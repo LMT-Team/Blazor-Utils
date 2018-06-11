@@ -27,7 +27,7 @@ interacting with elements with ease in Blazor! (updating)
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
       <td>>= 0.1 beta</td>
-      <td>50%</td>
+      <td>30%</td>
     </tr>
         <tr>
       <td>Dom (BlazorUtils.Cookie)</td>
