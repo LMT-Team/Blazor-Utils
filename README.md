@@ -50,4 +50,4 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 
 <h2>3. Add this line to _ViewImports.cshtml</h2>
 <p>@using static BlazorUtils.Dom.DomUtil</p>
-<p>This will help you call our API faster, without calling DomUtil over and over again.</p>
+<p>This will help you call my API faster, without calling DomUtil over and over again.</p>
