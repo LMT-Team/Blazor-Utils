@@ -1,4 +1,4 @@
-﻿//BlazorUtils 0.1
+﻿//LMT Blazor Utils 0.1
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 function BlazorBoot() {
@@ -23,7 +23,7 @@ function BlazorBoot() {
     }
 
 // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallCSEnumerableCallBacks(id, ind, className) {
+    function BlazorUtilsCallIntStringString(id, ind, className) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = 'IntStringStringStorage';
@@ -46,7 +46,7 @@ function BlazorBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallCSEnumerableCallBacks2(id, ind, value, typeOfRet) {
+    function BlazorUtilsCallIntInt(id, ind, value, typeOfRet) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
@@ -73,7 +73,7 @@ function BlazorBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallCSEnumerableCallBacks3(id, ind, value, typeOfRet) {
+    function BlazorUtilsCallIntDouble(id, ind, value, typeOfRet) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
@@ -97,6 +97,30 @@ function BlazorBoot() {
         let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue]);
 
         return Blazor.platform.toJavaScriptString(res);
+    }
+
+    // ReSharper disable once InconsistentNaming
+    function BlazorUtilsCallIntCoordsCoords(id, ind, value1, value2) {
+        const assemblyName = 'BlazorUtils.Dom';
+        const namespace = 'BlazorUtils.Dom.Storages';
+        const  typeName = "IntCoordsCoordsStorage";
+        const methodName = 'Invoke';
+
+        const method = Blazor.platform.findMethod(
+            assemblyName,
+            namespace,
+            typeName,
+            methodName
+        );
+
+        let csid = Blazor.platform.toDotNetString(id);
+        let csind = Blazor.platform.toDotNetString(ind);
+        let csvalue1 = Blazor.platform.toDotNetString(value1);
+        let csvalue2 = Blazor.platform.toDotNetString(value2);
+
+        let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue1, csvalue2]);
+        console.log(Blazor.platform.toJavaScriptString(res));
+        return JSON.parse(Blazor.platform.toJavaScriptString(res));
     }
 
     //Pure Js
@@ -186,7 +210,7 @@ function BlazorBoot() {
 
     Blazor.registerFunction('LMTRemoveClassFunc', function (selector, id) {
         $(selector).removeClass((ind, className) => {
-            return BlazorUtilsCallCSEnumerableCallBacks(id, ind + "", className);
+            return BlazorUtilsCallIntStringString(id, ind + "", className);
         });
     });
 
@@ -204,13 +228,13 @@ function BlazorBoot() {
 
     Blazor.registerFunction('LMTToggleClass3', function (selector, id) {
         $(selector).toggleClass((ind, className) => {
-            return BlazorUtilsCallCSEnumerableCallBacks(id, ind + "", className);
+            return BlazorUtilsCallIntStringString(id, ind + "", className);
         });
     });
 
     Blazor.registerFunction('LMTToggleClass4', function (selector, id, state) {
         $(selector).toggleClass((ind, className) => {
-            return BlazorUtilsCallCSEnumerableCallBacks(id, ind + "", className);
+            return BlazorUtilsCallIntStringString(id, ind + "", className);
         }, state);
     });
 
@@ -224,13 +248,13 @@ function BlazorBoot() {
 
     Blazor.registerFunction('LMTHeightFunc1', function (selector, id) {
         return $(selector).height((ind, height) => {
-            return BlazorUtilsCallCSEnumerableCallBacks2(id, ind + "", height + "", "number");
+            return BlazorUtilsCallIntInt(id, ind + "", height + "", "number");
         });
     });
 
     Blazor.registerFunction('LMTHeightFunc2', function (selector, id) {
         return $(selector).height((ind, height) => {
-            return BlazorUtilsCallCSEnumerableCallBacks2(id, ind + "", height + "", "string");
+            return BlazorUtilsCallIntInt(id, ind + "", height + "", "string");
         });
     });
 
@@ -244,13 +268,67 @@ function BlazorBoot() {
 
     Blazor.registerFunction('LMTInnerHeightFunc1', function (selector, id) {
         return $(selector).innerHeight((ind, height) => {
-            return BlazorUtilsCallCSEnumerableCallBacks3(id, ind + "", height + "", "string");
+            return BlazorUtilsCallIntDouble(id, ind + "", height + "", "string");
         });
     });
 
     Blazor.registerFunction('LMTInnerHeightFunc2', function (selector, id) {
         return $(selector).innerHeight((ind, height) => {
-            return BlazorUtilsCallCSEnumerableCallBacks3(id, ind + "", height + "", "number");
+            return BlazorUtilsCallIntDouble(id, ind + "", height + "", "number");
+        });
+    });
+
+    Blazor.registerFunction('LMTWidth2', function (selector) {
+        return $(selector).width();
+    });
+
+    Blazor.registerFunction('LMTWidth', function (selector, value) {
+        $(selector).width(value);
+    });
+
+    Blazor.registerFunction('LMTWidthFunc1', function (selector, id) {
+        return $(selector).width((ind, value) => {
+            return BlazorUtilsCallIntInt(id, ind + "", value + "", "string");
+        });
+    });
+
+    Blazor.registerFunction('LMTWidthFunc2', function (selector, id) {
+        return $(selector).width((ind, value) => {
+            return BlazorUtilsCallIntInt(id, ind + "", value + "", "number");
+        });
+    });
+
+    Blazor.registerFunction('LMTInnerWidth2', function (selector) {
+        return $(selector).innerWidth();
+    });
+
+    Blazor.registerFunction('LMTInnerWidth', function (selector, value) {
+        $(selector).innerWidth(value);
+    });
+
+    Blazor.registerFunction('LMTInnerWidthFunc1', function (selector, id) {
+        return $(selector).innerWidth((ind, width) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", width + "", "string");
+        });
+    });
+
+    Blazor.registerFunction('LMTInnerWidthFunc2', function (selector, id) {
+        return $(selector).innerWidth((ind, width) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", width + "", "number");
+        });
+    });
+
+    Blazor.registerFunction('LMTOffset2', function (selector) {
+        return $(selector).offset();
+    });
+
+    Blazor.registerFunction('LMTOffset', function (selector, coordinates) {
+        $(selector).offset(coordinates);
+    });
+
+    Blazor.registerFunction('LMTOffsetFunc', function (selector, id) {
+        return $(selector).offset((ind, coords) => {
+            return BlazorUtilsCallIntCoordsCoords(id, ind + "", coords.top + "", coords.left + "");
         });
     });
 }

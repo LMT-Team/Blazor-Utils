@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using BlazorUtils.Interfaces;
 using Microsoft.AspNetCore.Blazor;
 using static BlazorUtils.Dom.DomUtil;
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
+// ReSharper disable SpecifyACultureInStringConversionExplicitly
 
 namespace BlazorUtils.Dom.Storages
 {
@@ -29,6 +31,7 @@ namespace BlazorUtils.Dom.Storages
             {
                 _actionStorage[id].Invoke(null);
             }
+            _actionStorage[id].Invoke(null);
         }
 
         public static string Add(string events, string selector, Action<UIEventArgs> action)
@@ -165,6 +168,37 @@ namespace BlazorUtils.Dom.Storages
             if (_funcStorage == null)
             {
                 _funcStorage = new Dictionary<string, Func<int, double, double>>();
+            }
+
+            var id = Guid.NewGuid().ToString();
+            _funcStorage.Add(id, function);
+            return id;
+        }
+    }
+
+    /// <summary>
+    /// int-Coords-Coords callback
+    /// </summary>
+    public static class IntCoordsCoordsStorage
+    {
+        private static Dictionary<string, Func<int, Coordinate, Coordinate>> _funcStorage;
+
+        public static string Invoke(string id, string index, string top, string left)
+        {
+            var callbackRes = _funcStorage[id].Invoke(int.Parse(index), new Coordinate
+            {
+                Top = double.Parse(top),
+                Left = double.Parse(left)
+            });
+            var formatString = "\"top\": {0}, \"left\": {1}";
+            return "{" + string.Format(formatString, callbackRes.Top, callbackRes.Left) + "}";
+        }
+
+        public static string Add(Func<int, Coordinate, Coordinate> function)
+        {
+            if (_funcStorage == null)
+            {
+                _funcStorage = new Dictionary<string, Func<int, Coordinate, Coordinate>>();
             }
 
             var id = Guid.NewGuid().ToString();

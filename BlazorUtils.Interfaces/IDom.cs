@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Blazor;
 
@@ -40,5 +41,18 @@ namespace BlazorUtils.Interfaces
         IDom InnerHeight(string value);
         IDom InnerHeight(Func<int, double, string> function);
         IDom InnerHeight(Func<int, double, double> function);
+        double Width();
+        IDom Width(double value);
+        IDom Width(string value);
+        IDom Width(Func<int, int, string> function);
+        IDom Width(Func<int, int, double> function);
+        double InnerWidth();
+        IDom InnerWidth(double value);
+        IDom InnerWidth(string value);
+        IDom InnerWidth(Func<int, double, string> function);
+        IDom InnerWidth(Func<int, double, double> function);
+        Coordinate Offset();
+        IDom Offset(Coordinate coordinates);
+        IDom Offset(Func<int, Coordinate, Coordinate> function);
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using BlazorUtils.Dom.Storages;
+﻿using BlazorUtils.Dom.Storages;
 using BlazorUtils.Interfaces;
 using Microsoft.AspNetCore.Blazor;
+using System;
+using System.Threading.Tasks;
 using static Microsoft.AspNetCore.Blazor.Browser.Interop.RegisteredFunction;
 
 namespace BlazorUtils.Dom
@@ -131,6 +131,86 @@ namespace BlazorUtils.Dom
         {
             var id = IntDoubleDoubleStorage.Add(function);
             Invoke<object>("LMTInnerHeightFunc2", _selector, id);
+            return this;
+        }
+
+        public double Width()
+        {
+            return Invoke<double>("LMTWidth2", _selector);
+        }
+
+        public IDom Width(double value)
+        {
+            Invoke<object>("LMTWidth", _selector, value);
+            return this;
+        }
+
+        public IDom Width(string value)
+        {
+            Invoke<object>("LMTWidth", _selector, value);
+            return this;
+        }
+
+        public IDom Width(Func<int, int, string> function)
+        {
+            var id = IntIntStringStorage.Add(function);
+            Invoke<object>("LMTWidthFunc1", _selector, id);
+            return this;
+        }
+
+        public IDom Width(Func<int, int, double> function)
+        {
+            var id = IntIntDoubleStorage.Add(function);
+            Invoke<object>("LMTWidthFunc2", _selector, id);
+            return this;
+        }
+
+        public double InnerWidth()
+        {
+            return Invoke<double>("LMTInnerWidth2", _selector);
+        }
+
+        public IDom InnerWidth(double value)
+        {
+            Invoke<object>("LMTInnerWidth", _selector, value);
+            return this;
+        }
+
+        public IDom InnerWidth(string value)
+        {
+            Invoke<object>("LMTInnerWidth", _selector, value);
+            return this;
+        }
+
+        public IDom InnerWidth(Func<int, double, string> function)
+        {
+            var id = IntDoubleStringStorage.Add(function);
+            Invoke<object>("LMTInnerWidthFunc1", _selector, id);
+            return this;
+        }
+
+        public IDom InnerWidth(Func<int, double, double> function)
+        {
+            var id = IntDoubleDoubleStorage.Add(function);
+            Invoke<object>("LMTInnerWidthFunc2", _selector, id);
+            return this;
+        }
+
+        public Coordinate Offset()
+        {
+            return Invoke<Coordinate>("LMTOffset2", _selector);
+        }
+
+        public IDom Offset(Coordinate coordinates)
+        {
+            Invoke<object>("LMTOffset", _selector, coordinates);
+            return this;
+        }
+
+        public IDom Offset(Func<int, Coordinate, Coordinate> function)
+        {
+            var id = IntCoordsCoordsStorage.Add(function);
+            Invoke<object>("LMTOffsetFunc", _selector, id);
             return this;
         }
 

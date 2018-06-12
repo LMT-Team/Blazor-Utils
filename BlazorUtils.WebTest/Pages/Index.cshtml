@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Blazor
+﻿@using BlazorUtils.Interfaces
+@using Microsoft.AspNetCore.Blazor
 @using static BlazorUtils.Dom.DomUtil
 @page "/"
 
@@ -8,7 +9,7 @@ Welcome to your new app.
 
 <img style="width: 30px; height: 30px" class="sampleImg" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" />
 
-<input type="text" class="sampleText" />
+<input type="text" class="sampleText" lmt-ignore/>
 <input type="checkbox" class="checkboxtest" checked />
 
 <style>
@@ -132,5 +133,49 @@ Welcome to your new app.
         //    Console.WriteLine("cur value: " + value);
         //    return 200;
         //}));
+
+        Console.WriteLine("Testing Width");
+        Console.WriteLine("Width: " + domImg.Width());
+        domImg.Width(50);
+        domImg.Width("100px");
+        domImg.Width(((ind, value) =>
+        {
+            Console.WriteLine("ind: " + ind);
+            Console.WriteLine("Value: " + value);
+            return "400px";
+        }));
+
+        Console.WriteLine("Testing Inner Width");
+        Console.WriteLine("Inner Width: " + domImg.InnerWidth());
+
+        domImg.InnerWidth(20);
+        domImg.InnerWidth("60px");
+
+        domImg.InnerWidth(((ind, width) =>
+        {
+            Console.WriteLine("ind: " + ind);
+            Console.WriteLine("Width: " + width);
+            return "120px";
+        }));
+
+        Console.WriteLine("Testing offset");
+        Console.WriteLine("Output: ");
+        Console.WriteLine(domImg2.Offset().Top);
+        //domImg2.Offset(new Coordinate
+        //{
+        //    Top = 3,
+        //    Left = 6
+        //});
+        domImg2.Offset(((ind, coordinate) =>
+        {
+            Console.WriteLine("Cur ind: " + ind);
+            Console.WriteLine("Cur top: " + coordinate.Top);
+            Console.WriteLine("Cur left: " + coordinate.Left);
+            return new Coordinate
+            {
+                Top = 3,
+                Left = 6
+            };
+        }));
     }
 }
