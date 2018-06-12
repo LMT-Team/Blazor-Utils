@@ -91,15 +91,46 @@ namespace BlazorUtils.Dom
 
         public IDom Height(Func<int, int, string> function)
         {
-            var id = EnumerableCallBacks4Storage.Add(function);
+            var id = IntIntStringStorage.Add(function);
             Invoke<object>("LMTHeightFunc2", _selector, id);
             return this;
         }
 
         public IDom Height(Func<int, int, double> function)
         {
-            var id = EnumerableCallBacks3Storage.Add(function);
+            var id = IntIntDoubleStorage.Add(function);
             Invoke<object>("LMTHeightFunc1", _selector, id);
+            return this;
+        }
+
+        public double InnerHeight()
+        {
+            return Invoke<double>("LMTInnerHeight2", _selector);
+        }
+
+        public IDom InnerHeight(double value)
+        {
+            Invoke<object>("LMTInnerHeight", _selector, value);
+            return this;
+        }
+
+        public IDom InnerHeight(string value)
+        {
+            Invoke<object>("LMTInnerHeight", _selector, value);
+            return this;
+        }
+
+        public IDom InnerHeight(Func<int, double, string> function)
+        {
+            var id = IntDoubleStringStorage.Add(function);
+            Invoke<object>("LMTInnerHeightFunc1", _selector, id);
+            return this;
+        }
+
+        public IDom InnerHeight(Func<int, double, double> function)
+        {
+            var id = IntDoubleDoubleStorage.Add(function);
+            Invoke<object>("LMTInnerHeightFunc2", _selector, id);
             return this;
         }
 
@@ -141,7 +172,7 @@ namespace BlazorUtils.Dom
 
         public IDom RemoveClass(Func<int, string, string> function)
         {
-            var id = EnumerableCallBacksStorage.Add(function);
+            var id = IntStringStringStorage.Add(function);
             Invoke<object>("LMTRemoveClassFunc", _selector, id);
             return this;
         }
@@ -166,14 +197,14 @@ namespace BlazorUtils.Dom
 
         public IDom ToggleClass(Func<int, string, string> function)
         {
-            var id = EnumerableCallBacksStorage.Add(function);
+            var id = IntStringStringStorage.Add(function);
             Invoke<object>("LMTToggleClass3", _selector, id);
             return this;
         }
 
         public IDom ToggleClass(Func<int, string, string> function, bool state)
         {
-            var id = EnumerableCallBacksStorage.Add(function);
+            var id = IntStringStringStorage.Add(function);
             Invoke<object>("LMTToggleClass4", _selector, id, state);
             return this;
         }

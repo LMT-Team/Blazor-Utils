@@ -35,5 +35,10 @@ namespace BlazorUtils.Interfaces
         IDom Height(double value);
         IDom Height(Func<int, int, string> function);
         IDom Height(Func<int, int, double> function);
+        double InnerHeight();
+        IDom InnerHeight(double value);
+        IDom InnerHeight(string value);
+        IDom InnerHeight(Func<int, double, string> function);
+        IDom InnerHeight(Func<int, double, double> function);
     }
 }

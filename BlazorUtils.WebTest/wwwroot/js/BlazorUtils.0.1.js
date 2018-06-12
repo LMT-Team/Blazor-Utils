@@ -26,7 +26,7 @@ function BlazorBoot() {
     function BlazorUtilsCallCSEnumerableCallBacks(id, ind, className) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
-        const typeName = 'EnumerableCallBacksStorage';
+        const typeName = 'IntStringStringStorage';
         const methodName = 'Invoke';
 
         const method = Blazor.platform.findMethod(
@@ -51,9 +51,36 @@ function BlazorBoot() {
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
         if (typeOfRet === "string")
-            typeName = 'EnumerableCallBacks4Storage';
+            typeName = 'IntIntStringStorage';
         else
-            typeName = 'EnumerableCallBacks3Storage';
+            typeName = 'IntIntDoubleStorage';
+        const methodName = 'Invoke';
+
+        const method = Blazor.platform.findMethod(
+            assemblyName,
+            namespace,
+            typeName,
+            methodName
+        );
+
+        let csid = Blazor.platform.toDotNetString(id);
+        let csind = Blazor.platform.toDotNetString(ind);
+        let csvalue = Blazor.platform.toDotNetString(value);
+
+        let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue]);
+
+        return Blazor.platform.toJavaScriptString(res);
+    }
+
+    // ReSharper disable once InconsistentNaming
+    function BlazorUtilsCallCSEnumerableCallBacks3(id, ind, value, typeOfRet) {
+        const assemblyName = 'BlazorUtils.Dom';
+        const namespace = 'BlazorUtils.Dom.Storages';
+        let typeName;
+        if (typeOfRet === "string")
+            typeName = 'IntDoubleStringStorage';
+        else
+            typeName = 'IntDoubleDoubleStorage';
         const methodName = 'Invoke';
 
         const method = Blazor.platform.findMethod(
@@ -204,6 +231,26 @@ function BlazorBoot() {
     Blazor.registerFunction('LMTHeightFunc2', function (selector, id) {
         return $(selector).height((ind, height) => {
             return BlazorUtilsCallCSEnumerableCallBacks2(id, ind + "", height + "", "string");
+        });
+    });
+
+    Blazor.registerFunction('LMTInnerHeight2', function (selector) {
+        return $(selector).innerHeight();
+    });
+
+    Blazor.registerFunction('LMTInnerHeight', function (selector, value) {
+        $(selector).innerHeight(value);
+    });
+
+    Blazor.registerFunction('LMTInnerHeightFunc1', function (selector, id) {
+        return $(selector).innerHeight((ind, height) => {
+            return BlazorUtilsCallCSEnumerableCallBacks3(id, ind + "", height + "", "string");
+        });
+    });
+
+    Blazor.registerFunction('LMTInnerHeightFunc2', function (selector, id) {
+        return $(selector).innerHeight((ind, height) => {
+            return BlazorUtilsCallCSEnumerableCallBacks3(id, ind + "", height + "", "number");
         });
     });
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using static Microsoft.AspNetCore.Blazor.Browser.Interop.RegisteredFunction;
+﻿using static Microsoft.AspNetCore.Blazor.Browser.Interop.RegisteredFunction;
 namespace BlazorUtils.Dom
 {
     public static class DomUtil

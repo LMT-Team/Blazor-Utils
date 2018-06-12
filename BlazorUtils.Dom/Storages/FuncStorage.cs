@@ -51,7 +51,7 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-string-string callback
     /// </summary>
-    public static class EnumerableCallBacksStorage
+    public static class IntStringStringStorage
     {
         private static Dictionary<string, Func<int, string, string>> _funcStorage;
 
@@ -76,7 +76,7 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-int-double callback
     /// </summary>
-    public static class EnumerableCallBacks3Storage
+    public static class IntIntDoubleStorage
     {
         private static Dictionary<string, Func<int, int, double>> _funcStorage;
 
@@ -101,7 +101,7 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-int-string callback
     /// </summary>
-    public static class EnumerableCallBacks4Storage
+    public static class IntIntStringStorage
     {
         private static Dictionary<string, Func<int, int, string>> _funcStorage;
 
@@ -115,6 +115,56 @@ namespace BlazorUtils.Dom.Storages
             if (_funcStorage == null)
             {
                 _funcStorage = new Dictionary<string, Func<int, int, string>>();
+            }
+
+            var id = Guid.NewGuid().ToString();
+            _funcStorage.Add(id, function);
+            return id;
+        }
+    }
+
+    /// <summary>
+    /// int-double-string callback
+    /// </summary>
+    public static class IntDoubleStringStorage
+    {
+        private static Dictionary<string, Func<int, double, string>> _funcStorage;
+
+        public static string Invoke(string id, string index, string value)
+        {
+            return _funcStorage[id].Invoke(int.Parse(index), double.Parse(value));
+        }
+
+        public static string Add(Func<int, double, string> function)
+        {
+            if (_funcStorage == null)
+            {
+                _funcStorage = new Dictionary<string, Func<int, double, string>>();
+            }
+
+            var id = Guid.NewGuid().ToString();
+            _funcStorage.Add(id, function);
+            return id;
+        }
+    }
+
+    /// <summary>
+    /// int-double-double callback
+    /// </summary>
+    public static class IntDoubleDoubleStorage
+    {
+        private static Dictionary<string, Func<int, double, double>> _funcStorage;
+
+        public static string Invoke(string id, string index, string value)
+        {
+            return _funcStorage[id].Invoke(int.Parse(index), double.Parse(value)).ToString();
+        }
+
+        public static string Add(Func<int, double, double> function)
+        {
+            if (_funcStorage == null)
+            {
+                _funcStorage = new Dictionary<string, Func<int, double, double>>();
             }
 
             var id = Guid.NewGuid().ToString();
