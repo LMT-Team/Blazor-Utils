@@ -2,8 +2,14 @@
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 function BlazorBoot() {
+    //Behaviors
+    Blazor.registerFunction('LMTBehavioursBoot', function () {
+        //lmt-draggable
+        $("[lmt-drag]").draggable();
+    });
+
     //Reference to https://learn-blazor.com/architecture/interop/
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     function BlazorUtilsCallCSUICallBack(id) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
@@ -22,7 +28,7 @@ function BlazorBoot() {
         Blazor.platform.callMethod(method, null, [csid]);
     }
 
-// ReSharper disable once InconsistentNaming
+    // ReSharper disable once InconsistentNaming
     function BlazorUtilsCallIntStringString(id, ind, className) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
@@ -103,7 +109,7 @@ function BlazorBoot() {
     function BlazorUtilsCallIntCoordsCoords(id, ind, value1, value2) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
-        const  typeName = "IntCoordsCoordsStorage";
+        const typeName = "IntCoordsCoordsStorage";
         const methodName = 'Invoke';
 
         const method = Blazor.platform.findMethod(
@@ -247,13 +253,13 @@ function BlazorBoot() {
     });
 
     Blazor.registerFunction('LMTHeightFunc1', function (selector, id) {
-        return $(selector).height((ind, height) => {
+        $(selector).height((ind, height) => {
             return BlazorUtilsCallIntInt(id, ind + "", height + "", "number");
         });
     });
 
     Blazor.registerFunction('LMTHeightFunc2', function (selector, id) {
-        return $(selector).height((ind, height) => {
+        $(selector).height((ind, height) => {
             return BlazorUtilsCallIntInt(id, ind + "", height + "", "string");
         });
     });
@@ -267,13 +273,13 @@ function BlazorBoot() {
     });
 
     Blazor.registerFunction('LMTInnerHeightFunc1', function (selector, id) {
-        return $(selector).innerHeight((ind, height) => {
+        $(selector).innerHeight((ind, height) => {
             return BlazorUtilsCallIntDouble(id, ind + "", height + "", "string");
         });
     });
 
     Blazor.registerFunction('LMTInnerHeightFunc2', function (selector, id) {
-        return $(selector).innerHeight((ind, height) => {
+        $(selector).innerHeight((ind, height) => {
             return BlazorUtilsCallIntDouble(id, ind + "", height + "", "number");
         });
     });
@@ -287,13 +293,13 @@ function BlazorBoot() {
     });
 
     Blazor.registerFunction('LMTWidthFunc1', function (selector, id) {
-        return $(selector).width((ind, value) => {
+        $(selector).width((ind, value) => {
             return BlazorUtilsCallIntInt(id, ind + "", value + "", "string");
         });
     });
 
     Blazor.registerFunction('LMTWidthFunc2', function (selector, id) {
-        return $(selector).width((ind, value) => {
+        $(selector).width((ind, value) => {
             return BlazorUtilsCallIntInt(id, ind + "", value + "", "number");
         });
     });
@@ -307,13 +313,13 @@ function BlazorBoot() {
     });
 
     Blazor.registerFunction('LMTInnerWidthFunc1', function (selector, id) {
-        return $(selector).innerWidth((ind, width) => {
+        $(selector).innerWidth((ind, width) => {
             return BlazorUtilsCallIntDouble(id, ind + "", width + "", "string");
         });
     });
 
     Blazor.registerFunction('LMTInnerWidthFunc2', function (selector, id) {
-        return $(selector).innerWidth((ind, width) => {
+        $(selector).innerWidth((ind, width) => {
             return BlazorUtilsCallIntDouble(id, ind + "", width + "", "number");
         });
     });
@@ -327,7 +333,7 @@ function BlazorBoot() {
     });
 
     Blazor.registerFunction('LMTOffsetFunc', function (selector, id) {
-        return $(selector).offset((ind, coords) => {
+        $(selector).offset((ind, coords) => {
             return BlazorUtilsCallIntCoordsCoords(id, ind + "", coords.top + "", coords.left + "");
         });
     });

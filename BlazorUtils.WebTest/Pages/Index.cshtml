@@ -7,9 +7,9 @@
 
 Welcome to your new app.
 
-<img style="width: 30px; height: 30px" class="sampleImg" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" />
+<img style="width: 30px; height: 30px" class="sampleImg" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" lmt-drag/>
 
-<input type="text" class="sampleText" lmt-ignore/>
+<input type="text" class="sampleText"/>
 <input type="checkbox" class="checkboxtest" checked />
 
 <style>
@@ -32,13 +32,14 @@ Welcome to your new app.
 <p class="blue">Goodbye</p>
 <p class="red">Goodbye</p>
 
-<img style="width: 50px; height: 50px; margin-top: 2000px; display: block" class="sampleImg2" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" />
+<img style="width: 50px; height: 50px; margin-top: 2000px; display: block" class="sampleImg2" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" lmt-drag/>
 
 @functions
 {
 
     protected override async Task OnAfterRenderAsync()
     {
+        LMTBehaviours();
         var domImg = _(".sampleImg");
         var domImg2 = _(".sampleImg2");
         var domH1 = _("h1");
