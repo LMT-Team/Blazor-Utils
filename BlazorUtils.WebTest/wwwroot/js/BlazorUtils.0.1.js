@@ -1,6 +1,8 @@
 ﻿//LMT Blazor Utils 0.1
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
+$(() => {BlazorBoot()});
+
 function BlazorBoot() {
     //Behaviors
     Blazor.registerFunction('LMTBehavioursBoot',
