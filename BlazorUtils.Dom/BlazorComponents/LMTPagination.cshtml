@@ -1,0 +1,114 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@implements ILMTComponent
+
+<nav>
+    <ul class="pagination">
+        @if (!string.IsNullOrEmpty(@firstText))
+        {
+            <li class="page-item"><a class="page-link" onclick=@(() => {FirstPage();})>@firstText</a></li>
+        }
+        @if (!string.IsNullOrEmpty(@previousText))
+        {
+            <li class="page-item"><a class="page-link" onclick=@(() => {PreviousPage();})>@previousText</a></li>
+        }
+        @for (var i = firstPage; i < firstPage + show && i <= total; i++)
+        {
+            var ind = i;
+            <li class="page-item@(i == cur ? " active" : " ")"><a class="page-link" onclick=@(() => { cur = ind;})>@i</a></li>
+        }
+        @if (!string.IsNullOrEmpty(@nextText))
+        {
+            <li class="page-item"><a class="page-link" onclick=@(() => {NextPage();})>@nextText</a></li>
+        }
+        @if (!string.IsNullOrEmpty(@lastText))
+        {
+            <li class="page-item"><a class="page-link" onclick=@(() => {LastPage();})>@lastText</a></li>
+        }
+    </ul>
+</nav>
+
+@functions
+{
+    private int _cur = 1;
+
+    [Parameter]
+    private LMTEventHandlers.LMTEventHandler<LMTPageChangedEventArgs> onpagechange { get; set; } = null;
+
+    [Parameter]
+    private int cur
+    {
+        get => _cur;
+        set
+        {
+            if (value > total || value <= 0) return;
+            if (InvokeEventPageChanged(value)) return;
+            _cur = value;
+        }
+    }
+
+    [Parameter]
+    private int total { get; set; } = 6;
+
+    [Parameter]
+    private int show { get; set; } = 3;
+
+    [Parameter]
+    private string previousText { get; set; } = "Previous";
+
+    [Parameter]
+    private string nextText { get; set; } = "Next";
+
+    [Parameter]
+    private string firstText { get; set; } = "First";
+
+    [Parameter]
+    private string lastText { get; set; } = "Last";
+
+    private int middlePos
+    {
+        get => show % 2 == 0 ? (show / 2) : (show / 2 + 1);
+    }
+
+    private int firstPage
+    {
+        get
+        {
+            if (cur <= middlePos)
+            {
+                return 1;
+            }
+            else
+            {
+                return cur - middlePos + 1;
+            }
+        }
+    }
+
+    private void PreviousPage()
+    {
+        cur--;
+    }
+
+    private void NextPage()
+    {
+        cur++;
+    }
+
+    private void FirstPage()
+    {
+        cur = 1;
+    }
+
+    private void LastPage()
+    {
+        cur = total;
+    }
+
+    private bool InvokeEventPageChanged(int next)
+    {
+        if (onpagechange == null) return false;
+        var eventArg = new LMTPageChangedEventArgs(cur, next, total, show, previousText, nextText, firstText, lastText);
+        onpagechange(eventArg);
+        return eventArg.IsPrevented;
+    }
+}

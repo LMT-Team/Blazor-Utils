@@ -1,10 +1,11 @@
 ﻿@using BlazorUtils.Interfaces
 @using Microsoft.AspNetCore.Blazor
 @using static BlazorUtils.Dom.DomUtil
+
 @page "/"
 
 <h1>Hello, world!</h1>
-
+<LMTPagination nextText=">>" previousText="<<" cur="4" total="10" show="6" lastText="Last page" firstText="First page"/>
 Welcome to your new app.
 
 <img style="width: 30px; height: 30px" class="sampleImg" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" lmt-drag />
@@ -19,7 +20,7 @@ Guid test<br />
 <input type="text" lmt-val-guid />
 <input type="text" lmt-val-guid />
 
-<br/>Random number test<br />
+<br />Random number test<br />
 <input type="text" lmt-val-num="-50, -10" />
 <input type="text" lmt-val-num="10, 70" />
 <input type="text" lmt-val-num="60, 10" />
