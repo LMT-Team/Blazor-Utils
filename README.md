@@ -48,7 +48,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 
 <h2>2. Add BlazorUtils.0.1.js</h2>
 <p>Copy BlazorUtils.0.1.js fron "\BlazorUtils.WebTest\wwwroot\js", paste in your project and call it in index.html file by a <script> tag. Then, call BlazorBoot() in body's onload attribute.</p>
-<p><b>Warning: You must add jQuery if you haven't done it yet!</b></p>
+<p><b>Warning: You must add jquery-ui.css, jquery-3.3.1.min.js and jquery-ui.min.js if you haven't done it yet!</b></p>
 
 <h2>3. Add this line to _ViewImports.cshtml</h2>
 <p>@using static BlazorUtils.Dom.DomUtil</p>
