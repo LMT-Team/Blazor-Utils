@@ -32,7 +32,7 @@ Interacting with elements with ease in Blazor! (updating)
       <td>30%</td>
     </tr>
         <tr>
-      <td>Dom (BlazorUtils.Cookie)</td>
+      <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies and sessions</td>
       <td>(updating)</td>
       <td>0%</td>
