@@ -60,9 +60,11 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 ```
 
 <h2>3. Add this line to _ViewImports.cshtml</h2>
+
 ```
 @using static BlazorUtils.Dom.DomUtil
 @using BlazorUtils.Interfaces.EventArgs
 @addTagHelper *, BlazorUtils.Dom
 ```
+
 <p>This will help you call my API faster, without calling DomUtil over and over again.</p>
