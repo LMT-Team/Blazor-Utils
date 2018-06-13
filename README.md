@@ -2,7 +2,7 @@
 interacting with elements with ease in Blazor! (updating)
 
 <p>Version: 0.1 beta</p>
-<p>Dependency: jQuery version: 3.3.1</p>
+<p>Dependencies: jQuery version: 3.3.1, jQuery UI 1.12.1</p>
 <p>Progress tables: </p>
 <p>Dom (BlazorUtils.Dom): https://studenthcmuteeduvn0-my.sharepoint.com/:x:/g/personal/15110123_student_hcmute_edu_vn/EY0L_13KbWNMvDWdVJiA37UBO4Ie7muppmIseWWXKZVEfg?e=ehPsDu</p>
 
