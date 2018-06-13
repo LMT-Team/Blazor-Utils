@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\BehavioursTesting.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\ComponentTesting.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

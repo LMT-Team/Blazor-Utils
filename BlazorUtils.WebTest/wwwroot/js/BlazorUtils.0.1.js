@@ -3,50 +3,72 @@
 
 function BlazorBoot() {
     //Behaviors
-    Blazor.registerFunction('LMTBehavioursBoot', function () {
-        let s4 = () => {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
-        }
+    Blazor.registerFunction('LMTBehavioursBoot',
+        function() {
+            let s4 = () => {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
 
-        let guid = () => {
-            //No symbol guid, reference: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-            return s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4();
-        }
+            let guid = () => {
+                //No symbol guid, reference: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+                return s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4() + s4() + s4();
+            }
 
-        //Reference to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-        let randomIntInclusive = (min, max) => {
-            if (min > max)
-                return NaN;
+            //Reference to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+            let randomIntInclusive = (min, max) => {
+                if (min > max)
+                    return NaN;
 
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
-        }
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) +
+                    min; //The maximum is inclusive and the minimum is inclusive
+            }
 
-        //lmt-draggable
-        $("[lmt-drag]").draggable();
-        //lmt-resize
-        $("[lmt-resize]").resizable();
-        //lmt-select
-        $("[lmt-select]").selectable();
-        //lmt-sort
-        $("[lmt-sort]").sortable();
-        //lmt-readonly
-        $.each($("[lmt-readonly]"), (ind, val) => {
-            $(val).prop("readonly", true).prop("title", val.getAttributeNode("lmt-readonly").value).tooltip();
+            //lmt-draggable
+            $("[lmt-drag]").draggable();
+            //lmt-resize
+            $("[lmt-resize]").resizable();
+            //lmt-select
+            $("[lmt-select]").selectable();
+            //lmt-sort
+            $("[lmt-sort]").sortable();
+            //lmt-readonly
+            $.each($("[lmt-readonly]"),
+                (ind, val) => {
+                    $(val).prop("readonly", true).prop("title", val.getAttributeNode("lmt-readonly").value).tooltip();
+                });
+            //lmt-val-guid
+            $("[lmt-val-guid]").val(() => {
+                return guid();
+            });
+            //lmt-val-num
+            $.each($("[lmt-val-num]"),
+                (ind, ele) => {
+                    let params = ele.getAttributeNode("lmt-val-num").value.split(",");
+                    ele.value = randomIntInclusive(parseInt(params[0]), parseInt(params[1]));
+                });
+            //lmt-accord
+            $("[lmt-accord]").accordion();
+            //lmt-autocomp
+            $.each($("[lmt-autocomp]"),
+                (ind, ele) => {
+                    $(ele).autocomplete({
+                        source: ele.getAttributeNode("lmt-autocomp").value.split(",")
+                    });
+                });
+            //lmt-date
+            $("[lmt-date]").datepicker();
+            //lmt-dialog
+            $("[lmt-dialog]").dialog();
+            //lmt-tip
+            $.each($("[lmt-tip]"),
+                (ind, val) => {
+                    $(val).prop("title", val.getAttributeNode("lmt-tip").value).tooltip();
+                });
         });
-        //lmt-val-guid
-        $("[lmt-val-guid]").val(() => {
-            return guid();
-        });
-        //lmt-val-num
-        $.each($("[lmt-val-num]"), (ind, val) => {
-            let params = val.getAttributeNode("lmt-val-num").value.split(",");
-            val.value = randomIntInclusive(parseInt(params[0]), parseInt(params[1]));
-        });
-    });
 
     //Reference to https://learn-blazor.com/architecture/interop/
     // ReSharper disable once InconsistentNaming
