@@ -1,5 +1,5 @@
 # LMT Blazor Utils
-interacting with elements with ease in Blazor! (updating)
+Interacting with elements with ease in Blazor! (updating)
 
 <p>Version: 0.1 beta</p>
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css)</p>
@@ -46,10 +46,23 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <p>Currently, I haven't bring this to NuGet yet.</p>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
-<h2>2. Add BlazorUtils.0.1.js</h2>
-<p>Copy BlazorUtils.0.1.js fron "\BlazorUtils.WebTest\wwwroot\js", paste in your project and call it in index.html file by a <script> tag. Then, call BlazorBoot() in body's onload attribute.</p>
-<p><b>Warning: You must add jquery-ui.css, jquery-3.3.1.min.js and jquery-ui.min.js if you haven't done it yet!</b></p>
+<h2>2. Add BlazorUtils.0.1.js and dependencies</h2>
+<p>Copy BlazorUtils.0.1.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tag. Then, call BlazorBoot() in body's onload attribute.</p>
+<p>The result should be similar to this: </p>
+
+```
+<link href="css/jquery-ui.css" rel="stylesheet"/>
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
+```
 
 <h2>3. Add this line to _ViewImports.cshtml</h2>
-<p>@using static BlazorUtils.Dom.DomUtil</p>
+```
+@using static BlazorUtils.Dom.DomUtil
+@using BlazorUtils.Interfaces.EventArgs
+@addTagHelper *, BlazorUtils.Dom
+```
 <p>This will help you call my API faster, without calling DomUtil over and over again.</p>
