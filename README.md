@@ -59,7 +59,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
 ```
 
-<h2>3. Add this line to _ViewImports.cshtml</h2>
+<h2>3. Add these lines to _ViewImports.cshtml</h2>
 
 ```
 @using static BlazorUtils.Dom.DomUtil
