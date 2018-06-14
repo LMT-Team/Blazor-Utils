@@ -1,9 +1,35 @@
 ﻿//LMT Blazor Utils 0.1
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
-$(() => {BlazorBoot()});
+$(() => {
+    LMTDomBoot();
+    LMTCookieBoot();
+});
 
-function BlazorBoot() {
+function LMTCookieBoot() {
+    //Reference to https://www.w3schools.com/js/js_cookies.asp
+    let setCookie = (cname, cvalue, exdays, path) => {
+        var expires = "";
+        if (exdays != 0) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            expires = ";expires=" + d.toUTCString();
+        }
+        document.cookie = cname + "=" + cvalue + expires + ";path=" + path;
+    } 
+
+    Blazor.registerFunction('LMTCookies',
+        function() {
+            return document.cookie;
+        });
+
+    Blazor.registerFunction('LMTCookiesAdd',
+        function (key, value, exp, path) {
+            setCookie(key, value, exp, path);
+        });
+}
+
+function LMTDomBoot() {
     //Behaviors
     Blazor.registerFunction('LMTBehavioursBoot',
         function() {
