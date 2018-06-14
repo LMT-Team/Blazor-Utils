@@ -48,7 +48,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 
 <h2>2. Add BlazorUtils.0.1.js and dependencies</h2>
 <p>Copy BlazorUtils.0.1.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
-<p>The result should be similar to this: </p>
+<p>With BlazorUtils.Dom, the result should be similar to this: </p>
 
 ```
 <link href="css/jquery-ui.css" rel="stylesheet"/>
@@ -56,6 +56,12 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
+```
+
+<p>If you use BlazorUtils.Cookie: </p>
+
+```
 <script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
 ```
 
