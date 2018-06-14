@@ -67,7 +67,6 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <h2>3. Add these lines to _ViewImports.cshtml</h2>
 
 ```
-@addTagHelper *, BlazorUtils.Dom
 @using static BlazorUtils.Dom.DomUtil
 @using static BlazorUtils.Cookie.Cookies
 @using BlazorUtils.Interfaces.EventArgs
