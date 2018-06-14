@@ -1,7 +1,6 @@
 # LMT Blazor Utils
 Interacting with elements with ease in Blazor! (updating)
 
-<p>Version: 0.1 beta</p>
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css), Twitter Bootstrap 4 (css and bundle)</p>
 <p>Progress tables: </p>
 <p>Dom (BlazorUtils.Dom): https://studenthcmuteeduvn0-my.sharepoint.com/:x:/g/personal/15110123_student_hcmute_edu_vn/EY0L_13KbWNMvDWdVJiA37UBO4Ie7muppmIseWWXKZVEfg?e=ehPsDu</p>
@@ -20,7 +19,7 @@ Interacting with elements with ease in Blazor! (updating)
   <tr>
     <td><b>Name</b></td>
     <td><b>Description</b></td>
-    <td><b>Version supported</b></td>
+    <td><b>Interface version dependencies</b></td>
     <td><b>Progress</b></td>
   </tr>
   </thead>
@@ -28,13 +27,13 @@ Interacting with elements with ease in Blazor! (updating)
     <tr>
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
-      <td>>= 0.1 beta</td>
+      <td>>= 0.2 with ver 0.1</td>
       <td>30%</td>
     </tr>
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies</td>
-      <td>>= 0.1 beta</td>
+      <td>>= 0.1 with ver 0.1</td>
       <td>100%</td>
     </tr>
     </tody>
