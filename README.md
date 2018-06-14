@@ -68,4 +68,4 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 @using BlazorUtils.Interfaces.EventArgs
 ```
 
-<p>This will help you call my API faster, without calling DomUtil over and over again.</p>
+<p>This will help you call my API faster, without calling DomUtil, Cookies over and over again.</p>
