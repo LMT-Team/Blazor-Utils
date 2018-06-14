@@ -33,9 +33,9 @@ Interacting with elements with ease in Blazor! (updating)
     </tr>
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
-      <td>Managing cookies and sessions</td>
-      <td>(updating)</td>
-      <td>0%</td>
+      <td>Managing cookies</td>
+      <td>0.1 beta</td>
+      <td>100%</td>
     </tr>
     </tody>
 </table>
@@ -62,9 +62,10 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <h2>3. Add these lines to _ViewImports.cshtml</h2>
 
 ```
-@using static BlazorUtils.Dom.DomUtil
-@using BlazorUtils.Interfaces.EventArgs
 @addTagHelper *, BlazorUtils.Dom
+@using static BlazorUtils.Dom.DomUtil
+@using static BlazorUtils.Cookie.Cookies
+@using BlazorUtils.Interfaces.EventArgs
 ```
 
 <p>This will help you call my API faster, without calling DomUtil over and over again.</p>
