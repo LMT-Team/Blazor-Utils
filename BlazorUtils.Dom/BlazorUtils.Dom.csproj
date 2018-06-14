@@ -5,10 +5,23 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1</Version>
+    <Authors>Rogger Tan</Authors>
+    <Company>LMT</Company>
+    <Description>Blazor: Accessing and modifying DOM elements in the friendly jQuery style. This API will also include Blazor components in the future.</Description>
+    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
+    <PackageTags>blazor, asp.net, dom, jquery</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\BlazorUtils.Dom.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\BlazorUtils.Dom.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

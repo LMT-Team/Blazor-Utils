@@ -1,7 +1,6 @@
-﻿using System;
-using System.Dynamic;
+﻿using Microsoft.AspNetCore.Blazor;
+using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Blazor;
 
 namespace BlazorUtils.Interfaces
 {
@@ -9,7 +8,7 @@ namespace BlazorUtils.Interfaces
     {
         IDom Attr(string attribute, string value);
         IDom Toggle();
-        string Attr(string attribute);
+        string Attr(object attribute);
         string Val();
         IDom Val(string value);
         string Text();

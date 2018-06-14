@@ -2,6 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Managing cookies in Blazor.</Description>
+    <Company>LMT</Company>
+    <Authors>Rogger Tan</Authors>
+    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
+    <PackageTags>blazor, asp.net, cookies</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageId>LMT.BlazorUtils.Cookie</PackageId>
+    <Product>LMT.BlazorUtils.Cookie</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\BlazorUtils.Cookie.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
