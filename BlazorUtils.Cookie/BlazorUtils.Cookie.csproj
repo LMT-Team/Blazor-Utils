@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.2</Version>
+    <Version>0.2.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Managing cookies in Blazor.</Description>
     <Company>LMT</Company>
@@ -13,7 +13,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Cookie</PackageId>
     <Product>LMT.BlazorUtils.Cookie</Product>
-    <PackageReleaseNotes>[Fix]: Cannot get cookie in many situations</PackageReleaseNotes>
+    <PackageReleaseNotes>Update dependencies</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
