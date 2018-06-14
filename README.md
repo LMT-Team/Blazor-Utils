@@ -27,7 +27,7 @@ Interacting with elements with ease in Blazor! (updating)
     <tr>
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
-      <td>>= 0.2 with ver 0.1</td>
+      <td>>= 0.2 with ver 0.1, 0.2</td>
       <td>30%</td>
     </tr>
         <tr>
