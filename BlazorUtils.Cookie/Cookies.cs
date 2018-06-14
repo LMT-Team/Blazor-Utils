@@ -21,7 +21,7 @@ namespace BlazorUtils.Cookie
                     foreach (var ele in strCookies.Split(';'))
                     {
                         var keyValue = ele.Split('=');
-                        _dict.Add(keyValue[0], new Interfaces.Cookie.Cookie(keyValue[0], keyValue[1], -2));
+                        _dict.Add(keyValue[0].Trim(), new Interfaces.Cookie.Cookie(keyValue[0].Trim(), keyValue[1].Trim(), -2));
                     }
                 }
 

@@ -6,32 +6,13 @@ namespace BlazorUtils.Interfaces.Cookie
     {
         public string Key { get; }
         public string Value { get; }
-        public int Expires { get; } = -1;
-        public string Path { get; } = "/";
+        public int Expires { get; }
+        public string Path { get; }
 
-        public Cookie()
-        {
-
-        }
-
-        public Cookie(string key, string value)
+        public Cookie(string key, string value, int expires = 0, string path = "/")
         {
             Key = key ?? throw new ArgumentNullException(nameof(key));
             Value = value ?? throw new ArgumentNullException(nameof(value));
-        }
-
-        public Cookie(string key, string value, int expires) : this(key, value)
-        {
-            Expires = expires;
-        }
-
-        public Cookie(string key, string value, string path) : this(key, value)
-        {
-            Path = path;
-        }
-
-        public Cookie(string key, string value, int expires, string path) : this(key, value, expires)
-        {
             Expires = expires;
             Path = path;
         }
