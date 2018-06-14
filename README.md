@@ -47,7 +47,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
 <h2>2. Add BlazorUtils.0.1.js and dependencies</h2>
-<p>Copy BlazorUtils.0.1.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tag. Then, call BlazorBoot() in body's onload attribute.</p>
+<p>Copy BlazorUtils.0.1.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
 <p>The result should be similar to this: </p>
 
 ```
@@ -59,10 +59,12 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
 ```
 
-<h2>3. Add this line to _ViewImports.cshtml</h2>
+<h2>3. Add these lines to _ViewImports.cshtml</h2>
+
 ```
 @using static BlazorUtils.Dom.DomUtil
 @using BlazorUtils.Interfaces.EventArgs
 @addTagHelper *, BlazorUtils.Dom
 ```
+
 <p>This will help you call my API faster, without calling DomUtil over and over again.</p>
