@@ -34,7 +34,7 @@ Interacting with elements with ease in Blazor! (updating)
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies</td>
-      <td>0.1 beta</td>
+      <td>>= 0.1 beta</td>
       <td>100%</td>
     </tr>
     </tody>
