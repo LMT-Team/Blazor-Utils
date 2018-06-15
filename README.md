@@ -63,7 +63,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
 ```
-Or using Blazor Utils bundled version (recommended):
+Or using Blazor Utils bundled version (recommended, CDN - require internet connection):
 
 ```
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
