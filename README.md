@@ -5,6 +5,8 @@ Interacting with elements with ease in Blazor! (updating)
 <p>Progress tables: </p>
 <p> https://studenthcmuteeduvn0-my.sharepoint.com/:x:/g/personal/15110123_student_hcmute_edu_vn/EY0L_13KbWNMvDWdVJiA37UBO4Ie7muppmIseWWXKZVEfg?e=ehPsDu</p>
 
+<p>Project template: Blank Blazor web app with LMT Blazor Utils: https://github.com/15110123/Blazor-Utils-template</p>
+
 <h1>I. Features</h1>
 
 <p>This collection of libraries was created to improve Blazor developing experience. You don't need to type interop codes anymore, just work with front-end like you used to do - in Js/jQuery old style.</p>
