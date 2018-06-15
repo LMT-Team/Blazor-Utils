@@ -42,7 +42,13 @@ Interacting with elements with ease in Blazor! (updating)
 <h1>II. Configurations</h1>
 Things should be easy as 1, 2, 3! Just follow these steps: 
 <h2>1. Add references to your project</h2>
-<p>Currently, I haven't bring this to NuGet yet.</p>
+<p><del>Currently, I haven't bring this to NuGet yet.</del></p>
+<p>Great news! NuGet packages are available: </p>
+<ol>
+  <li>Interfaces: https://www.nuget.org/packages/LMT.BlazorUtils.Interfaces/</li>
+  <li>Dom: https://www.nuget.org/packages/LMT.BlazorUtils.Dom/</li>
+  <li>Cookie: https://www.nuget.org/packages/LMT.BlazorUtils.Cookie/</li>
+  </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
 <h2>2. Add BlazorUtils.0.1.js and dependencies</h2>
