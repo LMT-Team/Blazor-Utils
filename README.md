@@ -27,13 +27,13 @@ Interacting with elements with ease in Blazor! (updating)
     <tr>
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
-      <td>>= 0.2 with ver 0.1, 0.2</td>
+      <td>>= 0.2 with ver 0.1, 0.2, 0.2.1, >= 0.2.1 with ver 0.2.2</td>
       <td>30%</td>
     </tr>
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies</td>
-      <td>>= 0.1 with ver 0.1</td>
+      <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1</td>
       <td>100%</td>
     </tr>
     </tody>
