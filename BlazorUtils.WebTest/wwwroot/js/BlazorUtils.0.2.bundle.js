@@ -51,17 +51,17 @@ function LMTDomBoot() {
             }
 
             let boolParse = (obj) => {
-                if (obj == null || obj.value == null)
+                if (obj == null)
                     return false;
                 else
-                    return (obj.value === "true");
+                    return (obj === "true");
             }
 
             let getValParse = (obj, defaultVal) => {
-                if (obj == null || obj.value == null)
+                if (obj == null)
                     return defaultVal;
                 else
-                    return obj.value;
+                    return obj;
             }
 
             let s4 = () => {
@@ -97,7 +97,7 @@ function LMTDomBoot() {
             //lmt-readonly
             $.each($("[lmt-readonly]"),
                 (ind, val) => {
-                    $(val).prop("readonly", true).prop("title", val.getAttributeNode("lmt-readonly").value).tooltip();
+                    $(val).prop("readonly", true).prop("title", val.getAttribute("lmt-readonly")).tooltip();
                 });
             //lmt-val-guid
             $("[lmt-val-guid]").val(() => {
@@ -106,7 +106,7 @@ function LMTDomBoot() {
             //lmt-val-num
             $.each($("[lmt-val-num]"),
                 (ind, ele) => {
-                    let params = ele.getAttributeNode("lmt-val-num").value.split(",");
+                    let params = ele.getAttribute("lmt-val-num").split(",");
                     ele.value = randomIntInclusive(parseInt(params[0]), parseInt(params[1]));
                 });
             //lmt-accord
@@ -115,7 +115,7 @@ function LMTDomBoot() {
             $.each($("[lmt-autocomp]"),
                 (ind, ele) => {
                     $(ele).autocomplete({
-                        source: ele.getAttributeNode("lmt-autocomp").value.split(",")
+                        source: ele.getAttribute("lmt-autocomp").split(",")
                     });
                 });
             //lmt-date
@@ -125,27 +125,27 @@ function LMTDomBoot() {
             //lmt-tip
             $.each($("[lmt-tip]"),
                 (ind, val) => {
-                    $(val).prop("title", val.getAttributeNode("lmt-tip").value).tooltip();
+                    $(val).prop("title", val.getAttribute("lmt-tip")).tooltip();
                 });
             //lmt-bm
             $.each($("[lmt-bm]"),
                 (ind, val) => {
-                    let objName = getValParse(val.getAttributeNode("lmt-bm-name"), null);
-                    let speed = getValParse(val.getAttributeNode("lmt-bm-speed"), "1");
-                    let direction = getValParse(val.getAttributeNode("lmt-bm-direction"), "1");
+                    let objName = getValParse(val.getAttribute("lmt-bm-name"), null);
+                    let speed = getValParse(val.getAttribute("lmt-bm-speed"), "1");
+                    let direction = getValParse(val.getAttribute("lmt-bm-direction"), "1");
 
                     let animation = bodymovin.loadAnimation({
                         container: val,
                         renderer: 'svg',
-                        loop: boolParse(val.getAttributeNode("lmt-bm-loop")),
+                        loop: boolParse(val.getAttribute("lmt-bm-loop")),
                         autoplay: false,
-                        path: val.getAttributeNode("lmt-bm").value
+                        path: val.getAttribute("lmt-bm")
                     })
 
                     animation.setSpeed(parseInt(speed));
                     animation.setDirection(parseInt(direction));
 
-                    if (boolParse(val.getAttributeNode("lmt-bm-autoplay"))) {
+                    if (boolParse(val.getAttribute("lmt-bm-autoplay"))) {
                         animation.play();
                     }
 
@@ -155,9 +155,27 @@ function LMTDomBoot() {
             //lmt-filter
             $.each($("[lmt-filter]"),
                 (ind, val) => {
-                    var colorRate = val.getAttributeNode("lmt-filter").value.split(',');
+                    var colorRate = val.getAttribute("lmt-filter").split(',');
                     val.style.position = "relative";
                     $(val).append(`<div style="z-index: ${5 * (ind + 1)}; position: absolute; background-color: ${colorRate[0]}; width: 100%; height: 100%; left: 0; top: 0; opacity: ${colorRate[1] ? colorRate[1] : "0.5"}"/>`);
+                });
+            //lmt-grid
+            $.each($("[lmt-grid]"),
+                (ind, val) => {
+                    let param = val.getAttribute("lmt-grid").split(',');
+                    let isFluid = boolParse(val.getAttribute("lmt-grid-fluid"));
+                    val.className += isFluid ? " container-fluid" : " container";
+                    $.each($(val).children(), (ind, val) => {
+                        let rowChildren = $(val).children();
+                        val.className += " row";
+                        let isAutoWidth = rowChildren.length > param.length;
+                        $.each($(val).children(), (ind, val) => {
+                            if (isAutoWidth)
+                                val.className += " col-" + param[0];
+                            else
+                                val.className += " col-" + param[ind];
+                        });
+                    });
                 });
         });
 

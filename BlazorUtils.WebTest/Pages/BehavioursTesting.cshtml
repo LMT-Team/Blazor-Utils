@@ -1,6 +1,30 @@
 ﻿@page "/behaviour"
 
 <h1>Hello, world!</h1>
+
+<div style="width:400px; height: 400px"
+     lmt-bm="/json/LittleGirlJumping.json"
+     lmt-bm-name="girlJump"
+     lmt-bm-autoplay="true"
+     lmt-bm-loop="true"
+     lmt-bm-speed="1"
+     lmt-bm-direction="1"
+     lmt-filter="black" />
+
+<div lmt-grid="md-5,md-4,md-3" lmt-grid-fluid="true">
+    <div>
+        <div class="mycol5">
+            <h2>This should be col-md-5</h2>
+        </div>
+        <div class="mycol4">
+            <h2>This should be col-md-4</h2>
+        </div>
+        <div class="mycol3">
+            <h2>This should be col-md-3</h2>
+        </div>
+    </div>
+</div>
+
 <h2>lmt-accord</h2>
 <div lmt-accord>
     <h3>Section 1</h3>
