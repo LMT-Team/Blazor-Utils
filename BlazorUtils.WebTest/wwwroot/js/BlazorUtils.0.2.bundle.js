@@ -1,14 +1,21 @@
 ﻿//LMT Blazor Utils 0.2 bundled
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
+var LMTCDNDone = false;
 $(() => {
-    $("head").append('<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>');
-    $("head").append('<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>');
-    $.getScript('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js');
-    $.getScript('https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js');
-    $.getScript('https://cdn.rawgit.com/airbnb/lottie-web/master/build/player/lottie_light.js');
     LMTDomBoot();
     LMTCookieBoot();
+    $("head").append('<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>');
+    $("head").append('<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>');
+    $.getScript('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')
+        .done(() => {
+            $.getScript('https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js')
+                .done(() => {
+                    $.getScript('https://cdn.rawgit.com/airbnb/lottie-web/master/build/player/lottie.min.js').done(() => {
+                        LMTCDNDone = true;
+                    });
+                });
+        });
 });
 
 function LMTCookieBoot() {
@@ -37,7 +44,12 @@ function LMTCookieBoot() {
 function LMTDomBoot() {
     //Behaviors
     Blazor.registerFunction('LMTBehavioursBoot',
-        function () {
+        function func() {
+            while (!LMTCDNDone) {
+                setTimeout(func, 1);
+                return;
+            }
+
             let boolParse = (obj) => {
                 if (obj == null || obj.value == null)
                     return false;
@@ -119,22 +131,37 @@ function LMTDomBoot() {
             $.each($("[lmt-bm]"),
                 (ind, val) => {
                     let objName = getValParse(val.getAttributeNode("lmt-bm-name"), null);
-                    
+                    let speed = getValParse(val.getAttributeNode("lmt-bm-speed"), "1");
+                    let direction = getValParse(val.getAttributeNode("lmt-bm-direction"), "1");
+
                     let animation = bodymovin.loadAnimation({
                         container: val,
                         renderer: 'svg',
                         loop: boolParse(val.getAttributeNode("lmt-bm-loop")),
-                        autoplay: boolParse(val.getAttributeNode("lmt-bm-autoplay")),
+                        autoplay: false,
                         path: val.getAttributeNode("lmt-bm").value
                     })
+
+                    animation.setSpeed(parseInt(speed));
+                    animation.setDirection(parseInt(direction));
+
+                    if (boolParse(val.getAttributeNode("lmt-bm-autoplay"))) {
+                        animation.play();
+                    }
 
                     if (objName != null)
                         eval(`window.${objName} = animation`);
                 });
+            //lmt-filter
+            $.each($("[lmt-filter]"),
+                (ind, val) => {
+                    var colorRate = val.getAttributeNode("lmt-filter").value.split(',');
+                    val.style.position = "relative";
+                    $(val).append(`<div style="z-index: ${5 * (ind + 1)}; position: absolute; background-color: ${colorRate[0]}; width: 100%; height: 100%; left: 0; top: 0; opacity: ${colorRate[1] ? colorRate[1] : "0.5"}"/>`);
+                });
         });
 
     //Reference to https://learn-blazor.com/architecture/interop/
-    // ReSharper disable once InconsistentNaming
     function BlazorUtilsCallCSUICallBack(id) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';

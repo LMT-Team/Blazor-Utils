@@ -16,10 +16,10 @@ function LMTCookieBoot() {
             expires = ";expires=" + d.toUTCString();
         }
         document.cookie = cname + "=" + cvalue + expires + ";path=" + path;
-    } 
+    }
 
     Blazor.registerFunction('LMTCookies',
-        function() {
+        function () {
             return document.cookie;
         });
 
@@ -32,7 +32,26 @@ function LMTCookieBoot() {
 function LMTDomBoot() {
     //Behaviors
     Blazor.registerFunction('LMTBehavioursBoot',
-        function() {
+        function func() {
+            while (!LMTCDNDone) {
+                setTimeout(func, 1);
+                return;
+            }
+
+            let boolParse = (obj) => {
+                if (obj == null || obj.value == null)
+                    return false;
+                else
+                    return (obj.value === "true");
+            }
+
+            let getValParse = (obj, defaultVal) => {
+                if (obj == null || obj.value == null)
+                    return defaultVal;
+                else
+                    return obj.value;
+            }
+
             let s4 = () => {
                 return Math.floor((1 + Math.random()) * 0x10000)
                     .toString(16)
@@ -96,10 +115,41 @@ function LMTDomBoot() {
                 (ind, val) => {
                     $(val).prop("title", val.getAttributeNode("lmt-tip").value).tooltip();
                 });
+            //lmt-bm
+            $.each($("[lmt-bm]"),
+                (ind, val) => {
+                    let objName = getValParse(val.getAttributeNode("lmt-bm-name"), null);
+                    let speed = getValParse(val.getAttributeNode("lmt-bm-speed"), "1");
+                    let direction = getValParse(val.getAttributeNode("lmt-bm-direction"), "1");
+
+                    let animation = bodymovin.loadAnimation({
+                        container: val,
+                        renderer: 'svg',
+                        loop: boolParse(val.getAttributeNode("lmt-bm-loop")),
+                        autoplay: false,
+                        path: val.getAttributeNode("lmt-bm").value
+                    })
+
+                    animation.setSpeed(parseInt(speed));
+                    animation.setDirection(parseInt(direction));
+
+                    if (boolParse(val.getAttributeNode("lmt-bm-autoplay"))) {
+                        animation.play();
+                    }
+
+                    if (objName != null)
+                        eval(`window.${objName} = animation`);
+                });
+            //lmt-filter
+            $.each($("[lmt-filter]"),
+                (ind, val) => {
+                    var colorRate = val.getAttributeNode("lmt-filter").value.split(',');
+                    val.style.position = "relative";
+                    $(val).append(`<div style="z-index: ${5 * (ind + 1)}; position: absolute; background-color: ${colorRate[0]}; width: 100%; height: 100%; left: 0; top: 0; opacity: ${colorRate[1] ? colorRate[1] : "0.5"}"/>`);
+                });
         });
 
     //Reference to https://learn-blazor.com/architecture/interop/
-    // ReSharper disable once InconsistentNaming
     function BlazorUtilsCallCSUICallBack(id) {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
