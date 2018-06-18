@@ -178,6 +178,18 @@ function LMTDomBoot() {
                     });
                 });
             //lmt-skeleton
+            $.each($("[lmt-skeleton]"), (ind, ele) => {
+                $.each($(ele.children), (childInd, childEle) => {
+                    $(childEle).css("background", "linear-gradient(90deg, #ffffff, #d4d4d4, #ffffff)")
+                        .css("background-size", "600% 600%");
+
+                    setInterval(() => {
+                        $(childEle).css("background-position", "100%").animate({
+                            backgroundPosition: "0%"
+                        }, 800, "swing");
+                    }, 1000);
+                });
+            });
             //lmt-scroll
             $.each($("[lmt-scroll]"),
                 (ind, val) => {

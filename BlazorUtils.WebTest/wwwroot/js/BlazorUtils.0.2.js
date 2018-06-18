@@ -33,6 +33,10 @@ function LMTDomBoot() {
     //Behaviors
     Blazor.registerFunction('LMTBehavioursBoot',
         function func() {
+            while (!LMTCDNDone) {
+                setTimeout(func, 1);
+                return;
+            }
 
             let boolParse = (obj) => {
                 if (obj == null)
@@ -159,6 +163,39 @@ function LMTDomBoot() {
                             else
                                 val.className += " col-" + param[ind];
                         });
+                    });
+                });
+            //lmt-skeleton
+            $.each($("[lmt-skeleton]"), (ind, ele) => {
+                $.each($(ele.children), (childInd, childEle) => {
+                    $(childEle).css("background", "linear-gradient(90deg, #ffffff, #d4d4d4, #ffffff)")
+                        .css("background-size", "600% 600%");
+
+                    setInterval(() => {
+                        $(childEle).css("background-position", "100%").animate({
+                            backgroundPosition: "0%"
+                        }, 800, "swing");
+                    }, 1000);
+                });
+            });
+            //lmt-scroll
+            $.each($("[lmt-scroll]"),
+                (ind, val) => {
+                    let pxVal = val.getAttribute("lmt-scroll");
+                    val.addEventListener("click", () => {
+                        $('html').animate({
+                            scrollTop: pxVal
+                        }, 1000);
+                    });
+                });
+            //lmt-scroll-to
+            $.each($("[lmt-scroll-to]"),
+                (ind, val) => {
+                    let selector = val.getAttribute("lmt-scroll-to");
+                    val.addEventListener("click", () => {
+                        $('html').animate({
+                            scrollTop: $(selector).offset().top
+                        }, 1000);
                     });
                 });
         });
