@@ -177,6 +177,27 @@ function LMTDomBoot() {
                         });
                     });
                 });
+            //lmt-skeleton
+            //lmt-scroll
+            $.each($("[lmt-scroll]"),
+                (ind, val) => {
+                    let pxVal = val.getAttribute("lmt-scroll");
+                    val.addEventListener("click", () => {
+                        $('html').animate({
+                            scrollTop: pxVal
+                        }, 1000);
+                    });
+                });
+            //lmt-scroll-to
+            $.each($("[lmt-scroll-to]"),
+                (ind, val) => {
+                    let selector = val.getAttribute("lmt-scroll-to");
+                    val.addEventListener("click", () => {
+                        $('html').animate({
+                            scrollTop: $(selector).offset().top
+                        }, 1000);
+                    });
+                });
         });
 
     //Reference to https://learn-blazor.com/architecture/interop/

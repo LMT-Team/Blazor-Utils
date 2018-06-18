@@ -1,0 +1,68 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@implements ILMTComponent
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        @for (var i = 0; i < data.Length; i++)
+        {
+            var ind = i;
+            var isSelected = i == selected;
+            <li class="breadcrumb-item@(isSelected ? " active" : " ")">
+                @if (isSelected)
+                {
+                    @data[i].label
+                }
+                else
+                {
+                    <a href="javascript:;" onclick=@(() => { selected = ind; })>
+                        @data[i].label
+                    </a>
+                }
+            </li>
+        }
+    </ol>
+</nav>
+
+@functions
+{
+    private int _selected = -1;
+    private bool _isInitialState = true;
+
+    [Parameter]
+    private LMTEventHandlers.LMTEventHandler<SelectionChangedEventArgs<(string label, string url)[]>> onselectionchange { get; set; } = null;
+
+    [Parameter]
+    private (string label, string url)[] data { get; set; } = { };
+
+    [Parameter]
+    private int selected
+    {
+        get
+        {
+            return _selected;
+        }
+        set
+        {
+            if (value == _selected || SelectionChanged(value)) return;
+            if (_isInitialState)
+            {
+                _isInitialState = false;
+            }
+            else
+            {
+                UriHelper.NavigateTo(data[value].url);
+            }
+
+            _selected = value;
+        }
+    }
+
+    private bool SelectionChanged(int ind)
+    {
+        if (onselectionchange == null) return false;
+        var eventArg = new SelectionChangedEventArgs<(string label, string url)[]>(selected, ind, data);
+        onselectionchange(eventArg);
+        return eventArg.IsPrevented;
+    }
+}

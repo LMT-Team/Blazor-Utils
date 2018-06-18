@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="BlazorComponents\LMTBreadcrumb.cshtml" />
     <None Remove="BlazorComponents\_ViewImports.cshtml" />
   </ItemGroup>
 
