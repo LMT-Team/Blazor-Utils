@@ -218,11 +218,6 @@ function LMTDomBoot() {
                         if ((dist < 0 && dist < moveDist) || (dist >= 0 && dist > moveDist)) return;
                         ele.style.left = (ele.lmtLeft + dist) + "px";
                     }
-                    else {
-                        if (ele.style.left != ele.lmtLeft + "px") {
-                            ele.style.left = ele.lmtLeft + "px";
-                        }
-                    }
                 });
             });
         });
