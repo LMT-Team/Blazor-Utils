@@ -1,10 +1,20 @@
 ﻿//LMT Blazor Utils 0.2 bundled
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
+var lmtCssNode1 = document.createElement("link");
+lmtCssNode1.href = "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css";
+lmtCssNode1.rel = "stylesheet";
+
+var lmtCssNode2 = document.createElement("link");
+lmtCssNode2.href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css";
+lmtCssNode2.rel = "stylesheet";
+
+document.head.appendChild(lmtCssNode1);
+document.head.appendChild(lmtCssNode2);
+
 var LMTCDNDone = false;
+
 $(() => {
-    $("head").append('<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>');
-    $("head").append('<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>');
     LMTDomBoot();
     LMTCookieBoot();
     $.getScript('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')
