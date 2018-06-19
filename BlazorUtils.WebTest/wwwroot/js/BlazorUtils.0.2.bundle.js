@@ -19,9 +19,9 @@ $(() => {
     LMTCookieBoot();
     $.getScript('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')
         .done(() => {
-            $.getScript('https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js')
+            $.getScript('https://cdn.jsdelivr.net/gh/twbs/bootstrap/dist/js/bootstrap.bundle.min.js')
                 .done(() => {
-                    $.getScript('https://cdn.rawgit.com/airbnb/lottie-web/master/build/player/lottie.min.js').done(() => {
+                    $.getScript('https://cdn.jsdelivr.net/gh/airbnb/lottie-web/build/player/lottie.min.js').done(() => {
                         LMTCDNDone = true;
                     });
                 });
