@@ -119,9 +119,15 @@ function LMTDomBoot() {
                     });
                 });
             //lmt-date
-            $("[lmt-date]").datepicker();
+            $.each($("[lmt-date]"), (ind, ele) => {
+                let dateFormat = getValParse(ele.getAttribute("lmt-date"), "mm/dd/yy");
+                $(ele).datepicker({dateFormat});
+            });
             //lmt-dialog
-            $("[lmt-dialog]").dialog();
+            $.each($("[lmt-dialog]"), (ind, ele) => {
+                let title = getValParse(ele.getAttribute("lmt-dialog"), "");
+                $(ele).dialog({title});
+            });
             //lmt-tip
             $.each($("[lmt-tip]"),
                 (ind, val) => {
@@ -231,6 +237,27 @@ function LMTDomBoot() {
                         ele.style.left = (ele.lmtLeft + dist) + "px";
                     }
                 });
+            });
+            //lmt-fx
+            $.each($("[lmt-fx]"), (ind, ele) => {
+                let params = getValParse(ele.getAttribute("lmt-fx"), "").split(',');
+                if (params.length != 2) return;
+                let dur = parseInt(getValParse(ele.getAttribute("lmt-fx-duration"), "500"));
+                let fxDest = getValParse(ele.getAttribute("lmt-fx-to"), "");
+                let className = getValParse(ele.getAttribute("lmt-fx-class"), "");
+                let size = getValParse(ele.getAttribute("lmt-fx-size"), "200,60").split(',');
+                let percent = parseInt(getValParse(ele.getAttribute("lmt-fx-percent"), "50"));
+
+                let options = {};
+                if (params[0] === "scale") {
+                    options = { percent: percent };
+                } else if (params[0] === "transfer") {
+                    options = { to: fxDest, className: className };
+                } else if (params[0] === "size") {
+                    options = { to: { width: parseInt(size[0]), height: parseInt(size[1]) } };
+                }
+
+                eval(`window.${params[1]} = () => {$(ele).effect(params[0], options, dur)}`);
             });
         });
 

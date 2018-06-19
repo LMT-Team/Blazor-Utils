@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/jquery-ui.css" />
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-ui.min.js"></script>
+    <style>
+        div {
+            border: 1px solid #000;
+        }
+
+        .transferBox {
+            border: 2px dotted gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div lmt-fx="blind,myblind" onclick="myblind()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>blind test</h2>
+    </div>
+    <div lmt-fx="bounce,mybounce" onclick="mybounce()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>bounce test</h2>
+    </div>
+    <div lmt-fx="clip,myclip" onclick="myclip()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>clip test</h2>
+    </div>
+    <div lmt-fx="drop,mydrop" onclick="mydrop()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>drop test</h2>
+    </div>
+    <div lmt-fx="explode,myexplode" onclick="myexplode()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>explode test</h2>
+    </div>
+    <div lmt-fx="fade,myfade" onclick="myfade()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>fade test</h2>
+    </div>
+    <div lmt-fx="fold,myfold" onclick="myfold()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>fold test</h2>
+    </div>
+    <div lmt-fx="highlight,myhighlight" onclick="myhighlight()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>highlight test</h2>
+    </div>
+    <div lmt-fx="puff,mypuff" onclick="mypuff()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>puff test</h2>
+    </div>
+    <div lmt-fx="pulsate,mypulsate" onclick="mypulsate()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>pulsate test</h2>
+    </div>
+    <div lmt-fx="scale,myscale" lmt-fx-percent="70" onclick="myscale()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 100%; height: 100%" lmt-scroll-move="200px" />
+        <h2>scale test</h2>
+    </div>
+    <div lmt-fx="shake,myshake" onclick="myshake()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>shake test</h2>
+    </div>
+    <div lmt-fx="size,mysize" lmt-fx-size="50,50" onclick="mysize()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 100%; height: 100%" lmt-scroll-move="200px" />
+        <h2>size test</h2>
+    </div>
+    <div lmt-fx="slide,myslide" onclick="myslide()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>slide test</h2>
+    </div>
+    <div lmt-fx="transfer,mytransfer" lmt-fx-to="#testBox" lmt-fx-class="transferBox" onclick="mytransfer()">
+        <img src="/img/PRIVATE-INVESTIGATOR-UNLOCK-CELLPHONE.png" style="width: 300px; height: 300px" lmt-scroll-move="200px" />
+        <h2>transfer test</h2>
+    </div>
+    <div id="testBox" style="width: 200px; height: 200px;"></div>
+    <script>
+        let getValParse = (obj, defaultVal) => {
+            if (obj == null)
+                return defaultVal;
+            else
+                return obj;
+        }
+
+        $.each($("[lmt-fx]"), (ind, ele) => {
+            let params = getValParse(ele.getAttribute("lmt-fx"), "").split(',');
+            if (params.length != 2) return;
+            let dur = parseInt(getValParse(ele.getAttribute("lmt-fx-duration"), "500"));
+            let fxDest = getValParse(ele.getAttribute("lmt-fx-to"), "");
+            let className = getValParse(ele.getAttribute("lmt-fx-class"), "");
+            let size = getValParse(ele.getAttribute("lmt-fx-size"), "200,60").split(',');
+            let percent = parseInt(getValParse(ele.getAttribute("lmt-fx-percent"), "50"));
+
+            let options = {};
+            if (params[0] === "scale") {
+                options = { percent: percent };
+            } else if (params[0] === "transfer") {
+                options = { to: fxDest, className: className };
+            } else if (params[0] === "size") {
+                options = { to: { width: parseInt(size[0]), height: parseInt(size[1]) } };
+            }
+
+            eval(`window.${params[1]} = () => {$(ele).effect(params[0], options, dur)}`);
+        });
+    </script>
+</body>
+
+</html>
