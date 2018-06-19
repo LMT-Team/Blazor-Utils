@@ -120,7 +120,7 @@ function LMTDomBoot() {
                     ele.value = randomIntInclusive(parseInt(params[0]), parseInt(params[1]));
                 });
             //lmt-accord
-            $("[lmt-accord]").accordion();
+            $("[lmt-accord]").accordion({heightStyle: "content"});
             //lmt-autocomp
             $.each($("[lmt-autocomp]"),
                 (ind, ele) => {
@@ -228,6 +228,7 @@ function LMTDomBoot() {
                 });
             //lmt-scroll-move
             $.each($("[lmt-scroll-move]"), (ind, ele) => {
+                if (ele.lmtLeft != undefined) return;
                 let moveDist = parseInt(ele.getAttribute("lmt-scroll-move"));
                 let isMoveRight = moveDist >= 0;
                 if (ele.style.left != "") {
