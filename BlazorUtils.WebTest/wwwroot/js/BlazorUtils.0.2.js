@@ -198,6 +198,33 @@ function LMTDomBoot() {
                         }, 1000);
                     });
                 });
+            //lmt-scroll-move
+            $.each($("[lmt-scroll-move]"), (ind, ele) => {
+                let moveDist = parseInt(ele.getAttribute("lmt-scroll-move"));
+                let isMoveRight = moveDist >= 0;
+                if (ele.style.left != "") {
+                    ele.lmtLeft = parseInt(ele.style.left);
+                }
+                else if (ele.style.right != "") {
+                    ele.lmtLeft = ele.getBoundingClientRect().left - ele.parentElement.getBoundingClientRect().left;
+                }
+                else {
+                    ele.lmtLeft = 0;
+                }
+                window.addEventListener("scroll", () => {
+                    let diff = document.documentElement.clientHeight - ele.getBoundingClientRect().top;
+                    if (diff >= 0 && ele.getBoundingClientRect().bottom > 0) {
+                        var dist = diff / 2 * (isMoveRight ? 1 : -1);
+                        if ((dist < 0 && dist < moveDist) || (dist >= 0 && dist > moveDist)) return;
+                        ele.style.left = (ele.lmtLeft + dist) + "px";
+                    }
+                    else {
+                        if (ele.style.left != ele.lmtLeft + "px") {
+                            ele.style.left = ele.lmtLeft + "px";
+                        }
+                    }
+                });
+            });
         });
 
     //Reference to https://learn-blazor.com/architecture/interop/
