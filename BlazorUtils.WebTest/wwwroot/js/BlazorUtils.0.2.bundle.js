@@ -3,10 +3,10 @@
 
 var LMTCDNDone = false;
 $(() => {
-    LMTDomBoot();
-    LMTCookieBoot();
     $("head").append('<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>');
     $("head").append('<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>');
+    LMTDomBoot();
+    LMTCookieBoot();
     $.getScript('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')
         .done(() => {
             $.getScript('https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js')
