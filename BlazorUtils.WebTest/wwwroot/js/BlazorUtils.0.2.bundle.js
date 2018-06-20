@@ -1,6 +1,21 @@
 ﻿//LMT Blazor Utils 0.2 bundled
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
+var LMTCDNDone = false;
+var LMTCDNLottieDone = false;
+
+$(() => {
+    LMTDomBoot();
+    LMTCookieBoot();
+    $.getScript('https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js')
+        .done(() => {
+            $.getScript('https://cdn.jsdelivr.net/gh/twbs/bootstrap/dist/js/bootstrap.bundle.min.js')
+                .done(() => {
+                    LMTCDNDone = true;
+                });
+        });
+});
+
 var lmtCssNode1 = document.createElement("link");
 lmtCssNode1.href = "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css";
 lmtCssNode1.rel = "stylesheet";
@@ -11,22 +26,6 @@ lmtCssNode2.rel = "stylesheet";
 
 document.head.appendChild(lmtCssNode1);
 document.head.appendChild(lmtCssNode2);
-
-var LMTCDNDone = false;
-
-$(() => {
-    LMTDomBoot();
-    LMTCookieBoot();
-    $.getScript('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')
-        .done(() => {
-            $.getScript('https://cdn.jsdelivr.net/gh/twbs/bootstrap/dist/js/bootstrap.bundle.min.js')
-                .done(() => {
-                    $.getScript('https://cdn.jsdelivr.net/gh/airbnb/lottie-web/build/player/lottie.min.js').done(() => {
-                        LMTCDNDone = true;
-                    });
-                });
-        });
-});
 
 function LMTCookieBoot() {
     //Reference to https://www.w3schools.com/js/js_cookies.asp
@@ -120,7 +119,7 @@ function LMTDomBoot() {
                     ele.value = randomIntInclusive(parseInt(params[0]), parseInt(params[1]));
                 });
             //lmt-accord
-            $("[lmt-accord]").accordion({heightStyle: "content"});
+            $("[lmt-accord]").accordion({ heightStyle: "content" });
             //lmt-autocomp
             $.each($("[lmt-autocomp]"),
                 (ind, ele) => {
@@ -131,12 +130,12 @@ function LMTDomBoot() {
             //lmt-date
             $.each($("[lmt-date]"), (ind, ele) => {
                 let dateFormat = getValParse(ele.getAttribute("lmt-date"), "mm/dd/yy");
-                $(ele).datepicker({dateFormat});
+                $(ele).datepicker({ dateFormat });
             });
             //lmt-dialog
             $.each($("[lmt-dialog]"), (ind, ele) => {
                 let title = getValParse(ele.getAttribute("lmt-dialog"), "");
-                $(ele).dialog({title});
+                $(ele).dialog({ title });
             });
             //lmt-tip
             $.each($("[lmt-tip]"),
@@ -145,7 +144,14 @@ function LMTDomBoot() {
                 });
             //lmt-bm
             $.each($("[lmt-bm]"),
-                (ind, val) => {
+                function lmtbmFunc (ind, val) {
+                    if (!LMTCDNLottieDone) {
+                        $.getScript('https://cdn.jsdelivr.net/gh/airbnb/lottie-web/build/player/lottie.min.js').done(() => {
+                            LMTCDNLottieDone = true;
+                            lmtbmFunc(ind, val);
+                        });
+                        return;
+                    }
                     let objName = getValParse(val.getAttribute("lmt-bm-name"), null);
                     let speed = getValParse(val.getAttribute("lmt-bm-speed"), "1");
                     let direction = getValParse(val.getAttribute("lmt-bm-direction"), "1");
