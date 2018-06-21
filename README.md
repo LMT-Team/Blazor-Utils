@@ -1,5 +1,7 @@
 # LMT Blazor Utils
-Interacting with elements with ease in Blazor! (updating)
+Awesome utils for Blazor!
+
+Reference website: https://lmt.azurewebsites.net/
 
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css), Twitter Bootstrap 4 (css and bundle)</p>
 <p>Progress tables: </p>
