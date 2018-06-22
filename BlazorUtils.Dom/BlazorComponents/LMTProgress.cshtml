@@ -1,0 +1,24 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Dom.BlazorComponents
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@implements ILMTComponent
+
+<div class="progress" style="@style">
+    <div class="progress-bar@((isStriped ? " progress-bar-striped" : "") + (isAnimated ? " progress-bar-animated" : "") + (color == null ? "" : (" bg-" + color.ToString().ToLower())))" role="progressbar" style="width: @value%;" aria-valuenow="@value" aria-valuemin="0" aria-valuemax="100">@label</div>
+</div>
+
+@functions
+{
+[Parameter]
+private bool isStriped { get; set; } = false;
+[Parameter]
+private bool isAnimated { get; set; } = true;
+[Parameter]
+private string color { get; set; }
+[Parameter]
+private int value { get; set; } = 0;
+[Parameter]
+private string label { get; set; }
+[Parameter]
+private string style { get; set; }
+}

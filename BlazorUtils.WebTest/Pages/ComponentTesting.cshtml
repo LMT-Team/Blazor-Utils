@@ -5,17 +5,20 @@
 
 <LMTBreadcrumb data=@(new []{("Google", "https://google.com"), ("GMail", "https://gmail.com")}) selected="1"/>
 
+<LMTProgress style="width: 20%" value="@percentageVal" isAnimated="true" isStriped="true" label="@percentageVal.ToString()" color="danger"/>
+<input id="progressPerecentage" type="number"/>
+<button onclick=@(() => { percentageVal = int.Parse(_("#progressPerecentage").Val()); })>Change value!</button>
 @functions
 {
+    private int percentageVal = 40;
+    protected override async Task OnAfterRenderAsync()
+    {
 
-protected override async Task OnAfterRenderAsync()
-{
+    }
 
-}
-
-private void OnPageChange(LMTPageChangedEventArgs e)
-{
-    Console.WriteLine("Previous page: " + e.Cur);
-    Console.WriteLine("Next page: " + e.Next);
-}
+    private void OnPageChange(LMTPageChangedEventArgs e)
+    {
+        Console.WriteLine("Previous page: " + e.Cur);
+        Console.WriteLine("Next page: " + e.Next);
+    }
 }
