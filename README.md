@@ -55,8 +55,8 @@ Things should be easy as 1, 2, 3! Just follow these steps:
   </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
-<h2>2. Add BlazorUtils.0.1.js and dependencies</h2>
-<p>Copy BlazorUtils.0.1.js or BlazorUtils.0.1.bundle.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
+<h2>2. Add BlazorUtils js library 0.2 and dependencies</h2>
+<p>Copy BlazorUtils.0.2.min.js or BlazorUtils.0.2.bundle.min.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
 <p>With BlazorUtils.Dom, the result should be similar to this: </p>
 
 ```
@@ -65,19 +65,20 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
+<script type="text/javascript" src="js/lottie.min.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.2.min.js"></script>
 ```
 Or using Blazor Utils bundled version (recommended, CDN - require internet connection):
 
 ```
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/BlazorUtils.0.1.bundle.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.2.bundle.min.js"></script>
 ```
 
 <p>If you only use BlazorUtils.Cookie: </p>
 
 ```
-<script type="text/javascript" src="js/BlazorUtils.0.1.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.2.min.js"></script>
 ```
 
 <h2>3. Add these lines to _ViewImports.cshtml</h2>
