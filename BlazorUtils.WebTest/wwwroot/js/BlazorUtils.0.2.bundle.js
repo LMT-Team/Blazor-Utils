@@ -295,7 +295,7 @@ function LMTDomBoot() {
         });
 
     //Reference to https://learn-blazor.com/architecture/interop/
-    function BlazorUtilsCallCSUICallBack(id) {
+    let BlazorUtilsCallCSUICallBack = (id) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = 'UICallBacksStorage';
@@ -314,7 +314,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntStringString(id, ind, className) {
+    let BlazorUtilsCallIntStringString = (id, ind, className) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = 'IntStringStringStorage';
@@ -337,7 +337,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntInt(id, ind, value, typeOfRet) {
+    let BlazorUtilsCallIntInt = (id, ind, value, typeOfRet) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
@@ -364,7 +364,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntDouble(id, ind, value, typeOfRet) {
+    let BlazorUtilsCallIntDouble = (id, ind, value, typeOfRet) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
@@ -391,7 +391,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntCoordsCoords(id, ind, value1, value2) {
+    let BlazorUtilsCallIntCoordsCoords = (id, ind, value1, value2) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = "IntCoordsCoordsStorage";
@@ -410,7 +410,6 @@ function LMTDomBoot() {
         let csvalue2 = Blazor.platform.toDotNetString(value2);
 
         let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue1, csvalue2]);
-        console.log(Blazor.platform.toJavaScriptString(res));
         return JSON.parse(Blazor.platform.toJavaScriptString(res));
     }
 

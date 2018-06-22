@@ -12,13 +12,13 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// event callback
     /// </summary>
-    public static class UICallBacksStorage
+    internal static class UICallBacksStorage
     {
         private static Dictionary<string, Action<UIEventArgs>> _actionStorage;
         private static Dictionary<string, string> _selectorStorage;
         private static Dictionary<string, string> _eventStorage;
 
-        public static void Invoke(string id)
+        private static void Invoke(string id)
         {
             string value;
 
@@ -34,7 +34,7 @@ namespace BlazorUtils.Dom.Storages
             _actionStorage[id].Invoke(null);
         }
 
-        public static string Add(string events, string selector, Action<UIEventArgs> action)
+        internal static string Add(string events, string selector, Action<UIEventArgs> action)
         {
             if (_actionStorage == null)
             {
@@ -54,16 +54,16 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-string-string callback
     /// </summary>
-    public static class IntStringStringStorage
+    internal static class IntStringStringStorage
     {
         private static Dictionary<string, Func<int, string, string>> _funcStorage;
 
-        public static string Invoke(string id, string index, string className)
+        private static string Invoke(string id, string index, string className)
         {
             return _funcStorage[id].Invoke(int.Parse(index), className);
         }
 
-        public static string Add(Func<int, string, string> function)
+        internal static string Add(Func<int, string, string> function)
         {
             if (_funcStorage == null)
             {
@@ -79,16 +79,16 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-int-double callback
     /// </summary>
-    public static class IntIntDoubleStorage
+    internal static class IntIntDoubleStorage
     {
         private static Dictionary<string, Func<int, int, double>> _funcStorage;
 
-        public static string Invoke(string id, string index, string value)
+        private static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke(int.Parse(index), int.Parse(value)).ToString();
         }
 
-        public static string Add(Func<int, int, double> function)
+        internal static string Add(Func<int, int, double> function)
         {
             if (_funcStorage == null)
             {
@@ -104,16 +104,16 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-int-string callback
     /// </summary>
-    public static class IntIntStringStorage
+    internal static class IntIntStringStorage
     {
         private static Dictionary<string, Func<int, int, string>> _funcStorage;
 
-        public static string Invoke(string id, string index, string value)
+        private static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke(int.Parse(index), int.Parse(value));
         }
 
-        public static string Add(Func<int, int, string> function)
+        internal static string Add(Func<int, int, string> function)
         {
             if (_funcStorage == null)
             {
@@ -129,16 +129,16 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-double-string callback
     /// </summary>
-    public static class IntDoubleStringStorage
+    internal static class IntDoubleStringStorage
     {
         private static Dictionary<string, Func<int, double, string>> _funcStorage;
 
-        public static string Invoke(string id, string index, string value)
+        private static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke(int.Parse(index), double.Parse(value));
         }
 
-        public static string Add(Func<int, double, string> function)
+        internal static string Add(Func<int, double, string> function)
         {
             if (_funcStorage == null)
             {
@@ -154,16 +154,16 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-double-double callback
     /// </summary>
-    public static class IntDoubleDoubleStorage
+    internal static class IntDoubleDoubleStorage
     {
         private static Dictionary<string, Func<int, double, double>> _funcStorage;
 
-        public static string Invoke(string id, string index, string value)
+        private static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke(int.Parse(index), double.Parse(value)).ToString();
         }
 
-        public static string Add(Func<int, double, double> function)
+        internal static string Add(Func<int, double, double> function)
         {
             if (_funcStorage == null)
             {
@@ -179,11 +179,11 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-Coords-Coords callback
     /// </summary>
-    public static class IntCoordsCoordsStorage
+    internal static class IntCoordsCoordsStorage
     {
         private static Dictionary<string, Func<int, Coordinate, Coordinate>> _funcStorage;
 
-        public static string Invoke(string id, string index, string top, string left)
+        private static string Invoke(string id, string index, string top, string left)
         {
             var callbackRes = _funcStorage[id].Invoke(int.Parse(index), new Coordinate
             {
@@ -194,7 +194,7 @@ namespace BlazorUtils.Dom.Storages
             return "{" + string.Format(formatString, callbackRes.Top, callbackRes.Left) + "}";
         }
 
-        public static string Add(Func<int, Coordinate, Coordinate> function)
+        internal static string Add(Func<int, Coordinate, Coordinate> function)
         {
             if (_funcStorage == null)
             {

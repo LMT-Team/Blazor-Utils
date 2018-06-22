@@ -25,6 +25,9 @@
     <Content Update="Pages\ComponentTesting.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="wwwroot\js\BlazorUtils - Copy.0.2.bundle.min.js">
+      <DependentUpon>BlazorUtils - Copy.0.2.bundle.js</DependentUpon>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

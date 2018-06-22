@@ -33,11 +33,6 @@ function LMTDomBoot() {
     //Behaviors
     Blazor.registerFunction('LMTBehavioursBoot',
         function func() {
-            while (!LMTCDNDone) {
-                setTimeout(func, 1);
-                return;
-            }
-
             let boolParse = (obj) => {
                 if (obj == null)
                     return false;
@@ -46,7 +41,7 @@ function LMTDomBoot() {
             }
 
             let getValParse = (obj, defaultVal) => {
-                if (obj == null)
+                if (obj == null || obj == "")
                     return defaultVal;
                 else
                     return obj;
@@ -98,7 +93,7 @@ function LMTDomBoot() {
                     ele.value = randomIntInclusive(parseInt(params[0]), parseInt(params[1]));
                 });
             //lmt-accord
-            $("[lmt-accord]").accordion();
+            $("[lmt-accord]").accordion({ heightStyle: "content" });
             //lmt-autocomp
             $.each($("[lmt-autocomp]"),
                 (ind, ele) => {
@@ -107,9 +102,17 @@ function LMTDomBoot() {
                     });
                 });
             //lmt-date
-            $("[lmt-date]").datepicker();
+            $.each($("[lmt-date]"), (ind, ele) => {
+                let dateFormat = getValParse(ele.getAttribute("lmt-date"), "mm/dd/yy");
+                $(ele).datepicker({ dateFormat });
+            });
             //lmt-dialog
-            $("[lmt-dialog]").dialog();
+            $.each($("[lmt-dialog]"), (ind, ele) => {
+                if (ele.isDialog != undefined) return;
+                ele.isDialog = true;
+                let title = getValParse(ele.getAttribute("lmt-dialog"), "");
+                $(ele).dialog({ title });
+            });
             //lmt-tip
             $.each($("[lmt-tip]"),
                 (ind, val) => {
@@ -117,7 +120,9 @@ function LMTDomBoot() {
                 });
             //lmt-bm
             $.each($("[lmt-bm]"),
-                (ind, val) => {
+                function lmtbmFunc(ind, val) {
+                    if (val.islmtbm != undefined) return;
+                    val.islmtbm = true;
                     let objName = getValParse(val.getAttribute("lmt-bm-name"), null);
                     let speed = getValParse(val.getAttribute("lmt-bm-speed"), "1");
                     let direction = getValParse(val.getAttribute("lmt-bm-direction"), "1");
@@ -133,7 +138,7 @@ function LMTDomBoot() {
                     animation.setSpeed(parseInt(speed));
                     animation.setDirection(parseInt(direction));
 
-                    if (boolParse(val.getAttribute("lmt-bm-autoplay"))) {
+                    if (boolParse(getValParse(val.getAttribute("lmt-bm-autoplay"), "true"))) {
                         animation.play();
                     }
 
@@ -143,13 +148,17 @@ function LMTDomBoot() {
             //lmt-filter
             $.each($("[lmt-filter]"),
                 (ind, val) => {
+                    if (val.islmtfilter != undefined) return;
+                    val.islmtfilter = true;
                     var colorRate = val.getAttribute("lmt-filter").split(',');
                     val.style.position = "relative";
-                    $(val).append(`<div style="z-index: ${5 * (ind + 1)}; position: absolute; background-color: ${colorRate[0]}; width: 100%; height: 100%; left: 0; top: 0; opacity: ${colorRate[1] ? colorRate[1] : "0.5"}"/>`);
+                    $(val).append(`<div style="z-index: 20; position: absolute; background-color: ${colorRate[0]}; width: 100%; height: 100%; left: 0; top: 0; opacity: ${colorRate[1] ? colorRate[1] : "0.5"}"/>`);
                 });
             //lmt-grid
             $.each($("[lmt-grid]"),
                 (ind, val) => {
+                    if (val.islmtgrid != undefined) return;
+                    val.islmtgrid = true;
                     let param = val.getAttribute("lmt-grid").split(',');
                     let isFluid = boolParse(val.getAttribute("lmt-grid-fluid"));
                     val.className += isFluid ? " container-fluid" : " container";
@@ -168,6 +177,8 @@ function LMTDomBoot() {
             //lmt-skeleton
             $.each($("[lmt-skeleton]"), (ind, ele) => {
                 $.each($(ele.children), (childInd, childEle) => {
+                    if (childEle.islmtskeleton != undefined) return;
+                    childEle.islmtskeleton = true;
                     $(childEle).css("background", "linear-gradient(90deg, #ffffff, #d4d4d4, #ffffff)")
                         .css("background-size", "600% 600%");
 
@@ -181,6 +192,8 @@ function LMTDomBoot() {
             //lmt-scroll
             $.each($("[lmt-scroll]"),
                 (ind, val) => {
+                    if (val.islmtscroll != undefined) return;
+                    val.islmtscroll = true;
                     let pxVal = val.getAttribute("lmt-scroll");
                     val.addEventListener("click", () => {
                         $('html').animate({
@@ -191,6 +204,8 @@ function LMTDomBoot() {
             //lmt-scroll-to
             $.each($("[lmt-scroll-to]"),
                 (ind, val) => {
+                    if (val.islmtscrollto != undefined) return;
+                    val.islmtscrollto = true;
                     let selector = val.getAttribute("lmt-scroll-to");
                     val.addEventListener("click", () => {
                         $('html').animate({
@@ -199,27 +214,30 @@ function LMTDomBoot() {
                     });
                 });
             //lmt-scroll-move
-            $.each($("[lmt-scroll-move]"), (ind, ele) => {
-                let moveDist = parseInt(ele.getAttribute("lmt-scroll-move"));
-                let isMoveRight = moveDist >= 0;
-                if (ele.style.left != "") {
-                    ele.lmtLeft = parseInt(ele.style.left);
-                }
-                else if (ele.style.right != "") {
-                    ele.lmtLeft = ele.getBoundingClientRect().left - ele.parentElement.getBoundingClientRect().left;
-                }
-                else {
-                    ele.lmtLeft = 0;
-                }
-                window.addEventListener("scroll", () => {
-                    let diff = document.documentElement.clientHeight - ele.getBoundingClientRect().top;
-                    if (diff >= 0 && ele.getBoundingClientRect().bottom > 0) {
-                        var dist = diff / 2 * (isMoveRight ? 1 : -1);
-                        if ((dist < 0 && dist < moveDist) || (dist >= 0 && dist > moveDist)) return;
-                        ele.style.left = (ele.lmtLeft + dist) + "px";
+            setTimeout(() => {
+                $.each($("[lmt-scroll-move]"), (ind, ele) => {
+                    if (ele.lmtLeft != undefined) return;
+                    let moveDist = parseInt(ele.getAttribute("lmt-scroll-move"));
+                    let isMoveRight = moveDist >= 0;
+                    if (ele.style.left != "") {
+                        ele.lmtLeft = parseInt(ele.style.left);
                     }
+                    else if (ele.style.right != "") {
+                        ele.lmtLeft = ele.getBoundingClientRect().left - ele.parentElement.getBoundingClientRect().left;
+                    }
+                    else {
+                        ele.lmtLeft = 0;
+                    }
+                    window.addEventListener("scroll", () => {
+                        let diff = document.documentElement.clientHeight - ele.getBoundingClientRect().top;
+                        if (diff >= 0 && ele.getBoundingClientRect().bottom > 0) {
+                            var dist = diff / 2 * (isMoveRight ? 1 : -1);
+                            if ((dist < 0 && dist < moveDist) || (dist >= 0 && dist > moveDist)) return;
+                            ele.style.left = (ele.lmtLeft + dist) + "px";
+                        }
+                    });
                 });
-            });
+            }, 500);
             //lmt-fx
             $.each($("[lmt-fx]"), (ind, ele) => {
                 let params = getValParse(ele.getAttribute("lmt-fx"), "").split(',');
@@ -244,7 +262,7 @@ function LMTDomBoot() {
         });
 
     //Reference to https://learn-blazor.com/architecture/interop/
-    function BlazorUtilsCallCSUICallBack(id) {
+    let BlazorUtilsCallCSUICallBack = (id) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = 'UICallBacksStorage';
@@ -263,7 +281,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntStringString(id, ind, className) {
+    let BlazorUtilsCallIntStringString = (id, ind, className) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = 'IntStringStringStorage';
@@ -286,7 +304,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntInt(id, ind, value, typeOfRet) {
+    let BlazorUtilsCallIntInt = (id, ind, value, typeOfRet) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
@@ -313,7 +331,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntDouble(id, ind, value, typeOfRet) {
+    let BlazorUtilsCallIntDouble = (id, ind, value, typeOfRet) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         let typeName;
@@ -340,7 +358,7 @@ function LMTDomBoot() {
     }
 
     // ReSharper disable once InconsistentNaming
-    function BlazorUtilsCallIntCoordsCoords(id, ind, value1, value2) {
+    let BlazorUtilsCallIntCoordsCoords = (id, ind, value1, value2) => {
         const assemblyName = 'BlazorUtils.Dom';
         const namespace = 'BlazorUtils.Dom.Storages';
         const typeName = "IntCoordsCoordsStorage";
@@ -359,7 +377,6 @@ function LMTDomBoot() {
         let csvalue2 = Blazor.platform.toDotNetString(value2);
 
         let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue1, csvalue2]);
-        console.log(Blazor.platform.toJavaScriptString(res));
         return JSON.parse(Blazor.platform.toJavaScriptString(res));
     }
 
