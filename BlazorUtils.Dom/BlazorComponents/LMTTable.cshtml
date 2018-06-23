@@ -1,0 +1,69 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Dom.BlazorComponents
+@implements ILMTComponent
+
+<table style="@style" class="@(@class)" id="@id">
+    <thead>
+        <tr>
+            @foreach (var ele in head)
+            {
+                <td style="@headStyle">@ele</td>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var data in datas)
+        {
+        <tr>
+            @foreach(var prop in _dataProperties)
+            {
+                <td style="@bodyStyle">@GetValue(data, prop)</td>
+
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+@functions
+{
+    [Parameter]
+    private string style { get; set; }
+
+    [Parameter]
+    private string headStyle { get; set; }
+
+    [Parameter]
+    private string bodyStyle { get; set; }
+
+    [Parameter]
+    private string @class { get; set; }
+
+    [Parameter]
+    private string id { get; set; }
+
+    /// <summary>
+    /// A collection of data for table
+    /// </summary>
+    [Parameter]
+    private IEnumerable<object> datas { get; set; }
+
+    [Parameter]
+    private string[] head { get; set; }
+
+    private string[] _dataProperties;
+
+    protected override void OnInit()
+    {
+        _dataProperties = ((object)datas.ToArray()[0]).GetType().GetProperties().Select(x => x.Name).ToArray();
+    }
+
+    protected override void OnAfterRender()
+    {
+    }
+
+    private object GetValue(object o, string propertyName)
+    {
+        return o.GetType().GetProperty(propertyName).GetValue(o, null);
+    }
+}

@@ -35,6 +35,7 @@
     <None Remove="BlazorComponents\LMTBreadcrumb.cshtml" />
     <None Remove="BlazorComponents\LMTLightbox.cshtml" />
     <None Remove="BlazorComponents\LMTProgress.cshtml" />
+    <None Remove="BlazorComponents\LMTTable.cshtml" />
     <None Remove="BlazorComponents\_ViewImports.cshtml" />
   </ItemGroup>
 

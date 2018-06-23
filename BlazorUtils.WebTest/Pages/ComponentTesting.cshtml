@@ -1,31 +1,37 @@
 ﻿@page "/component"
 
+@using BlazorUtils.WebTest.Models
+
 <h1>Hello, world!</h1>
 <LMTPagination nextText=">>" previousText="<<" cur="4" total="10" show="6" lastText="Last page" firstText="First page" onpagechange=@OnPageChange />
 
-<LMTBreadcrumb data=@(new []{("Google", "https://google.com"), ("GMail", "https://gmail.com")}) selected="1"/>
+<LMTBreadcrumb data=@(new []{("Google", "https://google.com"), ("GMail", "https://gmail.com")}) selected="1" />
 
-<LMTProgress style="width: 20%" value="@percentageVal" isAnimated="true" isStriped="true" label="@percentageVal.ToString()" color="danger"/>
-<input id="progressPerecentage" type="number"/>
+<LMTProgress style="width: 20%" value="@percentageVal" isAnimated="true" isStriped="true" label="@percentageVal.ToString()" color="danger" />
+<input id="progressPerecentage" type="number" />
 <button onclick=@(() => { percentageVal = int.Parse(_("#progressPerecentage").Val()); })>Change value!</button>
-<br/>
-<LMTLightbox ref="@ele">
+<br />
+
+<LMTLightbox ref="@ele" style="color: red">
     <h1>This is why Meghan Markle wears shoes that are too big</h1>
     <p>This isn't the first time the internet has been buzzing about her shoe size. When she and Prince Harry officially announced their engagement, the Duchess of Cambridge was photographed wearing strappy beige heels that didn't hug her heel the way they're meant to.</p>
 </LMTLightbox>
 <button onclick=@(() => { ele.Show(); })>Show lightbox</button>
+<LMTTable datas="@(Student.lstStudent().Select(x => new {x.StudentId, x.StudentName, x.IsMale, x.Age}))"
+          head="@(new[] {"id", "name", "is male", "age"})" />
+
 @functions
 {
-    private int percentageVal = 40;
-    private LMTLightbox ele;
-    protected override async Task OnAfterRenderAsync()
-    {
+private int percentageVal = 40;
+private LMTLightbox ele;
+protected override async Task OnAfterRenderAsync()
+{
 
-    }
+}
 
-    private void OnPageChange(LMTPageChangedEventArgs e)
-    {
-        Console.WriteLine("Previous page: " + e.Cur);
-        Console.WriteLine("Next page: " + e.Next);
-    }
+private void OnPageChange(LMTPageChangedEventArgs e)
+{
+    Console.WriteLine("Previous page: " + e.Cur);
+    Console.WriteLine("Next page: " + e.Next);
+}
 }
