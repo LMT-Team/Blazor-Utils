@@ -1,0 +1,75 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Dom.BlazorComponents
+@implements ILMTComponent
+
+<style>
+    .lightBox {
+        display: none;
+    }
+</style>
+
+<div id="@id" class="lightBox" lmt-lightbox-shown="false">
+    <div>
+        @(isShown ? ChildContent : null)
+    </div>
+</div>
+
+@functions
+{
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    private string id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    private string style { get; set; }
+
+    [Parameter]
+    private bool isShown
+    {
+        get
+        {
+            var res = _("#" + id).Attr("lmt-lightbox-shown");
+            return res != null && bool.Parse(res);
+        }
+        set
+        {
+            _("#" + id).Attr("lmt-lightbox-shown", value.ToString());
+        }
+    }
+
+    /// <summary>
+    /// isShown should be use as an initial state: If it is true, lightbox will pop up at its' first time rendering. Use Show() method to control lightbox later on.
+    /// </summary>
+    private bool _isCheckShowParameter = false;
+
+    private bool _isRequestingShow = false;
+
+    protected override void OnInit()
+    {
+        DependenciesUtil.GetFeatherlight();
+    }
+
+    protected override void OnAfterRender()
+    {
+        if (!_isCheckShowParameter)
+        {
+            _isCheckShowParameter = true;
+            if (isShown)
+                Show();
+        }
+        if(_isRequestingShow)
+        {
+            _isRequestingShow = false;
+            var funcName = "lmt" + id.Replace("-", "");
+            Eval("function " + funcName + "(){while(window.LMTCDNFeatherlightDone == undefined){setTimeout(" + funcName + ", 1);return;}$.featherlight(\"#" + id + "\", {afterClose: ()=>{$(\"#" + id + "\").attr(\"lmt-lightbox-shown\", false)}});}" + funcName + "();");
+        }
+    }
+
+    public void Show()
+    {
+        isShown = true;
+        _isRequestingShow = true;
+    }
+}
