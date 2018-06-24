@@ -32,7 +32,7 @@
     private int _cur = 1;
 
     [Parameter]
-    private LMTEventHandlers.LMTEventHandler<LMTPageChangedEventArgs> onpagechange { get; set; } = null;
+    private LMTEventHandlers.LMTEventHandler<PageChangedEventArgs> onpagechange { get; set; } = null;
 
     [Parameter]
     private int cur
@@ -107,7 +107,7 @@
     private bool InvokeEventPageChanged(int next)
     {
         if (onpagechange == null) return false;
-        var eventArg = new LMTPageChangedEventArgs(cur, next, total, show, previousText, nextText, firstText, lastText);
+        var eventArg = new PageChangedEventArgs(cur, next, total, show, previousText, nextText, firstText, lastText);
         onpagechange(eventArg);
         return eventArg.IsPrevented;
     }

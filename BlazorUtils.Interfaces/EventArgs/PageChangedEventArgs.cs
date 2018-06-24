@@ -7,7 +7,7 @@ namespace BlazorUtils.Interfaces.EventArgs
     /// <summary>
     /// Event argument for page changing. This class contains values applied BEFORE page changing.
     /// </summary>
-    public sealed class LMTPageChangedEventArgs : LMTEventArgs
+    public sealed class PageChangedEventArgs : LMTEventArgs
     {
         public int Cur { get; }
         public int Next { get;  }
@@ -18,7 +18,7 @@ namespace BlazorUtils.Interfaces.EventArgs
         public string FirstText { get; }
         public string LastText { get; }
 
-        public LMTPageChangedEventArgs(int cur, int next, int total, int show, string previousText, string nextText, string firstText, string lastText)
+        public PageChangedEventArgs(int cur, int next, int total, int show, string previousText, string nextText, string firstText, string lastText)
         {
             Cur = cur;
             Next = next;

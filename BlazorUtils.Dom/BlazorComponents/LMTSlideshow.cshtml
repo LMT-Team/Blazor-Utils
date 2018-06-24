@@ -1,0 +1,140 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Dom.BlazorComponents
+@implements ILMTComponent
+
+<style>
+    @("#" + id + " > .bg") {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #000;
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+        filter: brightness(0);
+        display: none;
+    }
+    @("#" + id + " > .bg.on") {
+        display: block;
+    }
+</style>
+
+<div id="@id" class="@(@class)" style="@style">
+    @for (var i = 0; i < src.Length; i++)
+    {
+        var ind = i;
+        if (i == 0)
+        {
+            if (brightnessVals.Count != src.Length)
+            {
+                brightnessVals.Add(brightness);
+            }
+            <div class="bg bg0 on" style="@("filter: brightness(" + brightnessVals[ind] + ")"); @($"background-image:url(\"{src[ind]}\")")"></div>
+        }
+        else
+        {
+            if (brightnessVals.Count != src.Length)
+            {
+                brightnessVals.Add(0);
+            }
+            <div class="bg bg@(i)" style="@("filter: brightness(" + brightnessVals[ind] + ")"); @($"background-image:url(\"{src[ind]}\")")"></div>
+        }
+    }
+    @ChildContent
+</div>
+
+@functions
+{
+    [Parameter]
+    private LMTEventHandlers.LMTEventHandler<ImageChangedEventArgs> onimagechange { get; set; } = null;
+
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    private string style { get; set; }
+
+    [Parameter]
+    private string @class { get; set; }
+
+    [Parameter]
+    private string id { get; set; } = "lmt" + Guid.NewGuid().ToString();
+
+    [Parameter]
+    private string[] src { get; set; }
+
+    [Parameter]
+    private int delay { get; set; } = 1000;
+
+    /// <summary>
+    /// Image brightness, with maximum of 2 digits after comma. Default is 0.61
+    /// </summary>
+    [Parameter]
+    private double brightness { get; set; } = 0.61;
+
+    private List<double> brightnessVals = new List<double>();
+
+    private bool isActivateAnimation = false;
+
+    protected override void OnInit()
+    {
+
+    }
+
+    private int _onInd = 0;
+    private bool _isPause = false;
+
+    public void Pause()
+    {
+        _isPause = true;
+
+    }
+
+    public void Resume()
+    {
+        _isPause = false;
+    }
+
+    protected override void OnAfterRender()
+    {
+        if (isActivateAnimation == true) return;
+        isActivateAnimation = true;
+        Task.Run(async () =>
+        {
+            while (true)
+            {
+                if (_isPause)
+                {
+                    await Task.Delay(1);
+                    continue;
+                };
+                await Task.Delay(delay);
+                var nextInd = _onInd == (brightnessVals.Count - 1) ? 0 : (_onInd + 1);
+                if (onimagechange != null)
+                {
+                    var eventArg = new ImageChangedEventArgs(_onInd, nextInd, src[_onInd], src[nextInd], brightness, _isPause);
+                    onimagechange(eventArg);
+                    if (eventArg.IsPrevented || _isPause)
+                    {
+                        continue;
+                    }
+                }
+                while (brightnessVals[_onInd] > 0)
+                {
+                    brightnessVals[_onInd] = Math.Round(brightnessVals[_onInd] - 0.01, 2);
+                    StateHasChanged();
+                    await Task.Delay(1);
+                }
+                _($"#{id} > .on").RemoveClass("on");
+                _onInd = nextInd;
+                _($"#{id} > .bg{nextInd}").AddClass("on");
+                while (brightnessVals[nextInd] < brightness)
+                {
+                    brightnessVals[nextInd] = Math.Round(brightnessVals[nextInd] + 0.01, 2);
+                    StateHasChanged();
+                    await Task.Delay(1);
+                }
+            }
+        });
+    }
+}
