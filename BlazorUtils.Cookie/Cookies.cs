@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using static Microsoft.AspNetCore.Blazor.Browser.Interop.RegisteredFunction;
+using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 namespace BlazorUtils.Cookie
 {

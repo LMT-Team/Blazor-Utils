@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.2.1</Version>
+    <Version>0.2.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Managing cookies in Blazor.</Description>
     <Company>LMT</Company>
@@ -13,7 +13,8 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Cookie</PackageId>
     <Product>LMT.BlazorUtils.Cookie</Product>
-    <PackageReleaseNotes>Update dependencies</PackageReleaseNotes>
+    <PackageReleaseNotes>Add compability to Blazor &gt;= 0.5 (Sorry, I'm a kinda busy lately). 
+Please update Js library to 0.3.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
   </ItemGroup>
 
   <ItemGroup>

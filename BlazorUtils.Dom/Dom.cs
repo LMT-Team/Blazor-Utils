@@ -3,7 +3,7 @@ using BlazorUtils.Interfaces;
 using Microsoft.AspNetCore.Blazor;
 using System;
 using System.Threading.Tasks;
-using static Microsoft.AspNetCore.Blazor.Browser.Interop.RegisteredFunction;
+using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 namespace BlazorUtils.Dom
 {

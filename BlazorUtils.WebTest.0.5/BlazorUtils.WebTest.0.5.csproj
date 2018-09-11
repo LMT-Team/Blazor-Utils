@@ -10,12 +10,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.5.1" />
-    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.4.0" />
+    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorUtils.Cookie\BlazorUtils.Cookie.csproj" />
     <ProjectReference Include="..\BlazorUtils.Dom\BlazorUtils.Dom.csproj" />
+    <ProjectReference Include="..\BlazorUtils.Interfaces\BlazorUtils.Interfaces.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,14 +26,20 @@
     <Content Update="Pages\ComponentTesting.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="wwwroot\js\BlazorUtils - Copy.0.2.bundle.min.js">
-      <DependentUpon>BlazorUtils - Copy.0.2.bundle.js</DependentUpon>
+    <Content Update="Pages\CookieTesting.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\json\" />
-    <Folder Include="wwwroot\img\" />
+    <Content Update="Pages\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Pages\_ViewImports.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Shared\MainLayout.cshtml">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Generator>MSBuild:BlazorGenerateDeclaration</Generator>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

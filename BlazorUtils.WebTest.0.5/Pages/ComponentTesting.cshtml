@@ -1,0 +1,56 @@
+﻿@page "/component"
+
+@using BlazorUtils.WebTest._0._5.Models
+
+<h1>Hello, world!</h1>
+<LMTPagination nextText=">>" previousText="<<" cur="4" total="10" show="6" lastText="Last page" firstText="First page" onpagechange=@OnPageChange />
+
+<LMTBreadcrumb data=@(new []{("Google", "https://google.com"), ("GMail", "https://gmail.com")}) selected="1" />
+
+<LMTProgress style="width: 20%" value="@percentageVal" isAnimated="true" isStriped="true" label="@percentageVal.ToString()" color="danger" />
+<input id="progressPerecentage" type="number" />
+<button onclick=@(() => { percentageVal = int.Parse(_("#progressPerecentage").Val()); })>Change value!</button>
+<br />
+
+<LMTLightbox ref="@lightbox" style="color: red">
+    <h1>This is why Meghan Markle wears shoes that are too big</h1>
+    <p>This isn't the first time the internet has been buzzing about her shoe size. When she and Prince Harry officially announced their engagement, the Duchess of Cambridge was photographed wearing strappy beige heels that didn't hug her heel the way they're meant to.</p>
+</LMTLightbox>
+<button onclick=@(() => { lightbox.Show(); })>Show lightbox</button>
+<LMTTable datas="@(Student.lstStudent().Select(x => new {x.StudentId, x.StudentName, x.IsMale, x.Age}))"
+          head="@(new[] {"id", "name", "is male", "age"})" />
+<LMTSlideshow 
+              src="@(new[] {"/img/cover.jpg", "/img/home_cover.jpg", "/img/woman.jpg"})"
+              style="height: 100vh"
+              delay="2000"
+              onimagechange="@imageChange"
+              ref="slideShow">
+    <h1>Hello world! I'm a slideshow</h1>
+</LMTSlideshow>
+<button onclick="@(() => { slideShow.Resume(); })">Resume slideshow</button>
+@functions
+{
+    private int percentageVal = 40;
+    private bool isPauseSlide = false;
+    private LMTLightbox lightbox;
+    private LMTSlideshow slideShow;
+    protected override async Task OnAfterRenderAsync()
+    {
+
+    }
+
+    protected void imageChange(ImageChangedEventArgs e)
+    {
+        if (e.Cur == 1 && !isPauseSlide)
+        {
+            isPauseSlide = true;
+            slideShow.Pause();
+        }
+    }
+
+    private void OnPageChange(PageChangedEventArgs e)
+    {
+        Console.WriteLine("Previous page: " + e.Cur);
+        Console.WriteLine("Next page: " + e.Next);
+    }
+}

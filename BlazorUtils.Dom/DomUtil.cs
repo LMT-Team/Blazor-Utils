@@ -1,4 +1,4 @@
-﻿using static Microsoft.AspNetCore.Blazor.Browser.Interop.RegisteredFunction;
+﻿using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 // ReSharper disable InconsistentNaming
 namespace BlazorUtils.Dom
 {
