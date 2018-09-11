@@ -5,7 +5,7 @@ Reference website: https://lmt.azurewebsites.net/
 
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css), Twitter Bootstrap 4 (css and bundle)</p>
 <p>Progress tables: </p>
-<p> https://studenthcmuteeduvn0-my.sharepoint.com/:x:/g/personal/15110123_student_hcmute_edu_vn/EY0L_13KbWNMvDWdVJiA37UBO4Ie7muppmIseWWXKZVEfg?e=ehPsDu</p>
+<p>https://leminhtanvatcyahoocomvn-my.sharepoint.com/:x:/g/personal/admin_leminhtanvatcyahoocomvn_onmicrosoft_com/EboJMPJ95C1GvUi4wO89EHABlcfSr5QaN4cpA05ac_ONxQ?e=hC2lFQ</p>
 
 <p>Project template: Blank Blazor web app with LMT Blazor Utils: https://github.com/15110123/Blazor-Utils-template</p>
 
