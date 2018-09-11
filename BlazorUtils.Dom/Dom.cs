@@ -1,5 +1,6 @@
 ﻿using BlazorUtils.Dom.Storages;
 using BlazorUtils.Interfaces;
+using BlazorUtils.Interfaces.EventArgs;
 using Microsoft.AspNetCore.Blazor;
 using System;
 using System.Threading.Tasks;
@@ -114,7 +115,7 @@ namespace BlazorUtils.Dom
         /// <param name="events">One or more space-separated event types and optional namespaces, such as "click" or "keydown.myPlugin".</param>
         /// <param name="handler">A function to execute when the event is triggered.</param>
         /// <returns>DOM object.</returns>
-        public IDom On(string events, Action<UIEventArgs> handler)
+        public IDom On(string events, Action<LMTEventArgs> handler)
         {
             var id = UICallBacksStorage.Add(events, _selector, handler);
             Invoke<object>("LMTOn", _selector, events, id);

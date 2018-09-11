@@ -1,4 +1,4 @@
-﻿//LMT Blazor Utils 0.3 bundled
+﻿//LMT Blazor Utils 0.3.1 bundled
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 window.blazorUtils = {};
@@ -378,7 +378,13 @@ function LMTDomBoot() {
 
     let csid = Blazor.platform.toDotNetString(id);
 
-    Blazor.platform.callMethod(method, null, [csid]);
+    let result = Blazor.platform.toJavaScriptString(
+      Blazor.platform.callMethod(method, null, [csid])
+    );
+    if (result == "True") {
+      return true;
+    }
+    return false;
   };
 
   // ReSharper disable once InconsistentNaming
@@ -547,8 +553,9 @@ function LMTDomBoot() {
   });
 
   Blazor.registerFunction("LMTOn", function(selector, events, handler) {
-    $(selector).on(events, () => {
-      BlazorUtilsCallCSUICallBack(handler);
+    $(selector).on(events, e => {
+      let result = BlazorUtilsCallCSUICallBack(handler);
+      if (e != null && result) e.preventDefault();
     });
   });
 

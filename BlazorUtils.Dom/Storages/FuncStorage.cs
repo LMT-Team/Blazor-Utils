@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BlazorUtils.Interfaces;
+using BlazorUtils.Interfaces.EventArgs;
 using Microsoft.AspNetCore.Blazor;
 using static BlazorUtils.Dom.DomUtil;
 // ReSharper disable InconsistentNaming
@@ -14,31 +15,40 @@ namespace BlazorUtils.Dom.Storages
     /// </summary>
     internal static class UICallBacksStorage
     {
-        private static Dictionary<string, Action<UIEventArgs>> _actionStorage;
+        private static Dictionary<string, Action<LMTEventArgs>> _actionStorage;
         private static Dictionary<string, string> _selectorStorage;
         private static Dictionary<string, string> _eventStorage;
 
-        private static void Invoke(string id)
+        private static string Invoke(string id)
         {
             string value;
+            LMTEventArgs eventArgs = null;
 
             if (_eventStorage[id] == "change")
             {
                 value = _(_selectorStorage[id]).Val();
-                _actionStorage[id].Invoke(new UIChangeEventArgs { Value = value });
+                eventArgs = new LMTChangeEventArgs(value);
+                _actionStorage[id].Invoke(eventArgs);
             }
             else if (_eventStorage[id] == "click")
             {
-                _actionStorage[id].Invoke(null);
+                eventArgs = new LMTEventArgs();
+                _actionStorage[id].Invoke(eventArgs);
             }
-            else _actionStorage[id].Invoke(null);
+            else
+            {
+                eventArgs = new LMTEventArgs();
+                _actionStorage[id].Invoke(eventArgs);
+            };
+
+            return (eventArgs != null && eventArgs.IsPrevented ? true : false).ToString();
         }
 
-        internal static string Add(string events, string selector, Action<UIEventArgs> action)
+        internal static string Add(string events, string selector, Action<LMTEventArgs> action)
         {
             if (_actionStorage == null)
             {
-                _actionStorage = new Dictionary<string, Action<UIEventArgs>>();
+                _actionStorage = new Dictionary<string, Action<LMTEventArgs>>();
                 _selectorStorage = new Dictionary<string, string>();
                 _eventStorage = new Dictionary<string, string>();
             }

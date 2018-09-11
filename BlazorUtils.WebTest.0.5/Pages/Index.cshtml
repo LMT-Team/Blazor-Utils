@@ -36,149 +36,158 @@ Welcome to your new app.
 
 <img style="width: 50px; height: 50px; margin-top: 2000px; display: block" class="sampleImg2" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" lmt-drag />
 
+<a id="preventedLink" href="https://bing.com">This link should be prevented</a>
+
 @functions
 {
 
-protected override async Task OnAfterRenderAsync()
-{
-    LMTBehaviours();
+    protected override async Task OnAfterRenderAsync()
+    {
+        LMTBehaviours();
+
+        _("#preventedLink").On("click", (e) =>
+        {
+            e.PreventDefault();
+        });
+
+
     var domImg = _(".sampleImg");
-    var domImg2 = _(".sampleImg2");
-    var domH1 = _("h1");
+        var domImg2 = _(".sampleImg2");
+        var domH1 = _("h1");
 
-    Console.WriteLine(domImg.Attr("src"));
-    Console.WriteLine(domH1.Text());
+        Console.WriteLine(domImg.Attr("src"));
+        Console.WriteLine(domH1.Text());
 
-    Console.WriteLine(domH1.Css("font-size"));
-    domH1.Css("font-size", "50px");
+        Console.WriteLine(domH1.Css("font-size"));
+        domH1.Css("font-size", "50px");
 
-    Eval("console.log(\"This is from Js code\")");
+        Eval("console.log(\"This is from Js code\")");
 
-    await Task.Delay(3000);
-    domH1.Toggle();
+        await Task.Delay(3000);
+        domH1.Toggle();
 
-    await Task.Delay(1000);
+        await Task.Delay(1000);
 
-    await _("html").Animate(new
-    {
-        scrollTop = "500px"
-    }, 1000, "swing", () =>
-    {
-        Console.WriteLine("Done scrolling!");
-    });
-
-    _("html").Animate(new
-    {
-        scrollTop = "0px"
-    }, new
-    {
-        duration = 4000
-    });
-
-    domImg.On("click", (UIEventArgs e) =>
-    {
-        Console.WriteLine("Clicked");
-    });
-
-    _(".sampleText").On("change", (UIEventArgs e) =>
-    {
-        if (e is UIChangeEventArgs echanged)
+        await _("html").Animate(new
         {
-            Console.WriteLine(echanged.Value);
-        }
-    });
-
-    _("p").RemoveClass(((ind, str) =>
-    {
-        Console.WriteLine(ind);
-        Console.WriteLine(str);
-        return "blue";
-    }));
-
-    _("p").RemoveClass("red");
-    Console.WriteLine(_(".checkboxtest").Prop<bool>("checked"));
-
-    //_("p").ToggleClass("yellowBg");
-    //_("p").ToggleClass("yellowBg", false);
-    _("p").ToggleClass(((ind, className) =>
-    {
-        Console.WriteLine("test ToggleClass");
-        Console.WriteLine(ind);
-        Console.WriteLine(className);
-        return "yellowBg";
-    }), true);
-
-    Console.WriteLine("test height: ");
-    Console.WriteLine(domImg.Height());
-    Console.WriteLine("Set height: ");
-    domImg.Height(200);
-
-    Console.WriteLine("Test height with function");
-    domImg.Height(((ind, height) =>
-    {
-        Console.WriteLine("index: " + ind);
-        Console.WriteLine("height: " + height);
-        return 300;
-    }));
-    //domImg.Height(((ind, height) =>
-    //{
-    //    Console.WriteLine("index: " + ind);
-    //    Console.WriteLine("height: " + height);
-    //    return "400px";
-    //}));
-
-    //Console.WriteLine("innerheight: " + domImg.InnerHeight());
-    //domImg.InnerHeight(700);
-
-    //domImg.InnerHeight(((ind, value) =>
-    //{
-    //    Console.WriteLine("cur ind: " + ind);
-    //    Console.WriteLine("cur value: " + value);
-    //    return 200;
-    //}));
-
-    Console.WriteLine("Testing Width");
-    Console.WriteLine("Width: " + domImg.Width());
-    domImg.Width(50);
-    domImg.Width("100px");
-    domImg.Width(((ind, value) =>
-    {
-        Console.WriteLine("ind: " + ind);
-        Console.WriteLine("Value: " + value);
-        return "400px";
-    }));
-
-    Console.WriteLine("Testing Inner Width");
-    Console.WriteLine("Inner Width: " + domImg.InnerWidth());
-
-    domImg.InnerWidth(20);
-    domImg.InnerWidth("60px");
-
-    domImg.InnerWidth(((ind, width) =>
-    {
-        Console.WriteLine("ind: " + ind);
-        Console.WriteLine("Width: " + width);
-        return "120px";
-    }));
-
-    Console.WriteLine("Testing offset");
-    Console.WriteLine("Output: ");
-    Console.WriteLine(domImg2.Offset().Top);
-    //domImg2.Offset(new Coordinate
-    //{
-    //    Top = 3,
-    //    Left = 6
-    //});
-    domImg2.Offset(((ind, coordinate) =>
-    {
-        Console.WriteLine("Cur ind: " + ind);
-        Console.WriteLine("Cur top: " + coordinate.Top);
-        Console.WriteLine("Cur left: " + coordinate.Left);
-        return new Coordinate
+            scrollTop = "500px"
+        }, 1000, "swing", () =>
         {
-            Top = 3,
-            Left = 6
-        };
-    }));
-}
+            Console.WriteLine("Done scrolling!");
+        });
+
+        _("html").Animate(new
+        {
+            scrollTop = "0px"
+        }, new
+        {
+            duration = 4000
+        });
+
+        domImg.On("click", (LMTEventArgs e) =>
+        {
+            Console.WriteLine("Clicked");
+        });
+
+        _(".sampleText").On("change", (LMTEventArgs e) =>
+        {
+            if (e is LMTChangeEventArgs echanged)
+            {
+                Console.WriteLine(echanged.Value);
+            }
+        });
+
+        _("p").RemoveClass(((ind, str) =>
+        {
+            Console.WriteLine(ind);
+            Console.WriteLine(str);
+            return "blue";
+        }));
+
+        _("p").RemoveClass("red");
+        Console.WriteLine(_(".checkboxtest").Prop<bool>("checked"));
+
+        //_("p").ToggleClass("yellowBg");
+        //_("p").ToggleClass("yellowBg", false);
+        _("p").ToggleClass(((ind, className) =>
+        {
+            Console.WriteLine("test ToggleClass");
+            Console.WriteLine(ind);
+            Console.WriteLine(className);
+            return "yellowBg";
+        }), true);
+
+        Console.WriteLine("test height: ");
+        Console.WriteLine(domImg.Height());
+        Console.WriteLine("Set height: ");
+        domImg.Height(200);
+
+        Console.WriteLine("Test height with function");
+        domImg.Height(((ind, height) =>
+        {
+            Console.WriteLine("index: " + ind);
+            Console.WriteLine("height: " + height);
+            return 300;
+        }));
+        //domImg.Height(((ind, height) =>
+        //{
+        //    Console.WriteLine("index: " + ind);
+        //    Console.WriteLine("height: " + height);
+        //    return "400px";
+        //}));
+
+        //Console.WriteLine("innerheight: " + domImg.InnerHeight());
+        //domImg.InnerHeight(700);
+
+        //domImg.InnerHeight(((ind, value) =>
+        //{
+        //    Console.WriteLine("cur ind: " + ind);
+        //    Console.WriteLine("cur value: " + value);
+        //    return 200;
+        //}));
+
+        Console.WriteLine("Testing Width");
+        Console.WriteLine("Width: " + domImg.Width());
+        domImg.Width(50);
+        domImg.Width("100px");
+        domImg.Width(((ind, value) =>
+        {
+            Console.WriteLine("ind: " + ind);
+            Console.WriteLine("Value: " + value);
+            return "400px";
+        }));
+
+        Console.WriteLine("Testing Inner Width");
+        Console.WriteLine("Inner Width: " + domImg.InnerWidth());
+
+        domImg.InnerWidth(20);
+        domImg.InnerWidth("60px");
+
+        domImg.InnerWidth(((ind, width) =>
+        {
+            Console.WriteLine("ind: " + ind);
+            Console.WriteLine("Width: " + width);
+            return "120px";
+        }));
+
+        Console.WriteLine("Testing offset");
+        Console.WriteLine("Output: ");
+        Console.WriteLine(domImg2.Offset().Top);
+        //domImg2.Offset(new Coordinate
+        //{
+        //    Top = 3,
+        //    Left = 6
+        //});
+        domImg2.Offset(((ind, coordinate) =>
+        {
+            Console.WriteLine("Cur ind: " + ind);
+            Console.WriteLine("Cur top: " + coordinate.Top);
+            Console.WriteLine("Cur left: " + coordinate.Left);
+            return new Coordinate
+            {
+                Top = 3,
+                Left = 6
+            };
+        }));
+    }
 }

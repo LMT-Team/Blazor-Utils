@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using BlazorUtils.Interfaces.EventArgs;
 using System;
 using System.Threading.Tasks;
 
@@ -17,7 +17,7 @@ namespace BlazorUtils.Interfaces
         IDom Css(string propertyName, string value);
         Task<IDom> Animate(object properties, int duration, string easing, Action complete);
         IDom Animate(object properties, object options);
-        IDom On(string events, Action<UIEventArgs> handler);
+        IDom On(string events, Action<LMTEventArgs> handler);
         IDom Add(string arg);
         IDom AddClass(string className);
         bool HasClass(string className);

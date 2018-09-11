@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Blazor;
 
 namespace BlazorUtils.Interfaces.EventArgs
 {
-    public abstract class LMTEventArgs : UIEventArgs
+    public class LMTEventArgs : UIEventArgs
     {
         public bool IsPrevented { private set; get; }
 
