@@ -55,8 +55,8 @@ Things should be easy as 1, 2, 3! Just follow these steps:
   </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
-<h2>2. Add BlazorUtils js library 0.2 and dependencies</h2>
-<p>Copy BlazorUtils.0.2.min.js or BlazorUtils.0.2.bundle.min.js from "\BlazorUtils.WebTest.0.5\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
+<h2>2. Add BlazorUtils js library 0.3 and dependencies</h2>
+<p>Copy BlazorUtils.0.3.js or BlazorUtils.0.3.bundle.js from "\BlazorUtils.WebTest.0.5\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
 <p>With BlazorUtils.Dom, the result should be similar to this: </p>
 
 ```
