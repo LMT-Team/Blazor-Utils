@@ -1,5 +1,6 @@
 # LMT Blazor Utils
 Awesome utils for Blazor!
+These libraries DO NOT work with server-side Blazor!
 
 Reference website: https://lmt.azurewebsites.net/
 
