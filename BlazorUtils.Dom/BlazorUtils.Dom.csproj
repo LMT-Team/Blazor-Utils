@@ -16,7 +16,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>Add compability to Blazor &gt;= 0.5 (Sorry, I'm a kinda busy lately). 
+    <PackageReleaseNotes>Add compability to Blazor &gt;= 0.5.1 (Sorry, I'm a kinda busy lately). 
 Please update Js library to 0.3.</PackageReleaseNotes>
   </PropertyGroup>
 

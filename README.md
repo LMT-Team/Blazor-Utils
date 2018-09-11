@@ -7,7 +7,7 @@ Reference website: https://lmt.azurewebsites.net/
 <p>Progress tables: </p>
 <p>https://leminhtanvatcyahoocomvn-my.sharepoint.com/:x:/g/personal/admin_leminhtanvatcyahoocomvn_onmicrosoft_com/EboJMPJ95C1GvUi4wO89EHABlcfSr5QaN4cpA05ac_ONxQ?e=hC2lFQ</p>
 
-<p>Project template: Blank Blazor web app with LMT Blazor Utils: https://github.com/15110123/Blazor-Utils-template</p>
+Warning: I'm not going to develop the template anymore, since it could be quickly obsoleted compared to Blazor development. Also, the Js library will not have the minified version anymore. After all, the file is only less than 100KB.
 
 <h1>I. Features</h1>
 
@@ -31,13 +31,13 @@ Reference website: https://lmt.azurewebsites.net/
     <tr>
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
-      <td>>= 0.2 with ver 0.1, 0.2, 0.2.1, >= 0.2.1 with ver 0.2.2</td>
+      <td>>= 0.2 with ver 0.1, 0.2, 0.2.1, >= 0.2.1 with ver 0.2.2, >= 0.2.2 with ver 0.3.1</td>
       <td>30%</td>
     </tr>
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies</td>
-      <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1</td>
+      <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1, >= 0.2.2 with ver 0.2.2</td>
       <td>100%</td>
     </tr>
     </tody>
@@ -56,7 +56,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
 <h2>2. Add BlazorUtils js library 0.2 and dependencies</h2>
-<p>Copy BlazorUtils.0.2.min.js or BlazorUtils.0.2.bundle.min.js from "\BlazorUtils.WebTest\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
+<p>Copy BlazorUtils.0.2.min.js or BlazorUtils.0.2.bundle.min.js from "\BlazorUtils.WebTest.0.5\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
 <p>With BlazorUtils.Dom, the result should be similar to this: </p>
 
 ```
@@ -66,19 +66,19 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/lottie.min.js"></script>
-<script type="text/javascript" src="js/BlazorUtils.0.2.min.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.3.js"></script>
 ```
 Or using Blazor Utils bundled version (recommended, CDN - require internet connection):
 
 ```
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/BlazorUtils.0.2.bundle.min.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.3.bundle.js"></script>
 ```
 
 <p>If you only use BlazorUtils.Cookie: </p>
 
 ```
-<script type="text/javascript" src="js/BlazorUtils.0.2.min.js"></script>
+<script type="text/javascript" src="js/BlazorUtils.0.3.js"></script>
 ```
 
 <h2>3. Add these lines to _ViewImports.cshtml</h2>
