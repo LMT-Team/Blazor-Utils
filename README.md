@@ -85,9 +85,11 @@ Or using Blazor Utils bundled version (recommended, CDN - require internet conne
 <h2>3. Add these lines to _ViewImports.cshtml</h2>
 
 ```
+@addTagHelper *, BlazorUtils.Dom
 @using static BlazorUtils.Dom.DomUtil
 @using static BlazorUtils.Cookie.Cookies
 @using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Dom.BlazorComponents
 ```
 
 <p>This will help you call my API faster, without calling DomUtil, Cookies over and over again.</p>
