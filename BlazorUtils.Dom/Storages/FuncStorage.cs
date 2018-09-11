@@ -31,7 +31,7 @@ namespace BlazorUtils.Dom.Storages
             {
                 _actionStorage[id].Invoke(null);
             }
-            _actionStorage[id].Invoke(null);
+            else _actionStorage[id].Invoke(null);
         }
 
         internal static string Add(string events, string selector, Action<UIEventArgs> action)

@@ -6,7 +6,7 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.2</Version>
+    <Version>0.3.3</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Description>Blazor: Accessing and modifying DOM elements in the friendly jQuery style. This API will also include Blazor components in the future.</Description>
@@ -16,7 +16,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>Fix "'DependenciesUtil' is inaccessible due to its protection level" bug.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix event handlers trigger twice after using "On"</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
