@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>LMT.BlazorUtils.Dev</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Rogger Tan</Authors>
+    <Company>LMT</Company>
+    <Product>LMT.BlazorUtils.Dev</Product>
+    <Description>Providing dev tool for easier developing.</Description>
+    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
+    <PackageTags>blazor, asp.net, cookies</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

@@ -41,6 +41,12 @@ Warning: I'm not going to develop the template anymore, since it could be quickl
       <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1, >= 0.2.2 with ver 0.2.2</td>
       <td>100%</td>
     </tr>
+	        <tr>
+      <td>Dev (BlazorUtils.Dev)</td>
+      <td>Providing dev tool for easier developing</td>
+      <td>N/A</td>
+      <td>30%</td>
+    </tr>
     </tody>
 </table>
 
@@ -90,6 +96,7 @@ Or using Blazor Utils bundled version (recommended, CDN - require internet conne
 @using static BlazorUtils.Cookie.Cookies
 @using BlazorUtils.Interfaces.EventArgs
 @using BlazorUtils.Dom.BlazorComponents
+@using BlazorUtils.Dev
 ```
 
 <p>This will help you call my API faster, without calling DomUtil, Cookies over and over again.</p>

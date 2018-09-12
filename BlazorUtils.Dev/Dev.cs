@@ -5,14 +5,27 @@ using static BlazorUtils.Dom.DomUtil;
 
 namespace BlazorUtils.Dev
 {
+    /// <summary>
+    /// Providing dev tool for easier developing.
+    /// </summary>
     public static class Dev
     {
         private static bool _isLooped = false;
         private static Dictionary<string, object> _objects = null;
 
-        public static async Task Map(object o, string name)
+        /// <summary>
+        /// Map C# instance to Js object with custom name.
+        /// </summary>
+        /// <param name="o">C# instance</param>
+        /// <param name="name">Js variable name</param>
+        public static void Map(object o, string name)
         {
             AddToOrUpdateObjectList(o, name);
+            UpdateMappingLayer();
+        }
+
+        private static async void UpdateMappingLayer()
+        {
             await UpdateMapping();
         }
 
@@ -24,28 +37,54 @@ namespace BlazorUtils.Dev
             PropertyInfo[] properties;
             FieldInfo[] fields;
 
-            while (true)
+            do
             {
-                foreach(var o in _objects)
+                foreach (var o in _objects)
                 {
-                    Eval($"var {o.Key} = {{}}");
+                    Eval($"window.{o.Key} = {{}}");
 
-                    properties = o.Value.GetType().GetProperties();
-                    fields = o.Value.GetType().GetFields();
+                    properties = o.Value.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                    fields = o.Value.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
 
                     foreach (var property in properties)
                     {
-                        Eval($"{o.Key}.{property.Name} = \"{property.GetValue(o.Value)}\"");
+                        var value = property.GetValue(o.Value);
+
+                        if (value == null)
+                        {
+                            Eval($"{o.Key}.{property.Name} = null");
+                        }
+
+                        else if (double.TryParse(value.ToString(), out var _))
+                        {
+                            Eval($"{o.Key}.{property.Name} = {value}");
+                        }
+
+                        else Eval($"{o.Key}.{property.Name} = \"{value}\"");
                     }
 
                     foreach (var field in fields)
                     {
-                        Eval($"{o.Key}.{field.Name} = \"{field.GetValue(o.Value)}\"");
+                        //Skip backing field
+                        if (field.Name[0] == '<') continue;
+
+                        var value = field.GetValue(o.Value);
+
+                        if (value == null)
+                        {
+                            Eval($"{o.Key}.{field.Name} = null");
+                        }
+
+                        else if (double.TryParse(value.ToString(), out var _))
+                        {
+                            Eval($"{o.Key}.{field.Name} = {value}");
+                        }
+                        else Eval($"{o.Key}.{field.Name} = \"{value}\"");
                     }
                 }
 
-                await Task.Delay(1);
-            }
+                await Task.Delay(500);
+            } while (true);
         }
 
         private static void AddToOrUpdateObjectList(object o, string name)
@@ -53,7 +92,8 @@ namespace BlazorUtils.Dev
             if (_objects == null) _objects = new Dictionary<string, object>();
             if (_objects.ContainsKey(name))
                 _objects[name] = o;
-            _objects.Add(name, o);
+            else
+                _objects.Add(name, o);
         }
     }
 }

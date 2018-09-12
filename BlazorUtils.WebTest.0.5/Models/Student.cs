@@ -10,6 +10,7 @@ namespace BlazorUtils.WebTest._0._5.Models
         public bool IsMale { get; set; }
         public int Age { get; set; }
         private string _Token = "Secret!";
+        public List<int> Classes = null;
 
         public static List<Student> lstStudent()
         {

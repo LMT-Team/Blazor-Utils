@@ -1,6 +1,8 @@
 ﻿@page "/dev"
 @using BlazorUtils.WebTest._0._5.Models
 
+<button onclick="@(() => {student.Age += 7; })">Click to add student with 7!</button>
+
 @functions{
     Student student;
 
@@ -15,12 +17,9 @@
             StudentId = "12345",
             StudentName = "Nguyen Van A"
         };
+
+        Dev.Map(student, "mappedStudent");
+
+        Console.WriteLine("Done mapping");
     }
-
-        protected override async Task OnAfterRenderAsync()
-        {
-            await base.OnAfterRenderAsync();
-
-            await Dev.Map(student, "mapedStudent");
-        }
 }
