@@ -59,6 +59,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
   <li>Interfaces: https://www.nuget.org/packages/LMT.BlazorUtils.Interfaces/</li>
   <li>Dom: https://www.nuget.org/packages/LMT.BlazorUtils.Dom/</li>
   <li>Cookie: https://www.nuget.org/packages/LMT.BlazorUtils.Cookie/</li>
+  <li>Dev: https://www.nuget.org/packages/LMT.BlazorUtils.Dev/</li>
   </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
