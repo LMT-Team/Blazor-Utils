@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorUtils.Cookie\BlazorUtils.Cookie.csproj" />
+    <ProjectReference Include="..\BlazorUtils.Dev\BlazorUtils.Dev.csproj" />
     <ProjectReference Include="..\BlazorUtils.Dom\BlazorUtils.Dom.csproj" />
     <ProjectReference Include="..\BlazorUtils.Interfaces\BlazorUtils.Interfaces.csproj" />
   </ItemGroup>

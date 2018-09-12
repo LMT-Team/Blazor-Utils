@@ -1,0 +1,26 @@
+﻿@page "/dev"
+@using BlazorUtils.WebTest._0._5.Models
+
+@functions{
+    Student student;
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+
+        student = new Student
+        {
+            Age = 5,
+            IsMale = true,
+            StudentId = "12345",
+            StudentName = "Nguyen Van A"
+        };
+    }
+
+        protected override async Task OnAfterRenderAsync()
+        {
+            await base.OnAfterRenderAsync();
+
+            await Dev.Map(student, "mapedStudent");
+        }
+}
