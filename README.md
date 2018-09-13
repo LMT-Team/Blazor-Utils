@@ -6,7 +6,7 @@ Reference website: https://lmt.azurewebsites.net/
 
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css), Twitter Bootstrap 4 (css and bundle)</p>
 <p>Progress tables: </p>
-<p>https://leminhtanvatcyahoocomvn-my.sharepoint.com/:x:/g/personal/admin_leminhtanvatcyahoocomvn_onmicrosoft_com/EboJMPJ95C1GvUi4wO89EHABlcfSr5QaN4cpA05ac_ONxQ?e=hC2lFQ</p>
+<p>https://leminhtanvatcyahoocomvn.sharepoint.com/:x:/g/EbUBvT0Y_cJFquIPgbxJMzsBZ2HhCoYD1Uc-DRhNkoAG7A?e=cpbeZR</p>
 
 Warning: I'm not going to develop the template anymore, since it could be quickly obsoleted compared to Blazor development. Also, the Js library will not have the minified version anymore. After all, the file is only less than 100KB.
 
