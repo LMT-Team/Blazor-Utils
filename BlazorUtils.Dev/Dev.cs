@@ -10,8 +10,8 @@ namespace BlazorUtils.Dev
     /// </summary>
     public static class Dev
     {
-        private static bool _isLooped = false;
-        private static Dictionary<string, object> _objects = null;
+        internal static bool _isLooped = false;
+        internal static Dictionary<string, object> _objects = null;
 
         /// <summary>
         /// Map C# instance to Js object with custom name.
@@ -53,14 +53,17 @@ namespace BlazorUtils.Dev
                         if (value == null)
                         {
                             Eval($"{o.Key}.{property.Name} = null");
+                            continue;
                         }
 
-                        else if (double.TryParse(value.ToString(), out var _))
+                        var convertedResult = DevUtils.AsConverted(value, property.GetType());
+
+                        if (convertedResult.Item2 == DevUtils.TypeGroup.Numerics)
                         {
-                            Eval($"{o.Key}.{property.Name} = {value}");
+                            Eval($"{o.Key}.{property.Name} = {convertedResult.Item1}");
                         }
 
-                        else Eval($"{o.Key}.{property.Name} = \"{value}\"");
+                        else Eval($"{o.Key}.{property.Name} = \"{convertedResult.Item1}\"");
                     }
 
                     foreach (var field in fields)
@@ -73,13 +76,16 @@ namespace BlazorUtils.Dev
                         if (value == null)
                         {
                             Eval($"{o.Key}.{field.Name} = null");
+                            continue;
                         }
 
-                        else if (double.TryParse(value.ToString(), out var _))
+                        var convertedResult = DevUtils.AsConverted(value, field.GetType());
+
+                        if (convertedResult.Item2 == DevUtils.TypeGroup.Numerics)
                         {
-                            Eval($"{o.Key}.{field.Name} = {value}");
+                            Eval($"{o.Key}.{field.Name} = {convertedResult.Item1}");
                         }
-                        else Eval($"{o.Key}.{field.Name} = \"{value}\"");
+                        else Eval($"{o.Key}.{field.Name} = \"{convertedResult.Item1}\"");
                     }
                 }
 
