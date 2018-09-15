@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 
 namespace BlazorUtils.Dev
 {
@@ -8,6 +7,7 @@ namespace BlazorUtils.Dev
         internal enum TypeGroup
         {
             Numerics,
+            Boolean,
             Others
         }
 
@@ -20,6 +20,15 @@ namespace BlazorUtils.Dev
                 if (int.TryParse(stringValue, out var result))
                 {
                     return (result, TypeGroup.Numerics);
+                }
+
+                throw new Exception("BlazorUtils.Dev: Type and value not match");
+            }
+            if (type == typeof(bool))
+            {
+                if (bool.TryParse(stringValue, out var result))
+                {
+                    return (result, TypeGroup.Boolean);
                 }
 
                 throw new Exception("BlazorUtils.Dev: Type and value not match");

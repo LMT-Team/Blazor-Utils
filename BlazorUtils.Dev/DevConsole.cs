@@ -28,7 +28,7 @@ namespace BlazorUtils.Dev
 
             if (foundProperty != null)
             {
-                var convertResult = DevUtils.AsConverted(Dev._objects[name], foundProperty.GetType());
+                var convertResult = DevUtils.AsConverted(value, foundProperty.PropertyType);
                 foundProperty.SetValue(Dev._objects[name], convertResult.Item1);
                 return;
             }
@@ -39,7 +39,7 @@ namespace BlazorUtils.Dev
 
             if (foundField != null)
             {
-                var convertResult = DevUtils.AsConverted(Dev._objects[name], foundField.GetType());
+                var convertResult = DevUtils.AsConverted(value, foundField.FieldType);
                 foundProperty.SetValue(Dev._objects[name], convertResult.Item1);
                 return;
             }

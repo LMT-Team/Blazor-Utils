@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BlazorUtils.Dev.Properties;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using static BlazorUtils.Dom.DomUtil;
@@ -12,6 +13,7 @@ namespace BlazorUtils.Dev
     {
         internal static bool _isLooped = false;
         internal static Dictionary<string, object> _objects = null;
+        private static bool _isBooted = false;
 
         /// <summary>
         /// Map C# instance to Js object with custom name.
@@ -20,6 +22,13 @@ namespace BlazorUtils.Dev
         /// <param name="name">Js variable name</param>
         public static void Map(object o, string name)
         {
+            //Add DevBoot Js code
+            if (!_isBooted)
+            {
+                Eval(Resources.LMTDevBoot);
+                _isBooted = true;
+            }
+
             AddToOrUpdateObjectList(o, name);
             UpdateMappingLayer();
         }
@@ -52,18 +61,23 @@ namespace BlazorUtils.Dev
 
                         if (value == null)
                         {
-                            Eval($"{o.Key}.{property.Name} = null");
+                            Eval($"{o.Key}.{property.Name} = {{value: null}}");
+                            //Map set method to Js
+                            MapSetMethods(o, property);
                             continue;
                         }
 
-                        var convertedResult = DevUtils.AsConverted(value, property.GetType());
+                        var convertedResult = DevUtils.AsConverted(value, property.PropertyType);
 
-                        if (convertedResult.Item2 == DevUtils.TypeGroup.Numerics)
+                        if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
                         {
-                            Eval($"{o.Key}.{property.Name} = {convertedResult.Item1}");
+                            Eval($"{o.Key}.{property.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
                         }
 
-                        else Eval($"{o.Key}.{property.Name} = \"{convertedResult.Item1}\"");
+                        else Eval($"{o.Key}.{property.Name} = {{value: \"{convertedResult.Item1}\"}}");
+
+                        //Map set method to Js
+                        MapSetMethods(o, property);
                     }
 
                     foreach (var field in fields)
@@ -75,22 +89,37 @@ namespace BlazorUtils.Dev
 
                         if (value == null)
                         {
-                            Eval($"{o.Key}.{field.Name} = null");
+                            Eval($"{o.Key}.{field.Name} = {{value: null}}");
+                            //Map set method to Js
+                            MapSetMethods(o, field);
                             continue;
                         }
 
-                        var convertedResult = DevUtils.AsConverted(value, field.GetType());
+                        var convertedResult = DevUtils.AsConverted(value, field.FieldType);
 
-                        if (convertedResult.Item2 == DevUtils.TypeGroup.Numerics)
+                        if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
                         {
-                            Eval($"{o.Key}.{field.Name} = {convertedResult.Item1}");
+                            Eval($"{o.Key}.{field.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
                         }
-                        else Eval($"{o.Key}.{field.Name} = \"{convertedResult.Item1}\"");
+                        else Eval($"{o.Key}.{field.Name} = {{value: \"{convertedResult.Item1}\"}}");
+
+                        //Map set method to Js
+                        MapSetMethods(o, field);
                     }
                 }
 
                 await Task.Delay(500);
             } while (true);
+        }
+
+        private static void MapSetMethods(KeyValuePair<string, object> o, PropertyInfo property)
+        {
+            Eval($"window.{o.Key}.{property.Name}.set = (value) => {{window.Dev.SetObjectPropertyValue(\"{o.Key}\", \"{property.Name}\", value)}}");
+        }
+
+        private static void MapSetMethods(KeyValuePair<string, object> o, FieldInfo field)
+        {
+            Eval($"window.{o.Key}.{field.Name}.set = (value) => {{window.Dev.SetObjectPropertyValue(\"{o.Key}\", \"{field.Name}\", value)}}");
         }
 
         private static void AddToOrUpdateObjectList(object o, string name)
