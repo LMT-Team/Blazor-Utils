@@ -6,7 +6,7 @@ function LMTDevBoot() {
 
       const assemblyName = "BlazorUtils.Dev";
       const namespace = "BlazorUtils.Dev";
-      const typeName = "DevConsole";
+      const typeName = "Dev";
       const methodName = "Set";
 
       const method = Blazor.platform.findMethod(

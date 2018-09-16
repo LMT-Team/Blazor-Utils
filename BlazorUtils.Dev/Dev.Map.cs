@@ -1,5 +1,4 @@
-﻿using BlazorUtils.Dev.Properties;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using static BlazorUtils.Dom.DomUtil;
@@ -9,11 +8,10 @@ namespace BlazorUtils.Dev
     /// <summary>
     /// Providing dev tool for easier developing.
     /// </summary>
-    public static class Dev
+    public static partial class Dev
     {
         internal static bool _isLooped = false;
         internal static Dictionary<string, object> _objects = null;
-        private static bool _isBooted = false;
 
         /// <summary>
         /// Map C# instance to Js object with custom name.
@@ -23,11 +21,7 @@ namespace BlazorUtils.Dev
         public static void Map(object o, string name)
         {
             //Add DevBoot Js code
-            if (!_isBooted)
-            {
-                Eval(Resources.LMTDevBoot);
-                _isBooted = true;
-            }
+            DevUtils.DevBoot();
 
             AddToOrUpdateObjectList(o, name);
             UpdateMappingLayer();

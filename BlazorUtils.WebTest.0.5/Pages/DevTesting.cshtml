@@ -22,5 +22,13 @@
         Dev.Map(student, "mappedStudent");
 
         Console.WriteLine("Done mapping");
+
+        Dev.Track(this);
+    }
+
+    protected override void OnAfterRender()
+    {
+        base.OnAfterRender();
+        Dev.Warn("After render from component");
     }
 }

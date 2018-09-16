@@ -1,9 +1,14 @@
-﻿using System;
+﻿using BlazorUtils.Dev.Properties;
+using System;
+using System.Reflection;
+using static BlazorUtils.Dom.DomUtil;
 
 namespace BlazorUtils.Dev
 {
     internal static class DevUtils
     {
+        private static bool _isBooted = false;
+
         internal enum TypeGroup
         {
             Numerics,
@@ -62,5 +67,23 @@ namespace BlazorUtils.Dev
             }
             else return (stringValue, TypeGroup.Others);
         }
+
+        internal static void DevBoot()
+        {
+            if (_isBooted) return;
+            Eval(Resources.LMTDevBoot);
+            _isBooted = true;
+        }
+
+        internal static void DevWarn(string message) => Dev.Warn($"BlazorUtils.Dev: {message}");
+
+        internal static void DevError(string message) => Dev.Error($"BlazorUtils.Dev: {message}");
+
+        internal static void InvokeMethod(object o, string methodName, object[] parameters = null)
+        {
+            GetMatchMethodFromAll(o, methodName).Invoke(o, parameters ?? new object[] { });
+        }
+
+        internal static MethodInfo GetMatchMethodFromAll(object o, string methodName) => o.GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
     }
 }
