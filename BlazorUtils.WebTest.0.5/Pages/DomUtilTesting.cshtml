@@ -1,0 +1,16 @@
+﻿@page "/util"
+
+<button onclick="@NavHandler">Click here to navigate to /dev</button>
+<button onclick="@NavBingHandler">Click here to navigate to bing</button>
+
+@functions{
+    public void NavHandler()
+    {
+        NavigateTo("/dev");
+    }
+
+    public void NavBingHandler()
+    {
+        NavigateTo("https://bing.com");
+    }
+}

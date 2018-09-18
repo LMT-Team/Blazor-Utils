@@ -19,8 +19,7 @@
 <button onclick=@(() => { lightbox.Show(); })>Show lightbox</button>
 <LMTTable datas="@(Student.lstStudent().Select(x => new {x.StudentId, x.StudentName, x.IsMale, x.Age}))"
           head="@(new[] {"id", "name", "is male", "age"})" />
-<LMTSlideshow 
-              src="@(new[] {"/img/cover.jpg", "/img/home_cover.jpg", "/img/woman.jpg"})"
+<LMTSlideshow src="@(new[] {"/img/cover.jpg", "/img/home_cover.jpg", "/img/woman.jpg"})"
               style="height: 100vh"
               delay="2000"
               onimagechange="@imageChange"
@@ -28,12 +27,27 @@
     <h1>Hello world! I'm a slideshow</h1>
 </LMTSlideshow>
 <button onclick="@(() => { slideShow.Resume(); })">Resume slideshow</button>
+<h1>Drop area</h1>
+<LMTDropArea class="dropArea" ondrop="@OnDropHandler" />
+<img style="height: 300px; width: 300px; display: block" src="@imgData" />
+
+<style>
+    .dropArea {
+        display: block;
+        width: 300px;
+        height: 300px;
+        border: 5px solid black;
+    }
+</style>
+
 @functions
 {
     private int percentageVal = 40;
     private bool isPauseSlide = false;
     private LMTLightbox lightbox;
     private LMTSlideshow slideShow;
+    private string imgData { get; set; } = "#";
+
     protected override async Task OnAfterRenderAsync()
     {
 
@@ -52,5 +66,15 @@
     {
         Console.WriteLine("Previous page: " + e.Cur);
         Console.WriteLine("Next page: " + e.Next);
+    }
+
+    private void OnDropHandler(LMTDropEventArgs e)
+    {
+        imgData = e.DataUrl;
+        StateHasChanged();
+
+        Console.WriteLine(e.FileStream);
+        Console.WriteLine(e.DataBytes.Length);
+        Console.WriteLine(e.File.Name);
     }
 }

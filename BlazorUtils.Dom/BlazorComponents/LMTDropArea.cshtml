@@ -1,0 +1,53 @@
+﻿@using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Dom.BlazorComponents
+@implements ILMTComponent
+
+<div class="@(@class)" style="@style" id="@id">
+
+</div>
+
+@functions
+{
+    [Parameter]
+    private string style { get; set; }
+
+    [Parameter]
+    private string @class { get; set; }
+
+    [Parameter]
+    private string id { get; set; } = Guid.NewGuid().ToString();
+
+    /// <summary>
+    /// The eventargs will be called PreventDefault by library.
+    /// </summary>
+    [Parameter]
+    private LMTEventHandlers.LMTEventHandler<LMTDropEventArgs> ondrop { get; set; } = null;
+
+    [Parameter]
+    private LMTEventHandlers.LMTEventHandler<LMTEventArgs> ondragover { get; set; } = null;
+
+    protected override void OnInit()
+    {
+    }
+
+    protected override void OnAfterRender()
+    {
+        _($"#{id}")
+            .On("dragover", (e) =>
+            {
+                if (ondragover == null) return;
+                ondragover(e);
+            })
+            .On("drop", (e) =>
+            {
+                OnDropHandler(e);
+            });
+    }
+
+    private void OnDropHandler(LMTEventArgs e)
+    {
+        if (ondrop == null || !(e is LMTDropEventArgs eConverted)) return;
+
+        ondrop(eConverted);
+    }
+}

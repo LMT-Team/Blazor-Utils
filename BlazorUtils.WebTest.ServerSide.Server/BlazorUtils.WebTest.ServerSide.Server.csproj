@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.5.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorUtils.WebTest.ServerSide.App\BlazorUtils.WebTest.ServerSide.App.csproj" />
-  </ItemGroup>
-
 </Project>

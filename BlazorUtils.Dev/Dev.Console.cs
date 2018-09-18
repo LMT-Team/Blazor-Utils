@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using static BlazorUtils.Dom.DomUtil;
 using static BlazorUtils.Dev.DevUtils;
+using static BlazorUtils.Dom.DomUtil;
 
 namespace BlazorUtils.Dev
 {

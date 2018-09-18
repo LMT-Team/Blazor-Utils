@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using BlazorUtils.Interfaces;
+﻿using BlazorUtils.Interfaces;
 using BlazorUtils.Interfaces.EventArgs;
-using Microsoft.AspNetCore.Blazor;
+using System;
+using System.Collections.Generic;
 using static BlazorUtils.Dom.DomUtil;
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
@@ -40,6 +39,25 @@ namespace BlazorUtils.Dom.Storages
                 eventArgs = new LMTEventArgs();
                 _actionStorage[id].Invoke(eventArgs);
             };
+
+            return (eventArgs != null && eventArgs.IsPrevented ? true : false).ToString();
+        }
+
+        //Use for data-included events: ondrop
+        private static string InvokeWithFileData(string id, string dataUrl, string modifyDate, string properties)
+        {
+            //var eventArgs = new LMTDropEventArgs(
+            //    (dataByte == null || dataByte.Length == 0) 
+            //    ? new byte[] { } 
+            //    : dataByte?.Split(',')
+            //        ?.Select(byte.Parse), dataUrl);
+
+            var propertyArray = properties.Split('|');
+            var modifyDateArray = modifyDate.Split('|');
+
+            var eventArgs = new LMTDropEventArgs(dataUrl, new Interfaces.JsPrototypes.File(propertyArray[1], int.Parse(propertyArray[2]), propertyArray[0], new DateTime(int.Parse(modifyDateArray[0]), int.Parse(modifyDateArray[1]), int.Parse(modifyDateArray[2]), int.Parse(modifyDateArray[3]), int.Parse(modifyDateArray[4]), int.Parse(modifyDateArray[5]), int.Parse(modifyDateArray[6]))));
+
+            _actionStorage[id].Invoke(eventArgs);
 
             return (eventArgs != null && eventArgs.IsPrevented ? true : false).ToString();
         }

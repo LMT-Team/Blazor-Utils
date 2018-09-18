@@ -1,4 +1,10 @@
-﻿using static BlazorUtils.Interfaces.Invokers.JsInvoke;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static BlazorUtils.Interfaces.Invokers.JsInvoke;
+
 // ReSharper disable InconsistentNaming
 namespace BlazorUtils.Dom
 {
@@ -18,5 +24,11 @@ namespace BlazorUtils.Dom
         /// Inject behaviour attribute service to Blazor component
         /// </summary>
         public static void LMTBehaviours() => Invoke<object>("LMTBehavioursBoot");
+
+        /// <summary>
+        /// Navigate to specific URL
+        /// </summary>
+        /// <param name="url"></param>
+        public static void NavigateTo(string url) => Microsoft.AspNetCore.Blazor.Browser.Services.BrowserUriHelper.Instance.NavigateTo(url);
     }
 }
