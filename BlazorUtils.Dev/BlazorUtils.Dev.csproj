@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
     <PackageTags>blazor, asp.net, cookies</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

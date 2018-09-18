@@ -1,4 +1,4 @@
-﻿//LMT Blazor Utils 0.3.1 bundled
+﻿//LMT Blazor Utils 0.3.2 bundled
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 window.blazorUtils = {};

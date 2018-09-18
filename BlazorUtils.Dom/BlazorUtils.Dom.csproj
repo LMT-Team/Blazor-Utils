@@ -6,7 +6,7 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.4</Version>
+    <Version>0.3.5</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Description>Blazor: Accessing and modifying DOM elements in the friendly jQuery style. This API will also include Blazor components in the future.</Description>
