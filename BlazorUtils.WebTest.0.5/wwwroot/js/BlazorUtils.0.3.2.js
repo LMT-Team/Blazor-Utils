@@ -27,8 +27,9 @@ window.blazorUtils.core.guid = () => {
 };
 
 $(() => {
+  //window.Blazor might be overrided if put outside of jQuery onLoad
   window.Blazor.registerFunction = (funcName, func) => {
-    eval(`window.${funcName} = func`);
+    eval(`window.blazorUtils.core.funcs.${funcName} = func`);
   };
 
   LMTDomBoot();
