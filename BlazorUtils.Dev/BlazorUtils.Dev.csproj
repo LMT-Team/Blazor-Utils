@@ -7,12 +7,12 @@
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Product>LMT.BlazorUtils.Dev</Product>
-    <Description>Providing dev tool for easier developing.</Description>
+    <Description>Fix field mapping not work when being set value</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
     <PackageTags>blazor, asp.net, cookies</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -41,11 +41,11 @@ namespace BlazorUtils.Dev
             if (foundField != null)
             {
                 var convertResult = AsConverted(value, foundField.FieldType);
-                foundProperty.SetValue(_objects[name], convertResult.Item1);
+                foundField.SetValue(_objects[name], convertResult.Item1);
                 return;
             }
 
-            DevError("No property of field found");
+            DevError("No property or field found");
         }
 
         /// <summary>

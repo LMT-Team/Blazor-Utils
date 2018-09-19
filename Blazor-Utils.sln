@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest", "BlazorUtils.WebTest\BlazorUtils.WebTest.csproj", "{BDDD1379-7ABA-4D21-BAED-1BDB5023EC14}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Interfaces", "BlazorUtils.Interfaces\BlazorUtils.Interfaces.csproj", "{D3A20033-0664-4D2E-986F-2FC15088E836}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dom", "BlazorUtils.Dom\BlazorUtils.Dom.csproj", "{1CF773C2-9E70-4A90-ABFA-D3F8942E85BA}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BDDD1379-7ABA-4D21-BAED-1BDB5023EC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDDD1379-7ABA-4D21-BAED-1BDB5023EC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDDD1379-7ABA-4D21-BAED-1BDB5023EC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDDD1379-7ABA-4D21-BAED-1BDB5023EC14}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3A20033-0664-4D2E-986F-2FC15088E836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3A20033-0664-4D2E-986F-2FC15088E836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3A20033-0664-4D2E-986F-2FC15088E836}.Release|Any CPU.ActiveCfg = Release|Any CPU
