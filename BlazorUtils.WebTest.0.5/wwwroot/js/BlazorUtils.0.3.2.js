@@ -3,6 +3,7 @@
 
 window.blazorUtils = {};
 window.blazorUtils.core = {};
+window.blazorUtils.core.funcs = {};
 if (window.Blazor == undefined) {
   window.Blazor = {};
 }
