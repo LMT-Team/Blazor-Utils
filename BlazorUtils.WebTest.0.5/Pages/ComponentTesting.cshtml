@@ -40,6 +40,13 @@
 
 <LMTInjector type="@typeof(Models.WebsiteInfo)" ref="@injector" jsonpath="/json/Injection.json">
     <h1>The website name is @injector.Get("websiteName")</h1>
+    <h1>This website is developing by: </h1>
+    @{ 
+        foreach(var devname in injector.Get("developers") as string[])
+        {
+            <h2>@devname</h2>
+        }
+    }
 </LMTInjector>
 
 <style>

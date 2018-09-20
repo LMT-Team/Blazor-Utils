@@ -42,8 +42,8 @@ protected override async Task OnInitAsync()
     //jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
 }
 
-public string Get(string key)
+public object Get(string key)
 {
-    return type.GetProperty(key, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).GetValue(jsonObject).ToString();
+    return type.GetProperty(key, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).GetValue(jsonObject);
 }
 }
