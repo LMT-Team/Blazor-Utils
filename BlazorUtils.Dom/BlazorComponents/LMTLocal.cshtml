@@ -1,0 +1,16 @@
+﻿@implements ILMTComponent
+
+<div id="@id" style="@style">
+    @ChildContent
+</div>
+
+@functions
+{
+    [Parameter]
+    private string style { get; set; }
+
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+    public string id { get; set; } = $"lmt{Guid.NewGuid().ToString().Replace("-", "")}";
+}

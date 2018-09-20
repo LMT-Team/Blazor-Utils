@@ -31,6 +31,17 @@
 <LMTDropArea class="dropArea" ondrop="@OnDropHandler" />
 <img style="height: 300px; width: 300px; display: block" src="@imgData" />
 
+<button onclick="@(() => { local1._("h1").Css("color", "red"); })">Change h1 to red locally</button>
+<LMTLocal ref="@local1">
+    <h1>
+        This should be changed locally
+    </h1>
+</LMTLocal>
+
+<LMTInjector type="@typeof(Models.WebsiteInfo)" ref="@injector" jsonpath="/json/Injection.json">
+    <h1>The website name is @injector.Get("websiteName")</h1>
+</LMTInjector>
+
 <style>
     .dropArea {
         display: block;
@@ -47,6 +58,8 @@
     private LMTLightbox lightbox;
     private LMTSlideshow slideShow;
     private string imgData { get; set; } = "#";
+    private LMTLocal local1;
+    private LMTInjector injector;
 
     protected override async Task OnAfterRenderAsync()
     {

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static BlazorUtils.Interfaces.Invokers.JsInvoke;
+﻿using static BlazorUtils.Interfaces.Invokers.JsInvoke;
+using BlazorUtils.Dom.BlazorComponents;
 
 // ReSharper disable InconsistentNaming
 namespace BlazorUtils.Dom
@@ -14,6 +10,8 @@ namespace BlazorUtils.Dom
     public static class DomUtil
     {
         public static Dom _(string selector) => new Dom(selector);
+
+        public static Dom _(this LMTLocal localComponent, string selector) => new Dom($"#{localComponent.id} {selector}");
 
         /// <summary>
         /// Evaluate JavaScript code as string

@@ -34,7 +34,9 @@
   <ItemGroup>
     <None Remove="BlazorComponents\LMTBreadcrumb.cshtml" />
     <None Remove="BlazorComponents\LMTDropArea.cshtml" />
+    <None Remove="BlazorComponents\LMTInjector.cshtml" />
     <None Remove="BlazorComponents\LMTLightbox.cshtml" />
+    <None Remove="BlazorComponents\LMTLocal.cshtml" />
     <None Remove="BlazorComponents\LMTProgress.cshtml" />
     <None Remove="BlazorComponents\LMTSlideshow.cshtml" />
     <None Remove="BlazorComponents\LMTTable.cshtml" />

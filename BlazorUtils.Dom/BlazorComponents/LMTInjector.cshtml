@@ -1,0 +1,49 @@
+﻿@using System.Reflection
+@using Microsoft.AspNetCore.Blazor.Browser.Services
+
+@inject System.Net.Http.HttpClient HttpClient
+
+@implements ILMTComponent
+
+@{ if (jsonObject != null)
+    {
+        @ChildContent
+    }
+}
+
+@functions
+{
+[Parameter]
+private string jsonpath { get; set; }
+
+[Parameter]
+private Type type { get; set; }
+
+private object jsonObject { get; set; }
+
+[Parameter]
+private RenderFragment ChildContent { get; set; }
+
+
+
+protected override async Task OnInitAsync()
+{
+    var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
+    string jsonString;
+    jsonString = await HttpClient.GetStringAsync(absolutePath);
+
+    jsonObject = typeof(Microsoft.JSInterop.Json)
+.GetMethod("Deserialize")
+.MakeGenericMethod(type)
+.Invoke(null, new[] { jsonString as object });
+
+    StateHasChanged();
+
+    //jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
+}
+
+public string Get(string key)
+{
+    return type.GetProperty(key, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).GetValue(jsonObject).ToString();
+}
+}

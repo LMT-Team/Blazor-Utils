@@ -1,7 +1,6 @@
 ﻿using BlazorUtils.Dom.Storages;
 using BlazorUtils.Interfaces;
 using BlazorUtils.Interfaces.EventArgs;
-using Microsoft.AspNetCore.Blazor;
 using System;
 using System.Threading.Tasks;
 using static BlazorUtils.Interfaces.Invokers.JsInvoke;
