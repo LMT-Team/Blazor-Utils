@@ -13,37 +13,58 @@
 
 @functions
 {
-[Parameter]
-private string jsonpath { get; set; }
+    [Parameter]
+    private string jsonpath { get; set; }
 
-[Parameter]
-private Type type { get; set; }
+    [Parameter]
+    private Type type { get; set; }
 
-private object jsonObject { get; set; }
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
 
-[Parameter]
-private RenderFragment ChildContent { get; set; }
+    [Parameter]
+    private bool update { get; set; } = false;
 
+    private bool _skipRender = false;
 
+    private object jsonObject { get; set; }
 
-protected override async Task OnInitAsync()
-{
-    var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
-    string jsonString;
-    jsonString = await HttpClient.GetStringAsync(absolutePath);
+    protected override async Task OnInitAsync()
+    {
+        await Update();
 
-    jsonObject = typeof(Microsoft.JSInterop.Json)
-.GetMethod("Deserialize")
-.MakeGenericMethod(type)
-.Invoke(null, new[] { jsonString as object });
+        StateHasChanged();
 
-    StateHasChanged();
+        //jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
+    }
 
-    //jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
-}
+    public object Get(string key)
+    {
+        return type.GetProperty(key, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).GetValue(jsonObject);
+    }
 
-public object Get(string key)
-{
-    return type.GetProperty(key, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).GetValue(jsonObject);
-}
+    public async Task Update()
+    {
+        var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
+        string jsonString;
+        jsonString = await HttpClient.GetStringAsync(absolutePath);
+
+        jsonObject = typeof(Microsoft.JSInterop.Json)
+    .GetMethod("Deserialize")
+    .MakeGenericMethod(type)
+    .Invoke(null, new[] { jsonString as object });
+    }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        if (!update) return;
+        if (!_skipRender)
+        {
+            _skipRender = true;
+            return;
+        }
+        await Update();
+        _skipRender = false;
+        StateHasChanged();
+    }
 }
