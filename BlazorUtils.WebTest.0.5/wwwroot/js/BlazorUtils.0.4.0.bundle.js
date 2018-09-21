@@ -565,7 +565,7 @@ function LMTDomBoot() {
 
   //Pure Js
   Blazor.registerFunction("LMTDomEval", function(jsCode) {
-    eval(jsCode);
+    return eval(jsCode);
   });
 
   //jQuery

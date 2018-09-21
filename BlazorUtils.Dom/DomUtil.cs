@@ -18,6 +18,13 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <param name="jsCode"></param>
         public static void Eval(string jsCode) => Invoke<object>("LMTDomEval", jsCode);
+
+        /// <summary>
+        /// Evaluate JavaScript code as string
+        /// </summary>
+        /// <param name="jsCode"></param>
+        public static T Eval<T>(string jsCode) => Invoke<T>("LMTDomEval", jsCode);
+
         /// <summary>
         /// Inject behaviour attribute service to Blazor component
         /// </summary>
