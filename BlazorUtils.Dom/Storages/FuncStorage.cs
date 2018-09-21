@@ -63,7 +63,7 @@ namespace BlazorUtils.Dom.Storages
         }
 
         //Use for data-included events: ondrop
-        private static string InvokeWithSelector(string id, string selector)
+        private static string InvokeWithStringData(string id, string data)
         {
             //var eventArgs = new LMTDropEventArgs(
             //    (dataByte == null || dataByte.Length == 0) 
@@ -71,7 +71,7 @@ namespace BlazorUtils.Dom.Storages
             //    : dataByte?.Split(',')
             //        ?.Select(byte.Parse), dataUrl);
 
-            var eventArgs = new LMTDropEventArgs(selector);
+            var eventArgs = new LMTDropEventArgs(data);
 
             _actionStorage[id].Invoke(eventArgs);
 

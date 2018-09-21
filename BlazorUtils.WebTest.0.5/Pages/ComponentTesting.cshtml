@@ -106,6 +106,12 @@
 
     private void OnDropHandler(LMTDropEventArgs e)
     {
+        if (e.StringData != null)
+        {
+            Dev.Warn($"You dropped an element: {e.StringData}!");
+            return;
+        }
+
         imgData = e.DataUrl;
         StateHasChanged();
 

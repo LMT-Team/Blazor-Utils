@@ -433,6 +433,31 @@ function LMTDomBoot() {
     return false;
   };
 
+  let BlazorUtilsCallCSUICallBackWithStringData = (id, data) => {
+    const assemblyName = "BlazorUtils.Dom";
+    const namespace = "BlazorUtils.Dom.Storages";
+    const typeName = "UICallBacksStorage";
+    const methodName = "InvokeWithStringData";
+
+    const method = Blazor.platform.findMethod(
+      assemblyName,
+      namespace,
+      typeName,
+      methodName
+    );
+
+    let csid = Blazor.platform.toDotNetString(id);
+    let csdata = Blazor.platform.toDotNetString(data);
+
+    let result = Blazor.platform.toJavaScriptString(
+      Blazor.platform.callMethod(method, null, [csid, csdata])
+    );
+    if (result == "True") {
+      return true;
+    }
+    return false;
+  };
+
   // ReSharper disable once InconsistentNaming
   let BlazorUtilsCallIntStringString = (id, ind, className) => {
     const assemblyName = "BlazorUtils.Dom";
@@ -603,18 +628,27 @@ function LMTDomBoot() {
       let result = false;
       if (e.originalEvent && e.originalEvent.dataTransfer) {
         e.preventDefault();
-        let files = e.originalEvent.dataTransfer.files;
-        for (var i = 0, f; (f = files[i]); i++) {
-          let fileReader = new FileReader();
-          fileReader.file = f;
-          fileReader.readAsDataURL(f);
-          fileReader.onload = function() {
-            BlazorUtilsCallCSUICallBackWithFileData(
+        if (e.type == "drop") {
+          let files = e.originalEvent.dataTransfer.files;
+          if (files.length != 0) {
+            for (var i = 0, f; (f = files[i]); i++) {
+              let fileReader = new FileReader();
+              fileReader.file = f;
+              fileReader.readAsDataURL(f);
+              fileReader.onload = function() {
+                BlazorUtilsCallCSUICallBackWithFileData(
+                  handler,
+                  fileReader.result,
+                  fileReader.file
+                );
+              };
+            }
+          } else {
+            BlazorUtilsCallCSUICallBackWithStringData(
               handler,
-              fileReader.result,
-              fileReader.file
+              e.originalEvent.dataTransfer.getData("text")
             );
-          };
+          }
         }
       } else {
         result = BlazorUtilsCallCSUICallBack(handler);
