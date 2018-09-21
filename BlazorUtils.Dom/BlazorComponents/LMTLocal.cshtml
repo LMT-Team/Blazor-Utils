@@ -1,0 +1,30 @@
+﻿@using System.Text
+
+@implements ILMTComponent
+
+<div id="@id" style="@style">
+    @ChildContent
+</div>
+
+@functions
+{
+    [Parameter]
+    private string style { get; set; }
+
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+    public string id { get; set; } = $"lmt{Guid.NewGuid().ToString().Replace("-", "")}";
+
+    protected override void OnAfterRender()
+    {
+        var dom = _($"#{id} style");
+        var styleString = dom.Text().TrimEnd();
+
+        var stringBuilder = new StringBuilder($"#{id} ");
+        stringBuilder.Append(styleString.Substring(0, styleString.Length - 1).Replace("}", $"}} #{id}"));
+        stringBuilder.Append("}");
+
+        dom.Text(stringBuilder.ToString());
+    }
+}

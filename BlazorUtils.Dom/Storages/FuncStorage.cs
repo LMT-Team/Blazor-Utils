@@ -62,6 +62,22 @@ namespace BlazorUtils.Dom.Storages
             return (eventArgs != null && eventArgs.IsPrevented ? true : false).ToString();
         }
 
+        //Use for data-included events: ondrop
+        private static string InvokeWithStringData(string id, string data)
+        {
+            //var eventArgs = new LMTDropEventArgs(
+            //    (dataByte == null || dataByte.Length == 0) 
+            //    ? new byte[] { } 
+            //    : dataByte?.Split(',')
+            //        ?.Select(byte.Parse), dataUrl);
+
+            var eventArgs = new LMTDropEventArgs(data);
+
+            _actionStorage[id].Invoke(eventArgs);
+
+            return (eventArgs != null && eventArgs.IsPrevented ? true : false).ToString();
+        }
+
         internal static string Add(string events, string selector, Action<LMTEventArgs> action)
         {
             if (_actionStorage == null)

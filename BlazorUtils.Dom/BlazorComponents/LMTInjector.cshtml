@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Blazor.Browser.Services
+
+@inject System.Net.Http.HttpClient HttpClient
+
+@implements ILMTComponent
+
+@{ if (jsonString != null)
+    {
+        @ChildContent
+    }
+}
+
+@functions
+{
+    [Parameter]
+    private string jsonpath { get; set; }
+
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    private bool update { get; set; } = false;
+
+    private bool _skipRender = false;
+
+    private string jsonString = null;
+
+    private object jsonObject = null;
+
+    private object simpleJsonObject = null;
+
+    protected override async Task OnInitAsync()
+    {
+        await Update();
+
+        StateHasChanged();
+
+        //jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
+    }
+
+    /// <summary>
+    /// Get object as generics-type. Considering use this method for code refactoring, but bad for performance improvement.
+    /// </summary>
+    /// <typeparam name="T">Returning type</typeparam>
+    /// <returns></returns>
+    public T Get<T>()
+    {
+        if (jsonObject == null)
+        {
+            jsonObject = typeof(Microsoft.JSInterop.Json)
+        .GetMethod("Deserialize")
+        .MakeGenericMethod(typeof(T))
+        .Invoke(null, new[] { jsonString as object });
+        }
+
+        return (T)jsonObject;
+    }
+
+    /// <summary>
+    /// Get string value by key. Considering use this method for performance improvement, but bad for refactoring.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public string Get(string key)
+    {
+        if (simpleJsonObject == null)
+        {
+            simpleJsonObject = typeof(Microsoft.JSInterop.Json)
+    .GetMethod("Deserialize")
+    .MakeGenericMethod(typeof(object))
+    .Invoke(null, new[] { jsonString as object });
+        }
+
+        return simpleJsonObject.GetType().GetMethod("get_Item", new[] { typeof(string) }).Invoke(simpleJsonObject, new[] { key }).ToString();
+    }
+
+    public async Task Update()
+    {
+        var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
+        jsonString = await HttpClient.GetStringAsync(absolutePath);
+    }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        if (!update) return;
+        if (!_skipRender)
+        {
+            _skipRender = true;
+            return;
+        }
+        await Update();
+        _skipRender = false;
+        StateHasChanged();
+    }
+}

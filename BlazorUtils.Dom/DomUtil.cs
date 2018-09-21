@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static BlazorUtils.Interfaces.Invokers.JsInvoke;
+﻿using static BlazorUtils.Interfaces.Invokers.JsInvoke;
+using BlazorUtils.Dom.BlazorComponents;
 
 // ReSharper disable InconsistentNaming
 namespace BlazorUtils.Dom
@@ -15,11 +11,20 @@ namespace BlazorUtils.Dom
     {
         public static Dom _(string selector) => new Dom(selector);
 
+        public static Dom _(this LMTLocal localComponent, string selector) => new Dom($"#{localComponent.id} {selector}");
+
         /// <summary>
         /// Evaluate JavaScript code as string
         /// </summary>
         /// <param name="jsCode"></param>
         public static void Eval(string jsCode) => Invoke<object>("LMTDomEval", jsCode);
+
+        /// <summary>
+        /// Evaluate JavaScript code as string
+        /// </summary>
+        /// <param name="jsCode"></param>
+        public static T Eval<T>(string jsCode) => Invoke<T>("LMTDomEval", jsCode);
+
         /// <summary>
         /// Inject behaviour attribute service to Blazor component
         /// </summary>

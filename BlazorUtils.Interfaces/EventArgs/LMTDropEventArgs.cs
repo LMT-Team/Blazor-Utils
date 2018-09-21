@@ -12,6 +12,7 @@ namespace BlazorUtils.Interfaces.EventArgs
         
         public JsPrototypes.File File { get; }
         public string DataUrl { get; }
+        public string StringData { get; }
 
         public string Base64String
         {
@@ -53,6 +54,11 @@ namespace BlazorUtils.Interfaces.EventArgs
         {
             DataUrl = dataUrl;
             File = file;
+        }
+
+        public LMTDropEventArgs(string stringData)
+        {
+            StringData = stringData;
         }
     }
 }
