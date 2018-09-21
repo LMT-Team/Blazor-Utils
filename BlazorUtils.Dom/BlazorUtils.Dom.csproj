@@ -6,17 +6,22 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.3.5</Version>
+    <Version>0.4.0</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
-    <Description>Blazor: Accessing and modifying DOM elements in the friendly jQuery style. This API will also include Blazor components in the future.</Description>
+    <Description>Blazor: Support utilities related to browser's DOM.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
     <PackageTags>blazor, asp.net, dom, jquery</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>Use LMTEventArgs for On method, which support PreventDefault.</PackageReleaseNotes>
+    <PackageReleaseNotes>Big update!
+Please update Js library to 0.4.0 before using. 
+- Support HTML element drop in for LMTDropArea.
+- LMTLocal: Localizing CSS and BlazorUtils DOM selector automatically.
+- LMTInjector: Inject json object value and control update through an injector.
+- Eval now can return result with specific generics-type.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
