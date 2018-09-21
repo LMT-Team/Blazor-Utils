@@ -3,9 +3,9 @@
 namespace BlazorUtils.Cookie
 {
     /// <summary>
-    /// Session storage util class.
+    /// Local storage util class.
     /// </summary>
-    public static class SessionStorage
+    public static class LocalStorage
     {
         /// <summary>
         /// Get storage by key.
@@ -14,7 +14,7 @@ namespace BlazorUtils.Cookie
         /// <returns></returns>
         public static string Get(string key)
         {
-            return Invoke<string>("blazorUtils.core.funcs.SessionStorageGet", key);
+            return Invoke<string>("blazorUtils.core.funcs.LocalStorageGet", key);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace BlazorUtils.Cookie
         /// <param name="value"></param>
         public static void Set(string key, string value)
         {
-            Invoke<object>("blazorUtils.core.funcs.SessionStorageSet", key, value);
+            Invoke<object>("blazorUtils.core.funcs.LocalStorageSet", key, value);
         }
     }
 }
