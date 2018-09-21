@@ -32,17 +32,31 @@
 <img style="height: 300px; width: 300px; display: block" src="@imgData" />
 
 <button onclick="@(() => { local1._("h1").Css("color", "red"); })">Change h1 to red locally</button>
+<h2>Yeah!</h2>
 <LMTLocal ref="@local1">
     <h1>
         This should be changed locally
     </h1>
+    <h2>Yeah!</h2>
+    <style>
+        /*Comment testing*/
+        h1 {
+            font-size: 70px;
+            border: 2px solid black;
+        }
+
+        h2 {
+            color: blue;
+        }
+    </style>
 </LMTLocal>
 
-<LMTInjector type="@typeof(Models.WebsiteInfo)" ref="@injector" jsonpath="/json/Injection.json">
-    <h1>The website name is @injector.Get("websiteName")</h1>
+<LMTInjector ref="@injector" jsonpath="/json/Injection.json">
+    <h1>The website name is @(injector.Get("websiteName"))</h1>
+    <h1>It has been here for @injector.Get("age") years!</h1>
     <h1>This website is developing by: </h1>
     @{
-        foreach (var devname in injector.Get("developers") as string[])
+        foreach (var devname in injector.Get<Models.WebsiteInfo>().developers)
         {
             <h2>@devname</h2>
         }
@@ -72,7 +86,7 @@
 
     protected override async Task OnAfterRenderAsync()
     {
-        
+
     }
 
     protected void imageChange(ImageChangedEventArgs e)

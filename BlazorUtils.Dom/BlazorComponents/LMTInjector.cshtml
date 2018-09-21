@@ -1,11 +1,10 @@
-﻿@using System.Reflection
-@using Microsoft.AspNetCore.Blazor.Browser.Services
+﻿@using Microsoft.AspNetCore.Blazor.Browser.Services
 
 @inject System.Net.Http.HttpClient HttpClient
 
 @implements ILMTComponent
 
-@{ if (jsonObject != null)
+@{ if (jsonString != null)
     {
         @ChildContent
     }
@@ -17,9 +16,6 @@
     private string jsonpath { get; set; }
 
     [Parameter]
-    private Type type { get; set; }
-
-    [Parameter]
     private RenderFragment ChildContent { get; set; }
 
     [Parameter]
@@ -27,7 +23,11 @@
 
     private bool _skipRender = false;
 
-    private object jsonObject { get; set; }
+    private string jsonString = null;
+
+    private object jsonObject = null;
+
+    private object simpleJsonObject = null;
 
     protected override async Task OnInitAsync()
     {
@@ -38,21 +38,46 @@
         //jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
     }
 
-    public object Get(string key)
+    /// <summary>
+    /// Get object as generics-type. Considering use this method for code refactoring, but bad for performance improvement.
+    /// </summary>
+    /// <typeparam name="T">Returning type</typeparam>
+    /// <returns></returns>
+    public T Get<T>()
     {
-        return type.GetProperty(key, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static).GetValue(jsonObject);
+        if (jsonObject == null)
+        {
+            jsonObject = typeof(Microsoft.JSInterop.Json)
+        .GetMethod("Deserialize")
+        .MakeGenericMethod(typeof(T))
+        .Invoke(null, new[] { jsonString as object });
+        }
+
+        return (T)jsonObject;
+    }
+
+    /// <summary>
+    /// Get string value by key. Considering use this method for performance improvement, but bad for refactoring.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public string Get(string key)
+    {
+        if (simpleJsonObject == null)
+        {
+            simpleJsonObject = typeof(Microsoft.JSInterop.Json)
+    .GetMethod("Deserialize")
+    .MakeGenericMethod(typeof(object))
+    .Invoke(null, new[] { jsonString as object });
+        }
+
+        return simpleJsonObject.GetType().GetMethod("get_Item", new[] { typeof(string) }).Invoke(simpleJsonObject, new[] { key }).ToString();
     }
 
     public async Task Update()
     {
         var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
-        string jsonString;
         jsonString = await HttpClient.GetStringAsync(absolutePath);
-
-        jsonObject = typeof(Microsoft.JSInterop.Json)
-    .GetMethod("Deserialize")
-    .MakeGenericMethod(type)
-    .Invoke(null, new[] { jsonString as object });
     }
 
     protected override async Task OnAfterRenderAsync()
