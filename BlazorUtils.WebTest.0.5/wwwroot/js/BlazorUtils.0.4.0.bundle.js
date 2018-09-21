@@ -80,6 +80,38 @@ function LMTCookieBoot() {
   Blazor.registerFunction("LMTCookiesAdd", function(key, value, exp, path) {
     setCookie(key, value, exp, path);
   });
+
+  Blazor.registerFunction("LocalStorageGet", (key) => {
+    return localStorage.getItem(key);
+  });
+
+  Blazor.registerFunction("LocalStorageSet", (key, value) => {
+    localStorage.setItem(key, value);
+  });
+
+  Blazor.registerFunction("LocalStorageRemove", (key) => {
+    localStorage.removeItem(key);
+  });
+
+  Blazor.registerFunction("LocalStorageClear", () => {
+    localStorage.clear();
+  });
+
+  Blazor.registerFunction("SessionStorageGet", (key) => {
+    return sessionStorage.getItem(key);
+  });
+
+  Blazor.registerFunction("SessionStorageSet", (key, value) => {
+    sessionStorage.setItem(key, value);
+  });
+
+  Blazor.registerFunction("SessionStorageRemove", (key) => {
+    sessionStorage.removeItem(key);
+  });
+
+  Blazor.registerFunction("SessionStorageClear", () => {
+    sessionStorage.clear();
+  });
 }
 
 function LMTDomBoot() {

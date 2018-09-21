@@ -20,11 +20,36 @@
         <button onclick=@AddCookie>Submit</button>
     </div>
     <div>
-        <button onclick=@RemoveAllCookies>RemoveAll</button>
+        <button onclick=@Cookies.Clear>RemoveAll</button>
     </div>
 </div>
+<h1>Session storage</h1>
+<div>
+    <button onclick=@AddSessionStorage>Add sessionstorage</button>
+</div>
+<div>
+    <button onclick=@(() => { Dev.Warn(SessionStorage.Get("testing")); })>Get sessionstorage</button>
+</div>
+<div>
+    <button onclick=@SessionStorage.Clear>RemoveAll</button>
+</div>
+<h1>Local storage</h1>
+<div>
+    <button onclick=@AddLocalStorage>Add localstorage</button>
+</div>
+<div>
+    <button onclick=@(() => { Dev.Warn(LocalStorage.Get("testing")); })>Get localstorage</button>
+</div>
+<div>
+    <button onclick=@LocalStorage.Clear>RemoveAll</button>
+</div>
 @functions
-{
+{ protected override void OnInit()
+    {
+        base.OnInit();
+
+
+    }
 
     protected override async Task OnAfterRenderAsync()
     {
@@ -37,6 +62,16 @@
         var days = _(".CookieTesting [name=days]").Val();
         var path = _(".CookieTesting [name=path]").Val();
 
-        SetCookie(new Interfaces.Cookie.Cookie(key, val, int.Parse(days), path));
+        Cookies.Set(new Interfaces.Cookie.Cookie(key, val, int.Parse(days), path));
+    }
+
+    private void AddSessionStorage()
+    {
+        SessionStorage.Set("testing", "hello session!");
+    }
+
+    private void AddLocalStorage()
+    {
+        LocalStorage.Set("testing", "hello local!");
     }
 }

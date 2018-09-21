@@ -14,7 +14,7 @@ namespace BlazorUtils.Cookie
         /// <returns></returns>
         public static string Get(string key)
         {
-            return Invoke<string>("blazorUtils.core.funcs.SessionStorageGet", key);
+            return Invoke<string>("SessionStorageGet", key);
         }
 
         /// <summary>
@@ -24,7 +24,24 @@ namespace BlazorUtils.Cookie
         /// <param name="value"></param>
         public static void Set(string key, string value)
         {
-            Invoke<object>("blazorUtils.core.funcs.SessionStorageSet", key, value);
+            Invoke<object>("SessionStorageSet", key, value);
+        }
+
+        /// <summary>
+        /// Remove storage data by key.
+        /// </summary>
+        /// <param name="key"></param>
+        public static void Remove(string key)
+        {
+            Invoke<object>("SessionStorageRemove", key);
+        }
+
+        /// <summary>
+        /// Clear all storage data.
+        /// </summary>
+        public static void Clear()
+        {
+            Invoke<object>("SessionStorageClear");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BlazorUtils.Cookie
         /// <returns></returns>
         public static string Get(string key)
         {
-            return Invoke<string>("blazorUtils.core.funcs.LocalStorageGet", key);
+            return Invoke<string>("LocalStorageGet", key);
         }
 
         /// <summary>
@@ -24,7 +24,24 @@ namespace BlazorUtils.Cookie
         /// <param name="value"></param>
         public static void Set(string key, string value)
         {
-            Invoke<object>("blazorUtils.core.funcs.LocalStorageSet", key, value);
+            Invoke<object>("LocalStorageSet", key, value);
+        }
+
+        /// <summary>
+        /// Remove storage data by key.
+        /// </summary>
+        /// <param name="key"></param>
+        public static void Remove(string key)
+        {
+            Invoke<object>("LocalStorageRemove", key);
+        }
+
+        /// <summary>
+        /// Clear all storage data.
+        /// </summary>
+        public static void Clear()
+        {
+            Invoke<object>("LocalStorageClear");
         }
     }
 }

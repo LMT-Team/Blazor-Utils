@@ -34,13 +34,13 @@ namespace BlazorUtils.Cookie
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static Interfaces.Cookie.Cookie GetCookie(string key) => Dict[key];
+        public static Interfaces.Cookie.Cookie Get(string key) => Dict[key];
 
         /// <summary>
         /// Set a new cookie. If day expires is 0, it will be a session cookie. Set it to minus value in order to remove.
         /// </summary>
         /// <param name="cookie">Object representing cookie</param>
-        public static void SetCookie(Interfaces.Cookie.Cookie cookie)
+        public static void Set(Interfaces.Cookie.Cookie cookie)
         {
             Invoke<object>("LMTCookiesAdd", cookie.Key, cookie.Value, cookie.Expires, cookie.Path);
             //Set null to force getter to reinitialize list of cookies
@@ -48,14 +48,23 @@ namespace BlazorUtils.Cookie
         }
 
         /// <summary>
-        /// Remove all cookies
+        /// Clear all cookies
         /// </summary>
-        public static void RemoveAllCookies()
+        public static void Clear()
         {
             foreach(var ele in Dict)
             {
-                Invoke<object>("LMTCookiesAdd", ele.Key, "", -999, "/");
+                Remove(ele.Key);
             }
+        }
+
+        /// <summary>
+        /// Remove a specific cookie
+        /// </summary>
+        /// <param name="key"></param>
+        public static void Remove(string key)
+        {
+            Invoke<object>("LMTCookiesAdd", key, "", -999, "/");
         }
     }
 }
