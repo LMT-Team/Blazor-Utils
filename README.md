@@ -2,7 +2,7 @@
 Awesome utils for Blazor!
 These libraries DO NOT work with server-side Blazor!
 
-Reference website: https://lmt.azurewebsites.net/
+BlazorUtils.Dom 0.4.0 is available!: https://blazorutils.wordpress.com/2018/09/21/blazorutils-dom-0-4-0-is-available/
 
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css), Twitter Bootstrap 4 (css and bundle)</p>
 <p>Progress tables: </p>
