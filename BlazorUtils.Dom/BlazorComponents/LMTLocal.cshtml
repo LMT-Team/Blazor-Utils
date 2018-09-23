@@ -14,7 +14,7 @@
     [Parameter]
     private RenderFragment ChildContent { get; set; }
 
-    public string id { get; set; } = $"lmt{Guid.NewGuid().ToString().Replace("-", "")}";
+    public string id { get; set; } = $"lmt{Guid.NewGuid().ToString()}";
 
     private bool _isLocalized = false;
 
@@ -23,7 +23,8 @@
         if (_isLocalized) return;
         _isLocalized = true;
 
-        var dom = _($"#{id} style");
+        var dom = _($"#{id} > style");
+
         var styleString = dom.Text().TrimEnd();
 
         if (string.IsNullOrEmpty(styleString)) return;
