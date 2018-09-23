@@ -4,6 +4,11 @@
 <button onclick="@NavBingHandler">Click here to navigate to bing</button>
 
 @functions{
+    protected override void OnInit()
+    {
+        Dev.Warn(Eval<int>("5 + 7").ToString());
+    }
+
     public void NavHandler()
     {
         NavigateTo("/dev");

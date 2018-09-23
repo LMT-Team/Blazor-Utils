@@ -16,8 +16,13 @@
 
     public string id { get; set; } = $"lmt{Guid.NewGuid().ToString().Replace("-", "")}";
 
+    private bool _isLocalized = false;
+
     protected override void OnAfterRender()
     {
+        if (_isLocalized) return;
+        _isLocalized = true;
+
         var dom = _($"#{id} style");
         var styleString = dom.Text().TrimEnd();
 
