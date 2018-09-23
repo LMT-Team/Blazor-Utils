@@ -1,9 +1,8 @@
 ﻿@using BlazorUtils.Interfaces.EventArgs
-@using BlazorUtils.Dom.BlazorComponents
 @implements ILMTComponent
 
 <div class="@(@class)" style="@style" id="@id">
-
+    @ChildContent
 </div>
 
 @functions
@@ -16,6 +15,9 @@
 
     [Parameter]
     private string id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
 
     /// <summary>
     /// The eventargs will be called PreventDefault by library.
