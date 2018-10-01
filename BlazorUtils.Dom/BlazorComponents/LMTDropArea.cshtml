@@ -1,9 +1,8 @@
 ﻿@using BlazorUtils.Interfaces.EventArgs
-@using BlazorUtils.Dom.BlazorComponents
 @implements ILMTComponent
 
 <div class="@(@class)" style="@style" id="@id">
-
+    @ChildContent
 </div>
 
 @functions
@@ -17,6 +16,9 @@
     [Parameter]
     private string id { get; set; } = Guid.NewGuid().ToString();
 
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
     /// <summary>
     /// The eventargs will be called PreventDefault by library.
     /// </summary>
@@ -26,12 +28,17 @@
     [Parameter]
     private LMTEventHandlers.LMTEventHandler<LMTEventArgs> ondragover { get; set; } = null;
 
+    private bool _isSetDrop = false;
+
     protected override void OnInit()
     {
     }
 
     protected override void OnAfterRender()
     {
+        if (_isSetDrop) return;
+        _isSetDrop = true;
+
         _($"#{id}")
             .On("dragover", (e) =>
             {

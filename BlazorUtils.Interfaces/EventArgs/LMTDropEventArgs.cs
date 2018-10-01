@@ -32,7 +32,7 @@ namespace BlazorUtils.Interfaces.EventArgs
             {
                 if (_dataByte == null)
                 {
-                    _dataByte = Convert.FromBase64String(Base64String).ToArray();
+                    _dataByte = Convert.FromBase64String(Base64String);
                 }
                 return _dataByte;
             }
@@ -44,7 +44,7 @@ namespace BlazorUtils.Interfaces.EventArgs
             {
                 if (_fileStream == null)
                 {
-                    _fileStream = new MemoryStream(DataBytes.ToArray());
+                    _fileStream = new MemoryStream(DataBytes);
                 }
                 return _fileStream;
             }
