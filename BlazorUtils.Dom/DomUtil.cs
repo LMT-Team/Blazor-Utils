@@ -11,8 +11,6 @@ namespace BlazorUtils.Dom
     {
         public static Dom _(string selector) => new Dom(selector);
 
-        public static Dom _(this LMTLocal localComponent, string selector) => new Dom($"#{localComponent.id} {selector}");
-
         /// <summary>
         /// Evaluate JavaScript code as string
         /// </summary>

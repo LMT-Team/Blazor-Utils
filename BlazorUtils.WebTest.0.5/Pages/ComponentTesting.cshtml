@@ -48,6 +48,10 @@
         h2 {
             color: blue;
         }
+
+        h1, _(id) h2{
+            font-weight: 900;
+        }
     </style>
     <LMTLocal>
         <style>
@@ -95,6 +99,7 @@
     protected override async Task OnAfterRenderAsync()
     {
         Console.WriteLine(Eval<int>("1 + 1"));
+        local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
     }
 
     protected void imageChange(ImageChangedEventArgs e)
