@@ -34,4 +34,6 @@
 
         dom.Text(stringBuilder.ToString());
     }
+
+    public Dom _(string selector) => new Dom($"#{id} {selector}");
 }
