@@ -1,5 +1,5 @@
-﻿using static BlazorUtils.Interfaces.Invokers.JsInvoke;
-using BlazorUtils.Dom.BlazorComponents;
+﻿using System.Threading.Tasks;
+using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 // ReSharper disable InconsistentNaming
 namespace BlazorUtils.Dom
@@ -9,6 +9,10 @@ namespace BlazorUtils.Dom
     /// </summary>
     public static class DomUtil
     {
+        /// <summary>
+        /// Initialize DOM with a selector string.
+        /// </summary>
+        /// <param name="selector">DOM Selector string.</param>
         public static Dom _(string selector) => new Dom(selector);
 
         /// <summary>
@@ -21,12 +25,29 @@ namespace BlazorUtils.Dom
         /// Evaluate JavaScript code as string
         /// </summary>
         /// <param name="jsCode"></param>
+        public static async Task EvalAsync(string jsCode) => await InvokeAsync<object>("LMTDomEval", jsCode);
+
+        /// <summary>
+        /// Evaluate JavaScript code as string
+        /// </summary>
+        /// <param name="jsCode"></param>
         public static T Eval<T>(string jsCode) => Invoke<T>("LMTDomEval", jsCode);
+
+        /// <summary>
+        /// Evaluate JavaScript code as string
+        /// </summary>
+        /// <param name="jsCode"></param>
+        public static async Task<T> EvalAsync<T>(string jsCode) => await InvokeAsync<T>("LMTDomEval", jsCode);
 
         /// <summary>
         /// Inject behaviour attribute service to Blazor component
         /// </summary>
         public static void LMTBehaviours() => Invoke<object>("LMTBehavioursBoot");
+
+        /// <summary>
+        /// Inject behaviour attribute service to Blazor component
+        /// </summary>
+        public static async Task LMTBehavioursAsync() => await InvokeAsync<object>("LMTBehavioursBoot");
 
         /// <summary>
         /// Navigate to specific URL

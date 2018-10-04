@@ -13,12 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest.0.5", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dev", "BlazorUtils.Dev\BlazorUtils.Dev.csproj", "{78CE7F46-B851-4264-A78D-F408FFC7FFFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.Analyzer", "BlazorUtils.Analyzer\BlazorUtils.Analyzer\BlazorUtils.Analyzer.csproj", "{13049819-9630-4D2E-9D3C-53E4ADCD35BE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.Analyzer.Test", "BlazorUtils.Analyzer\BlazorUtils.Analyzer.Test\BlazorUtils.Analyzer.Test.csproj", "{FD1D803B-E88E-43B7-B9B0-F44B457BB2BE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.Analyzer.Vsix", "BlazorUtils.Analyzer\BlazorUtils.Analyzer.Vsix\BlazorUtils.Analyzer.Vsix.csproj", "{80EF1B0C-CB34-40BA-87AC-349F2D96428F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,18 +39,6 @@ Global
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13049819-9630-4D2E-9D3C-53E4ADCD35BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13049819-9630-4D2E-9D3C-53E4ADCD35BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13049819-9630-4D2E-9D3C-53E4ADCD35BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13049819-9630-4D2E-9D3C-53E4ADCD35BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD1D803B-E88E-43B7-B9B0-F44B457BB2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD1D803B-E88E-43B7-B9B0-F44B457BB2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD1D803B-E88E-43B7-B9B0-F44B457BB2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD1D803B-E88E-43B7-B9B0-F44B457BB2BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80EF1B0C-CB34-40BA-87AC-349F2D96428F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80EF1B0C-CB34-40BA-87AC-349F2D96428F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80EF1B0C-CB34-40BA-87AC-349F2D96428F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80EF1B0C-CB34-40BA-87AC-349F2D96428F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

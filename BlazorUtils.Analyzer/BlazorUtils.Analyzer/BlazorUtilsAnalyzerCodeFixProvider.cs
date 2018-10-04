@@ -22,7 +22,7 @@ namespace BlazorUtils.Analyzer
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(BlazorUtilsAnalyzerAnalyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(DevAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()

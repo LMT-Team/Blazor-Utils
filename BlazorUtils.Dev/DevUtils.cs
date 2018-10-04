@@ -1,6 +1,7 @@
 ﻿using BlazorUtils.Dev.Properties;
 using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using static BlazorUtils.Dom.DomUtil;
 
 namespace BlazorUtils.Dev
@@ -75,9 +76,9 @@ namespace BlazorUtils.Dev
             _isBooted = true;
         }
 
-        internal static void DevWarn(string message) => Dev.Warn($"BlazorUtils.Dev: {message}");
+        internal static async Task DevWarn(string message) => await Dev.WarnAsync($"BlazorUtils.Dev: {message}");
 
-        internal static void DevError(string message) => Dev.Error($"BlazorUtils.Dev: {message}");
+        internal static async Task DevError(string message) => await Dev.ErrorAsync($"BlazorUtils.Dev: {message}");
 
         internal static void InvokeMethod(object o, string methodName, object[] parameters = null)
         {

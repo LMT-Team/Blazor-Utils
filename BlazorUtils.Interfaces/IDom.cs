@@ -18,7 +18,7 @@ namespace BlazorUtils.Interfaces
         Task<IDom> Animate(object properties, int duration, string easing, Action complete);
         IDom Animate(object properties, object options);
         IDom On(string events, Action<LMTEventArgs> handler);
-        IDom Add(string arg);
+        IDom Add(string selector);
         IDom AddClass(string className);
         bool HasClass(string className);
         string Html();
@@ -53,5 +53,6 @@ namespace BlazorUtils.Interfaces
         Coordinate Offset();
         IDom Offset(Coordinate coordinates);
         IDom Offset(Func<int, Coordinate, Coordinate> function);
+        IAsyncDom ToAsync();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using static BlazorUtils.Dev.DevUtils;
 using static BlazorUtils.Dom.DomUtil;
 
@@ -7,17 +8,17 @@ namespace BlazorUtils.Dev
 {
     public static partial class Dev
     {
-        private static void Set(string name, string property, string value)
+        private static async void Set(string name, string property, string value)
         {
             if (!_objects.ContainsKey(name))
             {
-                DevError("BlazorUtils.Dev: Object name not found!");
+                await DevError("BlazorUtils.Dev: Object name not found!");
                 return;
             }
 
             if (property == null)
             {
-                DevError("BlazorUtils.Dev: Property (2nd parameter) cannot be null or undefined!");
+                await DevError("BlazorUtils.Dev: Property (2nd parameter) cannot be null or undefined!");
                 return;
             }
 
@@ -45,7 +46,7 @@ namespace BlazorUtils.Dev
                 return;
             }
 
-            DevError("No property or field found");
+            await DevError("No property or field found");
         }
 
         /// <summary>
@@ -55,9 +56,21 @@ namespace BlazorUtils.Dev
         public static void Warn(string message) => Eval($"console.warn(\"{message}\")");
 
         /// <summary>
+        /// Write warning message to devtool console
+        /// </summary>
+        /// <param name="message"></param>
+        public static async Task WarnAsync(string message) => await EvalAsync($"console.warn(\"{message}\")");
+
+        /// <summary>
         /// Write error message to devtool console
         /// </summary>
         /// <param name="message"></param>
         public static void Error(string message) => Eval($"console.error(\"{message}\")");
+
+        /// <summary>
+        /// Write error message to devtool console
+        /// </summary>
+        /// <param name="message"></param>
+        public static async Task ErrorAsync(string message) => await EvalAsync($"console.error(\"{message}\")");
     }
 }

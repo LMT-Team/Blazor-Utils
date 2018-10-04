@@ -76,7 +76,7 @@ namespace BlazorUtils.Analyzer.Test
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            return new BlazorUtilsAnalyzerAnalyzer();
+            return new DevAnalyzer();
         }
     }
 }

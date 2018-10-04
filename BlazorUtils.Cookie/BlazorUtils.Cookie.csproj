@@ -26,7 +26,7 @@ Please update Js library to 0.4.0 before using.
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0" />
   </ItemGroup>
 
   <ItemGroup>
