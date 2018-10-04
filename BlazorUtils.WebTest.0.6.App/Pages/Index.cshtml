@@ -1,0 +1,193 @@
+﻿@using BlazorUtils.Interfaces
+@using Microsoft.AspNetCore.Blazor
+
+@page "/"
+
+<h1>Hello, world!</h1>
+<LMTPagination nextText=">>" previousText="<<" cur="4" total="10" show="6" lastText="Last page" firstText="First page" />
+Welcome to your new app.
+
+<img style="width: 30px; height: 30px" class="sampleImg" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" lmt-drag />
+
+<input type="text" class="sampleText" />
+<input type="checkbox" class="checkboxtest" checked />
+
+<div style="width: 40px; height: 40px; display: block; background-color: brown" lmt-resize></div>
+
+<style>
+    .blue {
+        color: blue;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .yellowBg {
+        background-color: yellow;
+    }
+</style>
+
+<p class="blue yellowBg">Hello</p>
+<p class="blue yellowBg highlight">and</p>
+<p class="blue yellowBg">then</p>
+<p class="blue">Goodbye</p>
+<p class="red">Goodbye</p>
+
+<img style="width: 50px; height: 50px; margin-top: 2000px; display: block" class="sampleImg2" src="http://www.planwallpaper.com/static/images/sO0mRdKW.jpeg" lmt-drag />
+
+<a id="preventedLink" href="https://bing.com">This link should be prevented</a>
+
+@functions
+{
+
+    protected override async Task OnAfterRenderAsync()
+    {
+        await LMTBehavioursAsync();
+
+        await _("#preventedLink").ToAsync().On("click", (e) =>
+        {
+            e.PreventDefault();
+        });
+
+
+        var domImg = _(".sampleImg").ToAsync();
+        var domImg2 = _(".sampleImg2").ToAsync();
+        var domH1 = _("h1").ToAsync();
+
+        await Dev.LogAsync(await domImg.Attr("src"));
+        await Dev.LogAsync(await domH1.Text());
+
+        await Dev.LogAsync(domH1.Css("font-size"));
+        await domH1.Css("font-size", "50px");
+
+        await EvalAsync("console.log(\"This is from Js code\")");
+
+        await Task.Delay(3000);
+        await domH1.Toggle();
+
+        await Task.Delay(1000);
+
+        await _("html").ToAsync().Animate(new
+        {
+            scrollTop = "500px"
+        }, 1000, "swing", () =>
+        {
+            Console.WriteLine("Done scrolling!");
+        });
+
+        await _("html").ToAsync().Animate(new
+        {
+            scrollTop = "0px"
+        }, new
+        {
+            duration = 4000
+        });
+
+        await domImg.On("click", (LMTEventArgs e) =>
+        {
+            Console.WriteLine("Clicked");
+        });
+
+        await _(".sampleText").ToAsync().On("change", (LMTEventArgs e) =>
+        {
+            if (e is LMTChangeEventArgs echanged)
+            {
+                Console.WriteLine(echanged.Value);
+            }
+        });
+
+        await _("p").ToAsync().RemoveClass(((ind, str) =>
+        {
+            Console.WriteLine(ind);
+            Console.WriteLine(str);
+            return "blue";
+        }));
+
+        await _("p").ToAsync().RemoveClass("red");
+        await Dev.LogAsync(await _(".checkboxtest").ToAsync().Prop<bool>("checked"));
+
+        //_("p").ToggleClass("yellowBg");
+        //_("p").ToggleClass("yellowBg", false);
+        await _("p").ToAsync().ToggleClass(((ind, className) =>
+        {
+            Console.WriteLine("test ToggleClass");
+            Console.WriteLine(ind);
+            Console.WriteLine(className);
+            return "yellowBg";
+        }), true);
+
+        await Dev.LogAsync("test height: ");
+        await Dev.LogAsync(domImg.Height());
+        await Dev.LogAsync("Set height: ");
+        await domImg.Height(200);
+
+        Console.WriteLine("Test height with function");
+        await domImg.Height(((ind, height) =>
+        {
+            Console.WriteLine("index: " + ind);
+            Console.WriteLine("height: " + height);
+            return 300;
+        }));
+        //domImg.Height(((ind, height) =>
+        //{
+        //    Console.WriteLine("index: " + ind);
+        //    Console.WriteLine("height: " + height);
+        //    return "400px";
+        //}));
+
+        //Console.WriteLine("innerheight: " + domImg.InnerHeight());
+        //domImg.InnerHeight(700);
+
+        //domImg.InnerHeight(((ind, value) =>
+        //{
+        //    Console.WriteLine("cur ind: " + ind);
+        //    Console.WriteLine("cur value: " + value);
+        //    return 200;
+        //}));
+
+        await Dev.LogAsync("Testing Width");
+        await Dev.LogAsync("Width: " + await domImg.Width());
+        await domImg.Width(50);
+        await domImg.Width("100px");
+        await domImg.Width(((ind, value) =>
+        {
+            Console.WriteLine("ind: " + ind);
+            Console.WriteLine("Value: " + value);
+            return "400px";
+        }));
+
+        await Dev.LogAsync("Testing Inner Width");
+        await Dev.LogAsync("Inner Width: " + domImg.InnerWidth());
+
+        await domImg.InnerWidth(20);
+        await domImg.InnerWidth("60px");
+
+        await domImg.InnerWidth(((ind, width) =>
+        {
+            Console.WriteLine("ind: " + ind);
+            Console.WriteLine("Width: " + width);
+            return "120px";
+        }));
+
+        await Dev.LogAsync("Testing offset");
+        await Dev.LogAsync("Output: ");
+        await Dev.LogAsync((await domImg2.Offset()).Top);
+        //domImg2.Offset(new Coordinate
+        //{
+        //    Top = 3,
+        //    Left = 6
+        //});
+        await domImg2.Offset(((ind, coordinate) =>
+        {
+            Dev.LogAsync("Cur ind: " + ind);
+            Dev.LogAsync("Cur top: " + coordinate.Top);
+            Dev.LogAsync("Cur left: " + coordinate.Left);
+            return new Coordinate
+            {
+                Top = 3,
+                Left = 6
+            };
+        }));
+    }
+}

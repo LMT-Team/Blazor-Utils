@@ -50,27 +50,39 @@ namespace BlazorUtils.Dev
         }
 
         /// <summary>
-        /// Write warning message to devtool console
+        /// Write warning message to devtool console.
         /// </summary>
         /// <param name="message"></param>
-        public static void Warn(string message) => Eval($"console.warn(\"{message}\")");
+        public static void Warn(object message) => Eval($"console.warn(\"{message}\")");
 
         /// <summary>
-        /// Write warning message to devtool console
+        /// Write warning message to devtool console.
         /// </summary>
         /// <param name="message"></param>
-        public static async Task WarnAsync(string message) => await EvalAsync($"console.warn(\"{message}\")");
+        public static async Task WarnAsync(object message) => await EvalAsync($"console.warn(\"{message}\")");
 
         /// <summary>
-        /// Write error message to devtool console
+        /// Write error message to devtool console.
         /// </summary>
         /// <param name="message"></param>
-        public static void Error(string message) => Eval($"console.error(\"{message}\")");
+        public static void Error(object message) => Eval($"console.error(\"{message}\")");
 
         /// <summary>
-        /// Write error message to devtool console
+        /// Write error message to devtool console.
         /// </summary>
         /// <param name="message"></param>
-        public static async Task ErrorAsync(string message) => await EvalAsync($"console.error(\"{message}\")");
+        public static async Task ErrorAsync(object message) => await EvalAsync($"console.error(\"{message}\")");
+
+        /// <summary>
+        /// Write log to devtool console.
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Log(object message) => Eval($"console.log('{message}')");
+
+        /// <summary>
+        /// Write log to devtool console.
+        /// </summary>
+        /// <param name="message"></param>
+        public static async Task LogAsync(object message) => await EvalAsync($"console.log('{message}')");
     }
 }

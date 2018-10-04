@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static BlazorUtils.Dom.DomUtils;
 
@@ -18,13 +19,31 @@ namespace BlazorUtils.Dev
         /// </summary>
         /// <param name="o">C# instance</param>
         /// <param name="name">Js variable name</param>
-        public static async Task Map(object o, string name)
+        public static async Task MapAsync(object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
         {
             //Add DevBoot Js code
-            await DevUtils.DevBoot();
+            await DevUtils.DevBootAsync();
 
             AddToOrUpdateObjectList(o, name);
             UpdateMappingLayer();
+
+            await DevUtils.DevWarn($"Mapped {o.GetType().FullName} object in {filePath} at line {lineNumber}.");
+        }
+
+        /// <summary>
+        /// Map C# instance to Js object with custom name.
+        /// </summary>
+        /// <param name="o">C# instance</param>
+        /// <param name="name">Js variable name</param>
+        public static void Map(object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
+        {
+            //Add DevBoot Js code
+            DevUtils.DevBoot();
+
+            AddToOrUpdateObjectList(o, name);
+            UpdateMappingLayer();
+
+            DevUtils.DevWarn($"Mapped {o.GetType().FullName} object in {filePath} at line {lineNumber}.");
         }
 
         private static async void UpdateMappingLayer()

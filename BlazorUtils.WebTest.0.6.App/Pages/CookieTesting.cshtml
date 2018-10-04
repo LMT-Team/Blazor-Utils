@@ -1,0 +1,77 @@
+﻿@page "/cookie"
+
+<div class="CookieTesting">
+    <h1>Hello, world!</h1>
+    <h2>Submit cookie key, value, days expire and path: </h2>
+    <div>
+        <Input type="text" name="key" />
+    </div>
+    <div>
+        <Input type="text" name="val" />
+    </div>
+    <div>
+        <Input type="text" name="days" />
+    </div>
+    <div>
+        <Input type="text" name="path" />
+    </div>
+
+    <div>
+        <button onclick=@AddCookie>Submit</button>
+    </div>
+    <div>
+        <button onclick=@Cookies.Clear>RemoveAll</button>
+    </div>
+</div>
+<h1>Session storage</h1>
+<div>
+    <button onclick=@AddSessionStorage>Add sessionstorage</button>
+</div>
+<div>
+    <button onclick=@(() => { Dev.Warn(SessionStorage.Get("testing")); })>Get sessionstorage</button>
+</div>
+<div>
+    <button onclick=@SessionStorage.Clear>RemoveAll</button>
+</div>
+<h1>Local storage</h1>
+<div>
+    <button onclick=@AddLocalStorage>Add localstorage</button>
+</div>
+<div>
+    <button onclick=@(() => { Dev.Warn(LocalStorage.Get("testing")); })>Get localstorage</button>
+</div>
+<div>
+    <button onclick=@LocalStorage.Clear>RemoveAll</button>
+</div>
+@functions
+{ protected override void OnInit()
+    {
+        base.OnInit();
+
+
+    }
+
+    protected override async Task OnAfterRenderAsync()
+    {
+    }
+
+    private void AddCookie()
+    {
+        var key = _(".CookieTesting [name=key]").Val();
+        var val = _(".CookieTesting [name=val]").Val();
+        var days = _(".CookieTesting [name=days]").Val();
+        var path = _(".CookieTesting [name=path]").Val();
+
+        Cookies.Set(new Interfaces.Cookie.Cookie(key, val, int.Parse(days), path));
+    }
+
+    private void AddSessionStorage()
+    {
+        SessionStorage.Set("testing", "hello session!");
+    }
+
+    private void AddLocalStorage()
+    {
+        LocalStorage.Set("testing", "hello local!");
+    }
+}

@@ -1,4 +1,4 @@
-﻿//LMT Blazor Utils 0.4.2 bundled
+﻿//LMT Blazor Utils 0.4.1
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 window.blazorUtils = {};
@@ -26,9 +26,6 @@ window.blazorUtils.core.guid = () => {
   );
 };
 
-var LMTCDNDone = false;
-var LMTCDNLottieDone = false;
-
 $(() => {
   //window.Blazor might be overrided if put outside of jQuery onLoad
   window.Blazor.registerFunction = (funcName, func) => {
@@ -37,29 +34,7 @@ $(() => {
 
   LMTDomBoot();
   LMTCookieBoot();
-  $.getScript(
-    "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
-  ).done(() => {
-    $.getScript(
-      "https://cdn.jsdelivr.net/gh/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"
-    ).done(() => {
-      LMTCDNDone = true;
-    });
-  });
 });
-
-var lmtCssNode1 = document.createElement("link");
-lmtCssNode1.href =
-  "https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css";
-lmtCssNode1.rel = "stylesheet";
-
-var lmtCssNode2 = document.createElement("link");
-lmtCssNode2.href =
-  "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css";
-lmtCssNode2.rel = "stylesheet";
-
-document.head.appendChild(lmtCssNode1);
-document.head.appendChild(lmtCssNode2);
 
 function LMTCookieBoot() {
   //Reference to https://www.w3schools.com/js/js_cookies.asp
@@ -117,11 +92,6 @@ function LMTCookieBoot() {
 function LMTDomBoot() {
   //Behaviors
   Blazor.registerFunction("LMTBehavioursBoot", function func() {
-    while (!LMTCDNDone) {
-      setTimeout(func, 1);
-      return;
-    }
-
     let boolParse = obj => {
       if (obj == null) return false;
       else return obj === "true";
@@ -136,24 +106,6 @@ function LMTDomBoot() {
       return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
         .substring(1);
-    };
-
-    let guid = () => {
-      //No symbol guid, reference: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
-      return (
-        s4() +
-        s4() +
-        "-" +
-        s4() +
-        "-" +
-        s4() +
-        "-" +
-        s4() +
-        "-" +
-        s4() +
-        s4() +
-        s4()
-      );
     };
 
     //Reference to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -182,7 +134,7 @@ function LMTDomBoot() {
     });
     //lmt-val-guid
     $("[lmt-val-guid]").val(() => {
-      return guid();
+      return blazorUtils.core.guid();
     });
     //lmt-val-num
     $.each($("[lmt-val-num]"), (ind, ele) => {
@@ -217,15 +169,6 @@ function LMTDomBoot() {
     });
     //lmt-bm
     $.each($("[lmt-bm]"), function lmtbmFunc(ind, val) {
-      if (!LMTCDNLottieDone) {
-        $.getScript(
-          "https://cdn.jsdelivr.net/gh/airbnb/lottie-web/build/player/lottie.min.js"
-        ).done(() => {
-          LMTCDNLottieDone = true;
-          lmtbmFunc(ind, val);
-        });
-        return;
-      }
       if (val.islmtbm != undefined) return;
       val.islmtbm = true;
       let objName = getValParse(val.getAttribute("lmt-bm-name"), null);

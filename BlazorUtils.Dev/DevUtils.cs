@@ -69,16 +69,27 @@ namespace BlazorUtils.Dev
             else return (stringValue, TypeGroup.Others);
         }
 
-        internal static async Task DevBoot()
+        internal static async Task DevBootAsync()
         {
             if (_isBooted) return;
             await EvalAsync(Resources.LMTDevBoot);
             _isBooted = true;
         }
 
-        internal static async Task DevWarn(string message) => await Dev.WarnAsync($"BlazorUtils.Dev: {message}");
+        internal static void DevBoot()
+        {
+            if (_isBooted) return;
+            Eval(Resources.LMTDevBoot);
+            _isBooted = true;
+        }
 
-        internal static async Task DevError(string message) => await Dev.ErrorAsync($"BlazorUtils.Dev: {message}");
+        internal static void DevWarn(string message) => Dev.Warn($"BlazorUtils.Dev: {message}");
+
+        internal static async Task DevWarnAsync(string message) => await Dev.WarnAsync($"BlazorUtils.Dev: {message}");
+
+        internal static void DevError(string message) => Dev.Error($"BlazorUtils.Dev: {message}");
+
+        internal static async Task DevErrorAsync(string message) => await Dev.ErrorAsync($"BlazorUtils.Dev: {message}");
 
         internal static void InvokeMethod(object o, string methodName, object[] parameters = null)
         {
