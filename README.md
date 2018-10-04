@@ -32,20 +32,20 @@ Warning: I'm not going to develop the template anymore, since it could be quickl
     <tr>
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
-      <td>>= 0.2 with ver 0.1, 0.2, 0.2.1, >= 0.2.1 with ver 0.2.2, >= 0.2.2 with ver 0.3.1, >= 0.2.3 with ver 0.3.4, >=0.2.4 with ver 0.3.5, >=0.3.0 with ver 0.4.0</td>
+      <td>>= 0.2 with ver 0.1, 0.2, 0.2.1, >= 0.2.1 with ver 0.2.2, >= 0.2.2 with ver 0.3.1, >= 0.2.3 with ver 0.3.4, >=0.2.4 with ver 0.3.5, >=0.3.0 with ver 0.4.0, >=0.3.2 with ver 0.5.0 and 0.5.1</td>
       <td>30%</td>
     </tr>
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies</td>
-      <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1, >= 0.2.2 with ver 0.2.2, >=0.3.0 with ver 0.3.0</td>
+      <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1, >= 0.2.2 with ver 0.2.2, >=0.3.0 with ver 0.3.0, >=0.3.2 with ver 0.4.0</td>
       <td>100%</td>
     </tr>
 	        <tr>
       <td>Dev (BlazorUtils.Dev)</td>
       <td>Providing dev tool for easier developing</td>
       <td>N/A (DOM dependence)</td>
-      <td>40%</td>
+      <td>60%</td>
     </tr>
     </tody>
 </table>
@@ -60,6 +60,8 @@ Things should be easy as 1, 2, 3! Just follow these steps:
   <li>Dom: https://www.nuget.org/packages/LMT.BlazorUtils.Dom/</li>
   <li>Cookie: https://www.nuget.org/packages/LMT.BlazorUtils.Cookie/</li>
   <li>Dev: https://www.nuget.org/packages/LMT.BlazorUtils.Dev/</li>
+  <li>Js library: https://www.nuget.org/packages/LMT.BlazorUtils.Js/ (this will add BlazorUtils.Js automatically to HTML head section, but without dependencies)</li>
+  <li>Js library (bundle): https://www.nuget.org/packages/LMT.BlazorUtils.Js.Bundle/ (this will add BlazorUtils.Js automatically to HTML head section, but without dependencies)</li>
   </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
@@ -93,7 +95,7 @@ Or using Blazor Utils bundled version (recommended, CDN - require internet conne
 
 ```
 @addTagHelper *, BlazorUtils.Dom
-@using static BlazorUtils.Dom.DomUtil
+@using static BlazorUtils.Dom.DomUtils
 @using BlazorUtils.Cookie
 @using BlazorUtils.Interfaces.EventArgs
 @using BlazorUtils.Dom.BlazorComponents
