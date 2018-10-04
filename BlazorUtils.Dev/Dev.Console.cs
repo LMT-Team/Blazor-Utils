@@ -12,13 +12,13 @@ namespace BlazorUtils.Dev
         {
             if (!_objects.ContainsKey(name))
             {
-                await DevError("BlazorUtils.Dev: Object name not found!");
+                await DevErrorAsync("BlazorUtils.Dev: Object name not found!");
                 return;
             }
 
             if (property == null)
             {
-                await DevError("BlazorUtils.Dev: Property (2nd parameter) cannot be null or undefined!");
+                await DevErrorAsync("BlazorUtils.Dev: Property (2nd parameter) cannot be null or undefined!");
                 return;
             }
 
@@ -46,7 +46,7 @@ namespace BlazorUtils.Dev
                 return;
             }
 
-            await DevError("No property or field found");
+            await DevErrorAsync("No property or field found");
         }
 
         /// <summary>

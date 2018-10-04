@@ -27,7 +27,7 @@ namespace BlazorUtils.Dev
             AddToOrUpdateObjectList(o, name);
             UpdateMappingLayer();
 
-            await DevUtils.DevWarn($"Mapped {o.GetType().FullName} object in {filePath} at line {lineNumber}.");
+            await DevUtils.DevWarnAsync($"Mapped {o.GetType().FullName} object in {filePath} at line {lineNumber}.");
         }
 
         /// <summary>
