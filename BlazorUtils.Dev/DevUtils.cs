@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using static BlazorUtils.Dom.DomUtil;
+using static BlazorUtils.Dom.DomUtils;
 
 namespace BlazorUtils.Dev
 {
@@ -69,10 +69,10 @@ namespace BlazorUtils.Dev
             else return (stringValue, TypeGroup.Others);
         }
 
-        internal static void DevBoot()
+        internal static async Task DevBoot()
         {
             if (_isBooted) return;
-            Eval(Resources.LMTDevBoot);
+            await EvalAsync(Resources.LMTDevBoot);
             _isBooted = true;
         }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-using static BlazorUtils.Dom.DomUtil;
+using static BlazorUtils.Dom.DomUtils;
 
 namespace BlazorUtils.Dev
 {
@@ -18,10 +18,10 @@ namespace BlazorUtils.Dev
         /// </summary>
         /// <param name="o">C# instance</param>
         /// <param name="name">Js variable name</param>
-        public static void Map(object o, string name)
+        public static async Task Map(object o, string name)
         {
             //Add DevBoot Js code
-            DevUtils.DevBoot();
+            await DevUtils.DevBoot();
 
             AddToOrUpdateObjectList(o, name);
             UpdateMappingLayer();
@@ -44,7 +44,7 @@ namespace BlazorUtils.Dev
             {
                 foreach (var o in _objects)
                 {
-                    Eval($"window.{o.Key} = {{}}");
+                    await EvalAsync($"window.{o.Key} = {{}}");
 
                     properties = o.Value.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
                     fields = o.Value.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
@@ -55,9 +55,9 @@ namespace BlazorUtils.Dev
 
                         if (value == null)
                         {
-                            Eval($"{o.Key}.{property.Name} = {{value: null}}");
+                            await EvalAsync($"{o.Key}.{property.Name} = {{value: null}}");
                             //Map set method to Js
-                            MapSetMethods(o, property);
+                            await MapSetMethods(o, property);
                             continue;
                         }
 
@@ -65,13 +65,13 @@ namespace BlazorUtils.Dev
 
                         if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
                         {
-                            Eval($"{o.Key}.{property.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
+                            await EvalAsync($"{o.Key}.{property.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
                         }
 
-                        else Eval($"{o.Key}.{property.Name} = {{value: \"{convertedResult.Item1}\"}}");
+                        else await EvalAsync($"{o.Key}.{property.Name} = {{value: \"{convertedResult.Item1}\"}}");
 
                         //Map set method to Js
-                        MapSetMethods(o, property);
+                        await MapSetMethods(o, property);
                     }
 
                     foreach (var field in fields)
@@ -83,9 +83,9 @@ namespace BlazorUtils.Dev
 
                         if (value == null)
                         {
-                            Eval($"{o.Key}.{field.Name} = {{value: null}}");
+                            await EvalAsync($"{o.Key}.{field.Name} = {{value: null}}");
                             //Map set method to Js
-                            MapSetMethods(o, field);
+                            await MapSetMethods(o, field);
                             continue;
                         }
 
@@ -93,12 +93,12 @@ namespace BlazorUtils.Dev
 
                         if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
                         {
-                            Eval($"{o.Key}.{field.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
+                            await EvalAsync($"{o.Key}.{field.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
                         }
-                        else Eval($"{o.Key}.{field.Name} = {{value: \"{convertedResult.Item1}\"}}");
+                        else await EvalAsync($"{o.Key}.{field.Name} = {{value: \"{convertedResult.Item1}\"}}");
 
                         //Map set method to Js
-                        MapSetMethods(o, field);
+                        await MapSetMethods(o, field);
                     }
                 }
 
@@ -106,14 +106,14 @@ namespace BlazorUtils.Dev
             } while (true);
         }
 
-        private static void MapSetMethods(KeyValuePair<string, object> o, PropertyInfo property)
+        private static async Task MapSetMethods(KeyValuePair<string, object> o, PropertyInfo property)
         {
-            Eval($"window.{o.Key}.{property.Name}.set = (value) => {{window.Dev.SetObjectPropertyValue(\"{o.Key}\", \"{property.Name}\", value)}}");
+            await EvalAsync($"window.{o.Key}.{property.Name}.set = (value) => {{window.Dev.SetObjectPropertyValue(\"{o.Key}\", \"{property.Name}\", value)}}");
         }
 
-        private static void MapSetMethods(KeyValuePair<string, object> o, FieldInfo field)
+        private static async Task MapSetMethods(KeyValuePair<string, object> o, FieldInfo field)
         {
-            Eval($"window.{o.Key}.{field.Name}.set = (value) => {{window.Dev.SetObjectPropertyValue(\"{o.Key}\", \"{field.Name}\", value)}}");
+            await EvalAsync($"window.{o.Key}.{field.Name}.set = (value) => {{window.Dev.SetObjectPropertyValue(\"{o.Key}\", \"{field.Name}\", value)}}");
         }
 
         private static void AddToOrUpdateObjectList(object o, string name)

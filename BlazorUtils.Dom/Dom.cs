@@ -519,7 +519,7 @@ namespace BlazorUtils.Dom
         /// <returns>DOM object.</returns>
         public IDom Attr(string attribute, string value)
         {
-            Invoke<bool>("LMTDomAttr", _selector, attribute, value);
+            Invoke<object>("LMTDomAttr", _selector, attribute, value);
             return this;
         }
 

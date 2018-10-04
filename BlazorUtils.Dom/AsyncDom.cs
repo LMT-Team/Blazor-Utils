@@ -86,7 +86,7 @@ namespace BlazorUtils.Dom
         /// <returns>DOM object.</returns>
         public async Task<IAsyncDom> Attr(string attribute, string value)
         {
-            await InvokeAsync<bool>("LMTDomAttr", _selector, attribute, value);
+            await InvokeAsync<object>("LMTDomAttr", _selector, attribute, value);
             return this;
         }
 

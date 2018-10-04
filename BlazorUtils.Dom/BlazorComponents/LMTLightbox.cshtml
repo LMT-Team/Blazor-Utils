@@ -46,12 +46,12 @@
 
     private bool _isRequestingShow = false;
 
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
-        DependenciesUtil.GetFeatherlight();
+        await DependenciesUtils.GetFeatherlight();
     }
 
-    protected override void OnAfterRender()
+    protected override async Task OnAfterRenderAsync()
     {
         if (!_isCheckShowParameter)
         {
@@ -63,7 +63,7 @@
         {
             _isRequestingShow = false;
             var funcName = "lmt" + id.Replace("-", "");
-            Eval("function " + funcName + "(){while(window.LMTCDNFeatherlightDone == undefined){setTimeout(" + funcName + ", 1);return;}$.featherlight(\"#" + id + "\", {afterClose: ()=>{$(\"#" + id + "\").attr(\"lmt-lightbox-shown\", false)}});}" + funcName + "();");
+            await EvalAsync("function " + funcName + "(){while(window.LMTCDNFeatherlightDone == undefined){setTimeout(" + funcName + ", 1);return;}$.featherlight(\"#" + id + "\", {afterClose: ()=>{$(\"#" + id + "\").attr(\"lmt-lightbox-shown\", false)}});}" + funcName + "();");
         }
     }
 

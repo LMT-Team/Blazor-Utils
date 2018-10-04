@@ -2,7 +2,7 @@
 using BlazorUtils.Interfaces.EventArgs;
 using System;
 using System.Collections.Generic;
-using static BlazorUtils.Dom.DomUtil;
+using static BlazorUtils.Dom.DomUtils;
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedMember.Global
 // ReSharper disable SpecifyACultureInStringConversionExplicitly
@@ -104,7 +104,7 @@ namespace BlazorUtils.Dom.Storages
 
         private static string Invoke(string id, string index, string className)
         {
-            return _funcStorage[id].Invoke(int.Parse(index), className);
+            return _funcStorage[id].Invoke((int)double.Parse(index), className);
         }
 
         internal static string Add(Func<int, string, string> function)
@@ -129,7 +129,7 @@ namespace BlazorUtils.Dom.Storages
 
         private static string Invoke(string id, string index, string value)
         {
-            return _funcStorage[id].Invoke(int.Parse(index), int.Parse(value)).ToString();
+            return _funcStorage[id].Invoke((int)double.Parse(index), (int)double.Parse(value)).ToString();
         }
 
         internal static string Add(Func<int, int, double> function)
@@ -154,7 +154,7 @@ namespace BlazorUtils.Dom.Storages
 
         private static string Invoke(string id, string index, string value)
         {
-            return _funcStorage[id].Invoke(int.Parse(index), int.Parse(value));
+            return _funcStorage[id].Invoke((int)double.Parse(index), (int)double.Parse(value));
         }
 
         internal static string Add(Func<int, int, string> function)
@@ -179,7 +179,7 @@ namespace BlazorUtils.Dom.Storages
 
         private static string Invoke(string id, string index, string value)
         {
-            return _funcStorage[id].Invoke(int.Parse(index), double.Parse(value));
+            return _funcStorage[id].Invoke((int)double.Parse(index), double.Parse(value));
         }
 
         internal static string Add(Func<int, double, string> function)
@@ -204,7 +204,7 @@ namespace BlazorUtils.Dom.Storages
 
         private static string Invoke(string id, string index, string value)
         {
-            return _funcStorage[id].Invoke(int.Parse(index), double.Parse(value)).ToString();
+            return _funcStorage[id].Invoke((int)double.Parse(index), double.Parse(value)).ToString();
         }
 
         internal static string Add(Func<int, double, double> function)
@@ -229,7 +229,7 @@ namespace BlazorUtils.Dom.Storages
 
         private static string Invoke(string id, string index, string top, string left)
         {
-            var callbackRes = _funcStorage[id].Invoke(int.Parse(index), new Coordinate
+            var callbackRes = _funcStorage[id].Invoke((int)double.Parse(index), new Coordinate
             {
                 Top = double.Parse(top),
                 Left = double.Parse(left)

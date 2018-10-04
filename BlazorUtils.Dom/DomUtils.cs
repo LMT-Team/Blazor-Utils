@@ -7,7 +7,7 @@ namespace BlazorUtils.Dom
     /// <summary>
     /// Dom Utilities box
     /// </summary>
-    public static class DomUtil
+    public static class DomUtils
     {
         /// <summary>
         /// Initialize DOM with a selector string.

@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using static BlazorUtils.Dev.DevUtils;
-using static BlazorUtils.Dom.DomUtil;
+using static BlazorUtils.Dom.DomUtils;
 
 namespace BlazorUtils.Dev
 {
