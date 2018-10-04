@@ -6,16 +6,20 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.4.1</Version>
-    <PackageId>LMT.BlazorUtils.Js</PackageId>
+    <PackageId>LMT.BlazorUtils.Js.Bundle</PackageId>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
-    <Product>LMT.BlazorUtils.Js</Product>
+    <Product>LMT.BlazorUtils.Js.Bundle</Product>
     <Description>Contains Javascript codes for Blazor Utils.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
     <PackageTags>Blazor, Blazor Utils</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

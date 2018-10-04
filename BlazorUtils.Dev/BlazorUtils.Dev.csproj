@@ -10,9 +10,11 @@
     <Description>Fix field mapping not work when being set value</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
-    <PackageTags>blazor, asp.net, cookies</PackageTags>
+    <PackageTags>blazor, asp.net, dev, blazor utils</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.2.0</Version>
+    <Version>1.4.0</Version>
+    <PackageReleaseNotes>- new feature: Dev.Log, similar to console.log in Js.
+- Provide async methods.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

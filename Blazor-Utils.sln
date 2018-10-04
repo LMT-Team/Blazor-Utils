@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.WebTest.0.6.App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js", "BlazorUtils.Js\BlazorUtils.Js.csproj", "{9572867B-9138-40F9-BA6F-4C77D676E309}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js.Bundle", "BlazorUtils.Js.Bundle\BlazorUtils.Js.Bundle.csproj", "{61A7AC5B-A610-43BE-9CA0-B72EF958873C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{9572867B-9138-40F9-BA6F-4C77D676E309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9572867B-9138-40F9-BA6F-4C77D676E309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9572867B-9138-40F9-BA6F-4C77D676E309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

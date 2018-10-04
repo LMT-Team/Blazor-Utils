@@ -22,6 +22,7 @@
     <ProjectReference Include="..\BlazorUtils.Dev\BlazorUtils.Dev.csproj" />
     <ProjectReference Include="..\BlazorUtils.Dom\BlazorUtils.Dom.csproj" />
     <ProjectReference Include="..\BlazorUtils.Interfaces\BlazorUtils.Interfaces.csproj" />
+    <ProjectReference Include="..\BlazorUtils.Js.Bundle\BlazorUtils.Js.Bundle.csproj" />
   </ItemGroup>
 
   <ItemGroup>
