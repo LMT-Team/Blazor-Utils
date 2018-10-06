@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.4.0</Version>
+    <Version>0.4.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Managing cookies, local storage and session storage in Blazor.</Description>
     <Company>LMT</Company>
@@ -14,6 +14,7 @@
     <PackageId>LMT.BlazorUtils.Cookie</PackageId>
     <Product>LMT.BlazorUtils.Cookie</Product>
     <PackageReleaseNotes>- Provides async methods.</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

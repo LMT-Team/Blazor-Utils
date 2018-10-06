@@ -6,7 +6,7 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.5.2</Version>
+    <Version>0.5.3</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Description>Blazor: Support utilities related to browser's DOM.</Description>
@@ -25,6 +25,7 @@
 - Fix Local._() not work because of net standard. 
 - Fix LMTLightBox not shown because of null exception. 
 - Fix Dom's Attr method give null exception.</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -12,9 +12,10 @@
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
     <PackageTags>blazor, asp.net, dev, blazor utils</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <PackageReleaseNotes>- new feature: Dev.Log, similar to console.log in Js.
 - Provide async methods.</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

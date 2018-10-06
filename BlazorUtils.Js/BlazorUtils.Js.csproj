@@ -16,6 +16,7 @@
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
     <PackageTags>Blazor, Blazor Utils</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
