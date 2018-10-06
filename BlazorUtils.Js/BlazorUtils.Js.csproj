@@ -7,7 +7,7 @@
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.4.2.1</Version>
+    <Version>0.4.2.2</Version>
     <PackageId>LMT.BlazorUtils.Js</PackageId>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
@@ -17,7 +17,7 @@
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
     <PackageTags>Blazor, BlazorUtils</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageReleaseNotes>Fix: Func not defined error</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix: Some behaviour attributes not work as expected</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,21 +8,27 @@ if (window.Blazor == undefined) {
     window.Blazor = {};
 }
 
+window.blazorUtils.core.s4 = () => {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+};
+
 window.blazorUtils.core.guid = () => {
     //No symbol guid, reference: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
     return (
-        s4() +
-        s4() +
+        window.blazorUtils.core.s4() +
+        window.blazorUtils.core.s4() +
         "-" +
-        s4() +
+        window.blazorUtils.core.s4() +
         "-" +
-        s4() +
+        window.blazorUtils.core.s4() +
         "-" +
-        s4() +
+        window.blazorUtils.core.s4() +
         "-" +
-        s4() +
-        s4() +
-        s4()
+        window.blazorUtils.core.s4() +
+        window.blazorUtils.core.s4() +
+        window.blazorUtils.core.s4()
     );
 };
 
@@ -100,12 +106,6 @@ function LMTDomBoot() {
         let getValParse = (obj, defaultVal) => {
             if (obj == null || obj == "") return defaultVal;
             else return obj;
-        };
-
-        let s4 = () => {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1);
         };
 
         //Reference to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -332,7 +332,7 @@ function LMTDomBoot() {
             }
 
             eval(
-                `window.${params[1]} = () => {$(ele).effect(params[0], options, dur)}`
+                `window.${params[1]} = () => {$(${Object.keys({ ele })[0]}).effect(${Object.keys({ params })[0]}[0], ${Object.keys({ options })[0]}, ${Object.keys({ dur })[0]})}`
             );
         });
     });

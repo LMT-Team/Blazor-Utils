@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
-    <Version>0.4.2</Version>
+    <Version>0.4.2.1</Version>
     <PackageId>LMT.BlazorUtils.Js.Bundle</PackageId>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
@@ -17,7 +17,7 @@
     <PackageTags>Blazor, BlazorUtils</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageReleaseNotes>BlazorUtils.Js is now minified and offline bundled! Internet connection is unnecessary.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix: Some behaviour attributes not work as expected</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
