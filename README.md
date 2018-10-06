@@ -61,13 +61,13 @@ Things should be easy as 1, 2, 3! Just follow these steps:
   <li>Cookie: https://www.nuget.org/packages/LMT.BlazorUtils.Cookie/</li>
   <li>Dev: https://www.nuget.org/packages/LMT.BlazorUtils.Dev/</li>
   <li>Js library: https://www.nuget.org/packages/LMT.BlazorUtils.Js/ (this will add BlazorUtils.Js automatically to HTML head section, but without dependencies)</li>
-  <li>Js library (bundle): https://www.nuget.org/packages/LMT.BlazorUtils.Js.Bundle/ (this will add BlazorUtils.Js automatically to HTML head section, but without dependencies)</li>
+  <li>Js library (bundle): https://www.nuget.org/packages/LMT.BlazorUtils.Js.Bundle/ (this will add BlazorUtils.Js automatically to HTML head section. From 0.4.2, you can use this package offline)</li>
   </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
-<h2>2. Add BlazorUtils js library 0.4.1 and dependencies</h2>
-<p>Copy BlazorUtils.0.4.1.js or BlazorUtils.0.4.1.bundle.js from "\BlazorUtils.WebTest.0.5\wwwroot\js", paste in your project, call it and other dependencies' files in index.html by the <script> and <link> tags.</p>
-<p>With BlazorUtils.Dom, the result should be similar to this: </p>
+<h2>(No need for bundle one) 2. Add BlazorUtils js library and dependencies</h2>
+<p>Install BlazorUtils.Js package from NuGet.</p>
+<p>For non-bundled version, index.html needs some additional lines: </p>
 
 ```
 <link href="css/jquery-ui.css" rel="stylesheet"/>
@@ -76,19 +76,6 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/lottie.min.js"></script>
-<script type="text/javascript" src="js/BlazorUtils.0.4.1.js"></script>
-```
-Or using Blazor Utils bundled version (recommended, CDN - require internet connection):
-
-```
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/BlazorUtils.0.4.1.bundle.js"></script>
-```
-
-<p>If you only use BlazorUtils.Cookie: </p>
-
-```
-<script type="text/javascript" src="js/BlazorUtils.0.4.1.js"></script>
 ```
 
 <h2>3. Add these lines to _ViewImports.cshtml (remove the last one if you don't use Dev)</h2>
