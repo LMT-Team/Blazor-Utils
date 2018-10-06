@@ -1,8 +1,8 @@
 [
   {
-    "outputFileName": "BlazorUtils/BlazorUtils.0.4.1.min.js",
+    "outputFileName": "BlazorUtils/BlazorUtils.min.js",
     "inputFiles": [
-      "BlazorUtils/BlazorUtils.0.4.1.js"
+      "BlazorUtils/BlazorUtils.js"
     ],
     "minify": {
       "enabled": true,
