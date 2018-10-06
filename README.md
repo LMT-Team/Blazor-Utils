@@ -2,7 +2,7 @@
 Awesome utils for Blazor!
 These libraries DO NOT work with server-side Blazor!
 
-BlazorUtils.Dom 0.4.0 is available!: https://blazorutils.wordpress.com/2018/09/21/blazorutils-dom-0-4-0-is-available/
+BlazorUtils.Dom 0.5.0 is available!: https://blazorutils.wordpress.com/2018/10/05/blazorutils-dom-0-5-0-release-notes/
 
 <p>Dependencies: jQuery version: 3.3.1 (Js file only), jQuery UI 1.12.1 (js file and jquery-ui.css), Twitter Bootstrap 4 (css and bundle)</p>
 <p>Progress tables: </p>
@@ -16,7 +16,7 @@ Warning: I'm not going to develop the template anymore, since it could be quickl
 
 <p>I created BlazorUtils.WebTest as a testing project. You may use it as a demo</p>
 
-<p>LMT Blazor Utils has started only few days ago. Every comment, feedback sending to leminhtanvatc@outlook.com is appreciated.</p>
+<p>LMT Blazor Utils has started only few days ago. Every comment, feedbacks sent to leminhtanvatc@outlook.com are appreciated.</p>
 <p>Here is the list of all utils in Blazor Utils (updating)</p>
 
 <table>
@@ -65,7 +65,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
   </ol>
 <p>As an alternative, you can build the project (BlazorUtils.Dom for example) to get the dll file and add reference by yourself.</p>
 
-<h2>(No need for bundle one) 2. Add BlazorUtils js library and dependencies</h2>
+<h2>2. Add BlazorUtils js library and dependencies</h2>
 <p>Install BlazorUtils.Js package from NuGet.</p>
 <p>For non-bundled version, index.html needs some additional lines: </p>
 
