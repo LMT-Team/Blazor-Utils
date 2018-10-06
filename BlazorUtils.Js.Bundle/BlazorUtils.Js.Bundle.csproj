@@ -6,7 +6,7 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
-    <Version>0.4.1</Version>
+    <Version>0.4.2</Version>
     <PackageId>LMT.BlazorUtils.Js.Bundle</PackageId>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
@@ -14,9 +14,10 @@
     <Description>Contains Javascript codes for Blazor Utils.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
-    <PackageTags>Blazor, Blazor Utils</PackageTags>
+    <PackageTags>Blazor, BlazorUtils</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
+    <PackageReleaseNotes>BlazorUtils.Js is now minified and offline bundled! Internet connection is unnecessary.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,9 +26,27 @@
 
   <ItemGroup>
     <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
-    <EmbeddedResource Include="BlazorUtils\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="BlazorUtils\**\*.bundle.min.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" Exclude="**\bootstrap.bundle.min.js" />
     <EmbeddedResource Include="BlazorUtils\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
-    <EmbeddedResource Include="BlazorUtils\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+    <!--<EmbeddedResource Include="BlazorUtils\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="BlazorUtils\BlazorUtils.0.4.1.bundle.js" />
+    <EmbeddedResource Remove="BlazorUtils\BlazorUtils.0.4.1.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BlazorUtils\BlazorUtils.0.4.1.bundle.js" />
+    <None Remove="BlazorUtils\BlazorUtils.bundle.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
   <ItemGroup>

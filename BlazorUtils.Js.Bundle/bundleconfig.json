@@ -1,0 +1,18 @@
+[
+  {
+    "outputFileName": "BlazorUtils/BlazorUtils.bundle.js",
+    "inputFiles": [
+      "BlazorUtils/jquery-3.3.1.min.js",
+      "BlazorUtils/jquery-ui.min.js",
+      "BlazorUtils/bootstrap.bundle.min.js",
+      "BlazorUtils/lottie.min.js",
+      "BlazorUtils/BlazorUtils.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "commentMode": "none",
+      "renameLocals": false,
+      "preserveImportantComments": false
+    }
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "BlazorUtils/BlazorUtils.0.4.1.min.js",
+    "inputFiles": [
+      "BlazorUtils/BlazorUtils.0.4.1.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "commentMode": "none",
+      "renameLocals": false,
+      "preserveImportantComments": false
+    }
+  }
+]
