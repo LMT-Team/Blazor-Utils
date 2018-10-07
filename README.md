@@ -24,28 +24,24 @@ Warning: I'm not going to develop the template anymore, since it could be quickl
   <tr>
     <td><b>Name</b></td>
     <td><b>Description</b></td>
-    <td><b>Interface version dependencies</b></td>
-    <td><b>Progress</b></td>
+    <td><b>Js library version dependencies</b></td>
   </tr>
   </thead>
   <tbody>
     <tr>
       <td>Dom (BlazorUtils.Dom)</td>
       <td>Accessing and modifying DOM elements in the friendly jQuery style</td>
-      <td>>= 0.2 with ver 0.1, 0.2, 0.2.1, >= 0.2.1 with ver 0.2.2, >= 0.2.2 with ver 0.3.1, >= 0.2.3 with ver 0.3.4, >=0.2.4 with ver 0.3.5, >=0.3.0 with ver 0.4.0, >=0.3.2 with ver 0.5.0 and 0.5.1</td>
-      <td>30%</td>
+      <td>>= 0.4.3 with ver 0.5.3</td>
     </tr>
         <tr>
       <td>Cookie (BlazorUtils.Cookie)</td>
       <td>Managing cookies</td>
-      <td>>= 0.1 with ver 0.1, >= 0.2 with ver 0.2, >= 0.2.1 with ver 0.2.1, >= 0.2.2 with ver 0.2.2, >=0.3.0 with ver 0.3.0, >=0.3.2 with ver 0.4.0</td>
-      <td>100%</td>
+      <td>>= 0.4.1 with ver 0.4.0</td>
     </tr>
 	        <tr>
       <td>Dev (BlazorUtils.Dev)</td>
       <td>Providing dev tool for easier developing</td>
       <td>N/A (DOM dependence)</td>
-      <td>60%</td>
     </tr>
     </tody>
 </table>

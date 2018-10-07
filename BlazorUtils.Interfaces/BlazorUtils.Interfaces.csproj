@@ -11,7 +11,7 @@
     <Description>Provides necessary interfaces for Blazor Utils APIs</Description>
     <PackageId>LMT.BlazorUtils.Interfaces</PackageId>
     <Product>LMT.BlazorUtils.Interfaces</Product>
-    <PackageReleaseNotes>Provide interfaces for newer Blazor Utils libraries.</PackageReleaseNotes>
+    <PackageReleaseNotes>Provide ISyncDom (replace the old IDom). IDom now represents a Dom object in general.</PackageReleaseNotes>
     <AssemblyVersion>0.3.3.0</AssemblyVersion>
     <FileVersion>0.3.3.0</FileVersion>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
