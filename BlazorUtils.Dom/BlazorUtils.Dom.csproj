@@ -6,17 +6,21 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.5.3</Version>
+    <Version>0.5.3.1</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Description>Blazor: Support utilities related to browser's DOM.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
-    <PackageTags>blazor, asp.net, dom, jquery</PackageTags>
+    <PackageTags>Blazor, AspNet, Dom, jQuery</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>- Add new Dom's jQuery methods: Off, OuterHeight, OuterWidth, Position, ScrollLeft, ScrollTop.
+    <PackageReleaseNotes>* 0.5.3.1
+- Compatibilities to Js library 0.4.4
+---------------
+* 0.5.3
+- Add new Dom's jQuery methods: Off, OuterHeight, OuterWidth, Position, ScrollLeft, ScrollTop.
 - Dom now has Selector(), which get the selector string that you have given to the Dom's contructor.
 - Change some override methods in LMTDropArea and LMTLocal to async.
 - Optimize performance with DomPool: A Dom is actually a non-state object. If you initialize with a selector that has been used before, an old Dom will be returned instead of a new one. DomPool will work silently, so no code change needed.

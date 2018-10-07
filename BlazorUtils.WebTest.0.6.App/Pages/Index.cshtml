@@ -41,153 +41,245 @@ Welcome to your new app.
 @functions
 {
 
-    protected override async Task OnAfterRenderAsync()
+protected override async Task OnAfterRenderAsync()
+{
+    await LMTBehavioursAsync();
+
+    await _("#preventedLink").AsAsync().On("click", (e) =>
     {
-        await LMTBehavioursAsync();
+        e.PreventDefault();
+    });
 
-        await _("#preventedLink").ToAsync().On("click", (e) =>
+
+    var domImg = _(".sampleImg").AsAsync();
+    var domImg2 = _(".sampleImg2").AsAsync();
+    var domH1 = _("h1").AsAsync();
+
+    Console.WriteLine($"domImg2 selector is {domImg2.Selector()}");
+
+    Console.WriteLine(await domImg.Attr("src"));
+    Console.WriteLine(await domH1.Text());
+
+    Console.WriteLine(await domH1.Css("font-size"));
+    await domH1.Css("font-size", "50px");
+
+    await EvalAsync("console.log(\"This is from Js code\")");
+
+    await Task.Delay(3000);
+    await domH1.Toggle();
+
+    await Task.Delay(1000);
+
+    await _("html").ToAsync().Animate(new
+    {
+        scrollTop = "500px"
+    }, 1000, "swing", () =>
+    {
+        Console.WriteLine("Done scrolling!");
+    });
+
+    await _("html").ToAsync().Animate(new
+    {
+        scrollTop = "0px"
+    }, new
+    {
+        duration = 4000
+    });
+
+    await domImg.On("click", (LMTEventArgs e) =>
+    {
+        Console.WriteLine("Clicked");
+    });
+
+    await _(".sampleText").ToAsync().On("change", (LMTEventArgs e) =>
+    {
+        if (e is LMTChangeEventArgs echanged)
         {
-            e.PreventDefault();
-        });
+            Console.WriteLine(echanged.Value);
+        }
+    });
 
+    await _("p").ToAsync().RemoveClass(((ind, str) =>
+    {
+        Console.WriteLine(ind);
+        Console.WriteLine(str);
+        return "blue";
+    }));
 
-        var domImg = _(".sampleImg").ToAsync();
-        var domImg2 = _(".sampleImg2").ToAsync();
-        var domH1 = _("h1").ToAsync();
+    await _("p").ToAsync().RemoveClass("red");
+    Console.WriteLine(await _(".checkboxtest").ToAsync().Prop<bool>("checked"));
 
-        await Dev.LogAsync(await domImg.Attr("src"));
-        await Dev.LogAsync(await domH1.Text());
+    //_("p").ToggleClass("yellowBg");
+    //_("p").ToggleClass("yellowBg", false);
+    await _("p").ToAsync().ToggleClass(((ind, className) =>
+    {
+        Console.WriteLine("test ToggleClass");
+        Console.WriteLine(ind);
+        Console.WriteLine(className);
+        return "yellowBg";
+    }), true);
 
-        await Dev.LogAsync(domH1.Css("font-size"));
-        await domH1.Css("font-size", "50px");
+    Console.WriteLine("test height: ");
+    Console.WriteLine(await domImg.Height());
+    Console.WriteLine("Set height: ");
+    await domImg.Height(200);
 
-        await EvalAsync("console.log(\"This is from Js code\")");
+    Console.WriteLine("Test height with function");
+    await domImg.Height(((ind, height) =>
+    {
+        Console.WriteLine("index: " + ind);
+        Console.WriteLine("height: " + height);
+        return 300;
+    }));
+    //domImg.Height(((ind, height) =>
+    //{
+    //    Console.WriteLine("index: " + ind);
+    //    Console.WriteLine("height: " + height);
+    //    return "400px";
+    //}));
 
-        await Task.Delay(3000);
-        await domH1.Toggle();
+    //Console.WriteLine("innerheight: " + domImg.InnerHeight());
+    //domImg.InnerHeight(700);
 
-        await Task.Delay(1000);
+    //domImg.InnerHeight(((ind, value) =>
+    //{
+    //    Console.WriteLine("cur ind: " + ind);
+    //    Console.WriteLine("cur value: " + value);
+    //    return 200;
+    //}));
 
-        await _("html").ToAsync().Animate(new
+    Console.WriteLine("Testing Width");
+    Console.WriteLine("Width: " + await domImg.Width());
+    await domImg.Width(50);
+    await domImg.Width("100px");
+    await domImg.Width(((ind, value) =>
+    {
+        Console.WriteLine("ind: " + ind);
+        Console.WriteLine("Value: " + value);
+        return "400px";
+    }));
+
+    Console.WriteLine("Testing Inner Width");
+    Console.WriteLine("Inner Width: " + await domImg.InnerWidth());
+
+    await domImg.InnerWidth(20);
+    await domImg.InnerWidth("60px");
+
+    await domImg.InnerWidth(((ind, width) =>
+    {
+        Console.WriteLine("ind: " + ind);
+        Console.WriteLine("Width: " + width);
+        return "120px";
+    }));
+
+    Console.WriteLine("Testing offset");
+    Console.WriteLine("Output: ");
+    Console.WriteLine((await domImg2.Offset()).Top);
+    //domImg2.Offset(new Coordinate
+    //{
+    //    Top = 3,
+    //    Left = 6
+    //});
+    await domImg2.Offset(((ind, coordinate) =>
+    {
+        Console.WriteLine("Cur ind: " + ind);
+        Console.WriteLine("Cur top: " + coordinate.Top);
+        Console.WriteLine("Cur left: " + coordinate.Left);
+        return new Coordinate
         {
-            scrollTop = "500px"
-        }, 1000, "swing", () =>
-        {
-            Console.WriteLine("Done scrolling!");
-        });
+            Top = 3,
+            Left = 6
+        };
+    }));
 
-        await _("html").ToAsync().Animate(new
-        {
-            scrollTop = "0px"
-        }, new
-        {
-            duration = 4000
-        });
+    //0.5.3 test
+    await Dev.WarnAsync("0.5.3 test");
 
-        await domImg.On("click", (LMTEventArgs e) =>
-        {
-            Console.WriteLine("Clicked");
-        });
+    Console.WriteLine("OuterHeight: ");
 
-        await _(".sampleText").ToAsync().On("change", (LMTEventArgs e) =>
-        {
-            if (e is LMTChangeEventArgs echanged)
-            {
-                Console.WriteLine(echanged.Value);
-            }
-        });
+    await domImg2.OuterHeight(50);
 
-        await _("p").ToAsync().RemoveClass(((ind, str) =>
-        {
-            Console.WriteLine(ind);
-            Console.WriteLine(str);
-            return "blue";
-        }));
+    Console.WriteLine(await domImg2.OuterHeight());
+    Console.WriteLine(await domImg2.OuterHeight(true));
 
-        await _("p").ToAsync().RemoveClass("red");
-        await Dev.LogAsync(await _(".checkboxtest").ToAsync().Prop<bool>("checked"));
+    await domImg2.OuterHeight("20px");
 
-        //_("p").ToggleClass("yellowBg");
-        //_("p").ToggleClass("yellowBg", false);
-        await _("p").ToAsync().ToggleClass(((ind, className) =>
-        {
-            Console.WriteLine("test ToggleClass");
-            Console.WriteLine(ind);
-            Console.WriteLine(className);
-            return "yellowBg";
-        }), true);
+    Console.WriteLine(await domImg2.OuterHeight());
 
-        await Dev.LogAsync("test height: ");
-        await Dev.LogAsync(domImg.Height());
-        await Dev.LogAsync("Set height: ");
-        await domImg.Height(200);
+    await domImg2.OuterHeight((ind, height) =>
+    {
+        Console.WriteLine($"Set outerHeight by function: ind {ind} height {height}");
+        return 70;
+    });
 
-        Console.WriteLine("Test height with function");
-        await domImg.Height(((ind, height) =>
-        {
-            Console.WriteLine("index: " + ind);
-            Console.WriteLine("height: " + height);
-            return 300;
-        }));
-        //domImg.Height(((ind, height) =>
-        //{
-        //    Console.WriteLine("index: " + ind);
-        //    Console.WriteLine("height: " + height);
-        //    return "400px";
-        //}));
+    Console.WriteLine(await domImg2.OuterHeight());
 
-        //Console.WriteLine("innerheight: " + domImg.InnerHeight());
-        //domImg.InnerHeight(700);
+    await domImg2.OuterHeight((ind, height) =>
+    {
+        Console.WriteLine($"Set outerHeight by function: ind {ind} height {height}");
+        return "80px";
+    });
 
-        //domImg.InnerHeight(((ind, value) =>
-        //{
-        //    Console.WriteLine("cur ind: " + ind);
-        //    Console.WriteLine("cur value: " + value);
-        //    return 200;
-        //}));
+    Console.WriteLine(await domImg2.OuterHeight());
 
-        await Dev.LogAsync("Testing Width");
-        await Dev.LogAsync("Width: " + await domImg.Width());
-        await domImg.Width(50);
-        await domImg.Width("100px");
-        await domImg.Width(((ind, value) =>
-        {
-            Console.WriteLine("ind: " + ind);
-            Console.WriteLine("Value: " + value);
-            return "400px";
-        }));
+    Console.WriteLine("OuterWidth: ");
 
-        await Dev.LogAsync("Testing Inner Width");
-        await Dev.LogAsync("Inner Width: " + domImg.InnerWidth());
+    await domImg2.OuterWidth(50);
 
-        await domImg.InnerWidth(20);
-        await domImg.InnerWidth("60px");
+    Console.WriteLine(await domImg2.OuterWidth());
+    Console.WriteLine(await domImg2.OuterWidth(true));
 
-        await domImg.InnerWidth(((ind, width) =>
-        {
-            Console.WriteLine("ind: " + ind);
-            Console.WriteLine("Width: " + width);
-            return "120px";
-        }));
+    await domImg2.OuterWidth("20px");
 
-        await Dev.LogAsync("Testing offset");
-        await Dev.LogAsync("Output: ");
-        await Dev.LogAsync((await domImg2.Offset()).Top);
-        //domImg2.Offset(new Coordinate
-        //{
-        //    Top = 3,
-        //    Left = 6
-        //});
-        await domImg2.Offset(((ind, coordinate) =>
-        {
-            Dev.LogAsync("Cur ind: " + ind);
-            Dev.LogAsync("Cur top: " + coordinate.Top);
-            Dev.LogAsync("Cur left: " + coordinate.Left);
-            return new Coordinate
-            {
-                Top = 3,
-                Left = 6
-            };
-        }));
-    }
+    Console.WriteLine(await domImg2.OuterWidth());
+
+    await domImg2.OuterWidth((ind, width) =>
+    {
+        Console.WriteLine($"Set outerWidth by function: index {ind}, width {width}");
+        return 70;
+    });
+
+    Console.WriteLine(await domImg2.OuterWidth());
+
+    await domImg2.OuterWidth((ind, width) =>
+    {
+        Console.WriteLine($"Set outerWidth by function: index {ind}, width {width}");
+        return "80px";
+    });
+
+    Console.WriteLine(await domImg2.OuterWidth());
+
+    Console.WriteLine($"Position {(await domImg2.Position()).Left} {(await domImg2.Position()).Top}");
+
+    Console.WriteLine($"Scroll left {await domImg2.ScrollLeft()}");
+
+    await domImg2.ScrollLeft(70);
+
+    Console.WriteLine($"Scroll left {await domImg2.ScrollLeft()}");
+
+    Console.WriteLine($"Scroll top {await domImg2.ScrollTop()}");
+
+    await domImg2.ScrollTop(70);
+
+    Console.WriteLine($"Scroll left {await domImg2.ScrollTop()}");
+
+    await domImg2.On("click", (e) =>
+    {
+        Console.WriteLine("hello world");
+    });
+
+    await domImg2.Off("click");
+
+    await domImg2.On("click", (e) =>
+    {
+        Console.WriteLine("hello world 2");
+    });
+
+    await domImg2.Off();
+
+    await domImg2.On("click", (e) =>
+    {
+        Console.WriteLine("async hello world");
+    });
+}
 }

@@ -1,5 +1,6 @@
 ﻿using BlazorUtils.Interfaces;
 using BlazorUtils.Interfaces.EventArgs;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using static BlazorUtils.Dom.DomUtils;
@@ -12,13 +13,14 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// event callback
     /// </summary>
-    internal static class UICallBacksStorage
+    public static class UICallBacksStorage
     {
         private static Dictionary<string, Action<LMTEventArgs>> _actionStorage;
         private static Dictionary<string, string> _selectorStorage;
         private static Dictionary<string, string> _eventStorage;
 
-        private static string Invoke(string id)
+        [JSInvokable("UICallBacksStorageInvoke")]
+        public static string Invoke(string id)
         {
             string value;
             LMTEventArgs eventArgs = null;
@@ -44,7 +46,8 @@ namespace BlazorUtils.Dom.Storages
         }
 
         //Use for data-included events: ondrop
-        private static string InvokeWithFileData(string id, string dataUrl, string modifyDate, string properties)
+        [JSInvokable("UICallBacksStorageInvokeWithFileData")]
+        public static string InvokeWithFileData(string id, string dataUrl, string modifyDate, string properties)
         {
             //var eventArgs = new LMTDropEventArgs(
             //    (dataByte == null || dataByte.Length == 0) 
@@ -63,7 +66,8 @@ namespace BlazorUtils.Dom.Storages
         }
 
         //Use for data-included events: ondrop
-        private static string InvokeWithStringData(string id, string data)
+        [JSInvokable("UICallBacksStorageInvokeWithStringData")]
+        public static string InvokeWithStringData(string id, string data)
         {
             //var eventArgs = new LMTDropEventArgs(
             //    (dataByte == null || dataByte.Length == 0) 
@@ -98,11 +102,12 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-string-string callback
     /// </summary>
-    internal static class IntStringStringStorage
+    public static class IntStringStringStorage
     {
         private static Dictionary<string, Func<int, string, string>> _funcStorage;
 
-        private static string Invoke(string id, string index, string className)
+        [JSInvokable("IntStringStringStorageInvoke")]
+        public static string Invoke(string id, string index, string className)
         {
             return _funcStorage[id].Invoke((int)double.Parse(index), className);
         }
@@ -123,11 +128,12 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-int-double callback
     /// </summary>
-    internal static class IntIntDoubleStorage
+    public static class IntIntDoubleStorage
     {
         private static Dictionary<string, Func<int, int, double>> _funcStorage;
 
-        private static string Invoke(string id, string index, string value)
+        [JSInvokable("IntIntDoubleStorageInvoke")]
+        public static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke((int)double.Parse(index), (int)double.Parse(value)).ToString();
         }
@@ -148,11 +154,12 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-int-string callback
     /// </summary>
-    internal static class IntIntStringStorage
+    public static class IntIntStringStorage
     {
         private static Dictionary<string, Func<int, int, string>> _funcStorage;
 
-        private static string Invoke(string id, string index, string value)
+        [JSInvokable("IntIntStringStorageInvoke")]
+        public static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke((int)double.Parse(index), (int)double.Parse(value));
         }
@@ -173,11 +180,12 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-double-string callback
     /// </summary>
-    internal static class IntDoubleStringStorage
+    public static class IntDoubleStringStorage
     {
         private static Dictionary<string, Func<int, double, string>> _funcStorage;
 
-        private static string Invoke(string id, string index, string value)
+        [JSInvokable("IntDoubleStringStorageInvoke")]
+        public static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke((int)double.Parse(index), double.Parse(value));
         }
@@ -198,11 +206,12 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-double-double callback
     /// </summary>
-    internal static class IntDoubleDoubleStorage
+    public static class IntDoubleDoubleStorage
     {
         private static Dictionary<string, Func<int, double, double>> _funcStorage;
 
-        private static string Invoke(string id, string index, string value)
+        [JSInvokable("IntDoubleDoubleStorageInvoke")]
+        public static string Invoke(string id, string index, string value)
         {
             return _funcStorage[id].Invoke((int)double.Parse(index), double.Parse(value)).ToString();
         }
@@ -223,11 +232,12 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// int-Coords-Coords callback
     /// </summary>
-    internal static class IntCoordsCoordsStorage
+    public static class IntCoordsCoordsStorage
     {
         private static Dictionary<string, Func<int, Coordinate, Coordinate>> _funcStorage;
 
-        private static string Invoke(string id, string index, string top, string left)
+        [JSInvokable("IntCoordsCoordsStorageInvoke")]
+        public static string Invoke(string id, string index, string top, string left)
         {
             var callbackRes = _funcStorage[id].Invoke((int)double.Parse(index), new Coordinate
             {

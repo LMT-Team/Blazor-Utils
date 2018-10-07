@@ -1,9 +1,13 @@
-﻿//LMT Blazor Utils 0.4.3
+﻿//LMT Blazor Utils 0.4.4
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
-window.blazorUtils = {};
-window.blazorUtils.core = {};
-window.blazorUtils.core.funcs = {};
+window.blazorUtils = {
+    core: {
+        funcs:{
+
+        }
+    }
+};
 if (window.Blazor == undefined) {
     window.Blazor = {};
 }
@@ -338,23 +342,8 @@ function LMTDomBoot() {
 
     //Reference to https://learn-blazor.com/architecture/interop/
     let BlazorUtilsCallCSUICallBack = id => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
-        const typeName = "UICallBacksStorage";
-        const methodName = "Invoke";
+        let result = DotNet.invokeMethod("BlazorUtils.Dom", "UICallBacksStorageInvoke", id).toString();
 
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-
-        let result = Blazor.platform.toJavaScriptString(
-            Blazor.platform.callMethod(method, null, [csid])
-        );
         if (result == "True") {
             return true;
         }
@@ -362,45 +351,19 @@ function LMTDomBoot() {
     };
 
     let BlazorUtilsCallCSUICallBackWithFileData = (id, data, file) => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
-        const typeName = "UICallBacksStorage";
-        const methodName = "InvokeWithFileData";
-
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-        let csdata = Blazor.platform.toDotNetString(data);
-        let csfilemodify = Blazor.platform.toDotNetString(
-            `${file.lastModifiedDate.getFullYear().toString()}|${(
-                file.lastModifiedDate.getMonth() + 1
-            ).toString()}|${file.lastModifiedDate
-                .getDate()
+        let result = DotNet.invokeMethod("BlazorUtils.Dom", "UICallBacksStorageInvokeWithFileData", id, data, `${file.lastModifiedDate.getFullYear().toString()}|${(
+            file.lastModifiedDate.getMonth() + 1
+        ).toString()}|${file.lastModifiedDate
+            .getDate()
+            .toString()}|${file.lastModifiedDate
+                .getHours()
                 .toString()}|${file.lastModifiedDate
-                    .getHours()
+                    .getMinutes()
                     .toString()}|${file.lastModifiedDate
-                        .getMinutes()
-                        .toString()}|${file.lastModifiedDate
-                            .getSeconds()
-                            .toString()}|${file.lastModifiedDate.getMilliseconds().toString()}`
-        );
-        let csfileproperties = Blazor.platform.toDotNetString(
-            `${file.name}|${file.type}|${file.size.toString()}`
-        );
+                        .getSeconds()
+                .toString()}|${file.lastModifiedDate.getMilliseconds().toString()}`,
+            `${file.name}|${file.type}|${file.size.toString()}`).toString();
 
-        let result = Blazor.platform.toJavaScriptString(
-            Blazor.platform.callMethod(method, null, [
-                csid,
-                csdata,
-                csfilemodify,
-                csfileproperties
-            ])
-        );
         if (result == "True") {
             return true;
         }
@@ -408,24 +371,8 @@ function LMTDomBoot() {
     };
 
     let BlazorUtilsCallCSUICallBackWithStringData = (id, data) => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
-        const typeName = "UICallBacksStorage";
-        const methodName = "InvokeWithStringData";
+        let result = DotNet.invokeMethod("BlazorUtils.Dom", "UICallBacksStorageInvokeWithStringData", id, data).toString();
 
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-        let csdata = Blazor.platform.toDotNetString(data);
-
-        let result = Blazor.platform.toJavaScriptString(
-            Blazor.platform.callMethod(method, null, [csid, csdata])
-        );
         if (result == "True") {
             return true;
         }
@@ -434,107 +381,29 @@ function LMTDomBoot() {
 
     // ReSharper disable once InconsistentNaming
     let BlazorUtilsCallIntStringString = (id, ind, className) => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
-        const typeName = "IntStringStringStorage";
-        const methodName = "Invoke";
-
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-        let csind = Blazor.platform.toDotNetString(ind);
-        let csclassName = Blazor.platform.toDotNetString(className);
-
-        let res = Blazor.platform.callMethod(method, null, [
-            csid,
-            csind,
-            csclassName
-        ]);
-
-        return Blazor.platform.toJavaScriptString(res);
+        return DotNet.invokeMethod("BlazorUtils.Dom", "IntStringStringStorageInvoke", id, ind, className);
     };
 
     // ReSharper disable once InconsistentNaming
     let BlazorUtilsCallIntInt = (id, ind, value, typeOfRet) => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
         let typeName;
         if (typeOfRet === "string") typeName = "IntIntStringStorage";
         else typeName = "IntIntDoubleStorage";
-        const methodName = "Invoke";
 
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-        let csind = Blazor.platform.toDotNetString(ind);
-        let csvalue = Blazor.platform.toDotNetString(value);
-
-        let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue]);
-
-        return Blazor.platform.toJavaScriptString(res);
+        return DotNet.invokeMethod("BlazorUtils.Dom", `${typeName}Invoke`, id, ind, value);
     };
 
     // ReSharper disable once InconsistentNaming
     let BlazorUtilsCallIntDouble = (id, ind, value, typeOfRet) => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
         let typeName;
         if (typeOfRet === "string") typeName = "IntDoubleStringStorage";
         else typeName = "IntDoubleDoubleStorage";
-        const methodName = "Invoke";
 
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-        let csind = Blazor.platform.toDotNetString(ind);
-        let csvalue = Blazor.platform.toDotNetString(value);
-
-        let res = Blazor.platform.callMethod(method, null, [csid, csind, csvalue]);
-
-        return Blazor.platform.toJavaScriptString(res);
+        return DotNet.invokeMethod("BlazorUtils.Dom", `${typeName}Invoke`, id, ind, value);
     };
 
-    // ReSharper disable once InconsistentNaming
     let BlazorUtilsCallIntCoordsCoords = (id, ind, value1, value2) => {
-        const assemblyName = "BlazorUtils.Dom";
-        const namespace = "BlazorUtils.Dom.Storages";
-        const typeName = "IntCoordsCoordsStorage";
-        const methodName = "Invoke";
-
-        const method = Blazor.platform.findMethod(
-            assemblyName,
-            namespace,
-            typeName,
-            methodName
-        );
-
-        let csid = Blazor.platform.toDotNetString(id);
-        let csind = Blazor.platform.toDotNetString(ind);
-        let csvalue1 = Blazor.platform.toDotNetString(value1);
-        let csvalue2 = Blazor.platform.toDotNetString(value2);
-
-        let res = Blazor.platform.callMethod(method, null, [
-            csid,
-            csind,
-            csvalue1,
-            csvalue2
-        ]);
-        return JSON.parse(Blazor.platform.toJavaScriptString(res));
+        return JSON.parse(DotNet.invokeMethod("BlazorUtils.Dom", "IntCoordsCoordsStorageInvoke", id, ind, value1, value2));
     };
 
     //Pure Js

@@ -6,18 +6,18 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
-    <Version>0.4.3</Version>
+    <Version>0.4.4</Version>
     <PackageId>LMT.BlazorUtils.Js.Bundle</PackageId>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Product>LMT.BlazorUtils.Js.Bundle</Product>
-    <Description>Contains Javascript codes for Blazor Utils.</Description>
+    <Description>Contains Javascript library for Blazor Utils.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
     <PackageTags>Blazor, BlazorUtils</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageReleaseNotes>Provide Js API to BlazorUtils.Dom 0.5.3</PackageReleaseNotes>
+    <PackageReleaseNotes>Use the newer Blazor 0.5's DotNet.invokeMethod.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
