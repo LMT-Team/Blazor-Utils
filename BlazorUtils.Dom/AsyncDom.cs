@@ -95,9 +95,9 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <param name="attribute">An object of attribute-value pairs to set.</param>
         /// <returns></returns>
-        public async Task<string> Attr(object attribute)
+        public Task<string> Attr(object attribute)
         {
-            return await InvokeAsync<string>("LMTDomAttr2", _selector, attribute);
+            return InvokeAsync<string>("LMTDomAttr2", _selector, attribute);
         }
 
         /// <summary>
@@ -105,9 +105,9 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <param name="propertyName">A CSS property.</param>
         /// <returns>Computed style properties.</returns>
-        public async Task<string> Css(string propertyName)
+        public Task<string> Css(string propertyName)
         {
-            return await InvokeAsync<string>("LMTDomCss2", _selector, propertyName);
+            return InvokeAsync<string>("LMTDomCss2", _selector, propertyName);
         }
 
         /// <summary>
@@ -127,18 +127,18 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <param name="className">The class name to search for.</param>
         /// <returns>Whether any of the matched elements are assigned the given class.</returns>
-        public async Task<bool> HasClass(string className)
+        public Task<bool> HasClass(string className)
         {
-            return await InvokeAsync<bool>("LMTHasClass", _selector, className);
+            return InvokeAsync<bool>("LMTHasClass", _selector, className);
         }
 
         /// <summary>
         /// Get the current computed height for the first element in the set of matched elements.
         /// </summary>
         /// <returns>The current computed height for the first element in the set of matched elements.</returns>
-        public async Task<double> Height()
+        public Task<double> Height()
         {
-            return await InvokeAsync<double>("LMTHeight2", _selector);
+            return InvokeAsync<double>("LMTHeight2", _selector);
         }
 
         /// <summary>
@@ -180,18 +180,18 @@ namespace BlazorUtils.Dom
         /// Get the HTML contents of the first element in the set of matched elements.
         /// </summary>
         /// <returns>The HTML contents of the first element in the set of matched elements.</returns>
-        public async Task<string> Html()
+        public Task<string> Html()
         {
-            return await InvokeAsync<string>("LMTHtml", _selector);
+            return InvokeAsync<string>("LMTHtml", _selector);
         }
 
         /// <summary>
         /// Get the current computed height for the first element in the set of matched elements, including padding but not border.
         /// </summary>
         /// <returns>The current computed height for the first element in the set of matched elements, including padding but not border.</returns>
-        public async Task<double> InnerHeight()
+        public Task<double> InnerHeight()
         {
-            return await InvokeAsync<double>("LMTInnerHeight2", _selector);
+            return InvokeAsync<double>("LMTInnerHeight2", _selector);
         }
 
         /// <summary>
@@ -244,9 +244,9 @@ namespace BlazorUtils.Dom
         /// Get the current computed inner width for the first element in the set of matched elements, including padding but not border.
         /// </summary>
         /// <returns>The current computed inner width for the first element in the set of matched elements, including padding but not border.</returns>
-        public async Task<double> InnerWidth()
+        public Task<double> InnerWidth()
         {
-            return await InvokeAsync<double>("LMTInnerWidth2", _selector);
+            return InvokeAsync<double>("LMTInnerWidth2", _selector);
         }
 
         /// <summary>
@@ -296,12 +296,33 @@ namespace BlazorUtils.Dom
         }
 
         /// <summary>
+        /// Remove an event handler.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IAsyncDom> Off()
+        {
+            await InvokeAsync<object>("LMTOff", _selector);
+            return this;
+        }
+
+        /// <summary>
+        /// Remove an event handler.
+        /// </summary>
+        /// <param name="event">One or more space-separated event types and optional namespaces, or just namespaces, such as "click", "keydown.myPlugin", or ".myPlugin".</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> Off(string @event)
+        {
+            await InvokeAsync<object>("LMTOffEvent", _selector, @event);
+            return this;
+        }
+
+        /// <summary>
         /// Get the current coordinates of the first element in the set of matched elements, relative to the document.
         /// </summary>
         /// <returns>The current coordinates of the first element in the set of matched elements, relative to the document.</returns>
-        public async Task<Coordinate> Offset()
+        public Task<Coordinate> Offset()
         {
-            return await InvokeAsync<Coordinate>("LMTOffset2", _selector);
+            return InvokeAsync<Coordinate>("LMTOffset2", _selector);
         }
 
         /// <summary>
@@ -341,14 +362,135 @@ namespace BlazorUtils.Dom
         }
 
         /// <summary>
+        /// Get the current computed outer height (including padding, border, and optionally margin) for the first element in the set of matched elements.
+        /// </summary>
+        /// <param name="includeMargin">A Boolean indicating whether to include the element's margin in the calculation.</param>
+        /// <returns></returns>
+        public Task<double> OuterHeight(bool includeMargin = false)
+        {
+            return InvokeAsync<double>("LMTOuterHeightMargin", _selector, includeMargin);
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterHeight(double value)
+        {
+            await InvokeAsync<object>("LMTOuterHeight", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterHeight(string value)
+        {
+            await InvokeAsync<object>("LMTOuterHeight", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer height to set. Receives the index position of the element in the set and the old outer height as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterHeight(Func<int, double, string> function)
+        {
+            var id = IntDoubleStringStorage.Add(function);
+            await InvokeAsync<object>("LMTOuterHeightFunc1", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer height to set. Receives the index position of the element in the set and the old outer height as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterHeight(Func<int, double, double> function)
+        {
+            var id = IntDoubleDoubleStorage.Add(function);
+            await InvokeAsync<object>("LMTOuterHeightFunc2", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current computed outer width (including padding, border, and optionally margin) for the first element in the set of matched elements.
+        /// </summary>
+        /// <param name="includeMargin">A Boolean indicating whether to include the element's margin in the calculation.</param>
+        /// <returns></returns>
+        public Task<double> OuterWidth(bool includeMargin = false)
+        {
+            return InvokeAsync<double>("LMTOuterWidthMargin", _selector, includeMargin);
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterWidth(double value)
+        {
+            await InvokeAsync<object>("LMTOuterWidth", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterWidth(string value)
+        {
+            await InvokeAsync<object>("LMTOuterWidth", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer width to set. Receives the index position of the element in the set and the old outer width as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterWidth(Func<int, double, string> function)
+        {
+            var id = IntDoubleStringStorage.Add(function);
+            await InvokeAsync<object>("LMTOuterWidthFunc1", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer width to set. Receives the index position of the element in the set and the old outer width as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> OuterWidth(Func<int, double, double> function)
+        {
+            var id = IntDoubleDoubleStorage.Add(function);
+            await InvokeAsync<object>("LMTOuterWidthFunc2", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
+        /// </summary>
+        /// <returns></returns>
+        public Task<Coordinate> Position()
+        {
+            return InvokeAsync<Coordinate>("LMTPosition", _selector);
+        }
+
+        /// <summary>
         /// Get the value of a property for the first element in the set of matched elements.
         /// </summary>
         /// <typeparam name="T">The type of returned object.</typeparam>
         /// <param name="propertyName">The name of the property to get.</param>
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
-        public async Task<T> Prop<T>(string propertyName)
+        public Task<T> Prop<T>(string propertyName)
         {
-            return await InvokeAsync<T>("LMTProp", _selector, propertyName);
+            return InvokeAsync<T>("LMTProp", _selector, propertyName);
         }
 
         /// <summary>
@@ -397,12 +539,52 @@ namespace BlazorUtils.Dom
         }
 
         /// <summary>
+        /// Get the current horizontal position of the scroll bar for the first element in the set of matched elements.
+        /// </summary>
+        /// <returns></returns>
+        public Task<int> ScrollLeft()
+        {
+            return InvokeAsync<int>("LMTScrollLeft2", _selector);
+        }
+
+        /// <summary>
+        /// Set the current horizontal position of the scroll bar for each of the set of matched elements.
+        /// </summary>
+        /// <param name="value">An integer indicating the new position to set the scroll bar to.</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> ScrollLeft(double value)
+        {
+            await InvokeAsync<object>("LMTScrollLeft", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current vertical position of the scroll bar for the first element in the set of matched elements or set the vertical position of the scroll bar for every matched element.
+        /// </summary>
+        /// <returns></returns>
+        public Task<double> ScrollTop()
+        {
+            return InvokeAsync<double>("LMTScrollTop2", _selector);
+        }
+
+        /// <summary>
+        /// Set the current vertical position of the scroll bar for each of the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number indicating the new position to set the scroll bar to.</param>
+        /// <returns></returns>
+        public async Task<IAsyncDom> ScrollTop(double value)
+        {
+            await InvokeAsync<object>("LMTScrollTop", _selector);
+            return this;
+        }
+
+        /// <summary>
         /// Get the combined text contents of each element in the set of matched elements, including their descendants.
         /// </summary>
         /// <returns>Text contents of each element.</returns>
-        public async Task<string> Text()
+        public Task<string> Text()
         {
-            return await InvokeAsync<string>("LMTDomText2", _selector);
+            return InvokeAsync<string>("LMTDomText2", _selector);
         }
 
         /// <summary>
@@ -487,9 +669,9 @@ namespace BlazorUtils.Dom
         /// Get the current value of the first element in the set of matched elements.
         /// </summary>
         /// <returns>The current value of the first element in the set of matched elements.</returns>
-        public async Task<string> Val()
+        public Task<string> Val()
         {
-            return await InvokeAsync<string>("LMTDomVal2", _selector);
+            return InvokeAsync<string>("LMTDomVal2", _selector);
         }
 
         /// <summary>
@@ -507,9 +689,9 @@ namespace BlazorUtils.Dom
         /// Get the current computed width for the first element in the set of matched elements.
         /// </summary>
         /// <returns>The current computed width for the first element in the set of matched elements.</returns>
-        public async Task<double> Width()
+        public Task<double> Width()
         {
-            return await InvokeAsync<double>("LMTWidth2", _selector);
+            return InvokeAsync<double>("LMTWidth2", _selector);
         }
 
         /// <summary>
