@@ -8,11 +8,24 @@ using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 namespace BlazorUtils.Dom
 {
-    ///<inheritdoc cref = "IDom" />
+    ///<inheritdoc cref = "IAsyncDom" />
     public class AsyncDom : IAsyncDom
     {
-        private readonly string _selector;
-        private IDom _dom;
+        private readonly string _internalSelector;
+
+        private string _selector
+        {
+            get
+            {
+                if (_dom != null)
+                {
+                    return _dom.Selector();
+                }
+                return _internalSelector;
+            }
+        }
+
+        private ISyncDom _dom;
 
         /// <summary>
         /// Initialize async DOM with a selector string.
@@ -20,18 +33,16 @@ namespace BlazorUtils.Dom
         /// <param name="selector">DOM Selector string.</param>
         internal AsyncDom(string selector)
         {
-            _selector = selector;
+            _internalSelector = selector;
         }
 
         /// <summary>
         /// Initialize async DOM with a selector string.
         /// </summary>
         /// <param name="dom">Dom object for singleton converting method.</param>
-        /// <param name="selector">DOM Selector string.</param>
-        internal AsyncDom(Dom dom, string selector)
+        internal AsyncDom(SyncDom dom)
         {
             _dom = dom;
-            _selector = selector;
         }
 
         public async Task<IAsyncDom> Add(string selector)
@@ -65,11 +76,11 @@ namespace BlazorUtils.Dom
             return this;
         }
 
-        public IDom AsSync()
+        public ISyncDom AsSync()
         {
             if (_dom == null)
             {
-                _dom = new Dom(_selector);
+                _dom = new SyncDom(_selector);
             }
             return _dom;
         }
@@ -349,6 +360,11 @@ namespace BlazorUtils.Dom
             return this;
         }
 
+        public string Selector()
+        {
+            return _selector;
+        }
+
         public Task<string> Text()
         {
             return InvokeAsync<string>("LMTDomText2", _selector);
@@ -392,9 +408,9 @@ namespace BlazorUtils.Dom
             return this;
         }
 
-        public IDom ToSync()
+        public ISyncDom ToSync()
         {
-            return new Dom(_selector);
+            return new SyncDom(_selector);
         }
 
         public Task<string> Val()

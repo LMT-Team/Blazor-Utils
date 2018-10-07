@@ -1,38 +1,39 @@
-﻿@using System.Text
-
-@implements ILMTComponent
+﻿@implements ILMTComponent
 
 <div id="@id" style="@style">
     @ChildContent
 </div>
 
+
+@using System.Text
+@using BlazorUtils.Interfaces
 @functions
 {
-    [Parameter]
-    private string style { get; set; }
+[Parameter]
+private string style { get; set; }
 
-    [Parameter]
-    private RenderFragment ChildContent { get; set; }
+[Parameter]
+private RenderFragment ChildContent { get; set; }
 
-    public string id { get; set; } = $"lmt{Guid.NewGuid().ToString()}";
+public string id { get; set; } = $"lmt{Guid.NewGuid().ToString()}";
 
-    private bool _isLocalized = false;
+private bool _isLocalized = false;
 
-    protected override void OnAfterRender()
-    {
-        if (_isLocalized) return;
-        _isLocalized = true;
+protected override void OnAfterRender()
+{
+    if (_isLocalized) return;
+    _isLocalized = true;
 
-        var dom = _("> style");
+    var dom = _("> style");
 
-        var styleString = dom.Text().TrimEnd();
-        if (string.IsNullOrEmpty(styleString)) return;
-        var stringBuilder = new StringBuilder($"#{id} ");
-        stringBuilder.Append(styleString.Substring(0, styleString.Length - 1).Replace("}", $"}} #{id}"));
-        stringBuilder.Append("}");
+    var styleString = dom.Text().TrimEnd();
+    if (string.IsNullOrEmpty(styleString)) return;
+    var stringBuilder = new StringBuilder($"#{id} ");
+    stringBuilder.Append(styleString.Substring(0, styleString.Length - 1).Replace("}", $"}} #{id}"));
+    stringBuilder.Append("}");
 
-        dom.Text(stringBuilder.ToString());
-    }
+    dom.Text(stringBuilder.ToString());
+}
 
-    public Dom _(string selector) => new Dom($"#{id} {selector}");
+public IAsyncDom _(string selector) => _($"#{id} {selector}");
 }

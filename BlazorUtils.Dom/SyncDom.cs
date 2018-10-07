@@ -8,8 +8,8 @@ using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 namespace BlazorUtils.Dom
 {
-    ///<inheritdoc cref = "IDom" />
-    public class Dom : IDom
+    ///<inheritdoc cref = "ISyncDom" />
+    public class SyncDom : ISyncDom
     {
         private readonly string _selector;
         private IAsyncDom _asyncDom;
@@ -18,12 +18,12 @@ namespace BlazorUtils.Dom
         /// Initialize DOM with a selector string.
         /// </summary>
         /// <param name="selector">DOM Selector string.</param>
-        public Dom(string selector)
+        public SyncDom(string selector)
         {
             _selector = selector;
         }
 
-        public IDom Toggle()
+        public ISyncDom Toggle()
         {
             Invoke<object>("LMTDomToggle", _selector);
             return this;
@@ -34,7 +34,7 @@ namespace BlazorUtils.Dom
             return Invoke<string>("LMTDomText2", _selector);
         }
 
-        public IDom Text(string text)
+        public ISyncDom Text(string text)
         {
             Invoke<object>("LMTDomText", _selector, text);
             return this;
@@ -45,13 +45,13 @@ namespace BlazorUtils.Dom
             return Invoke<string>("LMTDomCss2", _selector, propertyName);
         }
 
-        public IDom Css(string propertyName, string value)
+        public ISyncDom Css(string propertyName, string value)
         {
             Invoke<object>("LMTDomCss", _selector, propertyName, value);
             return this;
         }
 
-        public async Task<IDom> Animate(object properties, int duration = 400, string easing = "swing", Action complete = null)
+        public async Task<ISyncDom> Animate(object properties, int duration = 400, string easing = "swing", Action complete = null)
         {
             Invoke<object>("LMTAnimate", _selector, properties, duration, easing);
             // ReSharper disable once InvertIf
@@ -64,20 +64,20 @@ namespace BlazorUtils.Dom
             return this;
         }
 
-        public IDom Animate(object properties, object options)
+        public ISyncDom Animate(object properties, object options)
         {
             Invoke<object>("LMTAnimateOptions", _selector, properties, options);
             return this;
         }
 
-        public IDom On(string events, Action<LMTEventArgs> handler)
+        public ISyncDom On(string events, Action<LMTEventArgs> handler)
         {
             var id = UICallBacksStorage.Add(events, _selector, handler);
             Invoke<object>("LMTOn", _selector, events, id);
             return this;
         }
 
-        public IDom Add(string selector)
+        public ISyncDom Add(string selector)
         {
             Invoke<object>("LMTAdd", _selector, selector);
             return this;
@@ -89,20 +89,20 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTHeight2", _selector);
         }
 
-        public IDom Height(double value)
+        public ISyncDom Height(double value)
         {
             Invoke<object>("LMTHeight", _selector, value);
             return this;
         }
 
-        public IDom Height(Func<int, int, string> function)
+        public ISyncDom Height(Func<int, int, string> function)
         {
             var id = IntIntStringStorage.Add(function);
             Invoke<object>("LMTHeightFunc2", _selector, id);
             return this;
         }
 
-        public IDom Height(Func<int, int, double> function)
+        public ISyncDom Height(Func<int, int, double> function)
         {
             var id = IntIntDoubleStorage.Add(function);
             Invoke<object>("LMTHeightFunc1", _selector, id);
@@ -114,26 +114,26 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTInnerHeight2", _selector);
         }
 
-        public IDom InnerHeight(double value)
+        public ISyncDom InnerHeight(double value)
         {
             Invoke<object>("LMTInnerHeight", _selector, value);
             return this;
         }
 
-        public IDom InnerHeight(string value)
+        public ISyncDom InnerHeight(string value)
         {
             Invoke<object>("LMTInnerHeight", _selector, value);
             return this;
         }
 
-        public IDom InnerHeight(Func<int, double, string> function)
+        public ISyncDom InnerHeight(Func<int, double, string> function)
         {
             var id = IntDoubleStringStorage.Add(function);
             Invoke<object>("LMTInnerHeightFunc1", _selector, id);
             return this;
         }
 
-        public IDom InnerHeight(Func<int, double, double> function)
+        public ISyncDom InnerHeight(Func<int, double, double> function)
         {
             var id = IntDoubleDoubleStorage.Add(function);
             Invoke<object>("LMTInnerHeightFunc2", _selector, id);
@@ -145,26 +145,26 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTWidth2", _selector);
         }
 
-        public IDom Width(double value)
+        public ISyncDom Width(double value)
         {
             Invoke<object>("LMTWidth", _selector, value);
             return this;
         }
 
-        public IDom Width(string value)
+        public ISyncDom Width(string value)
         {
             Invoke<object>("LMTWidth", _selector, value);
             return this;
         }
 
-        public IDom Width(Func<int, int, string> function)
+        public ISyncDom Width(Func<int, int, string> function)
         {
             var id = IntIntStringStorage.Add(function);
             Invoke<object>("LMTWidthFunc1", _selector, id);
             return this;
         }
 
-        public IDom Width(Func<int, int, double> function)
+        public ISyncDom Width(Func<int, int, double> function)
         {
             var id = IntIntDoubleStorage.Add(function);
             Invoke<object>("LMTWidthFunc2", _selector, id);
@@ -176,26 +176,26 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTInnerWidth2", _selector);
         }
 
-        public IDom InnerWidth(double value)
+        public ISyncDom InnerWidth(double value)
         {
             Invoke<object>("LMTInnerWidth", _selector, value);
             return this;
         }
 
-        public IDom InnerWidth(string value)
+        public ISyncDom InnerWidth(string value)
         {
             Invoke<object>("LMTInnerWidth", _selector, value);
             return this;
         }
 
-        public IDom InnerWidth(Func<int, double, string> function)
+        public ISyncDom InnerWidth(Func<int, double, string> function)
         {
             var id = IntDoubleStringStorage.Add(function);
             Invoke<object>("LMTInnerWidthFunc1", _selector, id);
             return this;
         }
 
-        public IDom InnerWidth(Func<int, double, double> function)
+        public ISyncDom InnerWidth(Func<int, double, double> function)
         {
             var id = IntDoubleDoubleStorage.Add(function);
             Invoke<object>("LMTInnerWidthFunc2", _selector, id);
@@ -207,13 +207,13 @@ namespace BlazorUtils.Dom
             return Invoke<Coordinate>("LMTOffset2", _selector);
         }
 
-        public IDom Offset(Coordinate coordinates)
+        public ISyncDom Offset(Coordinate coordinates)
         {
             Invoke<object>("LMTOffset", _selector, coordinates);
             return this;
         }
 
-        public IDom Offset(Func<int, Coordinate, Coordinate> function)
+        public ISyncDom Offset(Func<int, Coordinate, Coordinate> function)
         {
             var id = IntCoordsCoordsStorage.Add(function);
             Invoke<object>("LMTOffsetFunc", _selector, id);
@@ -223,7 +223,7 @@ namespace BlazorUtils.Dom
         #endregion
 
         #region Attributes
-        public IDom AddClass(string className)
+        public ISyncDom AddClass(string className)
         {
             Invoke<object>("LMTAddClass", _selector, className);
             return this;
@@ -244,58 +244,58 @@ namespace BlazorUtils.Dom
             return Invoke<T>("LMTProp", _selector, propertyName);
         }
 
-        public IDom RemoveAttr(string attributeName)
+        public ISyncDom RemoveAttr(string attributeName)
         {
             Invoke<object>("LMTRemoveAttr", _selector, attributeName);
             return this;
         }
 
-        public IDom RemoveClass(string className)
+        public ISyncDom RemoveClass(string className)
         {
             Invoke<object>("LMTRemoveClass", _selector, className);
             return this;
         }
 
-        public IDom RemoveClass(Func<int, string, string> function)
+        public ISyncDom RemoveClass(Func<int, string, string> function)
         {
             var id = IntStringStringStorage.Add(function);
             Invoke<object>("LMTRemoveClassFunc", _selector, id);
             return this;
         }
 
-        public IDom RemoveProp(string propertyName)
+        public ISyncDom RemoveProp(string propertyName)
         {
             Invoke<object>("LMTRemoveProp", _selector, propertyName);
             return this;
         }
 
-        public IDom ToggleClass(string className)
+        public ISyncDom ToggleClass(string className)
         {
             Invoke<object>("LMTToggleClass1", _selector, className);
             return this;
         }
 
-        public IDom ToggleClass(string className, bool state)
+        public ISyncDom ToggleClass(string className, bool state)
         {
             Invoke<object>("LMTToggleClass2", _selector, className, state);
             return this;
         }
 
-        public IDom ToggleClass(Func<int, string, string> function)
+        public ISyncDom ToggleClass(Func<int, string, string> function)
         {
             var id = IntStringStringStorage.Add(function);
             Invoke<object>("LMTToggleClass3", _selector, id);
             return this;
         }
 
-        public IDom ToggleClass(Func<int, string, string> function, bool state)
+        public ISyncDom ToggleClass(Func<int, string, string> function, bool state)
         {
             var id = IntStringStringStorage.Add(function);
             Invoke<object>("LMTToggleClass4", _selector, id, state);
             return this;
         }
 
-        public IDom Attr(string attribute, string value)
+        public ISyncDom Attr(string attribute, string value)
         {
             Invoke<object>("LMTDomAttr", _selector, attribute, value);
             return this;
@@ -311,7 +311,7 @@ namespace BlazorUtils.Dom
             return Invoke<string>("LMTDomVal2", _selector);
         }
 
-        public IDom Val(string value)
+        public ISyncDom Val(string value)
         {
             Invoke<object>("LMTDomVal", _selector, value);
             return this;
@@ -319,13 +319,13 @@ namespace BlazorUtils.Dom
 
         public IAsyncDom ToAsync() => new AsyncDom(_selector);
 
-        public IDom Off()
+        public ISyncDom Off()
         {
             Invoke<object>("LMTOff", _selector);
             return this;
         }
 
-        public IDom Off(string @event)
+        public ISyncDom Off(string @event)
         {
             Invoke<object>("LMTOffEvent", _selector, @event);
             return this;
@@ -336,26 +336,26 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTOuterHeightMargin", _selector, includeMargin);
         }
 
-        public IDom OuterHeight(double value)
+        public ISyncDom OuterHeight(double value)
         {
             Invoke<object>("LMTOuterHeight", _selector, value);
             return this;
         }
 
-        public IDom OuterHeight(string value)
+        public ISyncDom OuterHeight(string value)
         {
             Invoke<object>("LMTOuterHeight", _selector, value);
             return this;
         }
 
-        public IDom OuterHeight(Func<int, double, string> function)
+        public ISyncDom OuterHeight(Func<int, double, string> function)
         {
             var id = IntDoubleStringStorage.Add(function);
             Invoke<object>("LMTOuterHeightFunc1", _selector, id);
             return this;
         }
 
-        public IDom OuterHeight(Func<int, double, double> function)
+        public ISyncDom OuterHeight(Func<int, double, double> function)
         {
             var id = IntDoubleDoubleStorage.Add(function);
             Invoke<object>("LMTOuterHeightFunc2", _selector, id);
@@ -367,26 +367,26 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTOuterWidthMargin", _selector, includeMargin);
         }
 
-        public IDom OuterWidth(double value)
+        public ISyncDom OuterWidth(double value)
         {
             Invoke<object>("LMTOuterWidth", _selector, value);
             return this;
         }
 
-        public IDom OuterWidth(string value)
+        public ISyncDom OuterWidth(string value)
         {
             Invoke<object>("LMTOuterWidth", _selector, value);
             return this;
         }
 
-        public IDom OuterWidth(Func<int, double, string> function)
+        public ISyncDom OuterWidth(Func<int, double, string> function)
         {
             var id = IntDoubleStringStorage.Add(function);
             Invoke<object>("LMTOuterWidthFunc1", _selector, id);
             return this;
         }
 
-        public IDom OuterWidth(Func<int, double, double> function)
+        public ISyncDom OuterWidth(Func<int, double, double> function)
         {
             var id = IntDoubleDoubleStorage.Add(function);
             Invoke<object>("LMTOuterWidthFunc2", _selector, id);
@@ -403,7 +403,7 @@ namespace BlazorUtils.Dom
             return Invoke<int>("LMTScrollLeft2", _selector);
         }
 
-        public IDom ScrollLeft(double value)
+        public ISyncDom ScrollLeft(double value)
         {
             Invoke<object>("LMTScrollLeft", _selector, value);
             return this;
@@ -414,7 +414,7 @@ namespace BlazorUtils.Dom
             return Invoke<double>("LMTScrollTop2", _selector);
         }
 
-        public IDom ScrollTop(double value)
+        public ISyncDom ScrollTop(double value)
         {
             Invoke<object>("LMTScrollTop", _selector);
             return this;
@@ -424,9 +424,14 @@ namespace BlazorUtils.Dom
         {
             if (_asyncDom == null)
             {
-                _asyncDom = new AsyncDom(this, _selector);
+                _asyncDom = new AsyncDom(this);
             }
             return _asyncDom;
+        }
+
+        public string Selector()
+        {
+            return _selector;
         }
         #endregion
     }

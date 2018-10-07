@@ -15,7 +15,7 @@ namespace BlazorUtils.Dom
         /// Initialize DOM with a selector string.
         /// </summary>
         /// <param name="selector">DOM Selector string.</param>
-        public static IDom _(string selector) => DomPool.GetDom(selector);
+        public static ISyncDom _(string selector) => DomPool.GetDom(selector);
 
         /// <summary>
         /// Evaluate JavaScript code as string

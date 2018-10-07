@@ -35,6 +35,9 @@
     <Content Update="Pages\CookieTesting.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Pages\async.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

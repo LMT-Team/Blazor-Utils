@@ -39,19 +39,19 @@
     </h1>
     <h2>Yeah!</h2>
     <style>
-        /*Comment testing*/
-        h1 {
-            font-size: 70px;
-            border: 2px solid black;
-        }
+            /*Comment testing*/
+            h1 {
+                font-size: 70px;
+                border: 2px solid black;
+            }
 
-        h2 {
-            color: blue;
-        }
+            h2 {
+                color: blue;
+            }
 
-        h1, #@local1.id h2 {
-            font-weight: 900;
-        }
+            h1, #@local1.id h2 {
+                font-weight: 900;
+            }
     </style>
     <LMTLocal>
         <style>
@@ -63,50 +63,50 @@
     </LMTLocal>
 </LMTLocal>
 
-<LMTInjector ref="@injector" jsonpath="/json/Injection.json" type="Models.WebsiteInfo">
-    <LMTTry>
-        <h1>The website name is @(injector.Get("websiteName"))</h1>
-        <h1>It has been here for @injector.Get("age") years!</h1>
-        <h1>This website is developing by: </h1>
-        @{
-            foreach (var devname in injector.Get<Models.WebsiteInfo>().developers)
-            {
-                <h2>@devname</h2>
+@*<LMTInjector ref="@injector" jsonpath="/json/Injection.json" type="Models.WebsiteInfo">
+        <LMTTry>
+            <h1>The website name is @(injector.Get("websiteName"))</h1>
+            <h1>It has been here for @injector.Get("age") years!</h1>
+            <h1>This website is developing by: </h1>
+            @{
+                foreach (var devname in injector.Get<Models.WebsiteInfo>().developers)
+                {
+                    <h2>@devname</h2>
+                }
+                foreach (var devname in injector.Get().developers)
+                {
+                    <h2>@devname</h2>
+                }
             }
-            foreach (var devname in injector.Get().developers)
-            {
-                <h2>@devname</h2>
-            }
-        }
-        <button onclick="@(()=> { this.StateHasChanged(); })">ReRender!</button>
-        <button onclick="@(async()=> { await injector.Update(); })">Update data!</button>
-    </LMTTry>
-</LMTInjector>
+            <button onclick="@(()=> { this.StateHasChanged(); })">ReRender!</button>
+            <button onclick="@(async()=> { await injector.Update(); })">Update data!</button>
+        </LMTTry>
+    </LMTInjector>
 
-<h1>Fallback test</h1>
+    <h1>Fallback test</h1>
 
-<LMTInjector ref="@failInjector" jsonpath="@_wrongUrl" type="Models.WebsiteInfo">
-    <LMTTry>
-        <h1>The website name is @(failInjector.Get("websiteName"))</h1>
-        <h1>It has been here for @failInjector.Get("age") years!</h1>
-        <h1>This website is developing by: </h1>
-        @{
-            foreach (var devname in failInjector.Get<Models.WebsiteInfo>().developers)
-            {
-                <h2>@devname</h2>
+    <LMTInjector ref="@failInjector" jsonpath="@_wrongUrl" type="Models.WebsiteInfo">
+        <LMTTry>
+            <h1>The website name is @(failInjector.Get("websiteName"))</h1>
+            <h1>It has been here for @failInjector.Get("age") years!</h1>
+            <h1>This website is developing by: </h1>
+            @{
+                foreach (var devname in failInjector.Get<Models.WebsiteInfo>().developers)
+                {
+                    <h2>@devname</h2>
+                }
+                foreach (var devname in failInjector.Get().developers)
+                {
+                    <h2>@devname</h2>
+                }
             }
-            foreach (var devname in failInjector.Get().developers)
-            {
-                <h2>@devname</h2>
-            }
-        }
-    </LMTTry>
-    <LMTCatch>
-        <h1>Fail to get data. Please check back later!</h1>
-        <button onclick="@(() => { _wrongUrl = "/json/Injection.json"; })">Change url to /json/Injection.json</button>
-        <button onclick="@(async() => {StateHasChanged() ;  await failInjector.Update(); })">Update</button>
-    </LMTCatch>
-</LMTInjector>
+        </LMTTry>
+        <LMTCatch>
+            <h1>Fail to get data. Please check back later!</h1>
+            <button onclick="@(() => { _wrongUrl = "/json/Injection.json"; })">Change url to /json/Injection.json</button>
+            <button onclick="@(async() => {StateHasChanged() ;  await failInjector.Update(); })">Update</button>
+        </LMTCatch>
+    </LMTInjector>*@
 
 <style>
     .dropArea {
@@ -132,7 +132,7 @@ private string _wrongUrl = "/json/Injecti.json";
 protected override async Task OnAfterRenderAsync()
 {
     Console.WriteLine(Eval<int>("1 + 1"));
-    local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
+    //local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
 }
 
 protected void imageChange(ImageChangedEventArgs e)
