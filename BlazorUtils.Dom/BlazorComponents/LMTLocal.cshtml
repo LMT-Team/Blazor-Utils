@@ -35,5 +35,5 @@ protected override void OnAfterRender()
     dom.Text(stringBuilder.ToString());
 }
 
-public IAsyncDom _(string selector) => _($"#{id} {selector}");
+public ISyncDom _(string selector) => BlazorUtils.Dom.DomUtils._($"#{id} {selector}");
 }
