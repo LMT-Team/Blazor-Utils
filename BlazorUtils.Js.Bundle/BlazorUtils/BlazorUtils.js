@@ -1,4 +1,4 @@
-﻿//LMT Blazor Utils 0.4.2
+﻿//LMT Blazor Utils 0.4.3
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 window.blazorUtils = {};
@@ -797,5 +797,75 @@ function LMTDomBoot() {
                 coords.left + ""
             );
         });
+    });
+
+    Blazor.registerFunction("LMTOff", function (selector) {
+        $(selector).off();
+    });
+
+    Blazor.registerFunction("LMTOffEvent", function (selector, event) {
+        $(selector).off(event);
+    });
+
+    Blazor.registerFunction("LMTOuterHeightMargin", function (selector, includeMargin) {
+        return $(selector).outerHeight(includeMargin);
+    });
+
+    Blazor.registerFunction("LMTOuterHeight", function (selector, value) {
+        $(selector).outerHeight(value);
+    });
+
+    //String func
+    Blazor.registerFunction("LMTOuterHeightFunc1", function (selector, id) {
+        $(selector).outerHeight((ind, height) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", height + "", "string");
+        });
+    });
+
+    //double func
+    Blazor.registerFunction("LMTOuterHeightFunc2", function (selector, id) {
+        $(selector).outerHeight((ind, height) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", height + "", "number");
+        });
+    });
+
+    Blazor.registerFunction("LMTOuterWidth", function (selector, value) {
+        $(selector).outerWidth(value);
+    });
+
+    Blazor.registerFunction("LMTOuterWidthMargin", function (selector, includeMargin) {
+        return $(selector).outerWidth(includeMargin);
+    });
+
+    Blazor.registerFunction("LMTOuterWidthFunc1", function (selector, id) {
+        $(selector).outerWidth((ind, width) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", width + "", "string");
+        });
+    });
+
+    Blazor.registerFunction("LMTOuterWidthFunc2", function (selector, id) {
+        $(selector).outerWidth((ind, width) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", width + "", "number");
+        });
+    });
+
+    Blazor.registerFunction("LMTPosition", function (selector) {
+        return $(selector).position();
+    });
+
+    Blazor.registerFunction("LMTScrollLeft2", function (selector) {
+        return $(selector).scrollLeft();
+    });
+
+    Blazor.registerFunction("LMTScrollLeft", function (selector, value) {
+        $(selector).scrollLeft(value);
+    });
+
+    Blazor.registerFunction("LMTScrollTop2", function (selector) {
+        return $(selector).scrollTop();
+    });
+
+    Blazor.registerFunction("LMTScrollTop", function (selector, value) {
+        $(selector).scrollTop(value);
     });
 }

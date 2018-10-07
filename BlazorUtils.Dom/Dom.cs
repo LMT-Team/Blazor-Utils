@@ -558,6 +558,187 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <returns>Async Dom</returns>
         public IAsyncDom ToAsync() => new AsyncDom(_selector);
+
+        /// <summary>
+        /// Remove an event handler.
+        /// </summary>
+        /// <returns></returns>
+        public IDom Off()
+        {
+            Invoke<object>("LMTOff", _selector);
+            return this;
+        }
+
+        /// <summary>
+        /// Remove an event handler.
+        /// </summary>
+        /// <param name="event">One or more space-separated event types and optional namespaces, or just namespaces, such as "click", "keydown.myPlugin", or ".myPlugin".</param>
+        /// <returns></returns>
+        public IDom Off(string @event)
+        {
+            Invoke<object>("LMTOffEvent", _selector, @event);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current computed outer height (including padding, border, and optionally margin) for the first element in the set of matched elements.
+        /// </summary>
+        /// <param name="includeMargin">A Boolean indicating whether to include the element's margin in the calculation.</param>
+        /// <returns></returns>
+        public double OuterHeight(bool includeMargin = false)
+        {
+            return Invoke<double>("LMTOuterHeightMargin", _selector, includeMargin);
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public IDom OuterHeight(double value)
+        {
+            Invoke<object>("LMTOuterHeight", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public IDom OuterHeight(string value)
+        {
+            Invoke<object>("LMTOuterHeight", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer height to set. Receives the index position of the element in the set and the old outer height as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public IDom OuterHeight(Func<int, double, string> function)
+        {
+            var id = IntDoubleStringStorage.Add(function);
+            Invoke<object>("LMTOuterHeightFunc1", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer height of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer height to set. Receives the index position of the element in the set and the old outer height as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public IDom OuterHeight(Func<int, double, double> function)
+        {
+            var id = IntDoubleDoubleStorage.Add(function);
+            Invoke<object>("LMTOuterHeightFunc2", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current computed outer width (including padding, border, and optionally margin) for the first element in the set of matched elements.
+        /// </summary>
+        /// <param name="includeMargin">A Boolean indicating whether to include the element's margin in the calculation.</param>
+        /// <returns></returns>
+        public double OuterWidth(bool includeMargin = false)
+        {
+            return Invoke<double>("LMTOuterWidthMargin", _selector, includeMargin);
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public IDom OuterWidth(double value)
+        {
+            Invoke<object>("LMTOuterWidth", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number representing the number of pixels, or a number along with an optional unit of measure appended (as a string).</param>
+        /// <returns></returns>
+        public IDom OuterWidth(string value)
+        {
+            Invoke<object>("LMTOuterWidth", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer width to set. Receives the index position of the element in the set and the old outer width as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public IDom OuterWidth(Func<int, double, string> function)
+        {
+            var id = IntDoubleStringStorage.Add(function);
+            Invoke<object>("LMTOuterWidthFunc1", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Set the CSS outer width of each element in the set of matched elements.
+        /// </summary>
+        /// <param name="function">A function returning the outer width to set. Receives the index position of the element in the set and the old outer width as arguments. Within the function, this refers to the current element in the set.</param>
+        /// <returns></returns>
+        public IDom OuterWidth(Func<int, double, double> function)
+        {
+            var id = IntDoubleDoubleStorage.Add(function);
+            Invoke<object>("LMTOuterWidthFunc2", _selector, id);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.
+        /// </summary>
+        /// <returns></returns>
+        public Coordinate Position()
+        {
+            return Invoke<Coordinate>("LMTPosition", _selector);
+        }
+
+        /// <summary>
+        /// Get the current horizontal position of the scroll bar for the first element in the set of matched elements.
+        /// </summary>
+        /// <returns></returns>
+        public int ScrollLeft()
+        {
+            return Invoke<int>("LMTScrollLeft2", _selector);
+        }
+
+        /// <summary>
+        /// Set the current horizontal position of the scroll bar for each of the set of matched elements.
+        /// </summary>
+        /// <param name="value">An integer indicating the new position to set the scroll bar to.</param>
+        /// <returns></returns>
+        public IDom ScrollLeft(double value)
+        {
+            Invoke<object>("LMTScrollLeft", _selector, value);
+            return this;
+        }
+
+        /// <summary>
+        /// Get the current vertical position of the scroll bar for the first element in the set of matched elements or set the vertical position of the scroll bar for every matched element.
+        /// </summary>
+        /// <returns></returns>
+        public double ScrollTop()
+        {
+            return Invoke<double>("LMTScrollTop2", _selector);
+        }
+
+        /// <summary>
+        /// Set the current vertical position of the scroll bar for each of the set of matched elements.
+        /// </summary>
+        /// <param name="value">A number indicating the new position to set the scroll bar to.</param>
+        /// <returns></returns>
+        public double ScrollTop(double value)
+        {
+            return Invoke<double>("LMTScrollTop", _selector);
+        }
         #endregion
     }
 }

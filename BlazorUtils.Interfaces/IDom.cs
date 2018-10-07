@@ -1,4 +1,5 @@
-﻿using BlazorUtils.Interfaces.EventArgs;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using BlazorUtils.Interfaces.EventArgs;
 using System;
 using System.Threading.Tasks;
 
@@ -54,5 +55,23 @@ namespace BlazorUtils.Interfaces
         IDom Offset(Coordinate coordinates);
         IDom Offset(Func<int, Coordinate, Coordinate> function);
         IAsyncDom ToAsync();
+        IDom Off();
+        IDom Off(string @event);
+        double OuterHeight(bool includeMargin = false);
+        IDom OuterHeight(double value);
+        IDom OuterHeight(string value);
+        IDom OuterHeight(Func<int, double, string> function);
+        IDom OuterHeight(Func<int, double, double> function);
+        double OuterWidth(bool includeMargin = false);
+        IDom OuterWidth(double value);
+        IDom OuterWidth(string value);
+        IDom OuterWidth(Func<int, double, string> function);
+        IDom OuterWidth(Func<int, double, double> function);
+        Coordinate Position();
+        int ScrollLeft();
+        IDom ScrollLeft(double value);
+        double ScrollTop();
+        double ScrollTop(double value);
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
