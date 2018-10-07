@@ -735,9 +735,10 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <param name="value">A number indicating the new position to set the scroll bar to.</param>
         /// <returns></returns>
-        public double ScrollTop(double value)
+        public IDom ScrollTop(double value)
         {
-            return Invoke<double>("LMTScrollTop", _selector);
+            Invoke<object>("LMTScrollTop", _selector);
+            return this;
         }
         #endregion
     }

@@ -51,7 +51,7 @@ Welcome to your new app.
         });
 
 
-    var domImg = _(".sampleImg");
+        var domImg = _(".sampleImg");
         var domImg2 = _(".sampleImg2");
         var domH1 = _("h1");
 
@@ -189,5 +189,88 @@ Welcome to your new app.
                 Left = 6
             };
         }));
+
+        //0.5.3 test
+        await Dev.WarnAsync("0.5.3 test");
+
+        Console.WriteLine("OuterHeight: ");
+
+        domImg2.OuterHeight(50);
+
+        Console.WriteLine(domImg2.OuterHeight());
+        Console.WriteLine(domImg2.OuterHeight(true));
+
+        domImg2.OuterHeight("20px");
+
+        Console.WriteLine(domImg2.OuterHeight());
+
+        domImg2.OuterHeight((ind, height) => {
+            Console.WriteLine($"Set outerHeight by function: ind {ind} height {height}");
+            return 70;
+        });
+
+        Console.WriteLine(domImg2.OuterHeight());
+
+        domImg2.OuterHeight((ind, height) =>
+        {
+            Console.WriteLine($"Set outerHeight by function: ind {ind} height {height}");
+            return "80px";
+        });
+
+        Console.WriteLine(domImg2.OuterHeight());
+
+        Console.WriteLine("OuterWidth: ");
+
+        domImg2.OuterWidth(50);
+
+        Console.WriteLine(domImg2.OuterWidth());
+        Console.WriteLine(domImg2.OuterWidth(true));
+
+        domImg2.OuterWidth("20px");
+
+        Console.WriteLine(domImg2.OuterWidth());
+
+        domImg2.OuterWidth((ind, width) =>
+        {
+            Console.WriteLine($"Set outerWidth by function: index {ind}, width {width}");
+            return 70;
+        });
+
+        Console.WriteLine(domImg2.OuterWidth());
+
+        domImg2.OuterWidth((ind, width) =>
+        {
+            Console.WriteLine($"Set outerWidth by function: index {ind}, width {width}");
+            return "80px";
+        });
+
+        Console.WriteLine(domImg2.OuterWidth());
+
+        Console.WriteLine($"Position {domImg2.Position().Left} {domImg2.Position().Top}");
+
+        Console.WriteLine($"Scroll left {domImg2.ScrollLeft()}");
+
+        domImg2.ScrollLeft(70);
+
+        Console.WriteLine($"Scroll left {domImg2.ScrollLeft()}");
+
+        Console.WriteLine($"Scroll top {domImg2.ScrollTop()}");
+
+        domImg2.ScrollTop(70);
+
+        Console.WriteLine($"Scroll left {domImg2.ScrollTop()}");
+
+        domImg2.On("click", (e) => {
+            Console.WriteLine("hello world");
+        });
+
+        domImg2.Off("click");
+
+        domImg2.On("click", (e) =>
+        {
+            Console.WriteLine("hello world 2");
+        });
+
+        domImg2.Off();
     }
 }
