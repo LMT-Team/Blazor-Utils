@@ -272,5 +272,9 @@ Welcome to your new app.
         });
 
         domImg2.Off();
+
+        await domImg2.AsAsync().On("click", (e) => {
+            Console.WriteLine("async hello world");
+        });
     }
 }

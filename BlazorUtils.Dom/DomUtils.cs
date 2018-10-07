@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using BlazorUtils.Dom.Storages;
+using BlazorUtils.Interfaces;
+using System.Threading.Tasks;
 using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 // ReSharper disable InconsistentNaming
@@ -13,7 +15,7 @@ namespace BlazorUtils.Dom
         /// Initialize DOM with a selector string.
         /// </summary>
         /// <param name="selector">DOM Selector string.</param>
-        public static Dom _(string selector) => new Dom(selector);
+        public static IDom _(string selector) => DomPool.GetDom(selector);
 
         /// <summary>
         /// Evaluate JavaScript code as string
