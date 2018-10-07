@@ -58,10 +58,6 @@
         _dataProperties = ((object)datas.ToArray()[0]).GetType().GetProperties().Select(x => x.Name).ToArray();
     }
 
-    protected override void OnAfterRender()
-    {
-    }
-
     private object GetValue(object o, string propertyName)
     {
         return o.GetType().GetProperty(propertyName).GetValue(o, null);

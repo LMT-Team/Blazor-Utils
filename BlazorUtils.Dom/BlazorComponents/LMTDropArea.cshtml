@@ -34,17 +34,18 @@
     {
     }
 
-    protected override void OnAfterRender()
+    protected override async Task OnAfterRenderAsync()
     {
         if (_isSetDrop) return;
         _isSetDrop = true;
 
-        _($"#{id}")
+        await (await _($"#{id}")
+            .AsAsync()
             .On("dragover", (e) =>
             {
                 if (ondragover == null) return;
                 ondragover(e);
-            })
+            }))
             .On("drop", (e) =>
             {
                 OnDropHandler(e);

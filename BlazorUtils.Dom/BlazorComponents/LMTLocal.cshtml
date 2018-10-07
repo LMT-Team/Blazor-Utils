@@ -19,21 +19,25 @@ public string id { get; set; } = $"lmt{Guid.NewGuid().ToString()}";
 
 private bool _isLocalized = false;
 
-protected override void OnAfterRender()
+protected override async Task OnAfterRenderAsync()
 {
     if (_isLocalized) return;
     _isLocalized = true;
 
-    var dom = _("> style");
+    var dom = _("> style").AsAsync();
 
-    var styleString = dom.Text().TrimEnd();
+    var styleString = (await dom.Text()).TrimEnd();
     if (string.IsNullOrEmpty(styleString)) return;
     var stringBuilder = new StringBuilder($"#{id} ");
     stringBuilder.Append(styleString.Substring(0, styleString.Length - 1).Replace("}", $"}} #{id}"));
     stringBuilder.Append("}");
 
-    dom.Text(stringBuilder.ToString());
+    await dom.Text(stringBuilder.ToString());
 }
 
+/// <summary>
+/// Initialize DOM with a selector string. This Dom only affects inside LMTLocal.
+/// </summary>
+/// <param name="selector">DOM Selector string.</param>
 public ISyncDom _(string selector) => BlazorUtils.Dom.DomUtils._($"#{id} {selector}");
 }
