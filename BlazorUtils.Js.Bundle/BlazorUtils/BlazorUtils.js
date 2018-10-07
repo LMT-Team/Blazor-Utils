@@ -116,7 +116,23 @@ function LMTDomBoot() {
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
         };
-
+        //lmt-grid
+        $.each($("[lmt-grid]"), (ind, val) => {
+            if (val.islmtgrid != undefined) return;
+            val.islmtgrid = true;
+            let param = val.getAttribute("lmt-grid").split(",");
+            let isFluid = boolParse(val.getAttribute("lmt-grid-fluid"));
+            val.className += isFluid ? " container-fluid" : " container";
+            $.each($(val).children(), (ind, val) => {
+                let rowChildren = $(val).children();
+                val.className += " row";
+                let isAutoWidth = rowChildren.length > param.length;
+                $.each($(val).children(), (ind, val) => {
+                    if (isAutoWidth) val.className += " col-" + param[0];
+                    else val.className += " col-" + param[ind];
+                });
+            });
+        });
         //lmt-draggable
         $("[lmt-drag]").draggable();
         //lmt-resize
@@ -205,23 +221,6 @@ function LMTDomBoot() {
                 colorRate[1] ? colorRate[1] : "0.5"
                 }"/>`
             );
-        });
-        //lmt-grid
-        $.each($("[lmt-grid]"), (ind, val) => {
-            if (val.islmtgrid != undefined) return;
-            val.islmtgrid = true;
-            let param = val.getAttribute("lmt-grid").split(",");
-            let isFluid = boolParse(val.getAttribute("lmt-grid-fluid"));
-            val.className += isFluid ? " container-fluid" : " container";
-            $.each($(val).children(), (ind, val) => {
-                let rowChildren = $(val).children();
-                val.className += " row";
-                let isAutoWidth = rowChildren.length > param.length;
-                $.each($(val).children(), (ind, val) => {
-                    if (isAutoWidth) val.className += " col-" + param[0];
-                    else val.className += " col-" + param[ind];
-                });
-            });
         });
         //lmt-skeleton
         $.each($("[lmt-skeleton]"), (ind, ele) => {

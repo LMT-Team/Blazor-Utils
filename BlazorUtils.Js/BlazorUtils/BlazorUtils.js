@@ -1,4 +1,4 @@
-﻿//LMT Blazor Utils 0.4.2
+﻿//LMT Blazor Utils 0.4.3
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 window.blazorUtils = {};
@@ -116,7 +116,23 @@ function LMTDomBoot() {
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
         };
-
+        //lmt-grid
+        $.each($("[lmt-grid]"), (ind, val) => {
+            if (val.islmtgrid != undefined) return;
+            val.islmtgrid = true;
+            let param = val.getAttribute("lmt-grid").split(",");
+            let isFluid = boolParse(val.getAttribute("lmt-grid-fluid"));
+            val.className += isFluid ? " container-fluid" : " container";
+            $.each($(val).children(), (ind, val) => {
+                let rowChildren = $(val).children();
+                val.className += " row";
+                let isAutoWidth = rowChildren.length > param.length;
+                $.each($(val).children(), (ind, val) => {
+                    if (isAutoWidth) val.className += " col-" + param[0];
+                    else val.className += " col-" + param[ind];
+                });
+            });
+        });
         //lmt-draggable
         $("[lmt-drag]").draggable();
         //lmt-resize
@@ -205,23 +221,6 @@ function LMTDomBoot() {
                 colorRate[1] ? colorRate[1] : "0.5"
                 }"/>`
             );
-        });
-        //lmt-grid
-        $.each($("[lmt-grid]"), (ind, val) => {
-            if (val.islmtgrid != undefined) return;
-            val.islmtgrid = true;
-            let param = val.getAttribute("lmt-grid").split(",");
-            let isFluid = boolParse(val.getAttribute("lmt-grid-fluid"));
-            val.className += isFluid ? " container-fluid" : " container";
-            $.each($(val).children(), (ind, val) => {
-                let rowChildren = $(val).children();
-                val.className += " row";
-                let isAutoWidth = rowChildren.length > param.length;
-                $.each($(val).children(), (ind, val) => {
-                    if (isAutoWidth) val.className += " col-" + param[0];
-                    else val.className += " col-" + param[ind];
-                });
-            });
         });
         //lmt-skeleton
         $.each($("[lmt-skeleton]"), (ind, ele) => {
@@ -797,5 +796,75 @@ function LMTDomBoot() {
                 coords.left + ""
             );
         });
+    });
+
+    Blazor.registerFunction("LMTOff", function (selector) {
+        $(selector).off();
+    });
+
+    Blazor.registerFunction("LMTOffEvent", function (selector, event) {
+        $(selector).off(event);
+    });
+
+    Blazor.registerFunction("LMTOuterHeightMargin", function (selector, includeMargin) {
+        return $(selector).outerHeight(includeMargin);
+    });
+
+    Blazor.registerFunction("LMTOuterHeight", function (selector, value) {
+        $(selector).outerHeight(value);
+    });
+
+    //String func
+    Blazor.registerFunction("LMTOuterHeightFunc1", function (selector, id) {
+        $(selector).outerHeight((ind, height) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", height + "", "string");
+        });
+    });
+
+    //double func
+    Blazor.registerFunction("LMTOuterHeightFunc2", function (selector, id) {
+        $(selector).outerHeight((ind, height) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", height + "", "number");
+        });
+    });
+
+    Blazor.registerFunction("LMTOuterWidth", function (selector, value) {
+        $(selector).outerWidth(value);
+    });
+
+    Blazor.registerFunction("LMTOuterWidthMargin", function (selector, includeMargin) {
+        return $(selector).outerWidth(includeMargin);
+    });
+
+    Blazor.registerFunction("LMTOuterWidthFunc1", function (selector, id) {
+        $(selector).outerWidth((ind, width) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", width + "", "string");
+        });
+    });
+
+    Blazor.registerFunction("LMTOuterWidthFunc2", function (selector, id) {
+        $(selector).outerWidth((ind, width) => {
+            return BlazorUtilsCallIntDouble(id, ind + "", width + "", "number");
+        });
+    });
+
+    Blazor.registerFunction("LMTPosition", function (selector) {
+        return $(selector).position();
+    });
+
+    Blazor.registerFunction("LMTScrollLeft2", function (selector) {
+        return $(selector).scrollLeft();
+    });
+
+    Blazor.registerFunction("LMTScrollLeft", function (selector, value) {
+        $(selector).scrollLeft(value);
+    });
+
+    Blazor.registerFunction("LMTScrollTop2", function (selector) {
+        return $(selector).scrollTop();
+    });
+
+    Blazor.registerFunction("LMTScrollTop", function (selector, value) {
+        $(selector).scrollTop(value);
     });
 }
