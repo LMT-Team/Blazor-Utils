@@ -80,7 +80,7 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 
 ```
 @using static BlazorUtils.Dom.DomUtils
-@using BlazorUtils.Dom.BlazorComponents
+@using BlazorUtils.Dom.BlazorUtilsComponents
 @using BlazorUtils.Interfaces.EventArgs
 @using BlazorUtils.Cookie
 @using BlazorUtils.Dev
