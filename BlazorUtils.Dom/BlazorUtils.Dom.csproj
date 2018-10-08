@@ -17,7 +17,8 @@
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
     <PackageReleaseNotes>* 0.5.3.2
-Change "BlazorComponents" folder to "BlazorUtilsComponents"
+- Change "BlazorComponents" folder to "BlazorUtilsComponents"
+- LMTLightbox will not inject Featherlight.js automatically anymore. Please include Featherlight.js JS and CSS manually, or use LMT.BlazorUtils.Js.Bundle &gt;= 0.4.4.1 which is recommended.
 ---------------
 * 0.5.3.1
 - Compatibilities to Js library 0.4.4

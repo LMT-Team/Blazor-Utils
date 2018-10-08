@@ -22,6 +22,12 @@
       "BlazorUtils/bootstrap.min.css",
       "BlazorUtils/featherlight.min.css",
       "BlazorUtils/jquery-ui.css"
-    ]
+    ],
+    "minify": {
+      "enabled": true,
+      "commentMode": "none",
+      "renameLocals": false,
+      "preserveImportantComments": false
+    }
   }
 ]
