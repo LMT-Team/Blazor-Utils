@@ -1,5 +1,5 @@
 ﻿@using BlazorUtils.Interfaces.EventArgs
-@using BlazorUtils.Dom.BlazorComponents
+@using BlazorUtils.Dom.BlazorUtilsComponents
 @implements ILMTComponent
 
 <style>
@@ -45,11 +45,6 @@
     private bool _isCheckShowParameter = false;
 
     private bool _isRequestingShow = false;
-
-    protected override async Task OnInitAsync()
-    {
-        await DependenciesUtils.GetFeatherlight();
-    }
 
     protected override async Task OnAfterRenderAsync()
     {

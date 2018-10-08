@@ -6,6 +6,7 @@
       "BlazorUtils/jquery-ui.min.js",
       "BlazorUtils/bootstrap.bundle.min.js",
       "BlazorUtils/lottie.min.js",
+      "BlazorUtils/featherlight.min.js",
       "BlazorUtils/BlazorUtils.js"
     ],
     "minify": {
@@ -14,5 +15,13 @@
       "renameLocals": false,
       "preserveImportantComments": false
     }
+  },
+  {
+    "outputFileName": "BlazorUtils/BlazorUtils.bundle.min.css",
+    "inputFiles": [
+      "BlazorUtils/bootstrap.min.css",
+      "BlazorUtils/featherlight.min.css",
+      "BlazorUtils/jquery-ui.css"
+    ]
   }
 ]

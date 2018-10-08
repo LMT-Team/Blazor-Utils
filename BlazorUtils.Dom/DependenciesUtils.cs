@@ -14,7 +14,7 @@ namespace BlazorUtils.Dom
         public static async Task GetFeatherlight()
         {
             //Get Css and Js over CDN
-            await EvalAsync("if(window.LMTCDNFeatherlightDone == undefined){let lmtCssNode3 = document.createElement(\"link\");lmtCssNode3.href = \"https://cdn.jsdelivr.net/gh/noelboss/featherlight/release/featherlight.min.css\";lmtCssNode3.rel = \"stylesheet\";document.head.appendChild(lmtCssNode3);$.getScript(\"https://cdn.jsdelivr.net/gh/noelboss/featherlight/release/featherlight.min.js\").done(() => {LMTCDNFeatherlightDone = true;});}");
+            //await EvalAsync("if(window.LMTCDNFeatherlightDone == undefined){let lmtCssNode3 = document.createElement(\"link\");lmtCssNode3.href = \"https://cdn.jsdelivr.net/gh/noelboss/featherlight/release/featherlight.min.css\";lmtCssNode3.rel = \"stylesheet\";document.head.appendChild(lmtCssNode3);$.getScript(\"https://cdn.jsdelivr.net/gh/noelboss/featherlight/release/featherlight.min.js\").done(() => {LMTCDNFeatherlightDone = true;});}");
         }
     }
 }

@@ -6,7 +6,7 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.5.3.1</Version>
+    <Version>0.5.3.2</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Description>Blazor: Support utilities related to browser's DOM.</Description>
@@ -16,7 +16,10 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>* 0.5.3.1
+    <PackageReleaseNotes>* 0.5.3.2
+Change "BlazorComponents" folder to "BlazorUtilsComponents"
+---------------
+* 0.5.3.1
 - Compatibilities to Js library 0.4.4
 ---------------
 * 0.5.3
@@ -37,19 +40,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="BlazorComponents\**\*.cshtml" />
+    <Content Include="BlazorUtilsComponents\**\*.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="BlazorComponents\LMTBreadcrumb.cshtml" />
-    <None Remove="BlazorComponents\LMTDropArea.cshtml" />
-    <None Remove="BlazorComponents\LMTInjector.cshtml" />
-    <None Remove="BlazorComponents\LMTLightbox.cshtml" />
-    <None Remove="BlazorComponents\LMTLocal.cshtml" />
-    <None Remove="BlazorComponents\LMTProgress.cshtml" />
-    <None Remove="BlazorComponents\LMTSlideshow.cshtml" />
-    <None Remove="BlazorComponents\LMTTable.cshtml" />
-    <None Remove="BlazorComponents\_ViewImports.cshtml" />
+    <Compile Remove="DependenciesUtils.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BlazorUtilsComponents\LMTBreadcrumb.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTDropArea.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTInjector.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTLightbox.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTLocal.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTProgress.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTSlideshow.cshtml" />
+    <None Remove="BlazorUtilsComponents\LMTTable.cshtml" />
+    <None Remove="BlazorUtilsComponents\_ViewImports.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,7 +71,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="BlazorComponents\_ViewImports.cshtml">
+    <Content Update="BlazorUtilsComponents\_ViewImports.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

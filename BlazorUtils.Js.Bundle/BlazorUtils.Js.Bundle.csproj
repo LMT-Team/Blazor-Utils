@@ -27,7 +27,7 @@
   <ItemGroup>
     <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
     <EmbeddedResource Include="BlazorUtils\**\*.bundle.min.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" Exclude="**\bootstrap.bundle.min.js" />
-    <EmbeddedResource Include="BlazorUtils\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="BlazorUtils\**\*.bundle.min.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <!--<EmbeddedResource Include="BlazorUtils\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />-->
   </ItemGroup>
 
