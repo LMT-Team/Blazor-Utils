@@ -63,7 +63,7 @@
     </LMTLocal>
 </LMTLocal>
 
-@*<LMTInjector ref="@injector" jsonpath="/json/Injection.json" type="Models.WebsiteInfo">
+<LMTInjector ref="@injector" jsonpath="/json/Injection.json" type="Models.WebsiteInfo">
         <LMTTry>
             <h1>The website name is @(injector.Get("websiteName"))</h1>
             <h1>It has been here for @injector.Get("age") years!</h1>
@@ -106,7 +106,7 @@
             <button onclick="@(() => { _wrongUrl = "/json/Injection.json"; })">Change url to /json/Injection.json</button>
             <button onclick="@(async() => {StateHasChanged() ;  await failInjector.Update(); })">Update</button>
         </LMTCatch>
-    </LMTInjector>*@
+    </LMTInjector>
 
 <style>
     .dropArea {
