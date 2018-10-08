@@ -68,20 +68,21 @@ Things should be easy as 1, 2, 3! Just follow these steps:
 ```
 <link href="css/jquery-ui.css" rel="stylesheet"/>
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
+<link href="css/featherlight.min.css" rel="stylesheet"/>
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="js/lottie.min.js"></script>
+<script type="text/javascript" src="js/featherlight.min.js"></script>
 ```
 
 <h2>3. Add these lines to _ViewImports.cshtml (remove the last one if you don't use Dev)</h2>
 
 ```
-@addTagHelper *, BlazorUtils.Dom
 @using static BlazorUtils.Dom.DomUtils
-@using BlazorUtils.Cookie
-@using BlazorUtils.Interfaces.EventArgs
 @using BlazorUtils.Dom.BlazorComponents
+@using BlazorUtils.Interfaces.EventArgs
+@using BlazorUtils.Cookie
 @using BlazorUtils.Dev
 ```
 
