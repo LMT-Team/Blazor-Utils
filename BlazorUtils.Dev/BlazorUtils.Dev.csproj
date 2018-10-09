@@ -10,11 +10,13 @@
     <Description>Fix field mapping not work when being set value</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
-    <PackageTags>blazor, asp.net, dev, blazor utils</PackageTags>
+    <PackageTags>Blazor, AspNet, Dev, BlazorUtils</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Version>1.4.1</Version>
-    <PackageReleaseNotes>- new feature: Dev.Log, similar to console.log in Js.
-- Provide async methods.</PackageReleaseNotes>
+    <PackageReleaseNotes>- From 1.4.1, all components using Map must inherit from DevComponent. 
+This can be done by adding @inherits DevComponent. If you don't want to map anymore (for releasing purpose maybe), removing the inheritance is enough.
+- New feature: Mapping attribute. 
+Add [DevMap("mapping name")] to components' properties or fields. This feature won't work if property/field hasn't been initially set yet, since the mapping will occur right before the component contructor is called (see this example for more details: https://github.com/15110123/Blazor-Utils/blob/master/BlazorUtils.WebTest.0.5/Pages/DevTesting.cshtml).</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
   </PropertyGroup>
 
