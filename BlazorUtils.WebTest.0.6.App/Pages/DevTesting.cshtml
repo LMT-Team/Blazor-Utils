@@ -1,10 +1,21 @@
 ﻿@page "/dev"
+@inherits DevComponent
 @using BlazorUtils.WebTest._0._6.App.Models
 
 <button onclick="@(() => {student.Age += 7; })">Click to add student with 7!</button>
 
 @functions{
     Student student;
+
+    [DevMap("student2")]
+    Student student2 = new Student
+    {
+        Age = 5,
+        IsMale = true,
+        StudentId = "54321",
+        StudentName = "Nguyen Thi B",
+        course = new Course("132", "Tran Van B")
+    };
 
     protected override async Task OnInitAsync()
     {
@@ -19,7 +30,7 @@
             course = new Course("132", "Tran Van B")
         };
 
-        await Dev.MapAsync(student, "mappedStudent");
+        await Dev.MapAsync(this, student, "mappedStudent");
 
         Console.WriteLine("Done mapping");
     }
