@@ -7,7 +7,7 @@
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.4.4</Version>
+    <Version>0.4.4.1</Version>
     <PackageId>LMT.BlazorUtils.Js</PackageId>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
@@ -17,7 +17,9 @@
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
     <PackageTags>Blazor, BlazorUtils, Js</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageReleaseNotes>Use the newer Blazor 0.5's DotNet.invokeMethod.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Include important comments.</PackageReleaseNotes>
+    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright 2018 LMT</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

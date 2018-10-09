@@ -6,9 +6,8 @@
     ],
     "minify": {
       "enabled": true,
-      "commentMode": "none",
-      "renameLocals": false,
-      "preserveImportantComments": false
+      "commentMode": "important",
+      "renameLocals": false
     }
   }
 ]

@@ -16,6 +16,8 @@
     <FileVersion>0.3.3.0</FileVersion>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageTags>blazor, blazorutils</PackageTags>
+    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright 2018 LMT</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -1,4 +1,8 @@
-﻿//LMT Blazor Utils 0.4.4
+﻿/*!
+  * LMT Blazor Utils Js library v4.4.4
+  * Copyright 2018 LMT
+  * Licensed under MIT (https://github.com/15110123/Blazor-Utils/blob/master/LICENSE)
+  */
 //If a jQuery method has both get and set function, add number 2 after function name of the "get" one
 
 window.blazorUtils = {

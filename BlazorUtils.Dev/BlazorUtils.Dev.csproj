@@ -18,6 +18,8 @@ This can be done by adding @inherits DevComponent. If you don't want to map anym
 - New feature: Mapping attribute. 
 Add [DevMap("mapping name")] to components' properties or fields. This feature won't work if property/field hasn't been initially set yet, since the mapping will occur right before the component contructor is called (see this example for more details: https://github.com/15110123/Blazor-Utils/blob/master/BlazorUtils.WebTest.0.5/Pages/DevTesting.cshtml).</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright 2018 LMT</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

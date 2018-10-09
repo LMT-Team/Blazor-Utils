@@ -11,9 +11,8 @@
     ],
     "minify": {
       "enabled": true,
-      "commentMode": "none",
-      "renameLocals": false,
-      "preserveImportantComments": false
+      "commentMode": "important",
+      "renameLocals": false
     }
   },
   {
@@ -25,7 +24,7 @@
     ],
     "minify": {
       "enabled": true,
-      "commentMode": "none",
+      "commentMode": "important",
       "renameLocals": false,
       "preserveImportantComments": false
     }
