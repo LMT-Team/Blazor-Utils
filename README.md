@@ -3,7 +3,7 @@ Awesome utils for Blazor!
 
 [![Join the chat at https://gitter.im/Blazor-Utils](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Blazor-Utils) 
 
-Currently, Blazor Utils doesn't fully support server-side Blazor (jQuery callbacks don't work).
+Currently, Blazor Utils doesn't fully support server-side Blazor (jQuery callbacks and integrated components depending on them don't work).
 
 BlazorUtils.Dom 0.5.0 is available!: https://blazorutils.wordpress.com/2018/10/05/blazorutils-dom-0-5-0-release-notes/
 
