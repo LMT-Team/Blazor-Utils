@@ -7,7 +7,7 @@
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <Product>LMT.BlazorUtils.Dev</Product>
-    <Description>Providing dev tool for easier developing.</Description>
+    <Description>Providing Blazor dev tools for easier developing.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
     <PackageTags>Blazor, AspNet, Dev, BlazorUtils</PackageTags>
