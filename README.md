@@ -1,6 +1,9 @@
 # LMT Blazor Utils
 Awesome utils for Blazor!
-These libraries DO NOT work with server-side Blazor!
+
+[![Join the chat at https://gitter.im/Blazor-Utils](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Blazor-Utils) 
+
+Currently, Blazor Utils doesn't fully support server-side Blazor (jQuery callbacks don't work).
 
 BlazorUtils.Dom 0.5.0 is available!: https://blazorutils.wordpress.com/2018/10/05/blazorutils-dom-0-5-0-release-notes/
 
