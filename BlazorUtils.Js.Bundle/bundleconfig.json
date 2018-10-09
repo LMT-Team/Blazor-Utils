@@ -21,7 +21,7 @@
     "inputFiles": [
       "BlazorUtils/bootstrap.min.css",
       "BlazorUtils/featherlight.min.css",
-      "BlazorUtils/jquery-ui.css"
+      "BlazorUtils/jquery-ui.min.css"
     ],
     "minify": {
       "enabled": true,
