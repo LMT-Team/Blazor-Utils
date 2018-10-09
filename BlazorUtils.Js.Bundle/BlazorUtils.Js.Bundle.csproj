@@ -14,7 +14,7 @@
     <Description>Contains Javascript library for LMT Blazor Utils. All dependencies have been included.</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
-    <PackageTags>Blazor, BlazorUtils, Js</PackageTags>
+    <PackageTags>Blazor, BlazorUtils, js</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageReleaseNotes>- Update Bootstrap to 4.1.3 and Lottie to 5.3.4</PackageReleaseNotes>
