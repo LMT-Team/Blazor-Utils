@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BlazorUtils.Dev.Storages;
+using Microsoft.AspNetCore.Blazor.Components;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -15,12 +17,15 @@ namespace BlazorUtils.Dev
         internal static Dictionary<string, object> _objects = null;
 
         /// <summary>
-        /// Map C# instance to Js object with custom name.
+        /// Map C# referance type instance to Js object with custom name.
         /// </summary>
-        /// <param name="o">C# instance</param>
+        /// <param name="context">Component that contains the object, mostly 'this' keyword.</param>
+        /// <param name="o">Reference type object</param>
         /// <param name="name">Js variable name</param>
-        public static async Task MapAsync(object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
+        public static async Task MapAsync(BlazorComponent context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
         {
+            if (!(context is DevComponent)) return;
+
             //Add DevBoot Js code
             await DevUtils.DevBootAsync();
 
@@ -31,12 +36,15 @@ namespace BlazorUtils.Dev
         }
 
         /// <summary>
-        /// Map C# instance to Js object with custom name.
+        /// Map C# referance type instance to Js object with custom name.
         /// </summary>
-        /// <param name="o">C# instance</param>
+        /// <param name="context">Component that contains the object, mostly 'this' keyword.</param>
+        /// <param name="o">Reference type object</param>
         /// <param name="name">Js variable name</param>
-        public static void Map(object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
+        public static void Map(BlazorComponent context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
         {
+            if (!(context is DevComponent)) return;
+
             //Add DevBoot Js code
             DevUtils.DevBoot();
 
@@ -61,64 +69,71 @@ namespace BlazorUtils.Dev
 
             do
             {
-                foreach (var o in _objects)
+                try
                 {
-                    await EvalAsync($"window.{o.Key} = {{}}");
-
-                    properties = o.Value.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-                    fields = o.Value.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
-
-                    foreach (var property in properties)
+                    foreach (var o in _objects)
                     {
-                        var value = property.GetValue(o.Value);
+                        await EvalAsync($"window.{o.Key} = {{}}");
 
-                        if (value == null)
+                        properties = o.Value.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                        fields = o.Value.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+
+                        foreach (var property in properties)
                         {
-                            await EvalAsync($"{o.Key}.{property.Name} = {{value: null}}");
+                            var value = property.GetValue(o.Value);
+
+                            if (value == null)
+                            {
+                                await EvalAsync($"{o.Key}.{property.Name} = {{value: null}}");
+                                //Map set method to Js
+                                await MapSetMethods(o, property);
+                                continue;
+                            }
+
+                            var convertedResult = DevUtils.AsConverted(value, property.PropertyType);
+
+                            if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
+                            {
+                                await EvalAsync($"{o.Key}.{property.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
+                            }
+
+                            else await EvalAsync($"{o.Key}.{property.Name} = {{value: \"{convertedResult.Item1}\"}}");
+
                             //Map set method to Js
                             await MapSetMethods(o, property);
-                            continue;
                         }
 
-                        var convertedResult = DevUtils.AsConverted(value, property.PropertyType);
-
-                        if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
+                        foreach (var field in fields)
                         {
-                            await EvalAsync($"{o.Key}.{property.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
-                        }
+                            //Skip backing field
+                            if (field.Name[0] == '<') continue;
 
-                        else await EvalAsync($"{o.Key}.{property.Name} = {{value: \"{convertedResult.Item1}\"}}");
+                            var value = field.GetValue(o.Value);
 
-                        //Map set method to Js
-                        await MapSetMethods(o, property);
-                    }
+                            if (value == null)
+                            {
+                                await EvalAsync($"{o.Key}.{field.Name} = {{value: null}}");
+                                //Map set method to Js
+                                await MapSetMethods(o, field);
+                                continue;
+                            }
 
-                    foreach (var field in fields)
-                    {
-                        //Skip backing field
-                        if (field.Name[0] == '<') continue;
+                            var convertedResult = DevUtils.AsConverted(value, field.FieldType);
 
-                        var value = field.GetValue(o.Value);
+                            if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
+                            {
+                                await EvalAsync($"{o.Key}.{field.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
+                            }
+                            else await EvalAsync($"{o.Key}.{field.Name} = {{value: \"{convertedResult.Item1}\"}}");
 
-                        if (value == null)
-                        {
-                            await EvalAsync($"{o.Key}.{field.Name} = {{value: null}}");
                             //Map set method to Js
                             await MapSetMethods(o, field);
-                            continue;
                         }
-
-                        var convertedResult = DevUtils.AsConverted(value, field.FieldType);
-
-                        if (convertedResult.Item2 != DevUtils.TypeGroup.Others)
-                        {
-                            await EvalAsync($"{o.Key}.{field.Name} = {{value: {convertedResult.Item1.ToString().ToLower()}}}");
-                        }
-                        else await EvalAsync($"{o.Key}.{field.Name} = {{value: \"{convertedResult.Item1}\"}}");
-
-                        //Map set method to Js
-                        await MapSetMethods(o, field);
                     }
+                }
+                catch
+                {
+                    //Skip bug
                 }
 
                 await Task.Delay(500);

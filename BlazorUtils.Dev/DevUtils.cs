@@ -97,5 +97,9 @@ namespace BlazorUtils.Dev
         }
 
         internal static MethodInfo GetMatchMethodFromAll(object o, string methodName) => o.GetType().GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+
+        internal static PropertyInfo[] GetAllProperties(object o) => o.GetType().GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+
+        internal static FieldInfo[] GetAllFields(object o) => o.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
     }
 }

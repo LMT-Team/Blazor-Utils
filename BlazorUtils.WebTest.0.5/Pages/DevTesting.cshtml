@@ -1,10 +1,21 @@
 ﻿@page "/dev"
+@*@inherits DevComponent*@
 @using BlazorUtils.WebTest._0._5.Models
 
 <button onclick="@(() => {student.Age += 7; })">Click to add student with 7!</button>
 
 @functions{
     Student student;
+
+    [DevMap("student2")]
+    readonly Student student2 = new Student
+    {
+        Age = 5,
+        IsMale = false,
+        StudentId = "54321",
+        StudentName = "Nguyen Thi B",
+        course = new Course("132", "Tran Van C")
+    };
 
     protected override void OnInit()
     {
@@ -19,7 +30,7 @@
             course = new Course("132", "Tran Van B")
         };
 
-        Dev.Map(student, "mappedStudent");
+        Dev.Map(this, student, "mappedStudent");
 
         Console.WriteLine("Done mapping");
     }
