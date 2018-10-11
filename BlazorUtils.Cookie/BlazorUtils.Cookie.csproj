@@ -9,11 +9,14 @@
     <Authors>Rogger Tan</Authors>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
-    <PackageTags>blazor, asp.net, cookies</PackageTags>
+    <PackageTags>Blazor, AspNet, cookies</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Cookie</PackageId>
     <Product>LMT.BlazorUtils.Cookie</Product>
-    <PackageReleaseNotes>- Provides async methods.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Fix some methods for Cookies: GetAll(), GetAllAsync(), Update(), UpdateAsync().
+- Fix: Wrong value when contains '=' char.
+- Fix: Exception maybe thrown if non cookies are found.
+- Add Cookies's description for class and methods. You should check out.</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright 2018 LMT</Copyright>
