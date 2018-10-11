@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 namespace BlazorUtils.Cookie
 {
     /// <summary>
-    /// Providing all methods for managing cookies
+    /// Providing all methods for managing cookies. Please note that this class's data may not be affected by changing cookies from the Js environment as it stores its' own for caching. Call Update() or UpdateAsync() in this case.
     /// </summary>
     public static class Cookies
     {
@@ -19,8 +20,12 @@ namespace BlazorUtils.Cookie
                 var strCookies = await InvokeAsync<string>("LMTCookies");
                 foreach (var ele in strCookies.Split(';'))
                 {
-                    var keyValue = ele.Split('=');
-                    _dict.Add(keyValue[0].Trim(), new Interfaces.Cookie.Cookie(keyValue[0].Trim(), keyValue[1].Trim(), -2));
+                    var equalIndex = ele.IndexOf('=');
+                    var keyValue = ele.Substring(0, equalIndex).Trim();
+                    _dict.Add(keyValue, new Interfaces.Cookie.Cookie(
+                        keyValue,
+                        ele.Substring(equalIndex + 1),
+                        -2));
                 }
             }
 
@@ -35,8 +40,12 @@ namespace BlazorUtils.Cookie
                 var strCookies = Invoke<string>("LMTCookies");
                 foreach (var ele in strCookies.Split(';'))
                 {
-                    var keyValue = ele.Split('=');
-                    _dict.Add(keyValue[0].Trim(), new Interfaces.Cookie.Cookie(keyValue[0].Trim(), keyValue[1].Trim(), -2));
+                    var equalIndex = ele.IndexOf('=');
+                    var keyValue = ele.Substring(0, equalIndex).Trim();
+                    _dict.Add(keyValue, new Interfaces.Cookie.Cookie(
+                        keyValue,
+                        ele.Substring(equalIndex + 1),
+                        -2));
                 }
             }
 
@@ -99,7 +108,7 @@ namespace BlazorUtils.Cookie
             var cookies = await GetDictAsync();
             foreach (var ele in cookies)
             {
-                Remove(ele.Key);
+                await RemoveAsync(ele.Key);
             }
         }
 
@@ -119,6 +128,34 @@ namespace BlazorUtils.Cookie
         public static async Task RemoveAsync(string key)
         {
             await InvokeAsync<object>("LMTCookiesAdd", key, "", -999, "/");
+        }
+
+        /// <summary>
+        /// Force Cookies to re-initialize its' cache data.
+        /// </summary>
+        public static void Update()
+        {
+            _dict = null;
+            GetDict();
+        }
+
+
+        /// <summary>
+        /// Force Cookies to re-initialize its' cache data.
+        /// </summary>
+        public static async Task UpdateAsync()
+        {
+            _dict = null;
+            await GetDictAsync();
+        }
+
+        /// <summary>
+        /// Get all the cookies. The data may be outdated since GetAll() queries from Cookies cache. Call Update() or UpdateAsync() first if cookies have been changed from Js recently.
+        /// </summary>
+        /// <returns></returns>
+        public static IEnumerable<Interfaces.Cookie.Cookie> GetAll()
+        {
+            return _dict.Select(x => x.Value);
         }
     }
 }

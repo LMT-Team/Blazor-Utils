@@ -22,6 +22,9 @@
     <div>
         <button onclick=@Cookies.Clear>RemoveAll</button>
     </div>
+    <div>
+        <button onclick=@ShowAllCookies>Show all</button>
+    </div>
 </div>
 <h1>Session storage</h1>
 <div>
@@ -63,6 +66,14 @@
         var path = _(".CookieTesting [name=path]").Val();
 
         Cookies.Set(new Interfaces.Cookie.Cookie(key, val, int.Parse(days), path));
+    }
+
+    private void ShowAllCookies()
+    {
+        foreach (var cookie in Cookies.GetAll())
+        {
+            Dev.Log($"Key {cookie.Key}, value {cookie.Value}");
+        }
     }
 
     private void AddSessionStorage()
