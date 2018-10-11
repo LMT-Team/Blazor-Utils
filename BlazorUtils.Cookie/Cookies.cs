@@ -21,6 +21,7 @@ namespace BlazorUtils.Cookie
                 foreach (var ele in strCookies.Split(';'))
                 {
                     var equalIndex = ele.IndexOf('=');
+                    if (equalIndex == -1) continue;
                     var keyValue = ele.Substring(0, equalIndex).Trim();
                     _dict.Add(keyValue, new Interfaces.Cookie.Cookie(
                         keyValue,
@@ -41,6 +42,7 @@ namespace BlazorUtils.Cookie
                 foreach (var ele in strCookies.Split(';'))
                 {
                     var equalIndex = ele.IndexOf('=');
+                    if (equalIndex == -1) continue;
                     var keyValue = ele.Substring(0, equalIndex).Trim();
                     _dict.Add(keyValue, new Interfaces.Cookie.Cookie(
                         keyValue,
@@ -152,10 +154,19 @@ namespace BlazorUtils.Cookie
         /// <summary>
         /// Get all the cookies. The data may be outdated since GetAll() queries from Cookies cache. Call Update() or UpdateAsync() first if cookies have been changed from Js recently.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A collection of Cookie.</returns>
         public static IEnumerable<Interfaces.Cookie.Cookie> GetAll()
         {
-            return _dict.Select(x => x.Value);
+            return GetDict().Select(x => x.Value);
+        }
+
+        /// <summary>
+        /// Get all the cookies. The data may be outdated since GetAll() queries from Cookies cache. Call Update() or UpdateAsync() first if cookies have been changed from Js recently.
+        /// </summary>
+        /// <returns>A collection of Cookie.</returns>
+        public static async Task<IEnumerable<Interfaces.Cookie.Cookie>> GetAllAsync()
+        {
+            return (await GetDictAsync()).Select(x => x.Value);
         }
     }
 }

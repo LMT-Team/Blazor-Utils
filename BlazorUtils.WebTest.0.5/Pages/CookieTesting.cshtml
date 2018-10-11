@@ -70,7 +70,12 @@
 
     private void ShowAllCookies()
     {
-        foreach (var cookie in Cookies.GetAll())
+        var cookies = Cookies.GetAll();
+
+        //cookies maybe null if there isn't any data cached.
+        if (cookies == null) return;
+
+        foreach (var cookie in cookies)
         {
             Dev.Log($"Key {cookie.Key}, value {cookie.Value}");
         }
