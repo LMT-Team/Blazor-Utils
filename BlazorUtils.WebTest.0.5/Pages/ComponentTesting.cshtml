@@ -108,6 +108,12 @@
         </LMTCatch>
     </LMTInjector>
 
+<LMTDynamic 
+TComponent="@(BlazorUtils.WebTest._0._5.Shared.Components.DemoButton)" 
+parameters="@(new(string, object)[] { ("name", "Demo Button"), ("text", "Click me if you dare!")})">
+    <h2>I'm the child content!</h2>
+</LMTDynamic>
+
 <style>
     .dropArea {
         display: block;

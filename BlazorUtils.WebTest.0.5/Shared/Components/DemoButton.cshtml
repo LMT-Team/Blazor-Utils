@@ -1,0 +1,23 @@
+﻿<LMTLocal>
+    <h1>I'm @name</h1>
+    <button onclick="@OnClickHandler">
+        @text
+    </button>
+    @ChildContent
+</LMTLocal>
+
+@functions{
+    [Parameter]
+    private RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    private string name { get; set; }
+
+    [Parameter]
+    private string text { get; set; }
+
+    private void OnClickHandler(UIEventArgs e)
+    {
+        text = "Clicked!";
+    }
+}
