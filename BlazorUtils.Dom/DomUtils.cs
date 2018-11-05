@@ -12,6 +12,14 @@ namespace BlazorUtils.Dom
     public static class DomUtils
     {
         /// <summary>
+        /// Tag type can be used in some LMT Blazor components, such as LMTTable.
+        /// </summary>
+        public enum TagType
+        {
+            none, button, a
+        }
+
+        /// <summary>
         /// Initialize DOM with a selector string.
         /// </summary>
         /// <param name="selector">DOM Selector string.</param>

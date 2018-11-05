@@ -1,24 +1,56 @@
 ﻿@using BlazorUtils.Interfaces.EventArgs
 @using BlazorUtils.Dom.BlazorUtilsComponents
+@using BlazorUtils.Dom.Attributes
+@using static BlazorUtils.Dom.DomUtils
+@using System.Reflection;
 @implements ILMTComponent
 
 <table style="@style" class="@(@class)" id="@id">
     <thead>
         <tr>
-            @foreach (var ele in head)
+            @foreach (var ele in _heads)
             {
-                <td style="@headStyle">@ele</td>
+                <td style="@headStyle">@ele.Text</td>
             }
         </tr>
     </thead>
     <tbody>
-        @foreach(var data in datas)
+        @foreach (var data in datas)
         {
         <tr>
-            @foreach(var prop in _dataProperties)
+            @{
+                var index = 0;
+            }
+            @foreach (var prop in _dataProperties)
             {
-                <td style="@bodyStyle">@GetValue(data, prop)</td>
+                var propValue = GetValue(data, prop);
 
+                @switch (_heads[index++].TagType)
+                {
+                    case TagType.none:
+                        <td style="@bodyStyle">@propValue</td>
+                        break;
+                    case TagType.a:
+                        var attr = GetAttribute<LinkAttribute>(prop);
+                        <td style="@bodyStyle">
+                            @if (attr.Target == null)
+                            {
+                            <a href="@propValue">@attr.Text</a>
+                            }
+                            else
+                            {
+                            <a href="@propValue" target="@attr.Target">@attr.Text</a>
+                            }
+                        </td>
+                        break;
+                    case TagType.button:
+                        <td style="@bodyStyle">
+                            <button onclick="@((UIEventArgs e) => { onbuttonclick.Invoke(new LMTTableButtonClickEventArgs(propValue)); })">
+                                @(GetAttribute<ButtonAttribute>(prop).Text)
+                            </button>
+                        </td>
+                        break;
+                }
             }
         </tr>
         }
@@ -27,39 +59,57 @@
 
 @functions
 {
-    [Parameter]
-    private string style { get; set; }
+[Parameter]
+private string style { get; set; }
 
-    [Parameter]
-    private string headStyle { get; set; }
+[Parameter]
+private string headStyle { get; set; }
 
-    [Parameter]
-    private string bodyStyle { get; set; }
+[Parameter]
+private string bodyStyle { get; set; }
 
-    [Parameter]
-    private string @class { get; set; }
+[Parameter]
+private string @class { get; set; }
 
-    [Parameter]
-    private string id { get; set; }
+[Parameter]
+private string id { get; set; }
 
-    /// <summary>
-    /// A collection of data for table
-    /// </summary>
-    [Parameter]
-    private IEnumerable<object> datas { get; set; }
+/// <summary>
+/// A collection of data for table
+/// </summary>
+[Parameter]
+private IEnumerable<object> datas { get; set; }
 
-    [Parameter]
-    private string[] head { get; set; }
+private HeadAttribute[] _heads;
 
-    private string[] _dataProperties;
+private IEnumerable<PropertyInfo> _dataProperties;
 
-    protected override void OnInit()
-    {
-        _dataProperties = ((object)datas.ToArray()[0]).GetType().GetProperties().Select(x => x.Name).ToArray();
-    }
+[Parameter]
+private LMTEventHandlers.LMTEventHandler<LMTTableButtonClickEventArgs> onbuttonclick { get; set; }
 
-    private object GetValue(object o, string propertyName)
-    {
-        return o.GetType().GetProperty(propertyName).GetValue(o, null);
-    }
+protected override void OnInit()
+{
+    _dataProperties = ((object)datas.ToArray()[0])
+            .GetType()
+            .GetProperties()
+            .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HeadAttribute)))
+            .OrderBy(x => GetAttribute<HeadAttribute>(x).Index);
+
+    _heads = _dataProperties
+        .Select(x => GetAttribute<HeadAttribute>(x))
+        .OrderBy(x => x.Index)
+        .ToArray();
+}
+
+private object GetValue(object o, PropertyInfo property)
+{
+    return property.GetValue(o, null);
+}
+
+private T GetAttribute<T>(PropertyInfo property) where T : Attribute
+{
+    return property
+        .GetCustomAttributes(typeof(T), false)
+        .FirstOrDefault(x => x is T) as T;
+}
 }

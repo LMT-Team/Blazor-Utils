@@ -17,8 +17,9 @@
     <p>This isn't the first time the internet has been buzzing about her shoe size. When she and Prince Harry officially announced their engagement, the Duchess of Cambridge was photographed wearing strappy beige heels that didn't hug her heel the way they're meant to.</p>
 </LMTLightbox>
 <button onclick=@(() => { lightbox.Show(); })>Show lightbox</button>
-<LMTTable datas="@(Student.lstStudent().Select(x => new {x.StudentId, x.StudentName, x.IsMale, x.Age}))"
-          head="@(new[] {"id", "name", "is male", "age"})" />
+
+<LMTTable datas="@(Student.lstStudent())" onbuttonclick="@TableFunctionClickHandler"/>
+
 <LMTSlideshow src="@(new[] {"/img/cover.jpg", "/img/home_cover.jpg", "/img/woman.jpg"})"
               style="height: 100vh"
               delay="2000"
@@ -130,50 +131,55 @@ Component="@(typeof(BlazorUtils.WebTest._0._5.Shared.Components.DemoButton))"
 
 @functions
 {
-private int percentageVal = 40;
-private bool isPauseSlide = false;
-private LMTLightbox lightbox;
-private LMTSlideshow slideShow;
-private string imgData { get; set; } = "#";
-private LMTLocal local1;
-private LMTInjector<Models.WebsiteInfo> injector;
-private LMTInjector<Models.WebsiteInfo> failInjector;
-private string _wrongUrl = "/json/Injecti.json";
+    private int percentageVal = 40;
+    private bool isPauseSlide = false;
+    private LMTLightbox lightbox;
+    private LMTSlideshow slideShow;
+    private string imgData { get; set; } = "#";
+    private LMTLocal local1;
+    private LMTInjector<Models.WebsiteInfo> injector;
+    private LMTInjector<Models.WebsiteInfo> failInjector;
+    private string _wrongUrl = "/json/Injecti.json";
 
-protected override async Task OnAfterRenderAsync()
-{
-    Console.WriteLine(Eval<int>("1 + 1"));
-    //local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
-}
-
-protected void imageChange(ImageChangedEventArgs e)
-{
-    if (e.Cur == 1 && !isPauseSlide)
+    protected override async Task OnAfterRenderAsync()
     {
-        isPauseSlide = true;
-        slideShow.Pause();
-    }
-}
-
-private void OnPageChange(PageChangedEventArgs e)
-{
-    Console.WriteLine("Previous page: " + e.Cur);
-    Console.WriteLine("Next page: " + e.Next);
-}
-
-private void OnDropHandler(LMTDropEventArgs e)
-{
-    if (e.StringData != null)
-    {
-        Dev.Warn($"You dropped an element: {e.StringData}!");
-        return;
+        Console.WriteLine(Eval<int>("1 + 1"));
+        //local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
     }
 
-    imgData = e.DataUrl;
-    StateHasChanged();
+    protected void imageChange(ImageChangedEventArgs e)
+    {
+        if (e.Cur == 1 && !isPauseSlide)
+        {
+            isPauseSlide = true;
+            slideShow.Pause();
+        }
+    }
 
-    Console.WriteLine(e.FileStream);
-    Console.WriteLine(e.DataBytes.Length);
-    Console.WriteLine(e.File.Name);
-}
+    private void OnPageChange(PageChangedEventArgs e)
+    {
+        Console.WriteLine("Previous page: " + e.Cur);
+        Console.WriteLine("Next page: " + e.Next);
+    }
+
+    private void OnDropHandler(LMTDropEventArgs e)
+    {
+        if (e.StringData != null)
+        {
+            Dev.Warn($"You dropped an element: {e.StringData}!");
+            return;
+        }
+
+        imgData = e.DataUrl;
+        StateHasChanged();
+
+        Console.WriteLine(e.FileStream);
+        Console.WriteLine(e.DataBytes.Length);
+        Console.WriteLine(e.File.Name);
+    }
+
+    private void TableFunctionClickHandler(LMTTableButtonClickEventArgs e)
+    {
+        Console.WriteLine($"Edit triggered for {e.Value}");
+    }
 }

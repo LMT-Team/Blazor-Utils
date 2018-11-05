@@ -1,14 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BlazorUtils.Dom.Attributes;
 
 namespace BlazorUtils.WebTest._0._5.Models
 {
     public sealed class Student
     {
+        [Head("id")]
         public string StudentId { get; set; }
+
+        [Head("name", 1)]
         public string StudentName { get; set; }
+
+        [Head("is male", 3)]
         public bool IsMale { get; set; }
+
+        [Head("age", 2)]
         public int Age { get; set; }
+
+        [Head("Profile Url", Dom.DomUtils.TagType.a, 4)]
+        [Link("Search Id on Bing", "_blank")]
+        public string ProfileUrl {
+            get => $"https://www.bing.com/search?q={StudentId}";
+        }
+
+        [Head("Functions", Dom.DomUtils.TagType.button, 5)]
+        [Button("Edit")]
+        public string ButtonData
+        {
+            get => StudentId;
+        }
+
         private string _Token = "Secret!";
         public List<int> Classes = null;
         public Course course;

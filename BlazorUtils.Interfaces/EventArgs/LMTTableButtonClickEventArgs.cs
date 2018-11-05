@@ -1,8 +1,8 @@
 ﻿namespace BlazorUtils.Interfaces.EventArgs
 {
-    public sealed class LMTChangeEventArgs : LMTEventArgs
+    public sealed class LMTTableButtonClickEventArgs : LMTEventArgs
     {
-        public LMTChangeEventArgs(object value)
+        public LMTTableButtonClickEventArgs(object value)
         {
             Value = value;
         }
