@@ -54,8 +54,8 @@ namespace BlazorUtils.Dom.Attributes
             Index = index;
         }
 
-        internal string Text { get; set; }
-        internal TagType TagType { get; set; } = TagType.none;
-        internal int Index { get; set; } = 0;
+        public string Text { get; set; }
+        public TagType TagType { get; set; } = TagType.none;
+        public int Index { get; set; } = 0;
     }
 }

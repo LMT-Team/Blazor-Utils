@@ -17,7 +17,7 @@ namespace BlazorUtils.Dom.Attributes
             Text = text;
         }
 
-        internal string Text { get; set; }
+        public string Text { get; set; }
 
     }
 }

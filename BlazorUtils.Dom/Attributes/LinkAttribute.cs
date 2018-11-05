@@ -28,8 +28,8 @@ namespace BlazorUtils.Dom.Attributes
             Target = target;
         }
 
-        internal string Text { get; set; }
-        internal string Target { get; set; }
+        public string Text { get; set; }
+        public string Target { get; set; }
 
     }
 }

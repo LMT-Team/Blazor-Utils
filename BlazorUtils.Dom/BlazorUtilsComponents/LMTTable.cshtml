@@ -1,5 +1,4 @@
 ﻿@using BlazorUtils.Interfaces.EventArgs
-@using BlazorUtils.Dom.BlazorUtilsComponents
 @using BlazorUtils.Dom.Attributes
 @using static BlazorUtils.Dom.DomUtils
 @using System.Reflection;
@@ -42,7 +41,7 @@
                                 }
                                 break;
                             case TagType.button:
-                                <button onclick="@((UIEventArgs e) => { onbuttonclick?.Invoke(new LMTTableButtonClickEventArgs(propValue)); })">
+                                <button onclick=@(() => { ButtonClick(propValue); })>
                                     @(GetAttribute<ButtonAttribute>(prop).Text)
                                 </button>
                                 break;
@@ -56,57 +55,62 @@
 
 @functions
 {
-[Parameter]
-private string style { get; set; }
+    [Parameter]
+    private string style { get; set; }
 
-[Parameter]
-private string headStyle { get; set; }
+    [Parameter]
+    private string headStyle { get; set; }
 
-[Parameter]
-private string bodyStyle { get; set; }
+    [Parameter]
+    private string bodyStyle { get; set; }
 
-[Parameter]
-private string @class { get; set; }
+    [Parameter]
+    private string @class { get; set; }
 
-[Parameter]
-private string id { get; set; }
+    [Parameter]
+    private string id { get; set; }
 
-/// <summary>
-/// A collection of data for table
-/// </summary>
-[Parameter]
-private IEnumerable<object> datas { get; set; }
+    /// <summary>
+    /// A collection of data for table
+    /// </summary>
+    [Parameter]
+    private IEnumerable<object> datas { get; set; }
 
-private HeadAttribute[] _heads;
+    private HeadAttribute[] _heads;
 
-private IEnumerable<PropertyInfo> _dataProperties;
+    private IEnumerable<PropertyInfo> _dataProperties;
 
-[Parameter]
-private LMTEventHandlers.LMTEventHandler<LMTTableButtonClickEventArgs> onbuttonclick { get; set; }
+    [Parameter]
+    private LMTEventHandlers.LMTEventHandler<LMTTableButtonClickEventArgs> onbuttonclick { get; set; }
 
-protected override void OnInit()
-{
-    _dataProperties = ((object)datas.ToArray()[0])
-            .GetType()
-            .GetProperties()
-            .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HeadAttribute)))
-            .OrderBy(x => GetAttribute<HeadAttribute>(x).Index);
+    protected override void OnInit()
+    {
+        _dataProperties = ((object)datas.ToArray()[0])
+                .GetType()
+                .GetProperties()
+                .Where(x => x.CustomAttributes.Any(y => y.AttributeType == typeof(HeadAttribute)))
+                .OrderBy(x => GetAttribute<HeadAttribute>(x).Index);
 
-    _heads = _dataProperties
-        .Select(x => GetAttribute<HeadAttribute>(x))
-        .OrderBy(x => x.Index)
-        .ToArray();
-}
+        _heads = _dataProperties
+            .Select(x => GetAttribute<HeadAttribute>(x))
+            .OrderBy(x => x.Index)
+            .ToArray();
+    }
 
-private object GetValue(object o, PropertyInfo property)
-{
-    return property.GetValue(o, null);
-}
+    private object GetValue(object o, PropertyInfo property)
+    {
+        return property.GetValue(o, null);
+    }
 
-private T GetAttribute<T>(PropertyInfo property) where T : Attribute
-{
-    return property
-        .GetCustomAttributes(typeof(T), false)
-        .FirstOrDefault(x => x is T) as T;
-}
+    private T GetAttribute<T>(PropertyInfo property) where T : Attribute
+    {
+        return property
+            .GetCustomAttributes(typeof(T), false)
+            .FirstOrDefault(x => x is T) as T;
+    }
+
+    private void ButtonClick(object propValue)
+    {
+        onbuttonclick?.Invoke(new LMTTableButtonClickEventArgs(propValue));
+    }
 }
