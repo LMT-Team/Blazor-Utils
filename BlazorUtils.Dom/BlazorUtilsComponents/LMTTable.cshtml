@@ -45,7 +45,7 @@
                         break;
                     case TagType.button:
                         <td style="@bodyStyle">
-                            <button onclick="@((UIEventArgs e) => { onbuttonclick.Invoke(new LMTTableButtonClickEventArgs(propValue)); })">
+                            <button onclick="@((UIEventArgs e) => { onbuttonclick?.Invoke(new LMTTableButtonClickEventArgs(propValue)); })">
                                 @(GetAttribute<ButtonAttribute>(prop).Text)
                             </button>
                         </td>
