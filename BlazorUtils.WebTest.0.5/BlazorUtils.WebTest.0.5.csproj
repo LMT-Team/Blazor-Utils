@@ -44,6 +44,9 @@
     <Content Update="Pages\_ViewImports.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Shared\Components\KidPlayer.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Shared\MainLayout.cshtml">
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
       <Generator>MSBuild:BlazorGenerateDeclaration</Generator>

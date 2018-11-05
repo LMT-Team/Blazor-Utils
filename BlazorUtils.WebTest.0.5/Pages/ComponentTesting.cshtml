@@ -109,14 +109,20 @@
     </LMTCatch>
 </LMTInjector>
 
-<LMTDynamic TComponent="@(BlazorUtils.WebTest._0._5.Shared.Components.DemoButton)"
-            parameters="@(new(string, object)[] { ("name", "Demo Button"), ("text", "Click me if you dare!")})">
+<LMTDynamic TComponent="@(BlazorUtils.WebTest._0._5.Shared.Components.AdultPlayer)"
+            parameters="@(new(string, object)[] {
+                              ("url", "https://tempuri.org/videos/id=123"),
+                              ("starttime", 0),
+                              ("repeat", false)})">
     <h2>I'm the child content!</h2>
 </LMTDynamic>
 
 <LMTDynamic TComponent="@LMTEmpty"
-Component="@(typeof(BlazorUtils.WebTest._0._5.Shared.Components.DemoButton))"
-            parameters="@(new(string, object)[] { ("name", "Demo Button"), ("text", "Click me if you dare!")})">
+            Component="@GetPlayerTypeByAge(9)"
+            parameters="@(new(string, object)[] {
+                              ("url", "https://tempuri.org/videos/id=123"),
+                              ("starttime", 0),
+                              ("repeat", false)})">
     <h2>I'm the child content!</h2>
 </LMTDynamic>
 
@@ -181,5 +187,11 @@ Component="@(typeof(BlazorUtils.WebTest._0._5.Shared.Components.DemoButton))"
     private void TableFunctionClickHandler(LMTTableButtonClickEventArgs e)
     {
         Console.WriteLine($"Edit triggered for {e.Value}");
+    }
+
+    private Type GetPlayerTypeByAge(int age)
+    {
+        if (age > 10) return typeof(Shared.Components.AdultPlayer);
+        return typeof(Shared.Components.KidPlayer);
     }
 }
