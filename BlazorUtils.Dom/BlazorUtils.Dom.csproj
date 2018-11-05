@@ -6,29 +6,23 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.5.3.2</Version>
+    <Version>0.5.4</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
-    <Description>Blazor: Support utilities related to browser's DOM.</Description>
+    <Description>Blazor: Provide awesome components and utilities related to browser's DOM.
+jQuery-like for Blazor is included. Just call _(Selector string) method.
+Please follow the setup steps written to the README: https://github.com/15110123/Blazor-Utils</Description>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
     <PackageTags>Blazor, AspNet, Dom, jQuery</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>* 0.5.3.2
-- Change "BlazorComponents" folder to "BlazorUtilsComponents"
-- LMTLightbox will not inject Featherlight.js automatically anymore. Please include Featherlight.js JS and CSS manually, or use LMT.BlazorUtils.Js.Bundle &gt;= 0.4.4.1 which is recommended.
----------------
-* 0.5.3.1
-- Compatibilities to Js library 0.4.4
----------------
-* 0.5.3
-- Add new Dom's jQuery methods: Off, OuterHeight, OuterWidth, Position, ScrollLeft, ScrollTop.
-- Dom now has Selector(), which get the selector string that you have given to the Dom's contructor.
-- Change some override methods in LMTDropArea and LMTLocal to async.
-- Optimize performance with DomPool: A Dom is actually a non-state object. If you initialize with a selector that has been used before, an old Dom will be returned instead of a new one. DomPool will work silently, so no code change needed.
-- ISyncDom.AsAsync() and IAsyncDom.AsSync(): Convert to async/sync Dom. These return an object that maybe initialized in the past. Beware that ToAsync() and ToSync() are obsoleted as they always create a new Dom object and work separately to DomPool.</PackageReleaseNotes>
+    <PackageReleaseNotes>* 0.5.4: 
+- Add LMTDynamic, LMTEmpty components.
+- Improve LMTTable component.
+- Other minor fixes and improvements.
+For more info: https://blazorutils.wordpress.com/2018/11/05/dom-0-5-4-release-new-features/</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright 2018 LMT</Copyright>

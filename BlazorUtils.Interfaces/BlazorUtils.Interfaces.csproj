@@ -2,18 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.3.3</Version>
+    <Version>0.3.4</Version>
     <Authors>Rogger Tan</Authors>
     <Company>LMT</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
-    <Description>Provides necessary interfaces for Blazor Utils APIs</Description>
+    <Description>Provides necessary interfaces for Blazor Utils APIs to develop your own package that use BlazorUtils types.</Description>
     <PackageId>LMT.BlazorUtils.Interfaces</PackageId>
     <Product>LMT.BlazorUtils.Interfaces</Product>
-    <PackageReleaseNotes>Provide ISyncDom (replace the old IDom). IDom now represents a Dom object in general.</PackageReleaseNotes>
-    <AssemblyVersion>0.3.3.0</AssemblyVersion>
-    <FileVersion>0.3.3.0</FileVersion>
+    <PackageReleaseNotes>Provide LMTTableButtonClickEventArgs for Dom 0.5.4.</PackageReleaseNotes>
+    <AssemblyVersion>0.3.4.0</AssemblyVersion>
+    <FileVersion>0.3.4.0</FileVersion>
     <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageTags>blazor, blazorutils</PackageTags>
     <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
