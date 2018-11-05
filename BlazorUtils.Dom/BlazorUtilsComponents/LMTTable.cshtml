@@ -17,42 +17,39 @@
     <tbody>
         @foreach (var data in datas)
         {
-        <tr>
-            @{
-                var index = 0;
-            }
-            @foreach (var prop in _dataProperties)
-            {
-                var propValue = GetValue(data, prop);
-
-                @switch (_heads[index++].TagType)
-                {
-                    case TagType.none:
-                        <td style="@bodyStyle">@propValue</td>
-                        break;
-                    case TagType.a:
-                        var attr = GetAttribute<LinkAttribute>(prop);
-                        <td style="@bodyStyle">
-                            @if (attr.Target == null)
-                            {
-                            <a href="@propValue">@attr.Text</a>
-                            }
-                            else
-                            {
-                            <a href="@propValue" target="@attr.Target">@attr.Text</a>
-                            }
-                        </td>
-                        break;
-                    case TagType.button:
-                        <td style="@bodyStyle">
-                            <button onclick="@((UIEventArgs e) => { onbuttonclick?.Invoke(new LMTTableButtonClickEventArgs(propValue)); })">
-                                @(GetAttribute<ButtonAttribute>(prop).Text)
-                            </button>
-                        </td>
-                        break;
+            <tr>
+                @{
+                    var index = 0;
                 }
-            }
-        </tr>
+                @foreach (var prop in _dataProperties)
+                {
+                    var propValue = GetValue(data, prop);
+                    <td style="@bodyStyle">
+                        @switch (_heads[index++].TagType)
+                        {
+                            case TagType.none:
+                                @propValue
+                                break;
+                            case TagType.a:
+                                var attr = GetAttribute<LinkAttribute>(prop);
+                                @if (attr.Target == null)
+                                {
+                                    <a href="@propValue">@attr.Text</a>
+                                }
+                                else
+                                {
+                                    <a href="@propValue" target="@attr.Target">@attr.Text</a>
+                                }
+                                break;
+                            case TagType.button:
+                                <button onclick="@((UIEventArgs e) => { onbuttonclick?.Invoke(new LMTTableButtonClickEventArgs(propValue)); })">
+                                    @(GetAttribute<ButtonAttribute>(prop).Text)
+                                </button>
+                                break;
+                        }
+                    </td>
+                }
+            </tr>
         }
     </tbody>
 </table>
