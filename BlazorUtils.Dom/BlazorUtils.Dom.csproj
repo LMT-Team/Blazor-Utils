@@ -21,6 +21,7 @@ Please follow the setup steps written to the README: https://github.com/15110123
     <PackageReleaseNotes>* 0.5.4.1: 
 - Hot fix: "'HeadAttribute' does not contain a definition..." bugs.
 - LMTEmpty and LMTDynamic now inherit ILMTComponent.
+--------------------------------
 * 0.5.4: 
 - Add LMTDynamic, LMTEmpty components.
 - Improve LMTTable component.
