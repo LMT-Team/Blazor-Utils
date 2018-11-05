@@ -1,10 +1,14 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
 using Microsoft.AspNetCore.Blazor.RenderTree;
+using System;
 
 namespace BlazorUtils.Dom.BlazorUtilsComponents
 {
+    /// <summary>
+    /// Implement a component by specifying component type.
+    /// </summary>
+    /// <typeparam name="TComponent">Component type. LMTDynamic can work with component parameter as a replacement for this generics feature. In that case, choose LMTEmpty for TComponent.</typeparam>
     public class LMTDynamic<TComponent> : BlazorComponent where TComponent : IComponent
     {
         [Parameter]
@@ -13,12 +17,18 @@ namespace BlazorUtils.Dom.BlazorUtilsComponents
         [Parameter]
         private RenderFragment ChildContent { get; set; }
 
+        [Parameter]
+        private Type component { get; set; }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var seq = 0;
 
             //Open component
-            builder.OpenComponent<TComponent>(seq++);
+            if (component == null)
+                builder.OpenComponent<TComponent>(seq++);
+            else
+                builder.OpenComponent(seq++, component);
 
             //Set attribute
             for (var i = 0; i < parameters.Length; i++)
