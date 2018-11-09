@@ -15,13 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dev", "BlazorUt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerSide", "ServerSide", "{F8F2F65B-263C-4039-8E4E-591D0BA255A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.WebTest.0.6.Server", "BlazorUtils.WebTest.0.6.Server\BlazorUtils.WebTest.0.6.Server.csproj", "{223103A8-3ACF-4B56-B006-6F50712E7972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest.0.6.Server", "BlazorUtils.WebTest.0.6.Server\BlazorUtils.WebTest.0.6.Server.csproj", "{223103A8-3ACF-4B56-B006-6F50712E7972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.WebTest.0.6.App", "BlazorUtils.WebTest.0.6.App\BlazorUtils.WebTest.0.6.App.csproj", "{E497D16E-792C-44B6-8120-7019912CC4BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest.0.6.App", "BlazorUtils.WebTest.0.6.App\BlazorUtils.WebTest.0.6.App.csproj", "{E497D16E-792C-44B6-8120-7019912CC4BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js", "BlazorUtils.Js\BlazorUtils.Js.csproj", "{9572867B-9138-40F9-BA6F-4C77D676E309}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js.Bundle", "BlazorUtils.Js.Bundle\BlazorUtils.Js.Bundle.csproj", "{61A7AC5B-A610-43BE-9CA0-B72EF958873C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorUtils.Dom.UnitTest", "BlazorUtils.Dom.UnitTest\BlazorUtils.Dom.UnitTest.csproj", "{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A7AC5B-A610-43BE-9CA0-B72EF958873C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

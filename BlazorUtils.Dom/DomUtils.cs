@@ -64,5 +64,10 @@ namespace BlazorUtils.Dom
         /// </summary>
         /// <param name="url"></param>
         public static void NavigateTo(string url) => Microsoft.AspNetCore.Blazor.Browser.Services.BrowserUriHelper.Instance.NavigateTo(url);
+
+        /// <summary>
+        /// Get the shared GlobalData.
+        /// </summary>
+        public static GlobalData GlobalData => GlobalData.Shared;
     }
 }

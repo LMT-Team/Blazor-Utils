@@ -1,0 +1,14 @@
+﻿@page "/globaldataresult"
+
+<h1>@name</h1>
+
+@functions{
+    private string name { get; set; }
+
+    protected override void OnInit()
+    {
+        name = GlobalData["Name"] as string;
+
+        base.OnInit();
+    }
+}

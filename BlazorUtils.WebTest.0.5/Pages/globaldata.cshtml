@@ -1,0 +1,12 @@
+﻿@page "/globaldata"
+
+<h1>Name has been set! Navigate to <a href="/globaldataresult">this for result</a></h1>
+
+@functions{
+    protected override void OnInit()
+    {
+        GlobalData["Name"] = "Rogger Tan";
+
+        base.OnInit();
+    }
+}
