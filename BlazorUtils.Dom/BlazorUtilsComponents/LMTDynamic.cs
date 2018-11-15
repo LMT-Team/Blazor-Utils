@@ -21,15 +21,23 @@ namespace BlazorUtils.Dom.BlazorUtilsComponents
         [Parameter]
         private Type component { get; set; }
 
+        [Parameter]
+        private LMTDynamicContext context { get; set; }
+
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             var seq = 0;
 
             //Open component
-            if (component == null)
-                builder.OpenComponent<TComponent>(seq++);
-            else
+            if (component != null)
                 builder.OpenComponent(seq++, component);
+            else if (context != null)
+            {
+                builder.OpenComponent(seq++, context.ComponentSwitch());
+                parameters = context.ParametersSwitch();
+            }
+            else
+                builder.OpenComponent<TComponent>(seq++);
 
             //Set attribute
             for (var i = 0; i < parameters.Length; i++)
