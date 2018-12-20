@@ -6,9 +6,9 @@ namespace BlazorUtils.Dom.Storages
     /// <summary>
     /// Static class that contains values which can be accessed from many code locations.
     /// </summary>
-    public class GlobalData
+    public sealed class GlobalData
     {
-        private GlobalData() : base()
+        private GlobalData()
         {
             if (_data == null)
             {
