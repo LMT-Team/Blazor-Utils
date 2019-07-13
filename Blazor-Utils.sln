@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2026
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29021.104
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Interfaces", "BlazorUtils.Interfaces\BlazorUtils.Interfaces.csproj", "{D3A20033-0664-4D2E-986F-2FC15088E836}"
 EndProject
@@ -9,21 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dom", "BlazorUt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Cookie", "BlazorUtils.Cookie\BlazorUtils.Cookie.csproj", "{16CCB48E-35EB-468E-B4D4-DC048FA96FDA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest.0.5", "BlazorUtils.WebTest.0.5\BlazorUtils.WebTest.0.5.csproj", "{886C7058-ADFF-46E3-A01C-AD2F36A4DE22}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dev", "BlazorUtils.Dev\BlazorUtils.Dev.csproj", "{78CE7F46-B851-4264-A78D-F408FFC7FFFE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerSide", "ServerSide", "{F8F2F65B-263C-4039-8E4E-591D0BA255A7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest.0.6.Server", "BlazorUtils.WebTest.0.6.Server\BlazorUtils.WebTest.0.6.Server.csproj", "{223103A8-3ACF-4B56-B006-6F50712E7972}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.WebTest.0.6.App", "BlazorUtils.WebTest.0.6.App\BlazorUtils.WebTest.0.6.App.csproj", "{E497D16E-792C-44B6-8120-7019912CC4BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js", "BlazorUtils.Js\BlazorUtils.Js.csproj", "{9572867B-9138-40F9-BA6F-4C77D676E309}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js.Bundle", "BlazorUtils.Js.Bundle\BlazorUtils.Js.Bundle.csproj", "{61A7AC5B-A610-43BE-9CA0-B72EF958873C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dom.UnitTest", "BlazorUtils.Dom.UnitTest\BlazorUtils.Dom.UnitTest.csproj", "{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.ClientSide", "Demo.ClientSide\Demo.ClientSide.csproj", "{9DEB1B8E-6890-4EF7-9216-7EACEF253913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,22 +39,10 @@ Global
 		{16CCB48E-35EB-468E-B4D4-DC048FA96FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16CCB48E-35EB-468E-B4D4-DC048FA96FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16CCB48E-35EB-468E-B4D4-DC048FA96FDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{886C7058-ADFF-46E3-A01C-AD2F36A4DE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{886C7058-ADFF-46E3-A01C-AD2F36A4DE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{886C7058-ADFF-46E3-A01C-AD2F36A4DE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{886C7058-ADFF-46E3-A01C-AD2F36A4DE22}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78CE7F46-B851-4264-A78D-F408FFC7FFFE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{223103A8-3ACF-4B56-B006-6F50712E7972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{223103A8-3ACF-4B56-B006-6F50712E7972}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{223103A8-3ACF-4B56-B006-6F50712E7972}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{223103A8-3ACF-4B56-B006-6F50712E7972}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E497D16E-792C-44B6-8120-7019912CC4BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E497D16E-792C-44B6-8120-7019912CC4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E497D16E-792C-44B6-8120-7019912CC4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E497D16E-792C-44B6-8120-7019912CC4BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9572867B-9138-40F9-BA6F-4C77D676E309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9572867B-9138-40F9-BA6F-4C77D676E309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9572867B-9138-40F9-BA6F-4C77D676E309}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,12 +55,13 @@ Global
 		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DEB1B8E-6890-4EF7-9216-7EACEF253913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEB1B8E-6890-4EF7-9216-7EACEF253913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEB1B8E-6890-4EF7-9216-7EACEF253913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEB1B8E-6890-4EF7-9216-7EACEF253913}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{223103A8-3ACF-4B56-B006-6F50712E7972} = {F8F2F65B-263C-4039-8E4E-591D0BA255A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {268A838C-FCD7-469C-AF3D-9DDE3573E1E0}

@@ -1,6 +1,7 @@
 ﻿using BlazorUtils.Dom.Storages;
 using BlazorUtils.Interfaces;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Blazor.Services;
 using static BlazorUtils.Interfaces.Invokers.JsInvoke;
 
 // ReSharper disable InconsistentNaming
@@ -63,7 +64,7 @@ namespace BlazorUtils.Dom
         /// Navigate to specific URL
         /// </summary>
         /// <param name="url"></param>
-        public static void NavigateTo(string url) => Microsoft.AspNetCore.Blazor.Browser.Services.BrowserUriHelper.Instance.NavigateTo(url);
+        public static void NavigateTo(string url) => WebAssemblyUriHelper.Instance.NavigateTo(url);
 
         /// <summary>
         /// Get the shared GlobalData.

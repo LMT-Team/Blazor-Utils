@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject IJSRuntime runtime
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code{ protected override void OnInit()
+{
+    base.OnInit();
+    JsInvoke.UseRuntime(runtime);
+}
+
+protected override void OnAfterRender()
+{
+    Console.WriteLine(_("h1").Text());
+}
+}

@@ -1,7 +1,6 @@
 ﻿using BlazorUtils.Interfaces.BlazorComponents;
-using Microsoft.AspNetCore.Blazor;
-using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.RenderTree;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.RenderTree;
 using System;
 
 namespace BlazorUtils.Dom.BlazorUtilsComponents
@@ -10,7 +9,7 @@ namespace BlazorUtils.Dom.BlazorUtilsComponents
     /// Implement a component by specifying component type.
     /// </summary>
     /// <typeparam name="TComponent">Component type. LMTDynamic can work with component parameter as a replacement for this generics feature. In that case, choose LMTEmpty for TComponent.</typeparam>
-    public class LMTDynamic<TComponent> : BlazorComponent, ILMTComponent where TComponent : IComponent
+    public class LMTDynamic<TComponent> : ComponentBase, ILMTComponent where TComponent : IComponent
     {
         [Parameter]
         private (string PropertyName, object Value)[] parameters { get; set; }

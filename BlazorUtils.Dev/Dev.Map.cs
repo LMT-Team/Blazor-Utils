@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -21,7 +21,7 @@ namespace BlazorUtils.Dev
         /// <param name="context">Component that contains the object, mostly 'this' keyword.</param>
         /// <param name="o">Reference type object</param>
         /// <param name="name">Js variable name</param>
-        public static async Task MapAsync(BlazorComponent context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
+        public static async Task MapAsync(ComponentBase context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
         {
             if (!(context is DevComponent)) return;
 
@@ -40,7 +40,7 @@ namespace BlazorUtils.Dev
         /// <param name="context">Component that contains the object, mostly 'this' keyword.</param>
         /// <param name="o">Reference type object</param>
         /// <param name="name">Js variable name</param>
-        public static void Map(BlazorComponent context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
+        public static void Map(ComponentBase context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
         {
             if (!(context is DevComponent)) return;
 

@@ -61,10 +61,8 @@ For more info: https://blazorutils.wordpress.com/2018/11/05/dom-0-5-4-release-ne
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
-    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview6.19307.2" />
+    <DotNetCliToolReference Include="Microsoft.AspNetCore.Blazor.Cli" Version="0.7.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,10 @@
 ﻿using BlazorUtils.Dev.Storages;
-using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Components;
 using System.Linq;
 
 namespace BlazorUtils.Dev
 {
-    public abstract class DevComponent : BlazorComponent
+    public abstract class DevComponent : ComponentBase
     {
         public DevComponent()
         {
@@ -20,7 +20,7 @@ namespace BlazorUtils.Dev
             await DevUtils.DevWarnAsync($"{o.GetType().FullName} is now a dev component");
         }
 
-        internal static void MapProperties(BlazorComponent o)
+        internal static void MapProperties(ComponentBase o)
         {
             var mappedProperties = DevUtils
                 .GetAllProperties(o)
@@ -33,7 +33,7 @@ namespace BlazorUtils.Dev
             }
         }
 
-        internal static void MapFields(BlazorComponent o)
+        internal static void MapFields(ComponentBase o)
         {
             var mappedFields = DevUtils
                 .GetAllFields(o)
