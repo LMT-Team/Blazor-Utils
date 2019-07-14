@@ -2,24 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.4.1</Version>
+    <Version>0.5.0-alpha1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Managing cookies, local storage and session storage in Blazor.</Description>
     <Company>LMT</Company>
-    <Authors>Rogger Tan</Authors>
-    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
+    <Authors>LMT Team</Authors>
+    <PackageProjectUrl>https://github.com/LMT-Team/Blazor-Utils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LMT-Team/Blazor-Utils</RepositoryUrl>
     <PackageTags>Blazor, AspNet, cookies</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Cookie</PackageId>
     <Product>LMT.BlazorUtils.Cookie</Product>
-    <PackageReleaseNotes>- Fix some methods for Cookies: GetAll(), GetAllAsync(), Update(), UpdateAsync().
-- Fix: Wrong value when contains '=' char.
-- Fix: Exception maybe thrown if non cookies are found.
-- Add Cookies's description for class and methods. You should check out.</PackageReleaseNotes>
-    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright 2018 LMT</Copyright>
+    <PackageReleaseNotes>Remove Microsoft.AspNetCore.Blazor.Browser dependency.</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/LMT-Team/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <Copyright>Copyright 2019 LMT</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
