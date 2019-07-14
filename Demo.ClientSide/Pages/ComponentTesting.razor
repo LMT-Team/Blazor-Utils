@@ -109,6 +109,18 @@
     </LMTCatch>
 </LMTInjector>
 
+<h1>Invalid JSON test</h1>
+<LMTInjector @ref="@failInjector2" jsonpath="@_invalidJSONUrl" type="Models.WebsiteInfo">
+    <LMTTry>
+        <h1>This text shouldn't appear!</h1>
+    </LMTTry>
+    <LMTCatch>
+        <h1>Fail to get data. Please check back later!</h1>
+        <button @onclick="@(() => { _invalidJSONUrl = "/json/Injection.json"; })">Change url to /json/Injection.json</button>
+        <button @onclick="@(async() => {StateHasChanged() ;  await failInjector2.Update(); })">Update</button>
+    </LMTCatch>
+</LMTInjector>
+
 <LMTDynamic TComponent="@(Demo.ClientSide.Shared.Components.AdultPlayer)"
             parameters="@(new(string, object)[] {
                               ("url", "https://tempuri.org/videos/id=123"),
@@ -126,6 +138,11 @@
     <h2>I'm the child content!</h2>
 </LMTDynamic>
 
+<LMTDynamic TComponent="@LMTEmpty"
+            context="@(new Shared.Components.Player(isKid))">
+    <h2>I'm the child content!</h2>
+</LMTDynamic>
+
 <style>
     .dropArea {
         display: block;
@@ -136,67 +153,71 @@
 </style>
 
 @code{
-            private int percentageVal = 40;
-            private bool isPauseSlide = false;
-            private LMTLightbox lightbox;
-            private LMTSlideshow slideShow;
-            private string imgData { get; set; } = "#";
-            private LMTLocal local1;
-            private LMTInjector<Models.WebsiteInfo> injector;
-            private LMTInjector<Models.WebsiteInfo> failInjector;
-            private string _wrongUrl = "/json/Injecti.json";
+    private int percentageVal = 40;
+    private bool isPauseSlide = false;
+    private LMTLightbox lightbox;
+    private LMTSlideshow slideShow;
+    private string imgData { get; set; } = "#";
+    private LMTLocal local1;
+    private LMTInjector<Models.WebsiteInfo> injector;
+    private LMTInjector<Models.WebsiteInfo> failInjector;
+    private LMTInjector<Models.WebsiteInfo> failInjector2;
+    private string _wrongUrl = "/json/Injecti.json";
+    private string _invalidJSONUrl = "/json/invalidJSON.json";
+    [Parameter]
+    private string isKid { get; set; }
 
-            protected override async Task OnInitAsync()
-            {
-                await base.OnInitAsync();
-                JsInvoke.UseRuntime(jsRuntime);
-            }
+    protected override async Task OnInitAsync()
+    {
+        await base.OnInitAsync();
+        JsInvoke.UseRuntime(jsRuntime);
+    }
 
-            protected override async Task OnAfterRenderAsync()
-            {
-                Console.WriteLine(Eval<int>("1 + 1"));
-                //local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
-            }
+    protected override async Task OnAfterRenderAsync()
+    {
+        Console.WriteLine(Eval<int>("1 + 1"));
+        //local1._("h1").On("click", (e) => { local1._("h2").Css("color", "red"); });
+    }
 
-            protected void imageChange(ImageChangedEventArgs e)
-            {
-                if (e.Cur == 1 && !isPauseSlide)
-                {
-                    isPauseSlide = true;
-                    slideShow.Pause();
-                }
-            }
+    protected void imageChange(ImageChangedEventArgs e)
+    {
+        if (e.Cur == 1 && !isPauseSlide)
+        {
+            isPauseSlide = true;
+            slideShow.Pause();
+        }
+    }
 
-            private void OnPageChange(PageChangedEventArgs e)
-            {
-                Console.WriteLine("Previous page: " + e.Cur);
-                Console.WriteLine("Next page: " + e.Next);
-            }
+    private void OnPageChange(PageChangedEventArgs e)
+    {
+        Console.WriteLine("Previous page: " + e.Cur);
+        Console.WriteLine("Next page: " + e.Next);
+    }
 
-            private void OnDropHandler(LMTDropEventArgs e)
-            {
-                if (e.StringData != null)
-                {
-                    Dev.Warn($"You dropped an element: {e.StringData}!");
-                    return;
-                }
+    private void OnDropHandler(LMTDropEventArgs e)
+    {
+        if (e.StringData != null)
+        {
+            Dev.Warn($"You dropped an element: {e.StringData}!");
+            return;
+        }
 
-                imgData = e.DataUrl;
-                StateHasChanged();
+        imgData = e.DataUrl;
+        StateHasChanged();
 
-                Console.WriteLine(e.FileStream);
-                Console.WriteLine(e.DataBytes.Length);
-                Console.WriteLine(e.File.Name);
-            }
+        Console.WriteLine(e.FileStream);
+        Console.WriteLine(e.DataBytes.Length);
+        Console.WriteLine(e.File.Name);
+    }
 
-            private void TableFunctionClickHandler(LMTTableButtonClickEventArgs e)
-            {
-                Console.WriteLine($"Edit triggered for {e.Value}");
-            }
+    private void TableFunctionClickHandler(LMTTableButtonClickEventArgs e)
+    {
+        Console.WriteLine($"Edit triggered for {e.Value}");
+    }
 
-            private Type GetPlayerTypeByAge(int age)
-            {
-                if (age > 10) return typeof(Shared.Components.AdultPlayer);
-                return typeof(Shared.Components.KidPlayer);
-            }
+    private Type GetPlayerTypeByAge(int age)
+    {
+        if (age > 10) return typeof(Shared.Components.AdultPlayer);
+        return typeof(Shared.Components.KidPlayer);
+    }
 }

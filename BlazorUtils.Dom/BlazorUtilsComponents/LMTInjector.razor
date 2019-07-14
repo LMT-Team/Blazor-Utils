@@ -48,7 +48,7 @@ private string jsonString = null;
 
 private object jsonObject = null;
 
-private object simpleJsonObject = null;
+private Dictionary<string, object> simpleJsonObject = null;
 
 private bool _lastTimeFail = false;
 
@@ -95,7 +95,12 @@ public string Get(string key)
         _lastTimeFail = false;
     }
 
-    return (simpleJsonObject as Dictionary<string, object>)[key].ToString();
+    //if (simpleJsonObject.ContainsKey(key))
+    //{
+    //    _lastTimeFail = false;
+    //}
+
+    return simpleJsonObject[key].ToString();
 }
 
 public type Get()
@@ -152,7 +157,7 @@ private bool CheckIfJsonStringIsGet()
     if (jsonString == null || jsonString.Length == 0) return false;
     try
     {
-        simpleJsonObject = JsonSerializer.Parse<object>(jsonString);
+        simpleJsonObject = JsonSerializer.Parse<Dictionary<string, object>>(jsonString);
     }
     catch
     {

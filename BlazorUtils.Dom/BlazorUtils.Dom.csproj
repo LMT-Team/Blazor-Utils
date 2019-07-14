@@ -7,30 +7,36 @@
     <RunCommand>dotnet</RunCommand>
     <RunArguments>blazor serve</RunArguments>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.5.4.1</Version>
-    <Authors>Rogger Tan</Authors>
+    <Version>0.6.0-alpha1</Version>
+    <Authors>LMT Team</Authors>
     <Company>LMT</Company>
-    <Description>Blazor: Provide awesome components and utilities related to browser's DOM.
+    <Description>Blazor: Provide components and utilities related to browser's DOM.
 jQuery-like for Blazor is included. Just call _(Selector string) method.
 Please follow the setup steps written to the README: https://github.com/15110123/Blazor-Utils</Description>
-    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/LMT-Team/Blazor-Utils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LMT-Team/Blazor-Utils</RepositoryUrl>
     <PackageTags>Blazor, AspNet, Dom, jQuery</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageId>LMT.BlazorUtils.Dom</PackageId>
     <Product>LMT.BlazorUtils.Dom</Product>
-    <PackageReleaseNotes>* 0.5.4.1: 
-- Hot fix: "'HeadAttribute' does not contain a definition..." bugs.
-- LMTEmpty and LMTDynamic now inherit ILMTComponent.
---------------------------------
-* 0.5.4: 
-- Add LMTDynamic, LMTEmpty components.
-- Improve LMTTable component.
-- Other minor fixes and improvements.
-For more info: https://blazorutils.wordpress.com/2018/11/05/dom-0-5-4-release-new-features/</PackageReleaseNotes>
-    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright 2018 LMT</Copyright>
+    <PackageReleaseNotes>* 0.6.0-alpha1
+~ Features 
+- GlobalData: Save object that could be shared across all pages and components.  
+- GlobalData has 2 modes: 
+-&gt; Non-strict (default): Unlimit keys and objects are stored. There is no constrant.  
+-&gt; Strict: Developers can only add key which is included in a pre-defined array of key. For instance, Calling GlobalData.SetToStrict("username", "password") will cause GlobalData to only set value for "username" and "password".  
+- LMTDynamicContext: A class which inherits LMTDynamicContext can decide which component should be rendered by parameters.  
+
+~Fixes 
+- Compatible with Blazor 0.3.0 Preview 6, .NET Core 3.0.100 preview 6.  
+- When component referencing (ref), "netstandard2._0.BlazorUtilsComponents" namespace prefix is removed. In the previous version, you may need this namespace declaration like this: https://github.com/15110123/Traffic-Sign-Recognizer/blob/master/TrafficSignRecognizer/TrafficSignRecognizer.Web/Pages/Index.cshtml#L63 
+
+~Changes 
+- Blazor Utils components folder is now hidden from project which references to. 
+- From 0.6.0 and above, developers need to pass IJSRuntime object manually by calling JsInvoke.UseRuntime(jsRuntime) in OnInit() or OnInitAsync().  Js runtime can be obtained by Blazor's dependency injection technique.</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/LMT-Team/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
+    <Copyright>Copyright 2019 LMT</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

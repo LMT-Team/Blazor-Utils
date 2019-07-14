@@ -6,20 +6,24 @@
     <IsPackable>true</IsPackable>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
     <LangVersion>7.3</LangVersion>
-    <Version>0.4.4.3</Version>
+    <Version>0.5.0-alpha1</Version>
     <PackageId>LMT.BlazorUtils.Js.Bundle</PackageId>
-    <Authors>Rogger Tan</Authors>
+    <Authors>LMT Team</Authors>
     <Company>LMT</Company>
     <Product>LMT.BlazorUtils.Js.Bundle</Product>
     <Description>Contains Javascript library for LMT Blazor Utils. All dependencies have been included.</Description>
-    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/LMT-Team/Blazor-Utils</PackageProjectUrl>
     <RepositoryType>https://github.com/15110123/Blazor-Utils</RepositoryType>
     <PackageTags>Blazor, BlazorUtils, js</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageReleaseNotes>- Include important comments of all Js, CSS</PackageReleaseNotes>
-    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright 2018 LMT</Copyright>
+    <PackageIconUrl>https://raw.githubusercontent.com/LMT-Team/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
+    <PackageReleaseNotes>Compatible with Blazor 0.3 preview 6.</PackageReleaseNotes>
+    <Copyright>Copyright 2019 LMT</Copyright>
+    <RepositoryUrl>https://github.com/LMT-Team/Blazor-Utils</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl />
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
