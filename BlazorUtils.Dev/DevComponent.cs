@@ -1,6 +1,8 @@
 ﻿using BlazorUtils.Dev.Storages;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlazorUtils.Dev
 {
@@ -9,18 +11,22 @@ namespace BlazorUtils.Dev
         public DevComponent()
         {
             AddToStorage(this);
-
-            MapProperties(this);
-            MapFields(this);
         }
 
-        internal static async void AddToStorage(DevComponent o)
+        public async Task InitDevComponent()
+        {
+            await MapProperties(this);
+            await MapFields(this);
+            Console.WriteLine($"BlazorUtils.Dev: {GetType().FullName} has been initialized!");
+        }
+
+        internal static void AddToStorage(DevComponent o)
         {
             DevComponentStorage.Add(o);
-            await DevUtils.DevWarnAsync($"{o.GetType().FullName} is now a dev component");
+            Console.WriteLine($"BlazorUtils.Dev: {o.GetType().FullName} is now a dev component but hasn't been initialized. Please call InitDevComponent().");
         }
 
-        internal static void MapProperties(ComponentBase o)
+        internal static async Task MapProperties(ComponentBase o)
         {
             var mappedProperties = DevUtils
                 .GetAllProperties(o)
@@ -28,12 +34,12 @@ namespace BlazorUtils.Dev
 
             foreach(var property in mappedProperties)
             {
-                Dev.Map(o, property.GetValue(o), 
+                await Dev.MapAsync(o, property.GetValue(o), 
                     ((DevMapAttribute)property.GetCustomAttributes(typeof(DevMapAttribute), false)[0]).MapName);
             }
         }
 
-        internal static void MapFields(ComponentBase o)
+        internal async Task MapFields(ComponentBase o)
         {
             var mappedFields = DevUtils
                 .GetAllFields(o)
@@ -41,7 +47,7 @@ namespace BlazorUtils.Dev
 
             foreach (var field in mappedFields)
             {
-                Dev.Map(o, field.GetValue(o),
+                await Dev.MapAsync(o, field.GetValue(o),
                     ((DevMapAttribute)field.GetCustomAttributes(typeof(DevMapAttribute), false)[0]).MapName);
             }
         }

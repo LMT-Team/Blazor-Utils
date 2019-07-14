@@ -1,25 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>LMT.BlazorUtils.Dev</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Rogger Tan</Authors>
+    <Authors>LMT Team</Authors>
     <Company>LMT</Company>
     <Product>LMT.BlazorUtils.Dev</Product>
-    <Description>Providing Blazor dev tools for easier developing.</Description>
-    <PackageProjectUrl>https://github.com/15110123/Blazor-Utils</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/15110123/Blazor-Utils</RepositoryUrl>
+    <Description>Providing Blazor dev tools for easier development.</Description>
+    <PackageProjectUrl>https://github.com/LMT-Team/Blazor-Utils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LMT-Team/Blazor-Utils</RepositoryUrl>
     <PackageTags>Blazor, AspNet, Dev, BlazorUtils</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.4.1</Version>
-    <PackageReleaseNotes>- From 1.4.1, all components using Map must inherit from DevComponent. 
-This can be done by adding @inherits DevComponent. If you don't want to map anymore (for releasing purpose maybe), removing the inheritance is enough.
-- New feature: Mapping attribute. 
-Add [DevMap("mapping name")] to components' properties or fields. This feature won't work if property/field hasn't been initially set yet, since the mapping will occur right before the component contructor is called (see this example for more details: https://github.com/15110123/Blazor-Utils/blob/master/BlazorUtils.WebTest.0.5/Pages/DevTesting.cshtml).</PackageReleaseNotes>
-    <PackageIconUrl>https://raw.githubusercontent.com/15110123/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/15110123/Blazor-Utils/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright 2018 LMT</Copyright>
+    <Version>1.5.0-alpha1</Version>
+    <PackageReleaseNotes>Features
+- (This version doesn't have any new feature)
+
+Fixes 
+- Compatible with Dom 0.6.0 preview 1 and Interfaces 0.4.0-alpha1.
+
+Changes 
+- Map() is removed. Please use MapAsync() instead.
+- Before mapping, please call InitDevComponent() in OnInitAsync(). This method must be placed after JsInvoke.UseRuntime().</PackageReleaseNotes>
+    <PackageIconUrl>https://raw.githubusercontent.com/LMT-Team/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <Copyright>Copyright 2019 LMT</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

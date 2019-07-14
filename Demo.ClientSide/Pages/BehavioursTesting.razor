@@ -1,0 +1,178 @@
+@page "/behaviour"
+@inject HttpClient httpClient
+@inject IJSRuntime JSRuntime
+
+<h1>Hello, world!</h1>
+
+<button lmt-scroll="500px">Scroll down to 500px</button>
+<button lmt-scroll-to="#destImg">Scroll down to destImg</button>
+
+<div style="width:400px; height: 400px"
+     lmt-bm="/json/LittleGirlJumping.json"
+     lmt-bm-name="girlJump"
+     lmt-bm-autoplay="true"
+     lmt-bm-loop="true"
+     lmt-bm-speed="1"
+     lmt-bm-direction="1"
+     lmt-filter="black" />
+
+<div lmt-grid="md-5,md-4,md-3" lmt-grid-fluid="true">
+    <div>
+        <div class="mycol5">
+            <h2>This should be col-md-5</h2>
+        </div>
+        <div class="mycol4">
+            <h2>This should be col-md-4</h2>
+        </div>
+        <div class="mycol3">
+            <h2>This should be col-md-3</h2>
+        </div>
+    </div>
+    <div>
+        <div class="mycol5">
+            <h2>This should be col-md-5</h2>
+        </div>
+        <div class="mycol4">
+            <h2>This should be col-md-4</h2>
+        </div>
+        <div class="mycol3">
+            <h2>This should be col-md-3</h2>
+        </div>
+    </div>
+</div>
+
+<div lmt-grid="md" lmt-grid-fluid="true">
+    <div>
+        <div>
+            <h2>This should be col-md-6 (autowidth)</h2>
+        </div>
+        <div>
+            <h2>This should be col-md-6 (autowidth)</h2>
+        </div>
+    </div>
+</div>
+
+<div style="display: block; height: 1000px"></div>
+
+<img id="destImg" style="width: 200px; height: 200px" src="http://getwallpapers.com/wallpaper/full/2/b/d/191686.jpg" />
+
+<h2>lmt-accord</h2>
+<div lmt-accord>
+    <h3>Section 1</h3>
+    <div>
+        <p>
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+        </p>
+    </div>
+    <h3>Section 2</h3>
+    <div>
+        <p>
+            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+            suscipit faucibus urna.
+        </p>
+    </div>
+    <h3>Section 3</h3>
+    <div>
+        <p>
+            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+        </p>
+        <ul>
+            <li>List item one</li>
+            <li>List item two</li>
+            <li>List item three</li>
+        </ul>
+    </div>
+    <h3>Section 4</h3>
+    <div>
+        <p>
+            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+            et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+            mauris vel est.
+        </p>
+        <p>
+            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+            inceptos himenaeos.
+        </p>
+    </div>
+</div>
+
+<h2>lmt-drag</h2>
+<img style="width: 100px; height: 100px" src="http://getwallpapers.com/wallpaper/full/2/b/d/191686.jpg" lmt-drag />
+
+<h2>lmt-resize</h2>
+<div style="width: 100px; height: 100px; background-image: url(http://getwallpapers.com/wallpaper/full/2/b/d/191686.jpg); background-size: cover" lmt-resize />
+
+<h2>lmt-select</h2>
+<style>
+    .ui-selected {
+        background: #F39814;
+        color: white;
+    }
+</style>
+<ol lmt-select>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+    <li>Item 6</li>
+    <li>Item 7</li>
+</ol>
+
+<h2>lmt-sort</h2>
+<ul lmt-sort>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+    <li>Item 6</li>
+    <li>Item 7</li>
+</ul>
+
+<h2>lmt-readonly</h2>
+<textarea lmt-readonly="You cannot type anything here"></textarea>
+
+<h2>lmt-val-guid</h2>
+<input type="text" lmt-val-guid />
+<input type="text" lmt-val-guid />
+
+<h2>lmt-val-num</h2>
+<input type="text" lmt-val-num="-50, -10" />
+<input type="text" lmt-val-num="10, 70" />
+<input type="text" lmt-val-num="60, 10" />
+
+<h2>lmt-autocomp</h2>
+<input type="text" lmt-autocomp="C#,C,C++,Js" />
+
+<h2>lmt-date</h2>
+<input type="text" lmt-date />
+
+<h2>lmt-dialog</h2>
+<div lmt-dialog>
+    <p>Hello world! This is a dialog!</p>
+</div>
+
+<h2>lmt-tip</h2>
+<img style="width: 100px; height: 100px" src="http://getwallpapers.com/wallpaper/full/2/b/d/191686.jpg" lmt-tip="Beautiful picture!" />
+
+@code {  protected override async Task OnInitAsync()
+{
+    JsInvoke.UseRuntime(JSRuntime);
+}
+
+protected override async Task OnAfterRenderAsync()
+{
+    LMTBehaviours();
+}
+}

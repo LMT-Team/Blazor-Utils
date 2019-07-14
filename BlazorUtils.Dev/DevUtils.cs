@@ -1,4 +1,5 @@
 ﻿using BlazorUtils.Dev.Properties;
+using BlazorUtils.Interfaces.Invokers;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -72,6 +73,11 @@ namespace BlazorUtils.Dev
         internal static async Task DevBootAsync()
         {
             if (_isBooted) return;
+            while (!JsInvoke.HasJSRuntime)
+            {
+                Console.WriteLine("BlazorUtils.Dev: Waiting JSRuntime to be set every 0.5 second...");
+                await Task.Delay(500);
+            }
             await EvalAsync(Resources.LMTDevBoot);
             _isBooted = true;
         }

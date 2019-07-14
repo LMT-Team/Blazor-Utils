@@ -1,0 +1,48 @@
+@page "/dev"
+@inherits DevComponent
+@inject IJSRuntime JSRuntime
+@using Demo.ClientSide.Models
+
+<button @onclick="@(() => {student.Age += 7; })">Click to add student with 7!</button>
+
+@code {
+    Student student;
+
+    [DevMap("student2")]
+    readonly Student student2 = new Student
+    {
+        Age = 5,
+        IsMale = false,
+        StudentId = "54321",
+        StudentName = "Nguyen Thi B",
+        course = new Course("132", "Tran Van C")
+    };
+
+    protected override async Task OnInitAsync()
+    {
+        base.OnInit();
+
+        JsInvoke.UseRuntime(JSRuntime);
+
+        await InitDevComponent();
+
+        student = new Student
+        {
+            Age = 5,
+            IsMale = true,
+            StudentId = "12345",
+            StudentName = "Nguyen Van A",
+            course = new Course("132", "Tran Van B")
+        };
+
+        await Dev.MapAsync(this, student, "mappedStudent");
+
+        Console.WriteLine("Done mapping");
+    }
+
+    protected override void OnAfterRender()
+    {
+        base.OnAfterRender();
+        Dev.Warn("After render from component");
+    }
+}

@@ -34,25 +34,6 @@ namespace BlazorUtils.Dev
             await DevUtils.DevWarnAsync($"Mapped {o.GetType().FullName} object in {filePath} at line {lineNumber}.");
         }
 
-        /// <summary>
-        /// Map C# referance type instance to Js object with custom name.
-        /// </summary>
-        /// <param name="context">Component that contains the object, mostly 'this' keyword.</param>
-        /// <param name="o">Reference type object</param>
-        /// <param name="name">Js variable name</param>
-        public static void Map(ComponentBase context, object o, string name, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = 0)
-        {
-            if (!(context is DevComponent)) return;
-
-            //Add DevBoot Js code
-            DevUtils.DevBoot();
-
-            AddToOrUpdateObjectList(o, name);
-            UpdateMappingLayer();
-
-            DevUtils.DevWarn($"Mapped {o.GetType().FullName} object in {filePath} at line {lineNumber}.");
-        }
-
         private static async void UpdateMappingLayer()
         {
             await UpdateMapping();

@@ -9,6 +9,11 @@ namespace BlazorUtils.Interfaces.Invokers
         private static IJSRuntime _JSRuntime;
         private const string _NullExceptionMsg = "BlazorUtils.Interfaces: Please call JsInvoke.UseRuntime before using JsInvoke or any of its' dependencies.";
 
+        public static bool HasJSRuntime
+        {
+            get => _JSRuntime != null;
+        }
+
         public static void UseRuntime(IJSRuntime iJSRuntime, bool overrideRuntime = false)
         {
             if (!overrideRuntime && _JSRuntime != null)
@@ -17,6 +22,7 @@ namespace BlazorUtils.Interfaces.Invokers
                 return;
             }
             _JSRuntime = iJSRuntime;
+            Console.WriteLine("BlazorUtils.Interfaces: IJSRuntime is assigned!");
         }
 
         public static T Invoke<T>(string funcName, params object[] parameters)
