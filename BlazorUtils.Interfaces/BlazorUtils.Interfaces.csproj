@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.4.0-alpha1</Version>
+    <Version>0.4.0-alpha2</Version>
     <Authors>LMT Team</Authors>
     <Company>LMT</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,9 +11,9 @@
     <Description>Provides necessary interfaces for Blazor Utils APIs to develop your own package that use BlazorUtils types.</Description>
     <PackageId>LMT.BlazorUtils.Interfaces</PackageId>
     <Product>LMT.BlazorUtils.Interfaces</Product>
-    <PackageReleaseNotes>Compatible with Blazor 0.3 preview 6.</PackageReleaseNotes>
-    <AssemblyVersion>0.4.0.0</AssemblyVersion>
-    <FileVersion>0.4.0.0</FileVersion>
+    <PackageReleaseNotes>JSInvoke now has HasJSRuntime.</PackageReleaseNotes>
+    <AssemblyVersion>0.4.0.1</AssemblyVersion>
+    <FileVersion>0.4.0.1</FileVersion>
     <PackageIconUrl>https://raw.githubusercontent.com/LMT-Team/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageTags>blazor, blazorutils</PackageTags>
     <Copyright>Copyright 2019 LMT</Copyright>

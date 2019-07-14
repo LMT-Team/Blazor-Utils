@@ -12,20 +12,15 @@
     <RepositoryUrl>https://github.com/LMT-Team/Blazor-Utils</RepositoryUrl>
     <PackageTags>Blazor, AspNet, Dev, BlazorUtils</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.5.0-alpha1</Version>
-    <PackageReleaseNotes>Features
-- (This version doesn't have any new feature)
-
-Fixes 
-- Compatible with Dom 0.6.0 preview 1 and Interfaces 0.4.0-alpha1.
-
-Changes 
-- Map() is removed. Please use MapAsync() instead.
-- Before mapping, please call InitDevComponent() in OnInitAsync(). This method must be placed after JsInvoke.UseRuntime().</PackageReleaseNotes>
+    <Version>1.5.0-alpha2</Version>
+    <PackageReleaseNotes>Changes
+- Update dependency.</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/LMT-Team/Blazor-Utils/master/IconVer1.png</PackageIconUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <Copyright>Copyright 2019 LMT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AssemblyVersion>1.5.0.1</AssemblyVersion>
+    <FileVersion>1.5.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
