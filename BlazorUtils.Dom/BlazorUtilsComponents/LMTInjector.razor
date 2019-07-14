@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Blazor.Browser.Services
+﻿@using Microsoft.AspNetCore.Blazor.Services
+@using System.Text.Json.Serialization
 
 @inject System.Net.Http.HttpClient HttpClient
 @typeparam type
@@ -24,7 +25,7 @@ else
     }
 }
 
-@functions
+@code
 {
 [Parameter]
 private string jsonpath { get; set; }
@@ -53,11 +54,6 @@ private bool _lastTimeFail = false;
 
 private bool _doneLoad = false;
 
-//protected override async Task OnInitAsync()
-//{
-//    jsonObject = Microsoft.JSInterop.Json.Deserialize<object>(jsonString);
-//}
-
 /// <summary>
 /// Get object as generics-type. Considering use this method for code refactoring, but bad for performance improvement.
 /// </summary>
@@ -73,10 +69,7 @@ public T Get<T>()
 
     if (jsonObject == null)
     {
-        jsonObject = typeof(Microsoft.JSInterop.Json)
-    .GetMethod("Deserialize")
-    .MakeGenericMethod(typeof(T))
-    .Invoke(null, new[] { jsonString as object });
+        jsonObject = JsonSerializer.Parse<T>(jsonString);
         _lastTimeFail = false;
     }
 
@@ -98,14 +91,11 @@ public string Get(string key)
 
     if (simpleJsonObject == null)
     {
-        simpleJsonObject = typeof(Microsoft.JSInterop.Json)
-.GetMethod("Deserialize")
-.MakeGenericMethod(typeof(object))
-.Invoke(null, new[] { jsonString as object });
+        simpleJsonObject = JsonSerializer.Parse<Dictionary<string, object>>(jsonString);
         _lastTimeFail = false;
     }
 
-    return simpleJsonObject.GetType().GetMethod("get_Item", new[] { typeof(string) }).Invoke(simpleJsonObject, new[] { key }).ToString();
+    return (simpleJsonObject as Dictionary<string, object>)[key].ToString();
 }
 
 public type Get()
@@ -115,20 +105,23 @@ public type Get()
 
 public async Task Update()
 {
-    Console.WriteLine(jsonpath);
-    var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
-    jsonString = await HttpClient.GetStringAsync(absolutePath);
-    Console.WriteLine(jsonString);
+    await InternalUpdate();
     _lastTimeFail = !CheckIfJsonStringIsGet();
-    Console.WriteLine(_lastTimeFail);
     StateHasChanged();
 }
 
 private async Task InternalUpdate()
 {
-    var absolutePath = BrowserUriHelper.Instance.ToAbsoluteUri(jsonpath);
+    var absolutePath = WebAssemblyUriHelper.Instance.ToAbsoluteUri(jsonpath);
 
-    jsonString = await HttpClient.GetStringAsync(absolutePath);
+    try
+    {
+        jsonString = await HttpClient.GetStringAsync(absolutePath);
+    }
+    catch
+    {
+        //Ignore
+    }
 }
 
 protected override async Task OnAfterRenderAsync()
@@ -159,10 +152,7 @@ private bool CheckIfJsonStringIsGet()
     if (jsonString == null || jsonString.Length == 0) return false;
     try
     {
-        simpleJsonObject = typeof(Microsoft.JSInterop.Json)
-.GetMethod("Deserialize")
-.MakeGenericMethod(typeof(object))
-.Invoke(null, new[] { jsonString as object });
+        simpleJsonObject = JsonSerializer.Parse<object>(jsonString);
     }
     catch
     {

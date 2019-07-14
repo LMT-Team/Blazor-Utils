@@ -41,7 +41,7 @@
                                 }
                                 break;
                             case TagType.button:
-                                <button onclick=@(() => { ButtonClick(propValue); })>
+                                <button @onclick=@(() => { ButtonClick(propValue); })>
                                     @(GetAttribute<ButtonAttribute>(prop).Text)
                                 </button>
                                 break;
@@ -53,7 +53,7 @@
     </tbody>
 </table>
 
-@functions
+@code
 {
     [Parameter]
     private string style { get; set; }

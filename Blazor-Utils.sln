@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Js.Bundle", "Bl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorUtils.Dom.UnitTest", "BlazorUtils.Dom.UnitTest\BlazorUtils.Dom.UnitTest.csproj", "{5B9CDEE7-C5C3-4798-80EB-8269F3EDA8F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.ClientSide", "Demo.ClientSide\Demo.ClientSide.csproj", "{9DEB1B8E-6890-4EF7-9216-7EACEF253913}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.ClientSide", "Demo.ClientSide\Demo.ClientSide.csproj", "{9DEB1B8E-6890-4EF7-9216-7EACEF253913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

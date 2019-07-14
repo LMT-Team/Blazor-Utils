@@ -24,6 +24,7 @@ namespace BlazorUtils.Interfaces.Invokers
             if (_JSRuntime == null)
             {
                 Console.WriteLine(_NullExceptionMsg);
+                return default;
             }
             return (_JSRuntime as IJSInProcessRuntime).Invoke<T>(
 $"blazorUtils.core.funcs.{funcName}", parameters);
@@ -34,6 +35,7 @@ $"blazorUtils.core.funcs.{funcName}", parameters);
             if (_JSRuntime == null)
             {
                 Console.WriteLine(_NullExceptionMsg);
+                return default;
             }
             return _JSRuntime.InvokeAsync<T>($"blazorUtils.core.funcs.{funcName}", parameters);
         }

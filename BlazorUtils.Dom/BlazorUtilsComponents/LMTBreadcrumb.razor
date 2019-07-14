@@ -1,5 +1,5 @@
 ﻿@using BlazorUtils.Interfaces.EventArgs
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@inject IUriHelper UriHelper
 @implements ILMTComponent
 
 <nav aria-label="breadcrumb">
@@ -15,7 +15,7 @@
                 }
                 else
                 {
-                    <a href="javascript:;" onclick=@(() => { selected = ind; })>
+                    <a href="javascript:;" @onclick=@(() => { selected = ind; })>
                         @data[i].label
                     </a>
                 }
@@ -24,7 +24,7 @@
     </ol>
 </nav>
 
-@functions
+@code
 {
     private int _selected = -1;
     private bool _isInitialState = true;

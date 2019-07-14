@@ -5,29 +5,29 @@
     <ul class="pagination">
         @if (!string.IsNullOrEmpty(@firstText))
         {
-            <li class="page-item"><a class="page-link" onclick=@(() => {FirstPage();})>@firstText</a></li>
+            <li class="page-item"><a class="page-link" @onclick=@(() => {FirstPage();})>@firstText</a></li>
         }
         @if (!string.IsNullOrEmpty(@previousText))
         {
-            <li class="page-item"><a class="page-link" onclick=@(() => {PreviousPage();})>@previousText</a></li>
+            <li class="page-item"><a class="page-link" @onclick=@(() => {PreviousPage();})>@previousText</a></li>
         }
         @for (var i = firstPage; i < firstPage + show && i <= total; i++)
         {
             var ind = i;
-            <li class="page-item@(i == cur ? " active" : " ")"><a class="page-link" onclick=@(() => { cur = ind;})>@i</a></li>
+            <li class="page-item@(i == cur ? " active" : " ")"><a class="page-link" @onclick=@(() => { cur = ind;})>@i</a></li>
         }
         @if (!string.IsNullOrEmpty(@nextText))
         {
-            <li class="page-item"><a class="page-link" onclick=@(() => {NextPage();})>@nextText</a></li>
+            <li class="page-item"><a class="page-link" @onclick=@(() => {NextPage();})>@nextText</a></li>
         }
         @if (!string.IsNullOrEmpty(@lastText))
         {
-            <li class="page-item"><a class="page-link" onclick=@(() => {LastPage();})>@lastText</a></li>
+            <li class="page-item"><a class="page-link" @onclick=@(() => {LastPage();})>@lastText</a></li>
         }
     </ul>
 </nav>
 
-@functions
+@code
 {
     private int _cur = 1;
 

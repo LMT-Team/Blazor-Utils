@@ -14,7 +14,7 @@
     </div>
 </div>
 
-@functions
+@code
 {
     [Parameter]
     private RenderFragment ChildContent { get; set; }
@@ -54,7 +54,7 @@
             if (isShown)
                 Show();
         }
-        if(_isRequestingShow)
+        if (_isRequestingShow)
         {
             _isRequestingShow = false;
             var funcName = "lmt" + id.Replace("-", "");
