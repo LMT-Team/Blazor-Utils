@@ -1,0 +1,16 @@
+@page "/{0}"
+@inject IJSRuntime runtime
+
+<LMTLocal @ref="@Local">
+    <h1>Hello from {1}</h1>
+</LMTLocal>
+
+@code{ 
+    private LMTLocal Local;
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        JsInvoke.UseRuntime(runtime);
+    }
+}

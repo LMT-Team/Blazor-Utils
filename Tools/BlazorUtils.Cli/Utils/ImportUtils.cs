@@ -10,13 +10,6 @@ namespace BlazorUtils.Cli.Utils
     {
         public static void ImportPackage(IEnumerable<ImportOptions.IncludedPackage> packages, bool IsPrerelease)
         {
-            //Find project file
-            if (!Directory.EnumerateFiles(Program.WorkingDir, "*.csproj").Any())
-            {
-                Console.WriteLine("Could not find any project. Current directory should contain project files and csproj");
-                return;
-            }
-
             foreach (var package in packages)
             {
                 Console.WriteLine($"- {package.ToString()}");

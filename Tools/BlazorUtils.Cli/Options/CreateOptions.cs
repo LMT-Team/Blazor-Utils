@@ -13,5 +13,8 @@ namespace BlazorUtils.Cli.Options
 
         [Option('n', "new", Required = true, HelpText = "Create new component, page,...")]
         public ResourceTarget Target { get; set; }
+
+        [Option('a', "name", Required = true, HelpText = "Target name")]
+        public string TargetName { get; set; }
     }
 }
